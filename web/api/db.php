@@ -13,7 +13,7 @@ $cfg = function (string $key, string $env, string $default = '') use ($config): 
 };
 
 $host    = $cfg('host', 'DB_HOST', 'localhost');
-$db      = $cfg('name', 'DB_NAME', 'star-rail-manager');
+$db      = $cfg('name', 'DB_NAME', 'star-rail');
 $user    = $cfg('user', 'DB_USER');
 $pass    = $cfg('pass', 'DB_PASS');
 $charset = $cfg('charset', 'DB_CHARSET', 'utf8mb4');
