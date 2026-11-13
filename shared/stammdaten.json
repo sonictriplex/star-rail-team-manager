@@ -17,14 +17,14 @@
     {
       "name": "Aglaea",
       "element": "Blitz",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/char_aglaea.png"
     },
     {
       "name": "Anaxa",
       "element": "Wind",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_anaxa.png"
     },
@@ -38,7 +38,7 @@
     {
       "name": "Argenti",
       "element": "Physisch",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_argenti.png"
     },
@@ -115,7 +115,7 @@
     {
       "name": "Castorice",
       "element": "Quantum",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/char_castorice.png"
     },
@@ -143,7 +143,7 @@
     {
       "name": "Cyrene",
       "element": "Eis",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/char_cyrene.png"
     },
@@ -185,7 +185,7 @@
     {
       "name": "Evernight",
       "element": "Eis",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/char_evernight.png"
     },
@@ -255,21 +255,21 @@
     {
       "name": "Herta",
       "element": "Eis",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/char_herta.png"
     },
     {
       "name": "Himeko",
       "element": "Feuer",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_himeko.png"
     },
     {
       "name": "Himeko • Nova",
       "element": "Feuer",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_himeko_nova.png"
     },
@@ -290,7 +290,7 @@
     {
       "name": "Hyacine",
       "element": "Wind",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/char_hyacine.png"
     },
@@ -304,7 +304,7 @@
     {
       "name": "Jade",
       "element": "Quantum",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_jade.png"
     },
@@ -318,7 +318,7 @@
     {
       "name": "Jing Yuan",
       "element": "Blitz",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_jing_yuan.png"
     },
@@ -437,21 +437,21 @@
     {
       "name": "Qingque",
       "element": "Quantum",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/char_qingque.png"
     },
     {
       "name": "Rappa",
       "element": "Imaginär",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_rappa.png"
     },
     {
       "name": "Rin Tohsaka",
       "element": "Quantum",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_rin_tohsaka.png"
     },
@@ -465,7 +465,7 @@
     {
       "name": "Robin • Summeretto",
       "element": "Wind",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/char_robin_summeretto.png"
     },
@@ -500,7 +500,7 @@
     {
       "name": "Serval",
       "element": "Blitz",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/char_serval.png"
     },
@@ -556,7 +556,7 @@
     {
       "name": "The Herta",
       "element": "Eis",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_the_herta.png"
     },
@@ -582,9 +582,9 @@
       "icon_path": "assets/images/char_trailblazer_bewahrung.png"
     },
     {
-      "name": "Trailblazer (Erinnerung)",
+      "name": "Trailblazer (Gedenken)",
       "element": "Eis",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/char_trailblazer_erinnerung.png"
     },
@@ -662,7 +662,7 @@
   "light_cones": [
     {
       "name": "A Dream Scented in Wheat",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_a_dream_scented_in_wheat.png"
     },
@@ -686,7 +686,7 @@
     },
     {
       "name": "A Star That Lights the Night",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_a_star_that_lights_the_night.png"
     },
@@ -710,7 +710,7 @@
     },
     {
       "name": "After the Charmony Fall",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_after_the_charmony_fall.png"
     },
@@ -728,7 +728,7 @@
     },
     {
       "name": "An Instant Before A Gaze",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_an_instant_before_a_gaze.png"
     },
@@ -746,7 +746,7 @@
     },
     {
       "name": "Before Dawn",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_before_dawn.png"
     },
@@ -836,7 +836,7 @@
     },
     {
       "name": "Data Bank",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 3,
       "icon_path": "assets/images/lc_data_bank.png"
     },
@@ -902,7 +902,7 @@
     },
     {
       "name": "Eternal Calculus",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_eternal_calculus.png"
     },
@@ -944,7 +944,7 @@
     },
     {
       "name": "Flickering Stars",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_flickering_stars.png"
     },
@@ -956,7 +956,7 @@
     },
     {
       "name": "Fly Into a Pink Tomorrow",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 4,
       "icon_path": "assets/images/lc_fly_into_a_pink_tomorrow.png"
     },
@@ -968,13 +968,13 @@
     },
     {
       "name": "Geniuses' Greetings",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 4,
       "icon_path": "assets/images/lc_geniuses_greetings.png"
     },
     {
       "name": "Geniuses' Repose",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_geniuses_repose.png"
     },
@@ -1064,7 +1064,7 @@
     },
     {
       "name": "Into the Unreachable Veil",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_into_the_unreachable_veil.png"
     },
@@ -1094,7 +1094,7 @@
     },
     {
       "name": "Life Should Be Cast to Flames",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_life_should_be_cast_to_flames.png"
     },
@@ -1106,7 +1106,7 @@
     },
     {
       "name": "Long May Rainbows Adorn the Sky",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/lc_long_may_rainbows_adorn_the_sky.png"
     },
@@ -1124,13 +1124,13 @@
     },
     {
       "name": "Make Farewells More Beautiful",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/lc_make_farewells_more_beautiful.png"
     },
     {
       "name": "Make the World Clamor",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_make_the_world_clamor.png"
     },
@@ -1148,7 +1148,7 @@
     },
     {
       "name": "Memory's Curtain Never Falls",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/lc_memory_s_curtain_never_falls.png"
     },
@@ -1196,7 +1196,7 @@
     },
     {
       "name": "Night on the Milky Way",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_night_on_the_milky_way.png"
     },
@@ -1208,7 +1208,7 @@
     },
     {
       "name": "Ninjutsu Inscription: Dazzling Evilbreaker",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_ninjutsu_inscription_dazzling_evilbreaker.png"
     },
@@ -1232,7 +1232,7 @@
     },
     {
       "name": "Passkey",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 3,
       "icon_path": "assets/images/lc_passkey.png"
     },
@@ -1310,7 +1310,7 @@
     },
     {
       "name": "Reminiscence",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 3,
       "icon_path": "assets/images/lc_reminiscence.png"
     },
@@ -1328,7 +1328,7 @@
     },
     {
       "name": "Rise and Sing",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/lc_rise_and_sing.png"
     },
@@ -1340,7 +1340,7 @@
     },
     {
       "name": "Sagacity",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 3,
       "icon_path": "assets/images/lc_sagacity.png"
     },
@@ -1370,7 +1370,7 @@
     },
     {
       "name": "Shadowburn",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 3,
       "icon_path": "assets/images/lc_shadowburn.png"
     },
@@ -1436,7 +1436,7 @@
     },
     {
       "name": "Sweat Now, Cry Less",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 4,
       "icon_path": "assets/images/lc_sweat_now_cry_less.png"
     },
@@ -1454,13 +1454,13 @@
     },
     {
       "name": "The Birth of the Self",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_the_birth_of_the_self.png"
     },
     {
       "name": "The Day The Cosmos Fell",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_the_day_the_cosmos_fell.png"
     },
@@ -1472,7 +1472,7 @@
     },
     {
       "name": "The Flower Remembers",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 4,
       "icon_path": "assets/images/lc_the_flower_remembers.png"
     },
@@ -1484,7 +1484,7 @@
     },
     {
       "name": "The Great Cosmic Enterprise",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_the_great_cosmic_enterprise.png"
     },
@@ -1502,13 +1502,13 @@
     },
     {
       "name": "The Seriousness of Breakfast",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_the_seriousness_of_breakfast.png"
     },
     {
       "name": "The Story's Next Page",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 4,
       "icon_path": "assets/images/lc_the_story_s_next_page.png"
     },
@@ -1526,7 +1526,7 @@
     },
     {
       "name": "This Love, Forever",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/lc_this_love_forever.png"
     },
@@ -1556,19 +1556,19 @@
     },
     {
       "name": "Time Woven Into Gold",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/lc_time_woven_into_gold.png"
     },
     {
       "name": "To Evernight's Stars",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/lc_to_evernight_s_stars.png"
     },
     {
       "name": "Today Is Another Peaceful Day",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_today_is_another_peaceful_day.png"
     },
@@ -1616,7 +1616,7 @@
     },
     {
       "name": "Victory In a Blink",
-      "path": "Erinnerung",
+      "path": "Gedenken",
       "rarity": 4,
       "icon_path": "assets/images/lc_victory_in_a_blink.png"
     },
@@ -1688,7 +1688,7 @@
     },
     {
       "name": "Yet Hope Is Priceless",
-      "path": "Erudition",
+      "path": "Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_yet_hope_is_priceless.png"
     }
@@ -2066,7 +2066,7 @@
       "icon_path": "assets/images/relic_sacerdos_relived_ordeal.png"
     },
     {
-      "name": "Scholar Lost in Erudition",
+      "name": "Scholar Lost in Gelehrsamkeit",
       "kind": "Relikt",
       "bonus_2pc": "Increases CRIT Rate by 8%.",
       "bonus_4pc": "Increases DMG dealt by Skill and Ultimate by 20%. After using Ultimate, additionally increases the DMG dealt by the next Skill by 25%.",
