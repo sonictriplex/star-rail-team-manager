@@ -2,3 +2,4 @@
 web/api/config.local.php
 node_modules/
 deploy/*.local.*
+deploy/backup/
