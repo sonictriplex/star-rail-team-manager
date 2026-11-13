@@ -3,7 +3,7 @@
     {
       "name": "Acheron",
       "element": "Blitz",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_acheron.png"
     },
@@ -80,14 +80,14 @@
     {
       "name": "Bailu",
       "element": "Blitz",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 5,
       "icon_path": "assets/images/char_bailu.png"
     },
     {
       "name": "Black Swan",
       "element": "Wind",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_black_swan.png"
     },
@@ -129,7 +129,7 @@
     {
       "name": "Cipher",
       "element": "Quantum",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_cipher.png"
     },
@@ -213,14 +213,14 @@
     {
       "name": "Fugue",
       "element": "Feuer",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_fugue.png"
     },
     {
       "name": "Gallagher",
       "element": "Feuer",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/char_gallagher.png"
     },
@@ -241,7 +241,7 @@
     {
       "name": "Guinaifen",
       "element": "Feuer",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/char_guinaifen.png"
     },
@@ -283,7 +283,7 @@
     {
       "name": "Huohuo",
       "element": "Wind",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 5,
       "icon_path": "assets/images/char_huohuo.png"
     },
@@ -297,7 +297,7 @@
     {
       "name": "Hysilens",
       "element": "Physisch",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_hysilens.png"
     },
@@ -311,7 +311,7 @@
     {
       "name": "Jiaoqiu",
       "element": "Feuer",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_jiaoqiu.png"
     },
@@ -332,35 +332,35 @@
     {
       "name": "Kafka",
       "element": "Blitz",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_kafka.png"
     },
     {
       "name": "Lingsha",
       "element": "Feuer",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 5,
       "icon_path": "assets/images/char_lingsha.png"
     },
     {
       "name": "Luka",
       "element": "Physisch",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/char_luka.png"
     },
     {
       "name": "Luocha",
       "element": "Imaginär",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 5,
       "icon_path": "assets/images/char_luocha.png"
     },
     {
       "name": "Lynx",
       "element": "Quantum",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/char_lynx.png"
     },
@@ -388,7 +388,7 @@
     {
       "name": "Mortenax Blade",
       "element": "Feuer",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_mortenax_blade.png"
     },
@@ -409,7 +409,7 @@
     {
       "name": "Natasha",
       "element": "Physisch",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/char_natasha.png"
     },
@@ -423,7 +423,7 @@
     {
       "name": "Pela",
       "element": "Eis",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/char_pela.png"
     },
@@ -486,7 +486,7 @@
     {
       "name": "Sampo",
       "element": "Wind",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/char_sampo.png"
     },
@@ -507,7 +507,7 @@
     {
       "name": "Silver Wolf",
       "element": "Quantum",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_silver_wolf.png"
     },
@@ -549,7 +549,7 @@
     {
       "name": "The Dahlia",
       "element": "Feuer",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_the_dahlia.png"
     },
@@ -619,7 +619,7 @@
     {
       "name": "Welt",
       "element": "Imaginär",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_welt.png"
     },
@@ -716,7 +716,7 @@
     },
     {
       "name": "Along the Passing Shore",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_along_the_passing_shore.png"
     },
@@ -752,13 +752,13 @@
     },
     {
       "name": "Before the Tutorial Mission Starts",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_before_the_tutorial_mission_starts.png"
     },
     {
       "name": "Boundless Choreo",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_boundless_choreo.png"
     },
@@ -806,7 +806,7 @@
     },
     {
       "name": "Cornucopia",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 3,
       "icon_path": "assets/images/lc_cornucopia.png"
     },
@@ -866,7 +866,7 @@
     },
     {
       "name": "Dream's Montage",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_dream_s_montage.png"
     },
@@ -884,7 +884,7 @@
     },
     {
       "name": "Echoes of the Coffin",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 5,
       "icon_path": "assets/images/lc_echoes_of_the_coffin.png"
     },
@@ -908,13 +908,13 @@
     },
     {
       "name": "Eyes of the Prey",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_eyes_of_the_prey.png"
     },
     {
       "name": "Fermata",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_fermata.png"
     },
@@ -926,7 +926,7 @@
     },
     {
       "name": "Fine Fruit",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 3,
       "icon_path": "assets/images/lc_fine_fruit.png"
     },
@@ -980,25 +980,25 @@
     },
     {
       "name": "Good Night and Sleep Well",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_good_night_and_sleep_well.png"
     },
     {
       "name": "Hey, Over Here",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_hey_over_here.png"
     },
     {
       "name": "Hidden Shadow",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 3,
       "icon_path": "assets/images/lc_hidden_shadow.png"
     },
     {
       "name": "Holiday Thermae Escapade",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_holiday_thermae_escapade.png"
     },
@@ -1034,7 +1034,7 @@
     },
     {
       "name": "In the Name of the World",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_in_the_name_of_the_world.png"
     },
@@ -1046,7 +1046,7 @@
     },
     {
       "name": "Incessant Rain",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_incessant_rain.png"
     },
@@ -1070,7 +1070,7 @@
     },
     {
       "name": "It's Showtime",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_it_s_showtime.png"
     },
@@ -1088,7 +1088,7 @@
     },
     {
       "name": "Lies Dance on the Breeze",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_lies_dance_on_the_breeze.png"
     },
@@ -1112,13 +1112,13 @@
     },
     {
       "name": "Long Road Leads Home",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_long_road_leads_home.png"
     },
     {
       "name": "Loop",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 3,
       "icon_path": "assets/images/lc_loop.png"
     },
@@ -1166,7 +1166,7 @@
     },
     {
       "name": "Multiplication",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 3,
       "icon_path": "assets/images/lc_multiplication.png"
     },
@@ -1184,13 +1184,13 @@
     },
     {
       "name": "Never Forget Her Flame",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_never_forget_her_flame.png"
     },
     {
       "name": "Night of Fright",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 5,
       "icon_path": "assets/images/lc_night_of_fright.png"
     },
@@ -1250,13 +1250,13 @@
     },
     {
       "name": "Patience Is All You Need",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_patience_is_all_you_need.png"
     },
     {
       "name": "Perfect Timing",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_perfect_timing.png"
     },
@@ -1280,13 +1280,13 @@
     },
     {
       "name": "Post-Op Conversation",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_post_op_conversation.png"
     },
     {
       "name": "Quid Pro Quo",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_quid_pro_quo.png"
     },
@@ -1298,13 +1298,13 @@
     },
     {
       "name": "Reforged Remembrance",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_reforged_remembrance.png"
     },
     {
       "name": "Reforged in Hellfire",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_reforged_in_hellfire.png"
     },
@@ -1316,7 +1316,7 @@
     },
     {
       "name": "Resolution Shines As Pearls of Sweat",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_resolution_shines_as_pearls_of_sweat.png"
     },
@@ -1352,7 +1352,7 @@
     },
     {
       "name": "Scent Alone Stays True",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 5,
       "icon_path": "assets/images/lc_scent_alone_stays_true.png"
     },
@@ -1382,7 +1382,7 @@
     },
     {
       "name": "Shared Feeling",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_shared_feeling.png"
     },
@@ -1412,7 +1412,7 @@
     },
     {
       "name": "Solitary Healing",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_solitary_healing.png"
     },
@@ -1532,7 +1532,7 @@
     },
     {
       "name": "Those Many Springs",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_those_many_springs.png"
     },
@@ -1550,7 +1550,7 @@
     },
     {
       "name": "Time Waits for No One",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 5,
       "icon_path": "assets/images/lc_time_waits_for_no_one.png"
     },
@@ -1604,7 +1604,7 @@
     },
     {
       "name": "Unto Tomorrow's Morrow",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_unto_tomorrow_s_morrow.png"
     },
@@ -1622,13 +1622,13 @@
     },
     {
       "name": "Void",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 3,
       "icon_path": "assets/images/lc_void.png"
     },
     {
       "name": "Warmth Shortens Cold Nights",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_warmth_shortens_cold_nights.png"
     },
@@ -1640,7 +1640,7 @@
     },
     {
       "name": "We Will Meet Again",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_we_will_meet_again.png"
     },
@@ -1652,7 +1652,7 @@
     },
     {
       "name": "What Is Real?",
-      "path": "Fülle",
+      "path": "Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_what_is_real.png"
     },
@@ -1670,7 +1670,7 @@
     },
     {
       "name": "Why Does the Ocean Sing",
-      "path": "Nichtsein",
+      "path": "Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_why_does_the_ocean_sing.png"
     },

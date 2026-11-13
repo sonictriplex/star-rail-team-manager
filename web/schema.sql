@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS characters (
     id        INT AUTO_INCREMENT PRIMARY KEY,
     name      VARCHAR(255) NOT NULL UNIQUE,
     element   ENUM('Physisch','Feuer','Eis','Blitz','Wind','Quantum','Imaginär') NOT NULL,
-    path      ENUM('Zerstörung','Jagd','Erudition','Harmonie','Nichtsein','Bewahrung','Fülle','Erinnerung','Hochgefühl') NOT NULL,
+    path      ENUM('Zerstörung','Jagd','Erudition','Harmonie','Nichtigkeit','Bewahrung','Überfluss','Erinnerung','Hochgefühl') NOT NULL,
     rarity    TINYINT NOT NULL,                 -- 4 oder 5
     icon_path VARCHAR(255) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS characters (
 CREATE TABLE IF NOT EXISTS light_cones (
     id        INT AUTO_INCREMENT PRIMARY KEY,
     name      VARCHAR(255) NOT NULL UNIQUE,
-    path      ENUM('Zerstörung','Jagd','Erudition','Harmonie','Nichtsein','Bewahrung','Fülle','Erinnerung','Hochgefühl') NOT NULL,
+    path      ENUM('Zerstörung','Jagd','Erudition','Harmonie','Nichtigkeit','Bewahrung','Überfluss','Erinnerung','Hochgefühl') NOT NULL,
     rarity    TINYINT NOT NULL,                 -- 3 bis 5
     icon_path VARCHAR(255) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
