@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honkai: Star Rail - Team & Build Manager</title>
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0a0b17',
+                        cardBg: 'rgba(24, 25, 42, 0.75)',
+                        panelBg: 'rgba(18, 16, 27, 0.80)',
+                        inputBg: 'rgba(18, 16, 27, 0.65)',
+                        accent: '#a99bff',
+                        accentHover: '#9486f0',
+                        gold: '#e6c37a',
+                        danger: '#df4a28'
+                    },
+                    fontFamily: {
+                        app: ['system-ui', '-apple-system', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: radial-gradient(ellipse at 20% 0%, #2a2358 0%, transparent 55%), radial-gradient(ellipse at 90% 100%, #1d3a5c 0%, transparent 50%), #0a0b17;
+            background-attachment: fixed;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        /* Überschrift-Effekt mit TTF-Schriftart */
+        .app-title {
+            font-family: system-ui, -apple-system, sans-serif;
+            letter-spacing: 0.05em;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(169, 155, 255, 0.45);
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #12121f; }
+        ::-webkit-scrollbar-thumb { background: #34365a; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a99bff; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-4 relative">
+
+    <!-- DARK OVERLAY & BLUR FÜR BESSERE LESBARKEIT -->
+    <div class="fixed inset-0 bg-black/40 backdrop-blur-[2px] pointer-events-none -z-10"></div>
+
+    <!-- KOPFZEILE: Titel links, Benutzermenü rechts (Export, Import, Logout, Konto löschen) -->
+    <header class="w-full max-w-7xl mx-auto mt-4 mb-5 flex items-center justify-between gap-3 px-1">
+        <h1 class="app-title text-xl sm:text-3xl font-bold text-accent tracking-wide min-w-0 truncate" title="STAR RAIL Team & Build Manager">
+            <span class="sm:hidden">STAR RAIL Teams</span><span class="hidden sm:inline">HONKAI: STAR RAIL Team & Build Manager</span>
+        </h1>
+
+        <div id="userMenu" class="hidden relative flex-shrink-0">
+            <button id="userMenuButton" type="button" onclick="toggleUserMenu(event)" aria-haspopup="true" aria-expanded="false" aria-controls="userMenuList"
+                class="flex items-center gap-2 bg-cardBg/80 hover:bg-[#2d293e] text-accent border border-[#332d47] font-bold text-sm px-3 py-1.5 rounded-md transition-colors shadow-md max-w-[11rem]">
+                <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5Z"/></svg>
+                <span id="userInfo" class="truncate"></span>
+                <svg class="w-3 h-3 flex-shrink-0" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M2 4l4 4 4-4z"/></svg>
+            </button>
+            <div id="userMenuList" role="menu" class="hidden absolute right-0 mt-2 w-52 bg-[#1a1825] border border-[#332d47] rounded-lg shadow-2xl z-40 py-1 text-sm">
+                <div id="userMenuName" class="px-4 py-2 text-xs text-gray-400 border-b border-white/10 truncate"></div>
+                <button type="button" role="menuitem" onclick="closeUserMenu(); showAllTeams()" title="Zeigt alle Teams auf einen Blick"
+                    class="block w-full text-left px-4 py-2 text-gray-100 hover:bg-[#2d293e] hover:text-accent transition-colors">Alle Teams</button>
+                <button type="button" role="menuitem" onclick="closeUserMenu(); createNewTeam()" title="Beginnt ein leeres Team"
+                    class="block w-full text-left px-4 py-2 text-gray-100 hover:bg-[#2d293e] hover:text-accent transition-colors border-b border-white/10">Neues Team</button>
+                <button type="button" role="menuitem" onclick="closeUserMenu(); exportData()" title="Speichert alle Builds und Teams als JSON-Datei"
+                    class="block w-full text-left px-4 py-2 text-gray-100 hover:bg-[#2d293e] hover:text-accent transition-colors">Exportieren</button>
+                <button type="button" role="menuitem" onclick="closeUserMenu(); document.getElementById('importFile').click()" title="Liest Builds und Teams aus einer JSON-Export-Datei ein"
+                    class="block w-full text-left px-4 py-2 text-gray-100 hover:bg-[#2d293e] hover:text-accent transition-colors">Importieren</button>
+                <button type="button" role="menuitem" id="logoutBtn" onclick="closeUserMenu(); handleLogout()"
+                    class="block w-full text-left px-4 py-2 text-gray-300 hover:bg-[#2d293e] hover:text-danger border-t border-white/10 transition-colors">Logout</button>
+                <button type="button" role="menuitem" id="deleteAccountBtn" onclick="closeUserMenu(); openDeleteAccount()" title="Löscht dein Konto mit allen Teams und Builds endgültig"
+                    class="block w-full text-left px-4 py-2 text-danger/80 hover:bg-[#2d293e] hover:text-danger transition-colors">Konto löschen</button>
+                <button type="button" role="menuitem" id="aboutBtn" onclick="closeUserMenu(); openAbout()"
+                    class="block w-full text-left px-4 py-2 text-gray-300 hover:bg-[#2d293e] hover:text-accent border-t border-white/10 transition-colors">Über</button>
+            </div>
+            <input type="file" id="importFile" accept=".json,application/json" class="hidden" onchange="importData(this)">
+        </div>
+    </header>
+
+    <!-- TEAM-STEUERUNG: zwei Gruppen, die als Ganzes umbrechen (nie mitten in einer Beschriftung) -->
+    <div class="flex flex-wrap items-center gap-3 bg-cardBg/80 backdrop-blur-md p-3 rounded-xl border border-[#2d293e]/60 shadow-2xl mb-6 max-w-7xl w-full mx-auto">
+        <div class="flex flex-wrap items-center gap-2 flex-1 min-w-[17rem]">
+            <input type="text" id="teamNameInput" value="Neues Team" placeholder="Teamname" aria-label="Teamname"
+                class="bg-inputBg text-white px-3 py-1.5 rounded-md border border-[#332d47] text-sm focus:border-accent outline-none flex-1 min-w-[8rem]">
+            <button onclick="saveCurrentTeam()" class="whitespace-nowrap bg-accent hover:bg-accentHover text-darkBg font-bold text-sm px-4 py-1.5 rounded-md transition-colors shadow-md">Speichern</button>
+        </div>
+
+        <div class="flex items-center gap-2 flex-1 min-w-[17rem]">
+            <select id="teamsSelect" onchange="onTeamSelected(this.value)" aria-label="Gespeicherte Teams"
+                class="bg-inputBg text-white px-3 py-1.5 rounded-md border border-[#332d47] text-sm focus:border-accent outline-none min-w-0 flex-1">
+                <option value="">— Team wählen —</option>
+            </select>
+            <button onclick="deleteCurrentTeam()" title="Team löschen" aria-label="Team löschen"
+                class="flex-shrink-0 w-9 h-9 flex items-center justify-center bg-danger hover:opacity-90 text-white rounded-md transition-opacity shadow-md">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 3h6l1 2h4v2H4V5h4l1-2Zm-3 6h12l-1 12H7L6 9Z"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN STACK CONTAINER -->
+    <main class="flex-1 flex flex-col items-center w-full">
+
+        <!-- ÜBERSICHT ALLER TEAMS (Button "Alle Teams") -->
+        <div id="allTeamsView" class="hidden w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+
+        <!-- TEAM OVERVIEW -->
+        <div id="overviewView" class="flex flex-wrap justify-center gap-6 w-full max-w-7xl">
+            <!-- Dynamisch generiert durch JS -->
+        </div>
+
+        <!-- DETAIL VIEW -->
+        <div id="detailView" class="hidden w-full max-w-7xl flex flex-col md:flex-row gap-6 items-start md:items-stretch">
+            <div id="detailCardContainer" class="w-full md:w-[270px] flex-shrink-0 flex justify-center">
+                <!-- Die aktive Charakterkarte im Detailmodus -->
+            </div>
+
+            <div id="detailPanelBox" class="flex-1 w-full bg-panelBg/85 backdrop-blur-md border border-[#332d47] rounded-xl p-5 flex flex-col justify-between shadow-2xl transition-colors duration-300 min-h-[650px]">
+                <div class="flex flex-col flex-1">
+                    <h2 id="detailPanelTitle" class="font-app text-accent font-bold text-base mb-4">Relikt-Einzelwerte, Level & Substats</h2>
+                    <!-- 6 Relikt-Slots; die Buttons stehen darunter (siehe renderRelicPanel) -->
+                    <div id="relicSlotsGrid" class="grid grid-cols-1 xl:grid-cols-2 gap-4 flex-1"></div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="w-full max-w-7xl mx-auto mt-8 mb-2 flex justify-center">
+        <img src="/assets/images/mm_logo.png" alt="the media-matrix" width="109" height="41" class="opacity-90">
+    </footer>
+
+    <!-- MODAL: LOGIN / REGISTRIERUNG -->
+    <!-- Eigenes Hintergrundbild (wie die Hauptseite, leicht abgedunkelt), damit die Seite dahinter nicht durchscheint -->
+    <div id="authModal" class="fixed inset-0 overflow-y-auto z-50"
+         style="background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), radial-gradient(ellipse at 20% 0%, #2a2358 0%, transparent 55%), #0a0b17;">
+        <div class="min-h-full flex flex-col items-center justify-center gap-6 p-4">
+        <h1 class="app-title text-3xl sm:text-4xl font-bold text-accent tracking-wide text-center max-w-4xl" style="text-shadow: 0 2px 12px rgba(0,0,0,0.7);">HONKAI: STAR RAIL Team & Build Manager</h1>
+        <div class="bg-cardBg/90 border border-[#332d47] rounded-xl max-w-md w-full p-6 shadow-2xl text-white backdrop-blur-md">
+            <h2 id="authTitle" class="text-lg font-bold text-gray-200 mb-4 text-center">Anmelden</h2>
+
+            <div id="authError" class="hidden mb-4 p-3 bg-danger/20 border border-danger/60 rounded text-red-200 text-xs font-semibold"></div>
+
+            <form id="authForm" onsubmit="handleAuthSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 mb-1">Benutzername</label>
+                    <input type="text" id="authUsername" required class="w-full bg-inputBg border border-[#332d47] focus:border-accent text-white px-3 py-2 rounded text-sm outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 mb-1">Passwort</label>
+                    <input type="password" id="authPassword" required class="w-full bg-inputBg border border-[#332d47] focus:border-accent text-white px-3 py-2 rounded text-sm outline-none">
+                </div>
+
+                <button type="submit" id="authSubmitBtn" class="w-full py-2 bg-accent hover:bg-accentHover text-darkBg font-bold text-sm rounded shadow-md transition-colors">
+                    Einloggen
+                </button>
+            </form>
+
+            <div class="mt-4 pt-4 border-t border-[#252136] text-center text-xs text-gray-400">
+                <span id="authToggleText">Noch keinen Account?</span>
+                <button onclick="toggleAuthMode()" id="authToggleBtn" class="text-accent underline font-bold ml-1 hover:text-accentHover">
+                    Jetzt registrieren
+                </button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- MODAL: ÜBER -->
+    <div id="aboutModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 z-50" onclick="if (event.target === this) closeAbout()">
+        <div role="dialog" aria-modal="true" aria-labelledby="aboutTitle" class="bg-cardBg border border-[#332d47] rounded-xl max-w-sm w-full p-6 shadow-2xl text-white backdrop-blur-md text-center">
+            <div class="text-5xl mb-2 text-accent" aria-hidden="true">✦</div>
+            <h2 id="aboutTitle" class="app-title text-lg font-bold text-accent mb-1">Honkai: Star Rail Team & Build Manager</h2>
+            <!-- Bei jeder Änderung zusammen mit CHANGELOG.md hochzählen (ein Test vergleicht beide) -->
+            <div id="webVersion" class="text-sm text-gray-200 mb-3">Web-Version 0.1.0</div>
+            <p class="text-sm text-gray-300 mb-3">Teams aus bis zu vier Charakteren und die Builds deiner Charaktere verwalten.</p>
+            <p class="text-[11px] text-gray-400 mb-4">Inoffizielles Fanprojekt, nicht mit HoYoverse verbunden. Honkai: Star Rail sowie zugehörige Namen und Bilder sind Eigentum von HoYoverse.</p>
+            <a id="aboutLogoLink" href="https://www.media-matrix.de" target="_blank" rel="noopener noreferrer" title="www.media-matrix.de" class="inline-block mb-4 opacity-90 hover:opacity-100 transition-opacity">
+                <img src="/assets/images/mm_logo.png" alt="the media-matrix (www.media-matrix.de)" width="109" height="41" class="mx-auto">
+            </a>
+            <button type="button" onclick="closeAbout()" class="px-6 py-2 bg-inputBg hover:bg-[#2d293e] border border-[#332d47] text-gray-100 font-bold text-sm rounded transition-colors">Schließen</button>
+        </div>
+    </div>
+
+    <!-- MODAL: KONTO LÖSCHEN -->
+    <div id="deleteAccountModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 z-50">
+        <div role="dialog" aria-modal="true" aria-labelledby="deleteAccountTitle" class="bg-cardBg border border-[#332d47] rounded-xl max-w-md w-full p-6 shadow-2xl text-white backdrop-blur-md">
+            <h2 id="deleteAccountTitle" class="text-xl font-bold text-danger mb-3 text-center">Konto löschen?</h2>
+            <p class="text-sm text-gray-300 mb-4">Dein Konto <strong id="deleteAccountName" class="text-accent"></strong> wird mit allen Teams und Builds endgültig gelöscht. Das lässt sich nicht rückgängig machen.</p>
+
+            <div id="deleteAccountError" class="hidden mb-4 p-3 bg-danger/20 border border-danger/60 rounded text-red-200 text-xs font-semibold"></div>
+
+            <form id="deleteAccountForm" onsubmit="handleDeleteAccount(event)" class="space-y-4">
+                <div>
+                    <label for="deleteAccountPassword" class="block text-xs font-bold text-gray-300 mb-1">Passwort zur Bestätigung</label>
+                    <input type="password" id="deleteAccountPassword" required autocomplete="current-password" class="w-full bg-inputBg border border-[#332d47] focus:border-accent text-white px-3 py-2 rounded text-sm outline-none">
+                </div>
+                <div class="flex gap-3">
+                    <button type="button" onclick="closeDeleteAccount()" class="flex-1 py-2 bg-inputBg hover:bg-[#2d293e] border border-[#332d47] text-gray-100 font-bold text-sm rounded transition-colors">Abbrechen</button>
+                    <button type="submit" id="deleteAccountSubmit" class="flex-1 py-2 bg-danger hover:opacity-90 text-white font-bold text-sm rounded shadow-md transition-opacity disabled:opacity-50">Endgültig löschen</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: CHARAKTER SUCHEN -->
+    <div id="charModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div class="bg-cardBg border border-[#332d47] rounded-xl max-w-2xl w-full max-h-[85vh] flex flex-col p-5 shadow-2xl backdrop-blur-md">
+            <h3 class="text-lg font-bold text-white mb-3">Charakter auswählen</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+                <input type="text" id="charSearch" oninput="filterCharacters()" placeholder="Suchen..." class="bg-inputBg text-white px-3 py-1 rounded text-xs border border-[#332d47] outline-none focus:border-accent">
+                <select id="charPathFilter" onchange="filterCharacters()" class="bg-inputBg text-white px-2 py-1 rounded text-xs border border-[#332d47] outline-none focus:border-accent">
+                    <option value="">Alle Pfade</option>
+                    <option>Zerstörung</option><option>Jagd</option><option>Erudition</option><option>Harmonie</option><option>Nichtsein</option><option>Bewahrung</option><option>Fülle</option><option>Erinnerung</option><option>Hochgefühl</option>
+                </select>
+                <select id="charElemFilter" onchange="filterCharacters()" class="bg-inputBg text-white px-2 py-1 rounded text-xs border border-[#332d47] outline-none focus:border-accent">
+                    <option value="">Alle Elemente</option>
+                    <option>Physisch</option><option>Feuer</option><option>Eis</option><option>Blitz</option><option>Wind</option><option>Quantum</option><option>Imaginär</option>
+                </select>
+                <select id="charRarityFilter" onchange="filterCharacters()" class="bg-inputBg text-white px-2 py-1 rounded text-xs border border-[#332d47] outline-none focus:border-accent">
+                    <option value="">Alle Seltenheiten</option>
+                    <option value="5">5 ★</option><option value="4">4 ★</option>
+                </select>
+            </div>
+
+            <div class="flex-1 overflow-y-auto border border-[#332d47] rounded-lg">
+                <table class="w-full text-left text-xs text-gray-300">
+                    <thead class="bg-panelBg text-gold sticky top-0 font-bold border-b border-[#332d47]">
+                        <tr>
+                            <th class="p-2">Icon</th>
+                            <th class="p-2">Name</th>
+                            <th class="p-2">Element</th>
+                            <th class="p-2">Pfad</th>
+                            <th class="p-2 text-center">★</th>
+                        </tr>
+                    </thead>
+                    <tbody id="charTableBody" class="divide-y divide-[#252136]">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="flex justify-end mt-4">
+                <button onclick="closeCharModal()" class="bg-[#2d293e] text-white px-4 py-1.5 rounded text-xs font-bold hover:bg-[#332d47]">Abbrechen</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: LICHTKEGEL SUCHEN & AUSWÄHLEN -->
+    <div id="lcModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div class="bg-cardBg border border-[#332d47] rounded-xl max-w-2xl w-full max-h-[85vh] flex flex-col p-5 shadow-2xl backdrop-blur-md">
+            <h3 class="text-lg font-bold text-white mb-3">Lichtkegel auswählen</h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-4">
+                <input type="text" id="lcSearch" oninput="filterLcs()" placeholder="Lichtkegel suchen..." class="bg-inputBg text-white px-3 py-1.5 rounded text-xs border border-[#332d47] outline-none focus:border-accent">
+
+                <select id="lcPathFilter" onchange="filterLcs()" class="bg-inputBg text-white px-2 py-1.5 rounded text-xs border border-[#332d47] outline-none focus:border-accent">
+                    <option value="">Alle Pfade</option>
+                    <option>Zerstörung</option><option>Jagd</option><option>Erudition</option><option>Harmonie</option><option>Nichtsein</option><option>Bewahrung</option><option>Fülle</option><option>Erinnerung</option><option>Hochgefühl</option>
+                </select>
+
+                <select id="lcRarityFilter" onchange="filterLcs()" class="bg-inputBg text-white px-2 py-1.5 rounded text-xs border border-[#332d47] outline-none focus:border-accent">
+                    <option value="">Alle Seltenheiten</option>
+                    <option value="5">5 ★</option>
+                    <option value="4">4 ★</option>
+                    <option value="3">3 ★</option>
+                </select>
+            </div>
+
+            <div class="flex-1 overflow-y-auto border border-[#332d47] rounded-lg">
+                <table class="w-full text-left text-xs text-gray-300">
+                    <thead class="bg-panelBg text-gold sticky top-0 font-bold border-b border-[#332d47]">
+                        <tr>
+                            <th class="p-2 w-12">Icon</th>
+                            <th class="p-2">Name</th>
+                            <th class="p-2">Pfad</th>
+                            <th class="p-2 text-center w-16">★</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lcTableBody" class="divide-y divide-[#252136]">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="flex justify-between items-center mt-4">
+                <span id="lcCountLabel" class="text-xs text-gray-400">0 Lichtkegel gefunden</span>
+                <button onclick="closeLcModal()" class="bg-[#2d293e] text-white px-4 py-1.5 rounded text-xs font-bold hover:bg-[#332d47]">Abbrechen</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT-LOGIK -->
+    <script>
+        const API_BASE = '/api';
+
+        let availableCharacters = [];
+        let availableLightCones = [];
+        let availableRelicSets = [];
+        let savedTeams = {};
+
+        let currentTeamMembers = [];
+        let loadedTeamName = "";      // Name des zuletzt geöffneten, gespeicherten Teams (für das Umbenennen)
+        let activeDetailIndex = -1;
+        let activeLcTargetIndex = -1;
+
+        let isRegisterMode = false;
+        let currentUsername = "";
+
+        // Slots 0-3 sind Relikte, 4-5 Planar-Ornamente
+        const RELIC_SLOT_CONFIG = [
+            { name: "Kopf",            kind: "Relikt",   mains: ["LP (Fix)"] },
+            { name: "Hände",           kind: "Relikt",   mains: ["ANG (Fix)"] },
+            { name: "Körper",          kind: "Relikt",   mains: ["LP%", "ANG%", "VTD%", "KT%", "KSCH%", "Heilungsbonus%", "Effekttreffer%"] },
+            { name: "Füße",            kind: "Relikt",   mains: ["LP%", "ANG%", "VTD%", "Initiative"] },
+            { name: "Planarsphäre",    kind: "Ornament", mains: ["LP%", "ANG%", "VTD%", "Physisch-SCH%", "Feuer-SCH%", "Eis-SCH%", "Blitz-SCH%", "Wind-SCH%", "Quantum-SCH%", "Imaginär-SCH%"] },
+            { name: "Verbindungsseil", kind: "Ornament", mains: ["LP%", "ANG%", "VTD%", "Zerbrechungseffekt%", "Energieregeneration%"] }
+        ];
+        const RELIC_SLOT_NAMES = RELIC_SLOT_CONFIG.map(s => s.name);
+
+        const SUBSTAT_OPTIONS = [
+            "— Keiner —", "LP (Fix)", "ANG (Fix)", "VTD (Fix)", "LP%", "ANG%", "VTD%",
+            "Initiative", "KT%", "KSCH%", "Effekttreffer%", "Effektresistenz%", "Zerbrechungseffekt%"
+        ];
+
+        const ELEMENT_COLORS = {
+            "Physisch": "#c9c9c9", "Feuer": "#f4663b", "Eis": "#47b8e0", "Blitz": "#d86bff",
+            "Wind": "#4ed3a4", "Quantum": "#8c7cf5", "Imaginär": "#f2d441"
+        };
+
+        const ELEMENT_BG_MAP = {
+            "Physisch": "rgba(48, 48, 52, 0.45)", "Feuer": "rgba(62, 26, 20, 0.45)", "Eis": "rgba(18, 48, 66, 0.45)",
+            "Blitz": "rgba(48, 24, 66, 0.45)", "Wind": "rgba(18, 54, 46, 0.45)", "Quantum": "rgba(34, 28, 68, 0.45)",
+            "Imaginär": "rgba(60, 54, 18, 0.45)"
+        };
+
+        // Bild eines Elements bzw. Pfads (Dateinamen ohne Umlaute, z. B. "Imaginär" -> element_imaginaer.png)
+        function asciiSlug(s) {
+            return String(s || '').toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss');
+        }
+        const elementIcon = el => el ? `/assets/images/element_${asciiSlug(el)}.png` : '';
+        const pathIcon = p => p ? `/assets/images/path_${asciiSlug(p)}.png` : '';
+        const iconUrl = obj => (obj && obj.icon_path) ? '/' + obj.icon_path.replace(/^\//, '') : '';
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            // Klicks in den Auswahllisten per Event-Delegation (statt onclick mit Namen im HTML)
+            document.getElementById('charTableBody').addEventListener('click', e => {
+                const row = e.target.closest('tr[data-name]');
+                if (row) selectCharacter(row.dataset.name);
+            });
+            document.getElementById('lcTableBody').addEventListener('click', e => {
+                const row = e.target.closest('tr[data-name]');
+                if (row) selectLc(row.dataset.name);
+            });
+
+            await checkAuth();
+        });
+
+        async function checkAuth() {
+            try {
+                const res = await fetch(`${API_BASE}/auth.php?action=status`);
+                const data = await res.json();
+
+                if (data.logged_in) {
+                    currentUsername = data.username;
+                    document.getElementById('authModal').classList.add('hidden');
+
+                    document.getElementById('userInfo').textContent = data.username;
+                    document.getElementById('userMenuName').textContent = `Eingeloggt als ${data.username}`;
+                    document.getElementById('userMenu').classList.remove('hidden');
+
+                    await loadInitialData();
+                } else {
+                    document.getElementById('authModal').classList.remove('hidden');
+                }
+            } catch (e) {
+                console.error("Auth Check fehlgeschlagen:", e);
+            }
+        }
+
+        function toggleAuthMode() {
+            isRegisterMode = !isRegisterMode;
+            document.getElementById('authTitle').innerText = isRegisterMode ? "Account erstellen" : "Anmelden";
+            document.getElementById('authSubmitBtn').innerText = isRegisterMode ? "Registrieren" : "Einloggen";
+            document.getElementById('authToggleText').innerText = isRegisterMode ? "Bereits registriert?" : "Noch keinen Account?";
+            document.getElementById('authToggleBtn').innerText = isRegisterMode ? "Jetzt einloggen" : "Jetzt registrieren";
+            document.getElementById('authError').classList.add('hidden');
+        }
+
+        async function handleAuthSubmit(e) {
+            e.preventDefault();
+            const username = document.getElementById('authUsername').value.trim();
+            const password = document.getElementById('authPassword').value;
+            const action = isRegisterMode ? 'register' : 'login';
+            const errDiv = document.getElementById('authError');
+
+            try {
+                const res = await fetch(`${API_BASE}/auth.php?action=${action}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    errDiv.classList.add('hidden');
+                    document.getElementById('authUsername').value = '';
+                    document.getElementById('authPassword').value = '';
+                    await checkAuth();
+                } else {
+                    errDiv.innerText = data.error || "Ein Fehler ist aufgetreten.";
+                    errDiv.classList.remove('hidden');
+                }
+            } catch (err) {
+                errDiv.innerText = "Netzwerkfehler beim Anmelden.";
+                errDiv.classList.remove('hidden');
+            }
+        }
+
+        // --- Benutzermenü (Export, Import, Logout, Konto löschen) ---
+        function setUserMenuOpen(open) {
+            document.getElementById('userMenuList').classList.toggle('hidden', !open);
+            document.getElementById('userMenuButton').setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+
+        function closeUserMenu() { setUserMenuOpen(false); }
+
+        function toggleUserMenu(event) {
+            if (event) event.stopPropagation();
+            setUserMenuOpen(document.getElementById('userMenuList').classList.contains('hidden'));
+        }
+
+        // Klick daneben oder Escape schließt das Menü
+        document.addEventListener('click', event => {
+            const menu = document.getElementById('userMenu');
+            if (menu && !menu.contains(event.target)) closeUserMenu();
+        });
+        document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeUserMenu(); closeDeleteAccount(); closeAbout(); } });
+
+        async function handleLogout() {
+            try {
+                await fetch(`${API_BASE}/auth.php?action=logout`, { method: 'POST' });
+                location.reload();
+            } catch (e) {
+                console.error("Logout Fehler:", e);
+            }
+        }
+
+        function openAbout() { document.getElementById('aboutModal').classList.remove('hidden'); }
+        function closeAbout() { document.getElementById('aboutModal').classList.add('hidden'); }
+
+        // --- Konto löschen (Passwort wird erneut abgefragt; der Server prüft es) ---
+        function openDeleteAccount() {
+            document.getElementById('deleteAccountName').textContent = `„${currentUsername}“`;
+            document.getElementById('deleteAccountPassword').value = '';
+            document.getElementById('deleteAccountError').classList.add('hidden');
+            document.getElementById('deleteAccountModal').classList.remove('hidden');
+            document.getElementById('deleteAccountPassword').focus();
+        }
+
+        function closeDeleteAccount() {
+            document.getElementById('deleteAccountModal').classList.add('hidden');
+            document.getElementById('deleteAccountPassword').value = '';
+        }
+
+        async function handleDeleteAccount(event) {
+            event.preventDefault();
+            const errorBox = document.getElementById('deleteAccountError');
+            const submit = document.getElementById('deleteAccountSubmit');
+            errorBox.classList.add('hidden');
+            submit.disabled = true;
+            try {
+                const res = await fetch(`${API_BASE}/auth.php?action=delete_account`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: document.getElementById('deleteAccountPassword').value })
+                });
+                const data = await res.json().catch(() => ({}));
+                if (!res.ok) {
+                    errorBox.textContent = data.error || 'Das Konto konnte nicht gelöscht werden.';
+                    errorBox.classList.remove('hidden');
+                    return;
+                }
+                location.reload();
+            } catch (e) {
+                errorBox.textContent = 'Server nicht erreichbar. Bitte später erneut versuchen.';
+                errorBox.classList.remove('hidden');
+            } finally {
+                submit.disabled = false;
+            }
+        }
+
+        async function loadInitialData(preferredTeam = "") {
+            try {
+                const fetchSafe = async (url, fallback = []) => {
+                    try {
+                        const res = await fetch(url);
+                        if (!res.ok) return fallback;
+                        return await res.json();
+                    } catch (e) {
+                        console.warn(`Fehler beim Laden von ${url}:`, e);
+                        return fallback;
+                    }
+                };
+
+                availableCharacters = await fetchSafe(`${API_BASE}/characters.php`, []);
+                availableLightCones = await fetchSafe(`${API_BASE}/light_cones.php`, []);
+                availableRelicSets = await fetchSafe(`${API_BASE}/relic_sets.php`, []);
+                savedTeams = await fetchSafe(`${API_BASE}/teams.php`, {});
+
+                const teamNames = Object.keys(savedTeams);
+                // Nach dem Start (und nach Löschen/Import) erst alle Teams zeigen; nach dem Speichern bleibt das Team offen
+                const targetTeam = preferredTeam && savedTeams[preferredTeam] ? preferredTeam : "";
+
+                updateTeamsDropdown(targetTeam);
+
+                if (targetTeam) {
+                    onTeamSelected(targetTeam);
+                } else {
+                    createNewTeam();
+                    if (teamNames.length > 0) showAllTeams();
+                }
+            } catch (err) {
+                console.error("Fehler beim Laden der Stammdaten:", err);
+            }
+        }
+
+        function createNewTeam() {
+            activeDetailIndex = -1;
+            loadedTeamName = "";
+            document.getElementById('teamNameInput').value = "Neues Team";
+            document.getElementById('teamsSelect').value = "";
+            currentTeamMembers = [];
+            renderOverview();
+        }
+
+        // Tooltip mit den Set-Boni (2er, 4er) eines Relikt-Sets bzw. Planar-Ornaments; leer ohne Beschreibung
+        function relicBonusTip(setName) {
+            const s = availableRelicSets.find(x => x.name === setName);
+            if (!s) return '';
+            const parts = [['2er', s.bonus_2pc], ['4er', s.bonus_4pc]]
+                .filter(([, text]) => text).map(([label, text]) => `${label}-Bonus: ${text}`);
+            return parts.length ? `${s.name}\n\n${parts.join('\n\n')}` : '';
+        }
+
+        // Aktive Set-Boni eines Builds: je Set die Anzahl der Teile (2 oder 4; Ornamente nur 2)
+        function relicSetSummary(saved) {
+            const relics = (saved && saved.relics && typeof saved.relics === 'object' && !Array.isArray(saved.relics)) ? saved.relics : {};
+            const counts = {};
+            RELIC_SLOT_CONFIG.forEach(cfg => {
+                const set = relics[cfg.name]?.set;
+                if (set) counts[set] = (counts[set] || 0) + 1;
+            });
+            return Object.entries(counts)
+                .map(([set, n]) => ({ set, n: n >= 4 ? 4 : (n >= 2 ? 2 : 0) }))
+                .filter(x => x.n > 0)
+                .sort((a, b) => b.n - a.n || a.set.localeCompare(b.set, 'de'));
+        }
+
+        // Schützt vor XSS: wandelt HTML-Sonderzeichen in Entities um.
+        // Für JEDEN Wert aus DB/Nutzereingabe verwenden, der per innerHTML eingefügt wird.
+        function escapeHtml(value) {
+            return String(value ?? '').replace(/[&<>"']/g, ch => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[ch]));
+        }
+
+        function updateTeamsDropdown(selectName = "") {
+            const select = document.getElementById('teamsSelect');
+            select.innerHTML = '<option value="">— Team wählen —</option>';
+
+            if (typeof savedTeams === 'object' && savedTeams !== null) {
+                Object.keys(savedTeams).forEach(name => {
+                    const opt = document.createElement('option');
+                    opt.value = name;
+                    opt.textContent = name;
+                    if (name === selectName) opt.selected = true;
+                    select.appendChild(opt);
+                });
+            }
+        }
+
+        // =====================================================================
+        // HILFSFUNKTIONEN FÜR RELIKTDATEN
+        // PHP liefert ein leeres Array als [] statt {}. Ein JS-Array verwirft
+        // beim JSON.stringify alle benannten Schlüssel (z. B. "Kopf").
+        // Diese Funktionen stellen sicher, dass immer saubere Objekte vorliegen.
+        // =====================================================================
+
+        // Liefert das relics-Objekt eines Mitglieds (legt es bei Bedarf an)
+        function ensureRelics(index) {
+            const member = currentTeamMembers[index];
+            if (!member.saved) member.saved = {};
+            const relics = member.saved.relics;
+            if (!relics || typeof relics !== 'object' || Array.isArray(relics)) {
+                member.saved.relics = {};
+            }
+            return member.saved.relics;
+        }
+
+        // Liefert einen Slot (z. B. "Kopf") mit garantiert 4 Substats der Form {stat, val}
+        function ensureSlot(index, slotName) {
+            const relics = ensureRelics(index);
+            let slot = relics[slotName];
+            if (!slot || typeof slot !== 'object' || Array.isArray(slot)) {
+                slot = { level: 15, rarity: 5 };
+                relics[slotName] = slot;
+            }
+            if (!Array.isArray(slot.substats)) slot.substats = [];
+            while (slot.substats.length < 4) slot.substats.push({});
+            for (let i = 0; i < 4; i++) {
+                slot.substats[i] = parseSubstatEntry(slot.substats[i]);
+            }
+            return slot;
+        }
+
+        // Normalisiert alle Reliktdaten eines Mitglieds (nach dem Laden)
+        function normalizeMember(index) {
+            const relics = ensureRelics(index);
+            Object.keys(relics).forEach(slotName => ensureSlot(index, slotName));
+        }
+
+        function onTeamSelected(teamName) {
+            if (!teamName || !savedTeams[teamName]) return;
+            loadedTeamName = teamName;
+            document.getElementById('teamNameInput').value = teamName;
+            document.getElementById('teamsSelect').value = teamName;
+
+            currentTeamMembers = JSON.parse(JSON.stringify(savedTeams[teamName]));
+            currentTeamMembers.forEach((_, i) => normalizeMember(i));
+            renderOverview();
+        }
+
+        // SYNCHRONISIERT GEÄNDERTE DETAIL-FELDER IN DEN MEMORY-STATE
+        function syncActiveDetailStats() {
+            if (activeDetailIndex < 0 || !currentTeamMembers[activeDetailIndex]) return;
+
+            RELIC_SLOT_CONFIG.forEach((cfg, i) => {
+                const lvlInput = document.getElementById(`rel_lvl_${i}`);
+                if (!lvlInput) return;
+
+                const raritySelect = document.getElementById(`rel_rarity_${i}`);
+                const setSelect = document.getElementById(`rel_set_${i}`);
+                const mainSelect = document.getElementById(`rel_main_${i}`);
+                const mainValInput = document.getElementById(`rel_mainval_${i}`);
+
+                // ensureSlot erhält die bereits eingetragenen Substats
+                const slot = ensureSlot(activeDetailIndex, cfg.name);
+                slot.level = Math.max(0, Math.min(15, parseInt(lvlInput.value) || 0));
+                slot.rarity = raritySelect ? (parseInt(raritySelect.value) || 5) : 5;
+                slot.set = setSelect ? setSelect.value : "";
+                slot.main = mainSelect ? mainSelect.value : "";
+                slot.main_value = mainValInput ? mainValInput.value : "";
+            });
+        }
+
+        function renderOverview() {
+            // Geänderte Detaildaten sichern, falls aktiv
+            if (activeDetailIndex >= 0) {
+                syncActiveDetailStats();
+            }
+
+            document.getElementById('allTeamsView').classList.add('hidden');
+            document.getElementById('overviewView').classList.remove('hidden');
+            document.getElementById('detailView').classList.add('hidden');
+            activeDetailIndex = -1;
+
+            const grid = document.getElementById('overviewView');
+            grid.innerHTML = '';
+
+            currentTeamMembers.forEach((item, index) => {
+                grid.appendChild(createCharacterCard(item, index, false));
+                requestAnimationFrame(fitCardNames);
+            });
+
+            if (currentTeamMembers.length < 4) {
+                const addSlot = document.createElement('div');
+                addSlot.className = "w-[270px] h-[650px] bg-cardBg/40 backdrop-blur-md border-2 border-dashed border-[#332d47] hover:border-accent hover:bg-cardBg/70 rounded-xl p-6 flex flex-col items-center justify-center cursor-pointer transition-all flex-shrink-0 shadow-2xl";
+                addSlot.onclick = openCharModal;
+                addSlot.innerHTML = `
+                    <span class="text-5xl text-accent mb-3 font-bold">+</span>
+                    <span class="text-sm text-[#8a889e] font-bold">Charakter hinzufügen</span>
+                `;
+                // Karte auf den freien Platz ziehen = ans Ende verschieben
+                addSlot.addEventListener('dragover', e => { if (dragSourceIndex < 0) return; e.preventDefault(); e.dataTransfer.dropEffect = 'move'; });
+                addSlot.addEventListener('drop', e => {
+                    if (dragSourceIndex < 0) return;
+                    e.preventDefault();
+                    const from = dragSourceIndex;
+                    dragSourceIndex = -1;
+                    moveCharacterTo(from, currentTeamMembers.length - 1);
+                });
+                grid.appendChild(addSlot);
+            }
+        }
+
+        // Übersicht aller gespeicherten Teams: je Team eine Karte mit den Icons der Charaktere (Klick öffnet das Team)
+        function showAllTeams() {
+            if (activeDetailIndex >= 0) syncActiveDetailStats();
+            activeDetailIndex = -1;
+            document.getElementById('overviewView').classList.add('hidden');
+            document.getElementById('detailView').classList.add('hidden');
+            const grid = document.getElementById('allTeamsView');
+            grid.classList.remove('hidden');
+            grid.innerHTML = '';
+
+            const names = Object.keys(savedTeams || {});
+            if (names.length === 0) {
+                grid.innerHTML = '<p class="col-span-full text-center text-gray-300">Noch keine Teams. Lege über das Benutzermenü „Neues Team“ das erste an.</p>';
+                return;
+            }
+            names.forEach((name, index) => {
+                const card = document.createElement('div');
+                card.className = "bg-cardBg/40 backdrop-blur-md border border-[#332d47] hover:border-accent rounded-xl p-4 cursor-pointer transition-colors shadow-2xl";
+                card.draggable = true;
+                card.dataset.teamName = name;
+                card.tabIndex = 0;
+                card.setAttribute('role', 'button');
+                card.title = 'Team öffnen';
+                card.onclick = () => onTeamSelected(name);
+                card.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onTeamSelected(name); } };
+
+                const members = (savedTeams[name] || []).map(m => {
+                    const c = m.character || {};
+                    const border = c.rarity == 5 ? '#e6c37a' : '#a561c9';
+                    const cname = c.name || '';
+                    const lvl = (m.saved && m.saved.level) || 80;
+                    const ec = ELEMENT_COLORS[c.element] || '#5bc0be';
+                    return `<div class="min-w-0 text-center">
+                        <div class="relative">
+                            <img src="${escapeHtml(iconUrl(c))}" alt="" loading="lazy" class="w-full aspect-square rounded-lg object-cover" style="border: 2px solid ${border}; background-color: ${ec}59">
+                            <span class="absolute top-0.5 left-1 text-[10px] leading-none font-bold text-white" style="text-shadow: 0 1px 3px rgba(0,0,0,0.9)">${escapeHtml(String(lvl))}</span>
+                        </div>
+                        <div class="text-xs text-gray-200 truncate mt-1" title="${escapeHtml(cname)}">${escapeHtml(cname)}</div>
+                    </div>`;
+                }).join('');
+                const arrowClass = "w-6 h-6 bg-black/60 hover:bg-accent hover:text-darkBg text-white rounded-full flex items-center justify-center font-bold text-sm transition-colors disabled:opacity-30 disabled:cursor-default disabled:hover:bg-black/60 disabled:hover:text-white";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between gap-2 mb-3">
+                        <h3 class="app-title font-bold text-gold truncate" title="${escapeHtml(name)}">${escapeHtml(name)}</h3>
+                        <div class="flex items-center gap-1 flex-shrink-0">
+                            <button type="button" data-move="-1" ${index === 0 ? 'disabled' : ''} title="Nach vorn" class="${arrowClass}">‹</button>
+                            <button type="button" data-move="1" ${index === names.length - 1 ? 'disabled' : ''} title="Nach hinten" class="${arrowClass}">›</button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-4 gap-3">${members || '<span class="col-span-4 text-sm text-gray-400">Keine Charaktere</span>'}</div>`;
+                card.querySelectorAll('button[data-move]').forEach(btn => {
+                    btn.onclick = e => { e.stopPropagation(); moveTeam(name, index + Number(btn.dataset.move)); };
+                    btn.onkeydown = e => e.stopPropagation();
+                });
+
+                // Karten per Drag & Drop verschieben
+                card.addEventListener('dragstart', e => {
+                    teamDragName = name;
+                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('text/plain', name);
+                    card.classList.add('opacity-50');
+                });
+                card.addEventListener('dragend', () => {
+                    teamDragName = null;
+                    card.classList.remove('opacity-50');
+                    clearTeamDropMarks();
+                });
+                card.addEventListener('dragover', e => {
+                    if (teamDragName === null) return;
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                    if (name !== teamDragName) card.classList.add('ring-2', 'ring-accent');
+                });
+                card.addEventListener('dragleave', e => {
+                    if (!card.contains(e.relatedTarget)) card.classList.remove('ring-2', 'ring-accent');
+                });
+                card.addEventListener('drop', e => {
+                    if (teamDragName === null) return;
+                    e.preventDefault();
+                    const from = names.indexOf(teamDragName);
+                    teamDragName = null;
+                    moveTeam(names[from], index);
+                });
+                grid.appendChild(card);
+            });
+        }
+
+        let teamDragName = null;
+
+        function clearTeamDropMarks() {
+            document.querySelectorAll('#allTeamsView .ring-2').forEach(el => el.classList.remove('ring-2', 'ring-accent'));
+        }
+
+        // Verschiebt ein Team in der Übersicht an eine neue Stelle und speichert die Reihenfolge
+        async function moveTeam(name, toIndex) {
+            const names = Object.keys(savedTeams);
+            const from = names.indexOf(name);
+            if (from < 0 || toIndex < 0 || toIndex >= names.length || from === toIndex) return;
+
+            const previous = savedTeams;
+            names.splice(toIndex, 0, names.splice(from, 1)[0]);
+            savedTeams = {};
+            names.forEach(n => { savedTeams[n] = previous[n]; });
+            updateTeamsDropdown(loadedTeamName || "");
+            showAllTeams();
+
+            try {
+                const res = await fetch(`${API_BASE}/teams.php`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ order: names })
+                });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            } catch (e) {
+                console.warn('Reihenfolge konnte nicht gespeichert werden:', e);
+                savedTeams = previous;
+                updateTeamsDropdown(loadedTeamName || "");
+                showAllTeams();
+                alert('Die Reihenfolge konnte nicht gespeichert werden.');
+            }
+        }
+
+        // Verkleinert zu lange Charakternamen auf den Karten, bis sie komplett lesbar sind
+        function fitCardNames() {
+            document.querySelectorAll('[data-fit-name]').forEach(el => {
+                el.style.fontSize = '';
+                let size = parseFloat(getComputedStyle(el).fontSize);
+                while (el.scrollWidth > el.clientWidth && size > 8) {
+                    size -= 0.5;
+                    el.style.fontSize = size + 'px';
+                }
+            });
+        }
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitCardNames);
+
+        const ARROW_BTN = "w-6 h-6 bg-black/60 hover:bg-accent hover:text-darkBg text-white rounded-full flex items-center justify-center font-bold text-sm transition-colors disabled:opacity-30 disabled:cursor-default disabled:hover:bg-black/60 disabled:hover:text-white";
+        const NUM_INPUT = "bg-inputBg text-accent border border-[#332d47] rounded text-center font-bold outline-none focus:border-accent";
+
+        function createCharacterCard(item, index, isDetailMode) {
+            const char = item.character || {};
+            const saved = item.saved || {};
+
+            const card = document.createElement('div');
+
+            const elemColor = ELEMENT_COLORS[char.element] || '#a99bff';
+            const elemBg = ELEMENT_BG_MAP[char.element] || 'rgba(18, 18, 31, 0.45)';
+
+            card.className = `w-[270px] ${isDetailMode ? 'min-h-[650px]' : 'h-[650px]'} backdrop-blur-md border rounded-xl flex flex-col overflow-hidden text-sm flex-shrink-0 shadow-2xl transition-all hover:scale-[1.01]`;
+            card.style.borderColor = `${elemColor}66`;
+
+            const rarityGradient = char.rarity == 5
+                ? 'background: linear-gradient(180deg, rgba(138,96,42,0.85) 0%, rgba(45,36,29,0.85) 100%);'
+                : 'background: linear-gradient(180deg, rgba(89,61,122,0.85) 0%, rgba(41,36,59,0.85) 100%);';
+
+            const sets = relicSetSummary(saved);
+            const setLines = sets.length
+                ? sets.map(s => `<div class="truncate" title="${escapeHtml(relicBonusTip(s.set))}"><span class="text-accent font-bold">${s.n}×</span> ${escapeHtml(s.set)}</div>`).join('')
+                : '<div class="text-gray-400">Keine aktiven Set-Boni</div>';
+
+            card.innerHTML = `
+                <!-- KOPFBEREICH (BILD & RARITÄT) -->
+                <div class="h-44 relative p-3 flex flex-col justify-between flex-shrink-0 ${!isDetailMode ? 'cursor-grab' : ''}" style="${rarityGradient}" ${!isDetailMode ? 'draggable="true" data-drag-handle title="Ziehen, um die Karte zu verschieben"' : ''}>
+                    <div class="flex justify-between items-center z-10">
+                        <span class="bg-black/60 text-white font-bold px-2 py-0.5 rounded text-xs">${char.rarity || 4}★</span>
+                        ${!isDetailMode ? `<div class="flex items-center gap-1">
+                            <button onclick="moveCharacter(${index}, -1)" ${index === 0 ? 'disabled' : ''} title="Nach links" class="${ARROW_BTN}">‹</button>
+                            <button onclick="moveCharacter(${index}, 1)" ${index === currentTeamMembers.length - 1 ? 'disabled' : ''} title="Nach rechts" class="${ARROW_BTN}">›</button>
+                            <button onclick="removeCharacter(${index})" title="Entfernen" class="w-6 h-6 bg-black/60 hover:bg-danger text-white rounded-full flex items-center justify-center font-bold text-xs transition-colors">✕</button>
+                        </div>` : ''}
+                    </div>
+                    <img src="${escapeHtml(iconUrl(char))}" onerror="this.removeAttribute('src')" alt="${escapeHtml(char.name)}" class="h-32 w-32 object-contain mx-auto my-auto drop-shadow-lg">
+                </div>
+
+                <!-- TEXT & FORMULARBEREICH -->
+                <div class="p-4 flex flex-col justify-between flex-1" style="background-color: ${elemBg}">
+
+                    <!-- NAME, ELEMENT, PFAD & LEVEL -->
+                    <div>
+                        <div class="flex justify-between items-center mb-1 gap-2">
+                            <span data-fit-name class="font-app font-bold text-white text-base truncate max-w-[170px]" title="${escapeHtml(char.name || 'Unbekannt')}">${escapeHtml(char.name || 'Unbekannt')}</span>
+                            <span class="flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold border flex-shrink-0" style="color:${elemColor}; border-color:${elemColor}; background-color: rgba(0,0,0,0.3)">
+                                <img src="${escapeHtml(elementIcon(char.element))}" onerror="this.remove()" alt="" class="w-3.5 h-3.5">${escapeHtml(char.element || '')}
+                            </span>
+                        </div>
+                        <div class="flex justify-between items-center text-gray-300 text-xs">
+                            <span class="flex items-center gap-1 truncate max-w-[150px]"><img src="${escapeHtml(pathIcon(char.path))}" onerror="this.remove()" alt="" class="w-4 h-4 flex-shrink-0">${escapeHtml(char.path || '')}</span>
+                            <div class="flex items-center gap-1.5 flex-shrink-0">
+                                <span class="font-bold">Lvl</span>
+                                <input type="number" min="1" max="80" value="${saved.level || 80}" onchange="updateSavedProp(${index}, 'level', this.value)" class="w-13 h-7 ${NUM_INPUT} px-1 text-sm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EIDOLONS -->
+                    <div class="flex items-center justify-between border-t border-white/10 pt-2">
+                        <span class="text-gold font-bold text-xs">E</span>
+                        <div class="flex gap-1">
+                            ${[0,1,2,3,4,5,6].map(c => `
+                                <button onclick="updateSavedProp(${index}, 'eidolon', ${c}); renderCurrentView();" class="w-6 h-6 rounded text-xs font-bold ${ (saved.eidolon||0) === c ? 'bg-[#2d293e] text-gold border border-gold' : 'bg-inputBg text-white border border-[#332d47] hover:border-accent' }">${c}</button>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- LICHTKEGEL -->
+                    <div class="border-t border-white/10 pt-2">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-gold font-bold text-xs">Lichtkegel</span>
+                            <button onclick="openLcModal(${index})" class="w-5 h-5 rounded bg-inputBg text-accent font-bold flex items-center justify-center border border-[#332d47] hover:border-accent text-xs" title="Lichtkegel suchen">🔍</button>
+                        </div>
+                        <div class="flex gap-1.5 mb-1.5">
+                            <input type="text" readonly value="${escapeHtml(saved.light_cone || '')}" placeholder="Kein Lichtkegel" title="${escapeHtml(saved.light_cone || '')}" onclick="openLcModal(${index})" class="flex-1 min-w-0 bg-inputBg text-gray-100 border border-[#332d47] rounded px-2 py-1 text-xs truncate cursor-pointer hover:border-accent outline-none">
+                            <input type="number" min="1" max="80" value="${saved.lc_level || 80}" onchange="updateSavedProp(${index}, 'lc_level', this.value)" class="w-13 h-7 ${NUM_INPUT} px-1 text-xs flex-shrink-0">
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gold font-bold text-xs">S</span>
+                            <div class="flex gap-1">
+                                ${[1,2,3,4,5].map(r => `
+                                    <button onclick="updateSavedProp(${index}, 'lc_superimpose', ${r}); renderCurrentView();" class="w-6 h-6 rounded text-xs font-bold ${ (saved.lc_superimpose||1) === r ? 'bg-[#2d293e] text-accent border border-gold' : 'bg-inputBg text-white border border-[#332d47] hover:border-accent' }">${r}</button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RELIKT-SETS (aus den Slots berechnet) -->
+                    <div class="border-t border-white/10 pt-2">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-gold font-bold text-xs">Relikt-Sets</span>
+                            <button onclick="toggleDetailView(${index})" class="w-5 h-5 rounded-full bg-[#2d293e] text-accent font-bold flex items-center justify-center border border-[#332d47] hover:bg-accent hover:text-darkBg transition-colors" title="Relikte & Substats bearbeiten">${isDetailMode ? '-' : '+'}</button>
+                        </div>
+                        <div class="text-xs text-gray-200 space-y-0.5 min-h-[2.5rem]">${setLines}</div>
+                    </div>
+
+                    <!-- TALENTE -->
+                    <div class="border-t border-white/10 pt-2">
+                        <span class="text-gold font-bold text-xs block mb-1">Talente (Basis / Fertigkeit / Ult / Talent)</span>
+                        <div class="flex gap-2 items-center text-gray-300 text-xs justify-between">
+                            ${[['basic','B','Basisangriff'],['skill','F','Fertigkeit'],['ult','U','Ultimate'],['talent','T','Talent']].map(([key, label, title]) => `
+                            <div class="flex items-center gap-1" title="${title}">
+                                <span>${label}:</span>
+                                <input type="number" min="1" max="15" value="${saved.talents?.[key] || 1}" onchange="updateTalent(${index}, '${key}', this.value)" class="w-9 h-6 ${NUM_INPUT}">
+                            </div>`).join('')}
+                        </div>
+                    </div>
+
+                </div>
+            `;
+
+            if (!isDetailMode) setupCardDragAndDrop(card, index);
+            return card;
+        }
+
+        function updateSavedProp(index, prop, val) {
+            if (!currentTeamMembers[index].saved) currentTeamMembers[index].saved = {};
+            currentTeamMembers[index].saved[prop] = val;
+        }
+
+        function updateTalent(index, talentProp, val) {
+            if (!currentTeamMembers[index].saved) currentTeamMembers[index].saved = {};
+            if (!currentTeamMembers[index].saved.talents) currentTeamMembers[index].saved.talents = {};
+            currentTeamMembers[index].saved.talents[talentProp] = parseInt(val) || 1;
+        }
+
+        // --- Karten verschieben (Pfeile und Drag & Drop) ---
+
+        // Index der gerade gezogenen Karte, sonst -1 (so werden fremde Drags wie Dateien ignoriert)
+        let dragSourceIndex = -1;
+
+        // Verschiebt ein Teammitglied an eine neue Position; die Reihenfolge wird beim Speichern übernommen
+        function moveCharacterTo(from, to) {
+            const n = currentTeamMembers.length;
+            if (from === to || from < 0 || to < 0 || from >= n || to >= n) return;
+            const [item] = currentTeamMembers.splice(from, 1);
+            currentTeamMembers.splice(to, 0, item);
+            renderOverview();
+        }
+
+        function moveCharacter(index, direction) {
+            moveCharacterTo(index, index + direction);
+        }
+
+        function clearDropMarks() {
+            document.querySelectorAll('#overviewView .ring-2').forEach(el => el.classList.remove('ring-2', 'ring-accent'));
+        }
+
+        // Karten lassen sich am Kopfbereich ziehen (nicht an den Eingabefeldern, damit Text markierbar bleibt)
+        function setupCardDragAndDrop(card, index) {
+            const handle = card.querySelector('[data-drag-handle]');
+            if (!handle) return;
+
+            handle.addEventListener('dragstart', e => {
+                dragSourceIndex = index;
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/plain', String(index));
+                if (e.dataTransfer.setDragImage) e.dataTransfer.setDragImage(card, 135, 40);
+                card.classList.add('opacity-50');
+            });
+            handle.addEventListener('dragend', () => {
+                dragSourceIndex = -1;
+                card.classList.remove('opacity-50');
+                clearDropMarks();
+            });
+
+            card.addEventListener('dragover', e => {
+                if (dragSourceIndex < 0) return;
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+                if (index !== dragSourceIndex) card.classList.add('ring-2', 'ring-accent');
+            });
+            card.addEventListener('dragleave', e => {
+                if (!card.contains(e.relatedTarget)) card.classList.remove('ring-2', 'ring-accent');
+            });
+            card.addEventListener('drop', e => {
+                if (dragSourceIndex < 0) return;
+                e.preventDefault();
+                const from = dragSourceIndex;
+                dragSourceIndex = -1;
+                moveCharacterTo(from, index);
+            });
+        }
+
+        function removeCharacter(index) {
+            currentTeamMembers.splice(index, 1);
+            renderOverview();
+        }
+
+        // Baut die aktuelle Ansicht neu auf, ohne die Detailansicht zuzuklappen
+        function renderCurrentView() {
+            if (activeDetailIndex >= 0) {
+                const idx = activeDetailIndex;
+                syncActiveDetailStats();
+                activeDetailIndex = -1;   // verhindert, dass toggleDetailView zur Übersicht springt
+                toggleDetailView(idx);
+            } else {
+                renderOverview();
+            }
+        }
+        function toggleDetailView(index) {
+            if (activeDetailIndex === index) {
+                renderOverview();
+                return;
+            }
+
+            // Vorige Detailwerte sichern
+            if (activeDetailIndex >= 0) {
+                syncActiveDetailStats();
+            }
+
+            activeDetailIndex = index;
+            document.getElementById('overviewView').classList.add('hidden');
+            document.getElementById('detailView').classList.remove('hidden');
+
+            const item = currentTeamMembers[index];
+            const char = item.character || {};
+            const elemColor = ELEMENT_COLORS[char.element] || '#a99bff';
+            const elemBg = ELEMENT_BG_MAP[char.element] || 'rgba(18, 18, 31, 0.75)';
+
+            const panelBox = document.getElementById('detailPanelBox');
+            panelBox.style.backgroundColor = elemBg;
+            panelBox.style.borderColor = `${elemColor}88`;
+
+            const panelTitle = document.getElementById('detailPanelTitle');
+            panelTitle.style.color = elemColor;
+
+            const cardContainer = document.getElementById('detailCardContainer');
+            cardContainer.innerHTML = '';
+            cardContainer.appendChild(createCharacterCard(item, index, true));
+            requestAnimationFrame(fitCardNames);
+
+            renderRelicPanel(item);
+        }
+
+        function parseSubstatEntry(entry) {
+            // Leer, null oder (fälschlich) ein Array -> leerer Eintrag
+            if (!entry || Array.isArray(entry) || typeof entry !== 'object') return { stat: "", val: "" };
+            return { stat: entry.stat || "", val: entry.val || "" };
+        }
+
+        // Baut die Slot-Karten der sechs Relikte; die Set-Auswahl zeigt je nach Slot nur Relikt-Sets oder Ornamente
+        function renderRelicPanel(item) {
+            const grid = document.getElementById('relicSlotsGrid');
+            grid.innerHTML = '';
+
+            const rawRelics = item.saved?.relics;
+            const relicsSaved = (rawRelics && typeof rawRelics === 'object' && !Array.isArray(rawRelics)) ? rawRelics : {};
+
+            RELIC_SLOT_CONFIG.forEach((cfg, i) => {
+                const sData = relicsSaved[cfg.name] || {};
+                const subs = Array.isArray(sData.substats) ? sData.substats : [];
+
+                let subHTML = '';
+                for (let s = 0; s < 4; s++) {
+                    const parsed = parseSubstatEntry(subs[s]);
+                    const optionsHTML = SUBSTAT_OPTIONS.map(opt => {
+                        const isSel = (opt === parsed.stat) || (opt === "— Keiner —" && !parsed.stat);
+                        return `<option value="${escapeHtml(opt)}" ${isSel ? 'selected' : ''}>${escapeHtml(opt)}</option>`;
+                    }).join('');
+
+                    subHTML += `
+                        <div class="flex gap-1">
+                            <select onchange="updateRelicSub(activeDetailIndex, ${i}, ${s}, 'stat', this.value)" class="flex-1 min-w-0 bg-inputBg text-white border border-[#332d47] rounded px-1 py-0.5 text-xs outline-none focus:border-accent truncate">
+                                ${optionsHTML}
+                            </select>
+                            <input type="text" placeholder="Wert" value="${escapeHtml(parsed.val)}" onchange="updateRelicSub(activeDetailIndex, ${i}, ${s}, 'val', this.value)" class="w-14 bg-inputBg text-white border border-[#332d47] rounded px-1 py-0.5 text-xs text-center outline-none focus:border-accent">
+                        </div>
+                    `;
+                }
+
+                const setOptions = availableRelicSets.filter(x => x.kind === cfg.kind)
+                    .map(x => `<option value="${escapeHtml(x.name)}" title="${escapeHtml(relicBonusTip(x.name))}" ${sData.set === x.name ? 'selected' : ''}>${escapeHtml(x.name)}</option>`).join('');
+                const rarity = parseInt(sData.rarity) || 5;
+                const level = sData.level !== undefined ? sData.level : 15;
+                const mainSaved = sData.main || '';
+
+                const slotBox = document.createElement('div');
+                slotBox.className = "bg-black/35 border border-white/10 rounded-lg p-3 text-xs backdrop-blur-sm";
+                slotBox.innerHTML = `
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold text-gray-200">${cfg.name}</span>
+                        <div class="flex items-center gap-1">
+                            <span class="text-gray-400">Lvl:</span>
+                            <input type="number" min="0" max="15" value="${escapeHtml(level)}" id="rel_lvl_${i}" onchange="updateRelicProp(${i}, 'level', this.value)" class="w-10 bg-inputBg text-accent border border-[#332d47] rounded text-center font-bold">
+                            <select id="rel_rarity_${i}" onchange="updateRelicProp(${i}, 'rarity', this.value)" class="bg-inputBg text-white border border-[#332d47] rounded">
+                                ${[5,4,3,2].map(r => `<option value="${r}" ${rarity === r ? 'selected' : ''}>${r}★</option>`).join('')}
+                            </select>
+                        </div>
+                    </div>
+
+                    <select id="rel_set_${i}" onchange="updateRelicProp(${i}, 'set', this.value); this.title = relicBonusTip(this.value)" title="${escapeHtml(relicBonusTip(sData.set))}" class="w-full bg-inputBg text-white border border-[#332d47] rounded px-1 py-0.5 mb-2 outline-none focus:border-accent">
+                        <option value="">${cfg.kind === 'Relikt' ? '— Kein Relikt-Set —' : '— Kein Ornament —'}</option>
+                        ${setOptions}
+                    </select>
+
+                    <div class="flex gap-2 mb-2">
+                        <select id="rel_main_${i}" onchange="updateRelicProp(${i}, 'main', this.value)" class="flex-1 min-w-0 bg-inputBg text-white border border-[#332d47] rounded px-1 py-0.5">
+                            ${cfg.mains.map(m => `<option ${mainSaved === m ? 'selected' : ''}>${escapeHtml(m)}</option>`).join('')}
+                        </select>
+                        <input type="text" placeholder="Wert" id="rel_mainval_${i}" value="${escapeHtml(sData.main_value || '')}" onchange="updateRelicProp(${i}, 'main_value', this.value)" class="w-16 bg-inputBg text-white border border-[#332d47] rounded px-1 text-center">
+                    </div>
+
+                    <div class="border-t border-white/10 pt-2 mt-2">
+                        <span class="text-gray-400 font-bold block mb-1">Substats</span>
+                        <div class="grid grid-cols-2 gap-1.5">
+                            ${subHTML}
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(slotBox);
+            });
+
+            const buttons = document.createElement('div');
+            buttons.className = "col-span-full flex flex-wrap justify-end content-end gap-2";
+            buttons.innerHTML = `
+                <button onclick="resetRelics()" title="Leert alle eingegebenen Relikt-Einzelwerte dieser Karte" class="bg-[#252136]/80 hover:bg-[#332d47] text-accent font-bold text-xs px-3 py-2 rounded-md border border-[#332d47] transition-colors">Zurücksetzen</button>
+                <button onclick="reloadRelics()" title="Lädt die gespeicherten Reliktwerte dieses Charakters neu" class="bg-[#252136]/80 hover:bg-[#332d47] text-accent font-bold text-xs px-3 py-2 rounded-md border border-[#332d47] transition-colors">Neu laden</button>
+                <button onclick="renderOverview()" class="bg-[#252136]/80 hover:bg-[#332d47] text-accent font-bold text-xs px-3 py-2 rounded-md border border-[#332d47] transition-colors border-accent">Zurück</button>
+                <button onclick="saveCurrentTeam()" class="bg-accent hover:bg-accentHover text-darkBg font-bold text-xs px-3 py-2 rounded-md transition-colors shadow-md">Speichern</button>
+            `;
+            grid.appendChild(buttons);
+        }
+
+        // Leert alle Relikt-Einzelwerte des geöffneten Charakters (gespeichert wird erst mit "Speichern")
+        function resetRelics() {
+            const item = currentTeamMembers[activeDetailIndex];
+            if (!item) return;
+            item.saved = { ...(item.saved || {}), relics: {} };
+            renderRelicPanel(item);
+        }
+
+        // Verwirft die Eingaben und lädt die zuletzt gespeicherten Reliktwerte des Charakters
+        function reloadRelics() {
+            const item = currentTeamMembers[activeDetailIndex];
+            if (!item) return;
+
+            // Builds gelten pro Nutzer und Charakter, jedes gespeicherte Team mit dem Charakter liefert denselben Stand
+            let relics = {};
+            for (const members of Object.values(savedTeams)) {
+                const found = members.find(m => m.character?.name === item.character.name);
+                if (found) {
+                    relics = found.saved?.relics || {};
+                    break;
+                }
+            }
+            item.saved = { ...(item.saved || {}), relics: JSON.parse(JSON.stringify(relics)) };
+            renderRelicPanel(item);
+        }
+
+        function updateRelicProp(slotIndex, prop, val) {
+            if (activeDetailIndex < 0) return;
+            const slot = ensureSlot(activeDetailIndex, RELIC_SLOT_NAMES[slotIndex]);
+            slot[prop] = val;
+            // Die Set-Zusammenfassung auf der Karte sofort aktualisieren
+            if (prop === 'set') {
+                syncActiveDetailStats();
+                const container = document.getElementById('detailCardContainer');
+                container.innerHTML = '';
+                container.appendChild(createCharacterCard(currentTeamMembers[activeDetailIndex], activeDetailIndex, true));
+                requestAnimationFrame(fitCardNames);
+            }
+        }
+
+        function updateRelicSub(itemIndex, slotIndex, subIndex, fieldKey, val) {
+            if (itemIndex < 0 || !currentTeamMembers[itemIndex]) return;
+            const slot = ensureSlot(itemIndex, RELIC_SLOT_NAMES[slotIndex]);
+            slot.substats[subIndex][fieldKey] = (val === "— Keiner —") ? "" : val;
+        }
+
+        async function saveCurrentTeam() {
+            const name = document.getElementById('teamNameInput').value.trim();
+            if (!name) return alert("Bitte Teamnamen eingeben!");
+
+            // Wurde der Name eines geöffneten Teams geändert: umbenennen oder als neues Team speichern?
+            let renameFrom = "";
+            if (loadedTeamName && loadedTeamName !== name && savedTeams[loadedTeamName]) {
+                if (confirm(`Der Name wurde von „${loadedTeamName}“ zu „${name}“ geändert.\n\nOK: Team umbenennen\nAbbrechen: weitere Auswahl`)) {
+                    if (savedTeams[name] && !confirm(`Ein Team „${name}“ gibt es schon. Es würde überschrieben.\n\nTrotzdem umbenennen?`)) return;
+                    renameFrom = loadedTeamName;
+                } else if (!confirm(`Stattdessen als neues Team „${name}“ speichern?\nDas Team „${loadedTeamName}“ bleibt unverändert.\n\nOK: als neues Team speichern\nAbbrechen: nichts speichern`)) {
+                    return;
+                }
+            }
+
+            // 1. Sichere bestehende Detail-Formularwerte in den Speicher
+            if (activeDetailIndex >= 0) {
+                syncActiveDetailStats();
+            }
+
+            const previousDetailIndex = activeDetailIndex;
+
+            // Alle Mitglieder normalisieren, damit nie ein Array als relics gesendet wird
+            currentTeamMembers.forEach((_, i) => normalizeMember(i));
+
+            const membersPayload = currentTeamMembers.map(m => ({
+                name: m.character.name,
+                ...(m.saved || {})
+            }));
+
+            try {
+                const res = await fetch(`${API_BASE}/teams.php`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, members: membersPayload })
+                });
+
+                const data = await res.json();
+
+                // Umbenennen: erst nach erfolgreichem Speichern das Team unter dem alten Namen entfernen
+                if (renameFrom && res.ok) {
+                    await fetch(`${API_BASE}/teams.php?name=${encodeURIComponent(renameFrom)}`, { method: 'DELETE' });
+                }
+                alert(renameFrom && res.ok ? `Team „${renameFrom}“ wurde in „${name}“ umbenannt.` : (data.message || data.error || "Team erfolgreich gespeichert!"));
+
+                // 2. Teamdaten neu aus dem Backend laden
+                await loadInitialData(name);
+
+                // 3. Wenn vorher die Detailansicht offen war, stelle sie direkt wieder her
+                if (previousDetailIndex >= 0 && previousDetailIndex < currentTeamMembers.length) {
+                    toggleDetailView(previousDetailIndex);
+                }
+            } catch (err) {
+                alert("Fehler beim Speichern: " + err);
+            }
+        }
+
+        // Export: lädt alle Builds und Teams als JSON-Datei herunter (gleiches Format wie die Desktop-Version)
+        async function exportData() {
+            try {
+                const res = await fetch(`${API_BASE}/transfer.php`);
+                const data = await res.json();
+                if (!res.ok) return alert(data.error || "Fehler beim Exportieren.");
+
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'star-rail-team-manager.json';
+                link.click();
+                URL.revokeObjectURL(link.href);
+            } catch (err) {
+                alert("Fehler beim Exportieren: " + err);
+            }
+        }
+
+        // Import: liest eine JSON-Datei ein, wahlweise zusammenführen oder alles ersetzen
+        async function importData(input) {
+            const file = input.files[0];
+            input.value = '';  // gleiche Datei später erneut wählbar
+            if (!file) return;
+
+            let data;
+            try {
+                data = JSON.parse(await file.text());
+            } catch (err) {
+                return alert("Die Datei ist keine gültige JSON-Datei.");
+            }
+
+            let mode = 'merge';
+            if (!confirm("Importieren und mit den vorhandenen Daten zusammenführen?\n\nGleichnamige Builds und Teams werden überschrieben, alles andere bleibt.")) {
+                if (!confirm("Stattdessen ALLES ersetzen?\n\nAlle vorhandenen Builds und Teams werden vorher gelöscht.")) return;
+                mode = 'replace';
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/transfer.php`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mode, data })
+                });
+                const result = await res.json();
+                if (!res.ok) return alert(result.error || "Fehler beim Importieren.");
+
+                let text = `${result.builds} Builds und ${result.teams} Teams importiert.`;
+                if (result.skipped.length) text += "\n\nUnbekannte Charaktere (übersprungen):\n" + result.skipped.join(", ");
+                alert(text);
+
+                activeDetailIndex = -1;
+                await loadInitialData();
+            } catch (err) {
+                alert("Fehler beim Importieren: " + err);
+            }
+        }
+
+        async function deleteCurrentTeam() {
+            const name = document.getElementById('teamsSelect').value;
+            if (!name) return alert("Bitte wähle ein Team zum Löschen aus.");
+
+            if (!confirm(`Möchtest du das Team "${name}" wirklich löschen?`)) return;
+
+            try {
+                const res = await fetch(`${API_BASE}/teams.php?name=${encodeURIComponent(name)}`, {
+                    method: 'DELETE'
+                });
+                const data = await res.json();
+                alert(data.message || "Team gelöscht.");
+                activeDetailIndex = -1;
+                await loadInitialData();
+            } catch (err) {
+                alert("Fehler beim Löschen: " + err);
+            }
+        }
+
+        function openCharModal() {
+            filterCharacters();
+            document.getElementById('charModal').classList.remove('hidden');
+        }
+
+        function closeCharModal() {
+            document.getElementById('charModal').classList.add('hidden');
+        }
+
+        function filterCharacters() {
+            const search = document.getElementById('charSearch').value.toLowerCase();
+            const reg = document.getElementById('charPathFilter').value;
+            const elem = document.getElementById('charElemFilter').value;
+            const rar = document.getElementById('charRarityFilter').value;
+
+            const filtered = availableCharacters.filter(c => {
+                if (search && !c.name.toLowerCase().includes(search)) return false;
+                if (reg && c.path !== reg) return false;
+                if (elem && c.element !== elem) return false;
+                if (rar && c.rarity != rar) return false;
+                return true;
+            });
+
+            const tbody = document.getElementById('charTableBody');
+            tbody.innerHTML = filtered.map(c => `
+                <tr data-name="${escapeHtml(c.name)}" class="hover:bg-[#262338]/60 cursor-pointer transition-colors">
+                    <td class="p-2"><img src="${escapeHtml(iconUrl(c))}" onerror="this.removeAttribute('src')" class="w-8 h-8 object-contain"></td>
+                    <td class="p-2 font-bold text-white">${escapeHtml(c.name)}</td>
+                    <td class="p-2">${escapeHtml(c.element)}</td>
+                    <td class="p-2">${escapeHtml(c.path)}</td>
+                    <td class="p-2 text-center font-bold text-gold">${escapeHtml(c.rarity)}★</td>
+                </tr>
+            `).join('');
+        }
+
+        function selectCharacter(charName) {
+            const charObj = availableCharacters.find(c => c.name === charName);
+            if (!charObj || currentTeamMembers.length >= 4) return;
+
+            // Doppelte Charaktere im selben Team verhindern
+            if (currentTeamMembers.some(m => m.character && m.character.name === charName)) {
+                alert(`${charName} ist bereits im Team.`);
+                return;
+            }
+
+            // Builds gelten pro Nutzer und Charakter: vorhandenen Build aus einem gespeicherten Team übernehmen
+            let saved = null;
+            for (const members of Object.values(savedTeams || {})) {
+                const found = (members || []).find(m => m.character?.name === charName && m.saved);
+                if (found) {
+                    saved = JSON.parse(JSON.stringify(found.saved));
+                    break;
+                }
+            }
+            if (!saved) saved = { name: charName, level: 80, eidolon: 0, relics: {} };
+
+            currentTeamMembers.push({ character: charObj, saved });
+            closeCharModal();
+            renderOverview();
+        }
+
+        function openLcModal(memberIndex) {
+            activeLcTargetIndex = memberIndex;
+            const item = currentTeamMembers[memberIndex];
+
+            // Lichtkegel passen zum Pfad des Charakters: als Vorauswahl gesetzt, im Filter aber änderbar
+            document.getElementById('lcPathFilter').value = item?.character?.path || "";
+            document.getElementById('lcSearch').value = "";
+            document.getElementById('lcRarityFilter').value = "";
+
+            filterLcs();
+            document.getElementById('lcModal').classList.remove('hidden');
+        }
+
+        function closeLcModal() {
+            document.getElementById('lcModal').classList.add('hidden');
+            activeLcTargetIndex = -1;
+        }
+
+        function filterLcs() {
+            const search = document.getElementById('lcSearch').value.toLowerCase().trim();
+            const path = document.getElementById('lcPathFilter').value;
+            const rarity = document.getElementById('lcRarityFilter').value;
+
+            const filtered = availableLightCones.filter(l => {
+                if (search && !l.name.toLowerCase().includes(search)) return false;
+                if (path && l.path !== path) return false;
+                if (rarity && String(l.rarity) !== String(rarity)) return false;
+                return true;
+            });
+
+            document.getElementById('lcTableBody').innerHTML = filtered.map(l => `
+                <tr data-name="${escapeHtml(l.name)}" class="hover:bg-[#262338]/60 cursor-pointer transition-colors">
+                    <td class="p-2"><img src="${escapeHtml(iconUrl(l))}" loading="lazy" onerror="this.removeAttribute('src')" class="w-8 h-8 object-contain"></td>
+                    <td class="p-2 font-bold text-white">${escapeHtml(l.name)}</td>
+                    <td class="p-2">${escapeHtml(l.path)}</td>
+                    <td class="p-2 text-center font-bold text-gold">${escapeHtml(l.rarity)}★</td>
+                </tr>
+            `).join('');
+
+            document.getElementById('lcCountLabel').textContent = `${filtered.length} Lichtkegel gefunden`;
+        }
+
+        function selectLc(lcName) {
+            if (activeLcTargetIndex >= 0 && activeLcTargetIndex < currentTeamMembers.length) {
+                updateSavedProp(activeLcTargetIndex, 'light_cone', lcName);
+                closeLcModal();
+                renderCurrentView();
+            }
+        }
+    </script>
+</body>
+</html>
