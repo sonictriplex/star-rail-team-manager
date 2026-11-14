@@ -1,6 +1,6 @@
 # Honkai: Star Rail – Team & Build Manager
 
-Teams aus bis zu vier Charakteren zusammenstellen und für jeden Charakter einen Build verwalten: Level, Eidolon, Talente, Lichtkegel (Level, Überlagerung) und alle sechs Relikte mit Set, Hauptwert und Substats. Gleiches Konzept wie der Genshin-Manager, zunächst als **Web-App** (PHP + MySQL/MariaDB). Desktop und Android sind noch nicht portiert.
+Teams aus bis zu vier Charakteren zusammenstellen und für jeden Charakter einen Build verwalten: Level, Eidolon, Talente, Lichtkegel (Level, Überlagerung) und alle sechs Relikte mit Set, Hauptwert und Substats. Gleiches Konzept wie der Genshin-Manager, mit drei Clients für dieselben Daten: **Web** (PHP + MySQL/MariaDB), **Desktop** (Python, PySide6, lokale SQLite-Datei, siehe [desktop/README.md](desktop/README.md)) und **Android** (Kotlin, Jetpack Compose, Online-Client der Web-Version, siehe [android/README.md](android/README.md)). Builds und Teams lassen sich über eine Export-Datei zwischen allen Clients austauschen.
 
 ## Funktionen
 
