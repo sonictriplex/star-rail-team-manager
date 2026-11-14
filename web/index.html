@@ -256,7 +256,7 @@
                 <input type="text" id="charSearch" oninput="filterCharacters()" placeholder="Suchen..." class="bg-inputBg text-white px-3 py-1 rounded text-xs border border-[#332d47] outline-none focus:border-accent">
                 <select id="charPathFilter" onchange="filterCharacters()" class="bg-inputBg text-white px-2 py-1 rounded text-xs border border-[#332d47] outline-none focus:border-accent">
                     <option value="">Alle Pfade</option>
-                    <option>Zerstörung</option><option>Jagd</option><option>Gelehrsamkeit</option><option>Harmonie</option><option>Nichtigkeit</option><option>Bewahrung</option><option>Überfluss</option><option>Gedenken</option><option>Hochgefühl</option>
+                    <option>Die Zerstörung</option><option>Die Jagd</option><option>Die Gelehrsamkeit</option><option>Die Harmonie</option><option>Die Nichtigkeit</option><option>Die Bewahrung</option><option>Der Überfluss</option><option>Das Gedenken</option><option>Das Hochgefühl</option>
                 </select>
                 <select id="charElemFilter" onchange="filterCharacters()" class="bg-inputBg text-white px-2 py-1 rounded text-xs border border-[#332d47] outline-none focus:border-accent">
                     <option value="">Alle Elemente</option>
@@ -300,7 +300,7 @@
 
                 <select id="lcPathFilter" onchange="filterLcs()" class="bg-inputBg text-white px-2 py-1.5 rounded text-xs border border-[#332d47] outline-none focus:border-accent">
                     <option value="">Alle Pfade</option>
-                    <option>Zerstörung</option><option>Jagd</option><option>Gelehrsamkeit</option><option>Harmonie</option><option>Nichtigkeit</option><option>Bewahrung</option><option>Überfluss</option><option>Gedenken</option><option>Hochgefühl</option>
+                    <option>Die Zerstörung</option><option>Die Jagd</option><option>Die Gelehrsamkeit</option><option>Die Harmonie</option><option>Die Nichtigkeit</option><option>Die Bewahrung</option><option>Der Überfluss</option><option>Das Gedenken</option><option>Das Hochgefühl</option>
                 </select>
 
                 <select id="lcRarityFilter" onchange="filterLcs()" class="bg-inputBg text-white px-2 py-1.5 rounded text-xs border border-[#332d47] outline-none focus:border-accent">
@@ -399,7 +399,7 @@
             return String(s || '').toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss');
         }
         const elementIcon = el => el ? `/assets/images/element_${asciiSlug(el)}.png` : '';
-        const pathIcon = p => p ? `/assets/images/path_${asciiSlug(p)}.png` : '';
+        const pathIcon = p => p ? `/assets/images/path_${asciiSlug(String(p).replace(/^(Die|Der|Das)\s+/, ''))}.png` : '';   // Dateien ohne Artikel
         const iconUrl = obj => (obj && obj.icon_path) ? '/' + obj.icon_path.replace(/^\//, '') : '';
 
         window.addEventListener('DOMContentLoaded', async () => {

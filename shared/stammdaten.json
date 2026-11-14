@@ -3,658 +3,658 @@
     {
       "name": "Acheron",
       "element": "Blitz",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_acheron.png"
     },
     {
       "name": "Aeon ★ Aha",
       "element": "Quantum",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 5,
       "icon_path": "assets/images/char_aeon_aha.png"
     },
     {
       "name": "Aglaea",
       "element": "Blitz",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/char_aglaea.png"
     },
     {
       "name": "Anaxa",
       "element": "Wind",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_anaxa.png"
     },
     {
       "name": "Archer",
       "element": "Quantum",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/char_archer.png"
     },
     {
       "name": "Argenti",
       "element": "Physisch",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_argenti.png"
     },
     {
       "name": "Arlan",
       "element": "Blitz",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 4,
       "icon_path": "assets/images/char_arlan.png"
     },
     {
       "name": "Ashveil",
       "element": "Blitz",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/char_ashveil.png"
     },
     {
       "name": "Asta",
       "element": "Feuer",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 4,
       "icon_path": "assets/images/char_asta.png"
     },
     {
       "name": "Aventurine",
       "element": "Imaginär",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 5,
       "icon_path": "assets/images/char_aventurine.png"
     },
     {
       "name": "Aventurine • Waveflair",
       "element": "Quantum",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 5,
       "icon_path": "assets/images/char_aventurine_waveflair.png"
     },
     {
       "name": "Bailu",
       "element": "Blitz",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 5,
       "icon_path": "assets/images/char_bailu.png"
     },
     {
       "name": "Black Swan",
       "element": "Wind",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_black_swan.png"
     },
     {
       "name": "Blade",
       "element": "Wind",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/char_blade.png"
     },
     {
       "name": "Boothill",
       "element": "Physisch",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/char_boothill.png"
     },
     {
       "name": "Bronya",
       "element": "Wind",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 5,
       "icon_path": "assets/images/char_bronya.png"
     },
     {
       "name": "Castorice",
       "element": "Quantum",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/char_castorice.png"
     },
     {
       "name": "Cerydra",
       "element": "Wind",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 5,
       "icon_path": "assets/images/char_cerydra.png"
     },
     {
       "name": "Cipher",
       "element": "Quantum",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_cipher.png"
     },
     {
       "name": "Clara",
       "element": "Physisch",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/char_clara.png"
     },
     {
       "name": "Cyrene",
       "element": "Eis",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/char_cyrene.png"
     },
     {
       "name": "Dan Heng",
       "element": "Wind",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 4,
       "icon_path": "assets/images/char_dan_heng.png"
     },
     {
       "name": "Dan Heng • Imbibitor Lunae",
       "element": "Imaginär",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/char_dan_heng_imbibitor_lunae.png"
     },
     {
       "name": "Dan Heng • Permansor Terrae",
       "element": "Physisch",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 5,
       "icon_path": "assets/images/char_dan_heng_permansor_terrae.png"
     },
     {
       "name": "Dr. Ratio",
       "element": "Imaginär",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/char_dr_ratio.png"
     },
     {
       "name": "Evanescia",
       "element": "Physisch",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 5,
       "icon_path": "assets/images/char_evanescia.png"
     },
     {
       "name": "Evernight",
       "element": "Eis",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/char_evernight.png"
     },
     {
       "name": "Feixiao",
       "element": "Wind",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/char_feixiao.png"
     },
     {
       "name": "Firefly",
       "element": "Feuer",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/char_firefly.png"
     },
     {
       "name": "Fu Xuan",
       "element": "Quantum",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 5,
       "icon_path": "assets/images/char_fu_xuan.png"
     },
     {
       "name": "Fugue",
       "element": "Feuer",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_fugue.png"
     },
     {
       "name": "Gallagher",
       "element": "Feuer",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/char_gallagher.png"
     },
     {
       "name": "Gepard",
       "element": "Eis",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 5,
       "icon_path": "assets/images/char_gepard.png"
     },
     {
       "name": "Gilgamesh",
       "element": "Blitz",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/char_gilgamesh.png"
     },
     {
       "name": "Guinaifen",
       "element": "Feuer",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/char_guinaifen.png"
     },
     {
       "name": "Hanya",
       "element": "Physisch",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 4,
       "icon_path": "assets/images/char_hanya.png"
     },
     {
       "name": "Herta",
       "element": "Eis",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/char_herta.png"
     },
     {
       "name": "Himeko",
       "element": "Feuer",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_himeko.png"
     },
     {
       "name": "Himeko • Nova",
       "element": "Feuer",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_himeko_nova.png"
     },
     {
       "name": "Hook",
       "element": "Feuer",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 4,
       "icon_path": "assets/images/char_hook.png"
     },
     {
       "name": "Huohuo",
       "element": "Wind",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 5,
       "icon_path": "assets/images/char_huohuo.png"
     },
     {
       "name": "Hyacine",
       "element": "Wind",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/char_hyacine.png"
     },
     {
       "name": "Hysilens",
       "element": "Physisch",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_hysilens.png"
     },
     {
       "name": "Jade",
       "element": "Quantum",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_jade.png"
     },
     {
       "name": "Jiaoqiu",
       "element": "Feuer",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_jiaoqiu.png"
     },
     {
       "name": "Jing Yuan",
       "element": "Blitz",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_jing_yuan.png"
     },
     {
       "name": "Jingliu",
       "element": "Eis",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/char_jingliu.png"
     },
     {
       "name": "Kafka",
       "element": "Blitz",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_kafka.png"
     },
     {
       "name": "Lingsha",
       "element": "Feuer",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 5,
       "icon_path": "assets/images/char_lingsha.png"
     },
     {
       "name": "Luka",
       "element": "Physisch",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/char_luka.png"
     },
     {
       "name": "Luocha",
       "element": "Imaginär",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 5,
       "icon_path": "assets/images/char_luocha.png"
     },
     {
       "name": "Lynx",
       "element": "Quantum",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/char_lynx.png"
     },
     {
       "name": "March 7th",
       "element": "Eis",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 4,
       "icon_path": "assets/images/char_march_7th.png"
     },
     {
       "name": "March 7th",
       "element": "Imaginär",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 4,
       "icon_path": "assets/images/char_march_7th.png"
     },
     {
       "name": "Misha",
       "element": "Eis",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 4,
       "icon_path": "assets/images/char_misha.png"
     },
     {
       "name": "Mortenax Blade",
       "element": "Feuer",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_mortenax_blade.png"
     },
     {
       "name": "Moze",
       "element": "Blitz",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 4,
       "icon_path": "assets/images/char_moze.png"
     },
     {
       "name": "Mydei",
       "element": "Imaginär",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/char_mydei.png"
     },
     {
       "name": "Natasha",
       "element": "Physisch",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/char_natasha.png"
     },
     {
       "name": "Pearl",
       "element": "Eis",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 5,
       "icon_path": "assets/images/char_pearl.png"
     },
     {
       "name": "Pela",
       "element": "Eis",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/char_pela.png"
     },
     {
       "name": "Phainon",
       "element": "Physisch",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/char_phainon.png"
     },
     {
       "name": "Qingque",
       "element": "Quantum",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/char_qingque.png"
     },
     {
       "name": "Rappa",
       "element": "Imaginär",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_rappa.png"
     },
     {
       "name": "Rin Tohsaka",
       "element": "Quantum",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_rin_tohsaka.png"
     },
     {
       "name": "Robin",
       "element": "Physisch",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 5,
       "icon_path": "assets/images/char_robin.png"
     },
     {
       "name": "Robin • Summeretto",
       "element": "Wind",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/char_robin_summeretto.png"
     },
     {
       "name": "Ruan Mei",
       "element": "Eis",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 5,
       "icon_path": "assets/images/char_ruan_mei.png"
     },
     {
       "name": "Saber",
       "element": "Wind",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/char_saber.png"
     },
     {
       "name": "Sampo",
       "element": "Wind",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/char_sampo.png"
     },
     {
       "name": "Seele",
       "element": "Quantum",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/char_seele.png"
     },
     {
       "name": "Serval",
       "element": "Blitz",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/char_serval.png"
     },
     {
       "name": "Silver Wolf",
       "element": "Quantum",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_silver_wolf.png"
     },
     {
       "name": "Silver Wolf LV.999",
       "element": "Imaginär",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 5,
       "icon_path": "assets/images/char_silver_wolf_lv_999.png"
     },
     {
       "name": "Sparkle",
       "element": "Quantum",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 5,
       "icon_path": "assets/images/char_sparkle.png"
     },
     {
       "name": "Sparxie",
       "element": "Feuer",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 5,
       "icon_path": "assets/images/char_sparxie.png"
     },
     {
       "name": "Sunday",
       "element": "Imaginär",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 5,
       "icon_path": "assets/images/char_sunday.png"
     },
     {
       "name": "Sushang",
       "element": "Physisch",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 4,
       "icon_path": "assets/images/char_sushang.png"
     },
     {
       "name": "The Dahlia",
       "element": "Feuer",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_the_dahlia.png"
     },
     {
       "name": "The Herta",
       "element": "Eis",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_the_herta.png"
     },
     {
       "name": "Tingyun",
       "element": "Blitz",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 4,
       "icon_path": "assets/images/char_tingyun.png"
     },
     {
       "name": "Topaz & Numby",
       "element": "Feuer",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/char_topaz_numby.png"
     },
     {
       "name": "Trailblazer (Bewahrung)",
       "element": "Feuer",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 5,
       "icon_path": "assets/images/char_trailblazer_bewahrung.png"
     },
     {
       "name": "Trailblazer (Gedenken)",
       "element": "Eis",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/char_trailblazer_erinnerung.png"
     },
     {
       "name": "Trailblazer (Harmonie)",
       "element": "Imaginär",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 5,
       "icon_path": "assets/images/char_trailblazer_harmonie.png"
     },
     {
       "name": "Trailblazer (Hochgefühl)",
       "element": "Blitz",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 5,
       "icon_path": "assets/images/char_trailblazer_hochgef_hl.png"
     },
     {
       "name": "Trailblazer (Zerstörung)",
       "element": "Physisch",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/char_trailblazer_zerst_rung.png"
     },
     {
       "name": "Tribbie",
       "element": "Quantum",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 5,
       "icon_path": "assets/images/char_tribbie.png"
     },
     {
       "name": "Welt",
       "element": "Imaginär",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/char_welt.png"
     },
     {
       "name": "Xueyi",
       "element": "Quantum",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 4,
       "icon_path": "assets/images/char_xueyi.png"
     },
     {
       "name": "Yanqing",
       "element": "Eis",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/char_yanqing.png"
     },
     {
       "name": "Yao Guang",
       "element": "Physisch",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 5,
       "icon_path": "assets/images/char_yao_guang.png"
     },
     {
       "name": "Yukong",
       "element": "Imaginär",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 4,
       "icon_path": "assets/images/char_yukong.png"
     },
     {
       "name": "Yunli",
       "element": "Physisch",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/char_yunli.png"
     }
@@ -662,1033 +662,1033 @@
   "light_cones": [
     {
       "name": "A Dream Scented in Wheat",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_a_dream_scented_in_wheat.png"
     },
     {
       "name": "A Grounded Ascent",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 5,
       "icon_path": "assets/images/lc_a_grounded_ascent.png"
     },
     {
       "name": "A Little Getaway",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 4,
       "icon_path": "assets/images/lc_a_little_getaway.png"
     },
     {
       "name": "A Secret Vow",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 4,
       "icon_path": "assets/images/lc_a_secret_vow.png"
     },
     {
       "name": "A Star That Lights the Night",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_a_star_that_lights_the_night.png"
     },
     {
       "name": "A Thankless Coronation",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/lc_a_thankless_coronation.png"
     },
     {
       "name": "A Trail of Bygone Blood",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 4,
       "icon_path": "assets/images/lc_a_trail_of_bygone_blood.png"
     },
     {
       "name": "Adversarial",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 3,
       "icon_path": "assets/images/lc_adversarial.png"
     },
     {
       "name": "After the Charmony Fall",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_after_the_charmony_fall.png"
     },
     {
       "name": "Along the Passing Shore",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_along_the_passing_shore.png"
     },
     {
       "name": "Amber",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 3,
       "icon_path": "assets/images/lc_amber.png"
     },
     {
       "name": "An Instant Before A Gaze",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_an_instant_before_a_gaze.png"
     },
     {
       "name": "Arrows",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 3,
       "icon_path": "assets/images/lc_arrows.png"
     },
     {
       "name": "Baptism of Pure Thought",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/lc_baptism_of_pure_thought.png"
     },
     {
       "name": "Before Dawn",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_before_dawn.png"
     },
     {
       "name": "Before the Tutorial Mission Starts",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_before_the_tutorial_mission_starts.png"
     },
     {
       "name": "Boundless Choreo",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_boundless_choreo.png"
     },
     {
       "name": "Brighter Than the Sun",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/lc_brighter_than_the_sun.png"
     },
     {
       "name": "But the Battle Isn't Over",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 5,
       "icon_path": "assets/images/lc_but_the_battle_isn_t_over.png"
     },
     {
       "name": "Carve the Moon, Weave the Clouds",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 4,
       "icon_path": "assets/images/lc_carve_the_moon_weave_the_clouds.png"
     },
     {
       "name": "Chorus",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 3,
       "icon_path": "assets/images/lc_chorus.png"
     },
     {
       "name": "Collapsing Sky",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 3,
       "icon_path": "assets/images/lc_collapsing_sky.png"
     },
     {
       "name": "Colors for Tomorrow",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 5,
       "icon_path": "assets/images/lc_colors_for_tomorrow.png"
     },
     {
       "name": "Concert for Two",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 4,
       "icon_path": "assets/images/lc_concert_for_two.png"
     },
     {
       "name": "Cornucopia",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 3,
       "icon_path": "assets/images/lc_cornucopia.png"
     },
     {
       "name": "Cruising in the Stellar Sea",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/lc_cruising_in_the_stellar_sea.png"
     },
     {
       "name": "Dance at Sunset",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/lc_dance_at_sunset.png"
     },
     {
       "name": "Dance! Dance! Dance!",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 4,
       "icon_path": "assets/images/lc_dance_dance_dance.png"
     },
     {
       "name": "Darting Arrow",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 3,
       "icon_path": "assets/images/lc_darting_arrow.png"
     },
     {
       "name": "Data Bank",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 3,
       "icon_path": "assets/images/lc_data_bank.png"
     },
     {
       "name": "Day One of My New Life",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 4,
       "icon_path": "assets/images/lc_day_one_of_my_new_life.png"
     },
     {
       "name": "Dazzled by a Flowery World",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 5,
       "icon_path": "assets/images/lc_dazzled_by_a_flowery_world.png"
     },
     {
       "name": "Defense",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 3,
       "icon_path": "assets/images/lc_defense.png"
     },
     {
       "name": "Destiny's Threads Forewoven",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 4,
       "icon_path": "assets/images/lc_destiny_s_threads_forewoven.png"
     },
     {
       "name": "Dream's Montage",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_dream_s_montage.png"
     },
     {
       "name": "Dreamville Adventure",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 4,
       "icon_path": "assets/images/lc_dreamville_adventure.png"
     },
     {
       "name": "Earthly Escapade",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 5,
       "icon_path": "assets/images/lc_earthly_escapade.png"
     },
     {
       "name": "Echoes of the Coffin",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 5,
       "icon_path": "assets/images/lc_echoes_of_the_coffin.png"
     },
     {
       "name": "Elation Brimming With Blessings",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 5,
       "icon_path": "assets/images/lc_elation_brimming_with_blessings.png"
     },
     {
       "name": "Epoch Etched in Golden Blood",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 5,
       "icon_path": "assets/images/lc_epoch_etched_in_golden_blood.png"
     },
     {
       "name": "Eternal Calculus",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_eternal_calculus.png"
     },
     {
       "name": "Eyes of the Prey",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_eyes_of_the_prey.png"
     },
     {
       "name": "Fermata",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_fermata.png"
     },
     {
       "name": "Final Victor",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 4,
       "icon_path": "assets/images/lc_final_victor.png"
     },
     {
       "name": "Fine Fruit",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 3,
       "icon_path": "assets/images/lc_fine_fruit.png"
     },
     {
       "name": "Flame of Blood, Blaze My Path",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/lc_flame_of_blood_blaze_my_path.png"
     },
     {
       "name": "Flames Afar",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 4,
       "icon_path": "assets/images/lc_flames_afar.png"
     },
     {
       "name": "Flickering Stars",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_flickering_stars.png"
     },
     {
       "name": "Flowing Nightglow",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 5,
       "icon_path": "assets/images/lc_flowing_nightglow.png"
     },
     {
       "name": "Fly Into a Pink Tomorrow",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 4,
       "icon_path": "assets/images/lc_fly_into_a_pink_tomorrow.png"
     },
     {
       "name": "For Tomorrow's Journey",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 4,
       "icon_path": "assets/images/lc_for_tomorrow_s_journey.png"
     },
     {
       "name": "Geniuses' Greetings",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 4,
       "icon_path": "assets/images/lc_geniuses_greetings.png"
     },
     {
       "name": "Geniuses' Repose",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_geniuses_repose.png"
     },
     {
       "name": "Good Night and Sleep Well",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_good_night_and_sleep_well.png"
     },
     {
       "name": "Hey, Over Here",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_hey_over_here.png"
     },
     {
       "name": "Hidden Shadow",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 3,
       "icon_path": "assets/images/lc_hidden_shadow.png"
     },
     {
       "name": "Holiday Thermae Escapade",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_holiday_thermae_escapade.png"
     },
     {
       "name": "I Am As You Behold",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/lc_i_am_as_you_behold.png"
     },
     {
       "name": "I Shall Be My Own Sword",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/lc_i_shall_be_my_own_sword.png"
     },
     {
       "name": "I Venture Forth to Hunt",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/lc_i_venture_forth_to_hunt.png"
     },
     {
       "name": "If Time Were a Flower",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 5,
       "icon_path": "assets/images/lc_if_time_were_a_flower.png"
     },
     {
       "name": "In Pursuit of the Wind",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 4,
       "icon_path": "assets/images/lc_in_pursuit_of_the_wind.png"
     },
     {
       "name": "In the Name of the World",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_in_the_name_of_the_world.png"
     },
     {
       "name": "In the Night",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/lc_in_the_night.png"
     },
     {
       "name": "Incessant Rain",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_incessant_rain.png"
     },
     {
       "name": "Indelible Promise",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 4,
       "icon_path": "assets/images/lc_indelible_promise.png"
     },
     {
       "name": "Inherently Unjust Destiny",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 5,
       "icon_path": "assets/images/lc_inherently_unjust_destiny.png"
     },
     {
       "name": "Into the Unreachable Veil",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_into_the_unreachable_veil.png"
     },
     {
       "name": "It's Showtime",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_it_s_showtime.png"
     },
     {
       "name": "Journey, Forever Peaceful",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 4,
       "icon_path": "assets/images/lc_journey_forever_peaceful.png"
     },
     {
       "name": "Landau's Choice",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 4,
       "icon_path": "assets/images/lc_landau_s_choice.png"
     },
     {
       "name": "Lies Dance on the Breeze",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_lies_dance_on_the_breeze.png"
     },
     {
       "name": "Life Should Be Cast to Flames",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_life_should_be_cast_to_flames.png"
     },
     {
       "name": "Lingering Tear",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 3,
       "icon_path": "assets/images/lc_lingering_tear.png"
     },
     {
       "name": "Long May Rainbows Adorn the Sky",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/lc_long_may_rainbows_adorn_the_sky.png"
     },
     {
       "name": "Long Road Leads Home",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_long_road_leads_home.png"
     },
     {
       "name": "Loop",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 3,
       "icon_path": "assets/images/lc_loop.png"
     },
     {
       "name": "Make Farewells More Beautiful",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/lc_make_farewells_more_beautiful.png"
     },
     {
       "name": "Make the World Clamor",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_make_the_world_clamor.png"
     },
     {
       "name": "Mediation",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 3,
       "icon_path": "assets/images/lc_mediation.png"
     },
     {
       "name": "Memories of the Past",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 4,
       "icon_path": "assets/images/lc_memories_of_the_past.png"
     },
     {
       "name": "Memory's Curtain Never Falls",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/lc_memory_s_curtain_never_falls.png"
     },
     {
       "name": "Meshing Cogs",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 3,
       "icon_path": "assets/images/lc_meshing_cogs.png"
     },
     {
       "name": "Moment of Victory",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 5,
       "icon_path": "assets/images/lc_moment_of_victory.png"
     },
     {
       "name": "Multiplication",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 3,
       "icon_path": "assets/images/lc_multiplication.png"
     },
     {
       "name": "Mushy Shroomy's Adventures",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 4,
       "icon_path": "assets/images/lc_mushy_shroomy_s_adventures.png"
     },
     {
       "name": "Mutual Demise",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 3,
       "icon_path": "assets/images/lc_mutual_demise.png"
     },
     {
       "name": "Never Forget Her Flame",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_never_forget_her_flame.png"
     },
     {
       "name": "Night of Fright",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 5,
       "icon_path": "assets/images/lc_night_of_fright.png"
     },
     {
       "name": "Night on the Milky Way",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_night_on_the_milky_way.png"
     },
     {
       "name": "Ninja Record: Sound Hunt",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 4,
       "icon_path": "assets/images/lc_ninja_record_sound_hunt.png"
     },
     {
       "name": "Ninjutsu Inscription: Dazzling Evilbreaker",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_ninjutsu_inscription_dazzling_evilbreaker.png"
     },
     {
       "name": "Nowhere to Run",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 4,
       "icon_path": "assets/images/lc_nowhere_to_run.png"
     },
     {
       "name": "On the Fall of an Aeon",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/lc_on_the_fall_of_an_aeon.png"
     },
     {
       "name": "Only Silence Remains",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 4,
       "icon_path": "assets/images/lc_only_silence_remains.png"
     },
     {
       "name": "Passkey",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 3,
       "icon_path": "assets/images/lc_passkey.png"
     },
     {
       "name": "Past Self in Mirror",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 5,
       "icon_path": "assets/images/lc_past_self_in_mirror.png"
     },
     {
       "name": "Past and Future",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 4,
       "icon_path": "assets/images/lc_past_and_future.png"
     },
     {
       "name": "Patience Is All You Need",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_patience_is_all_you_need.png"
     },
     {
       "name": "Perfect Timing",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_perfect_timing.png"
     },
     {
       "name": "Pioneering",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 3,
       "icon_path": "assets/images/lc_pioneering.png"
     },
     {
       "name": "Planetary Rendezvous",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 4,
       "icon_path": "assets/images/lc_planetary_rendezvous.png"
     },
     {
       "name": "Poised to Bloom",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 4,
       "icon_path": "assets/images/lc_poised_to_bloom.png"
     },
     {
       "name": "Post-Op Conversation",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_post_op_conversation.png"
     },
     {
       "name": "Quid Pro Quo",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_quid_pro_quo.png"
     },
     {
       "name": "Race to the Horizon",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 4,
       "icon_path": "assets/images/lc_race_to_the_horizon.png"
     },
     {
       "name": "Reforged Remembrance",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_reforged_remembrance.png"
     },
     {
       "name": "Reforged in Hellfire",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_reforged_in_hellfire.png"
     },
     {
       "name": "Reminiscence",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 3,
       "icon_path": "assets/images/lc_reminiscence.png"
     },
     {
       "name": "Resolution Shines As Pearls of Sweat",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_resolution_shines_as_pearls_of_sweat.png"
     },
     {
       "name": "Return to Darkness",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 4,
       "icon_path": "assets/images/lc_return_to_darkness.png"
     },
     {
       "name": "Rise and Sing",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/lc_rise_and_sing.png"
     },
     {
       "name": "River Flows in Spring",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 4,
       "icon_path": "assets/images/lc_river_flows_in_spring.png"
     },
     {
       "name": "Sagacity",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 3,
       "icon_path": "assets/images/lc_sagacity.png"
     },
     {
       "name": "Sailing Towards a Second Life",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/lc_sailing_towards_a_second_life.png"
     },
     {
       "name": "Scent Alone Stays True",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 5,
       "icon_path": "assets/images/lc_scent_alone_stays_true.png"
     },
     {
       "name": "See You at the End",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 4,
       "icon_path": "assets/images/lc_see_you_at_the_end.png"
     },
     {
       "name": "See You at the World's End!",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 4,
       "icon_path": "assets/images/lc_see_you_at_the_world_s_end.png"
     },
     {
       "name": "Shadowburn",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 3,
       "icon_path": "assets/images/lc_shadowburn.png"
     },
     {
       "name": "Shadowed by Night",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 4,
       "icon_path": "assets/images/lc_shadowed_by_night.png"
     },
     {
       "name": "Shared Feeling",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_shared_feeling.png"
     },
     {
       "name": "Shattered Home",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 3,
       "icon_path": "assets/images/lc_shattered_home.png"
     },
     {
       "name": "She Already Shut Her Eyes",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 5,
       "icon_path": "assets/images/lc_she_already_shut_her_eyes.png"
     },
     {
       "name": "Sleep Like the Dead",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/lc_sleep_like_the_dead.png"
     },
     {
       "name": "Sneering",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 3,
       "icon_path": "assets/images/lc_sneering.png"
     },
     {
       "name": "Solitary Healing",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_solitary_healing.png"
     },
     {
       "name": "Something Irreplaceable",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/lc_something_irreplaceable.png"
     },
     {
       "name": "Subscribe for More!",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 4,
       "icon_path": "assets/images/lc_subscribe_for_more.png"
     },
     {
       "name": "Summer Rides the Surf",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 5,
       "icon_path": "assets/images/lc_summer_rides_the_surf.png"
     },
     {
       "name": "Sweat Now, Cry Less",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 4,
       "icon_path": "assets/images/lc_sweat_now_cry_less.png"
     },
     {
       "name": "Swordplay",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 4,
       "icon_path": "assets/images/lc_swordplay.png"
     },
     {
       "name": "Texture of Memories",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 5,
       "icon_path": "assets/images/lc_texture_of_memories.png"
     },
     {
       "name": "The Birth of the Self",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_the_birth_of_the_self.png"
     },
     {
       "name": "The Day The Cosmos Fell",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_the_day_the_cosmos_fell.png"
     },
     {
       "name": "The Finale of a Lie",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/lc_the_finale_of_a_lie.png"
     },
     {
       "name": "The Flower Remembers",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 4,
       "icon_path": "assets/images/lc_the_flower_remembers.png"
     },
     {
       "name": "The Forever Victual",
-      "path": "Harmonie",
+      "path": "Die Harmonie",
       "rarity": 4,
       "icon_path": "assets/images/lc_the_forever_victual.png"
     },
     {
       "name": "The Great Cosmic Enterprise",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_the_great_cosmic_enterprise.png"
     },
     {
       "name": "The Hell Where Ideals Burn",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/lc_the_hell_where_ideals_burn.png"
     },
     {
       "name": "The Moles Welcome You",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 4,
       "icon_path": "assets/images/lc_the_moles_welcome_you.png"
     },
     {
       "name": "The Seriousness of Breakfast",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_the_seriousness_of_breakfast.png"
     },
     {
       "name": "The Story's Next Page",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 4,
       "icon_path": "assets/images/lc_the_story_s_next_page.png"
     },
     {
       "name": "The Unreachable Side",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/lc_the_unreachable_side.png"
     },
     {
       "name": "This Is Me!",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 4,
       "icon_path": "assets/images/lc_this_is_me.png"
     },
     {
       "name": "This Love, Forever",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/lc_this_love_forever.png"
     },
     {
       "name": "Those Many Springs",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_those_many_springs.png"
     },
     {
       "name": "Though Worlds Apart",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 5,
       "icon_path": "assets/images/lc_though_worlds_apart.png"
     },
     {
       "name": "Thus Burns the Dawn",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/lc_thus_burns_the_dawn.png"
     },
     {
       "name": "Time Waits for No One",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 5,
       "icon_path": "assets/images/lc_time_waits_for_no_one.png"
     },
     {
       "name": "Time Woven Into Gold",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/lc_time_woven_into_gold.png"
     },
     {
       "name": "To Evernight's Stars",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 5,
       "icon_path": "assets/images/lc_to_evernight_s_stars.png"
     },
     {
       "name": "Today Is Another Peaceful Day",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_today_is_another_peaceful_day.png"
     },
     {
       "name": "Today's Good Luck",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 4,
       "icon_path": "assets/images/lc_today_s_good_luck.png"
     },
     {
       "name": "Tomorrow, Together",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 4,
       "icon_path": "assets/images/lc_tomorrow_together.png"
     },
     {
       "name": "Trend of the Universal Market",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 4,
       "icon_path": "assets/images/lc_trend_of_the_universal_market.png"
     },
     {
       "name": "Under the Blue Sky",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 4,
       "icon_path": "assets/images/lc_under_the_blue_sky.png"
     },
     {
       "name": "Until the Flowers Bloom Again",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 5,
       "icon_path": "assets/images/lc_until_the_flowers_bloom_again.png"
     },
     {
       "name": "Unto Tomorrow's Morrow",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_unto_tomorrow_s_morrow.png"
     },
     {
       "name": "Upon the First Echo of \"Aha\"",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 5,
       "icon_path": "assets/images/lc_upon_the_first_echo_of_aha.png"
     },
     {
       "name": "Victory In a Blink",
-      "path": "Gedenken",
+      "path": "Das Gedenken",
       "rarity": 4,
       "icon_path": "assets/images/lc_victory_in_a_blink.png"
     },
     {
       "name": "Void",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 3,
       "icon_path": "assets/images/lc_void.png"
     },
     {
       "name": "Warmth Shortens Cold Nights",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_warmth_shortens_cold_nights.png"
     },
     {
       "name": "We Are Wildfire",
-      "path": "Bewahrung",
+      "path": "Die Bewahrung",
       "rarity": 4,
       "icon_path": "assets/images/lc_we_are_wildfire.png"
     },
     {
       "name": "We Will Meet Again",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 4,
       "icon_path": "assets/images/lc_we_will_meet_again.png"
     },
     {
       "name": "Welcome to the Cosmic City",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 5,
       "icon_path": "assets/images/lc_welcome_to_the_cosmic_city.png"
     },
     {
       "name": "What Is Real?",
-      "path": "Überfluss",
+      "path": "Der Überfluss",
       "rarity": 4,
       "icon_path": "assets/images/lc_what_is_real.png"
     },
     {
       "name": "When She Decided to See",
-      "path": "Hochgefühl",
+      "path": "Das Hochgefühl",
       "rarity": 5,
       "icon_path": "assets/images/lc_when_she_decided_to_see.png"
     },
     {
       "name": "Whereabouts Should Dreams Rest",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 5,
       "icon_path": "assets/images/lc_whereabouts_should_dreams_rest.png"
     },
     {
       "name": "Why Does the Ocean Sing",
-      "path": "Nichtigkeit",
+      "path": "Die Nichtigkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_why_does_the_ocean_sing.png"
     },
     {
       "name": "Woof! Walk Time!",
-      "path": "Zerstörung",
+      "path": "Die Zerstörung",
       "rarity": 4,
       "icon_path": "assets/images/lc_woof_walk_time.png"
     },
     {
       "name": "Worrisome, Blissful",
-      "path": "Jagd",
+      "path": "Die Jagd",
       "rarity": 5,
       "icon_path": "assets/images/lc_worrisome_blissful.png"
     },
     {
       "name": "Yet Hope Is Priceless",
-      "path": "Gelehrsamkeit",
+      "path": "Die Gelehrsamkeit",
       "rarity": 5,
       "icon_path": "assets/images/lc_yet_hope_is_priceless.png"
     }

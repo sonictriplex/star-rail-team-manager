@@ -2,6 +2,7 @@
 """Führt eine SQL-Datei (INSERT/UPDATE/DELETE) auf der Datenbank des Servers aus, ohne phpMyAdmin.
 
     python3 tools/remote_sql.py web/migrations/003_scholar_set_name.sql
+    python3 tools/remote_sql.py --ddl web/migrations/<datei>.sql      zusätzlich ALTER TABLE … MODIFY (ohne Transaktion)
 
 Die Datenbank ist nur vom Server aus erreichbar. Das Skript lädt deshalb per FTPS eine einmalige PHP-Datei
 (api/_sql_<zufall>.php) hoch, ruft sie per HTTPS auf und löscht sie wieder:
@@ -27,6 +28,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWED = ("INSERT", "UPDATE", "DELETE", "REPLACE")
+DDL_PATTERN = re.compile(r"ALTER\s+TABLE\s+\w+\s+MODIFY\s", re.I)   # nur mit --ddl: Spalten-Umstellungen (z. B. ENUM erweitern)
 
 
 def load_env():
@@ -47,7 +49,7 @@ def load_env():
     return env
 
 
-def split_statements(sql):
+def split_statements(sql, ddl=False):
     """Zerlegt SQL in Anweisungen (beachtet Zeichenketten und -- Kommentare). Gibt nur erlaubte zurück."""
     statements, buf, i, n = [], [], 0, len(sql)
     quote = None
@@ -80,8 +82,12 @@ def split_statements(sql):
         word = s.split(None, 1)[0].upper()
         if word == "SELECT" or re.match(r"SET\s+NAMES\s+utf8mb4\s*$", s, re.I):   # db.php stellt utf8mb4 schon ein
             continue
+        if word == "ALTER" and ddl and DDL_PATTERN.match(s):
+            result.append(s)
+            continue
         if word not in ALLOWED:
-            raise SystemExit(f"Nicht erlaubte Anweisung ({word}): {s[:60]} …")
+            hint = " (ALTER TABLE … MODIFY nur mit --ddl)" if word == "ALTER" else ""
+            raise SystemExit(f"Nicht erlaubte Anweisung ({word}){hint}: {s[:60]} …")
         result.append(s)
     return result
 
@@ -122,12 +128,14 @@ if (!hash_equals($hash, hash('sha256', $token))) { http_response_code(404); exit
 @unlink(__FILE__);
 header('Content-Type: application/json; charset=utf-8');
 require __DIR__ . '/db.php';
-$statements = json_decode(base64_decode('__PAYLOAD__'), true);
+$payload = json_decode(base64_decode('__PAYLOAD__'), true);
+$statements = $payload['statements'];
 $rows = [];
 try {
-    $pdo->beginTransaction();
+    // Ohne DDL: alles in einer Transaktion. ALTER TABLE beendet Transaktionen von selbst, dann der Reihe nach.
+    if (empty($payload['ddl'])) $pdo->beginTransaction();
     foreach ($statements as $s) { $rows[] = $pdo->exec($s); }
-    $pdo->commit();
+    if ($pdo->inTransaction()) $pdo->commit();
     echo json_encode(["ok" => true, "statements" => count($statements), "rows" => $rows]);
 } catch (Throwable $e) {
     if ($pdo->inTransaction()) $pdo->rollBack();
@@ -137,9 +145,9 @@ try {
 """
 
 
-def run_sql(sql, quiet=False):
+def run_sql(sql, quiet=False, ddl=False):
     """Führt die Anweisungen auf dem Server aus. Gibt die Zahl der Anweisungen zurück; wirft bei Fehlern."""
-    statements = split_statements(sql)
+    statements = split_statements(sql, ddl)
     if not statements:
         return 0
     env = load_env()
@@ -147,7 +155,7 @@ def run_sql(sql, quiet=False):
     token = secrets.token_urlsafe(32)
     name = f"_sql_{secrets.token_hex(8)}.php"
     php = (PHP.replace("__HASH__", hashlib.sha256(token.encode()).hexdigest())
-              .replace("__PAYLOAD__", base64.b64encode(json.dumps(statements).encode()).decode()))
+              .replace("__PAYLOAD__", base64.b64encode(json.dumps({"statements": statements, "ddl": ddl}).encode()).decode()))
     local = Path(ftp.tmp.name) / name
     local.write_text(php, encoding="utf-8")
     url = env["SITE_URL"].rstrip("/") + "/api/" + name
@@ -179,12 +187,14 @@ def run_sql(sql, quiet=False):
 
 
 def main():
-    if len(sys.argv) != 2:
+    args = [a for a in sys.argv[1:] if a != "--ddl"]
+    ddl = "--ddl" in sys.argv[1:]
+    if len(args) != 1:
         raise SystemExit(__doc__)
-    path = Path(sys.argv[1])
+    path = Path(args[0])
     if not path.is_file():
         raise SystemExit(f"Datei nicht gefunden: {path}")
-    count = run_sql(path.read_text(encoding="utf-8"))
+    count = run_sql(path.read_text(encoding="utf-8"), ddl=ddl)
     if not count:
         print("Keine ausführbaren Anweisungen in der Datei.")
 

@@ -39,9 +39,9 @@ from pathlib import Path
 RAW = "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/"
 ROOT = Path(__file__).resolve().parents[1]
 
-PATHS = {"Warrior": "Zerstörung", "Rogue": "Jagd", "Mage": "Gelehrsamkeit", "Shaman": "Harmonie",
-         "Warlock": "Nichtigkeit", "Knight": "Bewahrung", "Priest": "Überfluss", "Memory": "Gedenken",
-         "Elation": "Hochgefühl"}
+PATHS = {"Warrior": "Die Zerstörung", "Rogue": "Die Jagd", "Mage": "Die Gelehrsamkeit", "Shaman": "Die Harmonie",
+         "Warlock": "Die Nichtigkeit", "Knight": "Die Bewahrung", "Priest": "Der Überfluss", "Memory": "Das Gedenken",
+         "Elation": "Das Hochgefühl"}
 ELEMENTS = {"Physical": "Physisch", "Fire": "Feuer", "Ice": "Eis", "Thunder": "Blitz", "Wind": "Wind",
             "Quantum": "Quantum", "Imaginary": "Imaginär"}
 
@@ -75,7 +75,7 @@ def find_new(data):
         path, element = PATHS.get(c["path"]), ELEMENTS.get(c["element"])
         name = c["name"]
         if name == "{NICKNAME}":                       # Trailblazer: je Pfad ein Eintrag (Varianten teilen sich ihn)
-            name = f"Trailblazer ({path})" if path else name
+            name = f"Trailblazer ({re.sub(r'^(Die|Der|Das)\s+', '', path)})" if path else name   # Name ohne Artikel, bleibt stabil
         if name.casefold() in have["characters"] or name.casefold() in seen:
             continue
         seen.add(name.casefold())

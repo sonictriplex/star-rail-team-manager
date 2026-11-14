@@ -16,8 +16,8 @@ set_time_limit(120);
 
 const SRC = 'https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/';
 const MAX_APPLY = 50;
-const PATHS = ['Warrior' => 'Zerstörung', 'Rogue' => 'Jagd', 'Mage' => 'Gelehrsamkeit', 'Shaman' => 'Harmonie',
-    'Warlock' => 'Nichtigkeit', 'Knight' => 'Bewahrung', 'Priest' => 'Überfluss', 'Memory' => 'Gedenken', 'Elation' => 'Hochgefühl'];
+const PATHS = ['Warrior' => 'Die Zerstörung', 'Rogue' => 'Die Jagd', 'Mage' => 'Die Gelehrsamkeit', 'Shaman' => 'Die Harmonie',
+    'Warlock' => 'Die Nichtigkeit', 'Knight' => 'Die Bewahrung', 'Priest' => 'Der Überfluss', 'Memory' => 'Das Gedenken', 'Elation' => 'Das Hochgefühl'];
 const ELEMENTS = ['Physical' => 'Physisch', 'Fire' => 'Feuer', 'Ice' => 'Eis', 'Thunder' => 'Blitz', 'Wind' => 'Wind',
     'Quantum' => 'Quantum', 'Imaginary' => 'Imaginär'];
 
@@ -43,7 +43,7 @@ function find_new(PDO $pdo): array {
         $path = PATHS[$c['path']] ?? null;
         $element = ELEMENTS[$c['element']] ?? null;
         $name = $c['name'];
-        if ($name === '{NICKNAME}') $name = $path ? "Trailblazer ($path)" : $name;   // je Pfad ein Eintrag
+        if ($name === '{NICKNAME}') $name = $path ? 'Trailblazer (' . preg_replace('/^(Die|Der|Das)\s+/u', '', $path) . ')' : $name;   // je Pfad ein Eintrag
         $key = mb_strtolower($name);
         if (isset($have['characters'][$key]) || isset($seen[$key])) continue;
         $seen[$key] = true;
