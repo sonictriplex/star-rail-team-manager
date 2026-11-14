@@ -9,7 +9,7 @@ Web-App zum Zusammenstellen von Star-Rail-Teams und Verwalten der Charakter-Buil
 - Pro Charakter: Level, Eidolon, Talente, Lichtkegel (Level, Überlagerung S1–S5) und sechs Relikte mit Set, Seltenheit, Level, Hauptwert und vier Substats
 - Aktive Set-Boni werden aus den Slots berechnet; **Tooltips** zeigen die Fähigkeit des Lichtkegels (zur gewählten Überlagerung) und die Set-Boni
 - Suchbare Auswahllisten für Charaktere (Pfad, Element, Seltenheit) und Lichtkegel (Pfad, Seltenheit)
-- Benutzermenü: Alle Teams, Neues Team, Exportieren, Importieren, Passwort ändern, Logout, Konto löschen, Über; für **Administratoren** zusätzlich **Stammdaten aktualisieren**
+- Benutzermenü: Alle Teams, Neues Team, Exportieren, Importieren, Logout, Passwort ändern, Konto löschen, Über; für **Administratoren** zusätzlich **Stammdaten aktualisieren**
 
 Builds werden **pro Nutzer und Charakter** gespeichert, nicht pro Team. Ändert man den Build eines Charakters, gilt die Änderung in allen Teams, in denen er vorkommt.
 

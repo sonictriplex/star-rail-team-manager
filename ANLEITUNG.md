@@ -34,7 +34,7 @@ In der App ist das Feld **„Server“** schon mit `https://star-rail.media-matr
 - **Teams sortieren:** Mit den Pfeilen auf der Teamkarte verschiebst du Teams; im Browser geht das auch per Drag & Drop. Die Reihenfolge wird gespeichert. Auch die Charaktere in einem Team lassen sich mit Pfeilen oder (im Browser) per Ziehen am Kopf der Karte umsortieren.
 - **Deine Daten sind nur deine:** Jedes Konto sieht nur die eigenen Teams und Builds.
 
-**Im Browser** findest du Alle Teams, Neues Team, Exportieren, Importieren, Passwort ändern, Logout, Konto löschen und Über im Benutzermenü oben rechts:
+**Im Browser** findest du Alle Teams, Neues Team, Exportieren, Importieren, Logout, Passwort ändern, Konto löschen und Über im Benutzermenü oben rechts (für Administratoren zusätzlich „Stammdaten aktualisieren“ nach „Importieren“):
 
 <p align="center">
   <img src="docs/screenshots/web-menu.jpg" alt="Benutzermenü im Browser" width="560">
