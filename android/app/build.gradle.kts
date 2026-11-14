@@ -20,7 +20,7 @@ android {
         minSdk = 26
         targetSdk = 36
         versionCode = 1
-        versionName = "0.1.0"
+        versionName = "1.0.0"
 
         // Der Server, mit dem die App spricht (die Web-Version, siehe ../web); auf der Anmeldeseite damit vorbelegt, aber änderbar.
         buildConfigField("String", "DEFAULT_SERVER_URL", "\"https://star-rail.media-matrix.de\"")
