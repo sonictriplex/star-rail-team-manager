@@ -11,7 +11,7 @@ function fetch_url(string $url, int $timeout = 60): string {
         $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $err = curl_error($ch);
         curl_close($ch);
-        if ($body === false || $code !== 200) throw new RuntimeException("Abruf fehlgeschlagen ($code $err): $url");
+        if ($body === false || $code !== 200) throw new RuntimeException("Abruf fehlgeschlagen ($code $err): $url", $code);
         return $body;
     }
     $ctx = stream_context_create(['http' => ['timeout' => $timeout, 'header' => "User-Agent: stammdaten-update\r\n"]]);
