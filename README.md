@@ -20,7 +20,7 @@ Du spielst nur mit und willst die App benutzen? Dann geht es hier zur [Anleitung
 
 - **Teams** mit bis zu 4 Charakteren anlegen, speichern, umbenennen und löschen; die Reihenfolge der Teams und der Charaktere im Team lässt sich verschieben (Pfeile in allen Clients, in Web und Desktop auch per Drag & Drop) und wird gespeichert
 - **Builds pro Charakter:** Level 1–80, Eidolon E0–E6, Talente (Basisangriff bis 7, Fertigkeit, Ultimate und Talent bis 12), Lichtkegel mit Level und Überlagerung S1–S5
-- **Relikt-Details:** sechs Slots (Kopf, Hände, Körper, Füße, Planarsphäre, Verbindungsseil). Kopf bis Füße nehmen Relikt-Sets, Planarsphäre und Verbindungsseil Planar-Ornamente. Je Slot Seltenheit, Level 0–15, Hauptwert (passend zum Slot) und bis zu 4 Substats
+- **Relikt-Details:** sechs Slots (Kopf, Hände, Körper, Füße, Planarsphäre, Verbindungsseil). Kopf bis Füße nehmen Relikt-Sets, Planarsphäre und Verbindungsseil Planar-Ornamente. Die Set-Auswahl zeigt zu jedem Set sein Icon (Web mit Suchfeld, Desktop und Android ebenfalls mit Icons). Je Slot Seltenheit, Level 0–15, Hauptwert (passend zum Slot) und bis zu 4 Substats
 - **Aktive Set-Boni** berechnet jede Karte selbst aus den sechs Slots (2er und 4er; Ornamente zählen bis 2)
 - **Tooltips** mit den Beschreibungen: die Fähigkeit des Lichtkegels passend zur gewählten Überlagerung und die Boni der Relikt-Sets, jeweils auf Deutsch
 - **Suche und Filter** für Charaktere (Pfad, Element, Seltenheit) und Lichtkegel (Pfad, Seltenheit)
