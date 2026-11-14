@@ -32,8 +32,8 @@ private const val MEDIA_MATRIX_URL = "https://www.media-matrix.de"
 @Composable
 fun AboutDialog(repo: StammdatenRepository, onDismiss: () -> Unit) {
     val uriHandler = LocalUriHandler.current
-    val paimon by produceState<ImageBitmap?>(null) { value = withContext(Dispatchers.IO) { repo.loadBitmap("assets/images/paimon.png")?.asImageBitmap() } }
-    val logo by produceState<ImageBitmap?>(null) { value = withContext(Dispatchers.IO) { repo.loadBitmap("assets/images/mm_logo.png")?.asImageBitmap() } }
+    val paimon by produceState<ImageBitmap?>(null) { value = withContext(Dispatchers.IO) { repo.loadBitmap("assets/images/ui/paimon.png")?.asImageBitmap() } }
+    val logo by produceState<ImageBitmap?>(null) { value = withContext(Dispatchers.IO) { repo.loadBitmap("assets/images/ui/mm_logo.png")?.asImageBitmap() } }
     AlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = { TextButton(onClick = onDismiss) { Text("Schließen") } },

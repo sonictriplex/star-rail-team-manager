@@ -5,658 +5,658 @@
       "element": "Blitz",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_acheron.png"
+      "icon_path": "assets/images/characters/acheron.png"
     },
     {
       "name": "Aeon ★ Aha",
       "element": "Quantum",
       "path": "Das Hochgefühl",
       "rarity": 5,
-      "icon_path": "assets/images/char_aeon_aha.png"
+      "icon_path": "assets/images/characters/aeon_aha.png"
     },
     {
       "name": "Aglaea",
       "element": "Blitz",
       "path": "Das Gedenken",
       "rarity": 5,
-      "icon_path": "assets/images/char_aglaea.png"
+      "icon_path": "assets/images/characters/aglaea.png"
     },
     {
       "name": "Anaxa",
       "element": "Wind",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_anaxa.png"
+      "icon_path": "assets/images/characters/anaxa.png"
     },
     {
       "name": "Archer",
       "element": "Quantum",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/char_archer.png"
+      "icon_path": "assets/images/characters/archer.png"
     },
     {
       "name": "Argenti",
       "element": "Physisch",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_argenti.png"
+      "icon_path": "assets/images/characters/argenti.png"
     },
     {
       "name": "Arlan",
       "element": "Blitz",
       "path": "Die Zerstörung",
       "rarity": 4,
-      "icon_path": "assets/images/char_arlan.png"
+      "icon_path": "assets/images/characters/arlan.png"
     },
     {
       "name": "Ashveil",
       "element": "Blitz",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/char_ashveil.png"
+      "icon_path": "assets/images/characters/ashveil.png"
     },
     {
       "name": "Asta",
       "element": "Feuer",
       "path": "Die Harmonie",
       "rarity": 4,
-      "icon_path": "assets/images/char_asta.png"
+      "icon_path": "assets/images/characters/asta.png"
     },
     {
       "name": "Aventurine",
       "element": "Imaginär",
       "path": "Die Bewahrung",
       "rarity": 5,
-      "icon_path": "assets/images/char_aventurine.png"
+      "icon_path": "assets/images/characters/aventurine.png"
     },
     {
       "name": "Aventurine • Waveflair",
       "element": "Quantum",
       "path": "Das Hochgefühl",
       "rarity": 5,
-      "icon_path": "assets/images/char_aventurine_waveflair.png"
+      "icon_path": "assets/images/characters/aventurine_waveflair.png"
     },
     {
       "name": "Bailu",
       "element": "Blitz",
       "path": "Der Überfluss",
       "rarity": 5,
-      "icon_path": "assets/images/char_bailu.png"
+      "icon_path": "assets/images/characters/bailu.png"
     },
     {
       "name": "Black Swan",
       "element": "Wind",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_black_swan.png"
+      "icon_path": "assets/images/characters/black_swan.png"
     },
     {
       "name": "Blade",
       "element": "Wind",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/char_blade.png"
+      "icon_path": "assets/images/characters/blade.png"
     },
     {
       "name": "Boothill",
       "element": "Physisch",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/char_boothill.png"
+      "icon_path": "assets/images/characters/boothill.png"
     },
     {
       "name": "Bronya",
       "element": "Wind",
       "path": "Die Harmonie",
       "rarity": 5,
-      "icon_path": "assets/images/char_bronya.png"
+      "icon_path": "assets/images/characters/bronya.png"
     },
     {
       "name": "Castorice",
       "element": "Quantum",
       "path": "Das Gedenken",
       "rarity": 5,
-      "icon_path": "assets/images/char_castorice.png"
+      "icon_path": "assets/images/characters/castorice.png"
     },
     {
       "name": "Cerydra",
       "element": "Wind",
       "path": "Die Harmonie",
       "rarity": 5,
-      "icon_path": "assets/images/char_cerydra.png"
+      "icon_path": "assets/images/characters/cerydra.png"
     },
     {
       "name": "Cipher",
       "element": "Quantum",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_cipher.png"
+      "icon_path": "assets/images/characters/cipher.png"
     },
     {
       "name": "Clara",
       "element": "Physisch",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/char_clara.png"
+      "icon_path": "assets/images/characters/clara.png"
     },
     {
       "name": "Cyrene",
       "element": "Eis",
       "path": "Das Gedenken",
       "rarity": 5,
-      "icon_path": "assets/images/char_cyrene.png"
+      "icon_path": "assets/images/characters/cyrene.png"
     },
     {
       "name": "Dan Heng",
       "element": "Wind",
       "path": "Die Jagd",
       "rarity": 4,
-      "icon_path": "assets/images/char_dan_heng.png"
+      "icon_path": "assets/images/characters/dan_heng.png"
     },
     {
       "name": "Dan Heng • Imbibitor Lunae",
       "element": "Imaginär",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/char_dan_heng_imbibitor_lunae.png"
+      "icon_path": "assets/images/characters/dan_heng_imbibitor_lunae.png"
     },
     {
       "name": "Dan Heng • Permansor Terrae",
       "element": "Physisch",
       "path": "Die Bewahrung",
       "rarity": 5,
-      "icon_path": "assets/images/char_dan_heng_permansor_terrae.png"
+      "icon_path": "assets/images/characters/dan_heng_permansor_terrae.png"
     },
     {
       "name": "Dr. Ratio",
       "element": "Imaginär",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/char_dr_ratio.png"
+      "icon_path": "assets/images/characters/dr_ratio.png"
     },
     {
       "name": "Evanescia",
       "element": "Physisch",
       "path": "Das Hochgefühl",
       "rarity": 5,
-      "icon_path": "assets/images/char_evanescia.png"
+      "icon_path": "assets/images/characters/evanescia.png"
     },
     {
       "name": "Evernight",
       "element": "Eis",
       "path": "Das Gedenken",
       "rarity": 5,
-      "icon_path": "assets/images/char_evernight.png"
+      "icon_path": "assets/images/characters/evernight.png"
     },
     {
       "name": "Feixiao",
       "element": "Wind",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/char_feixiao.png"
+      "icon_path": "assets/images/characters/feixiao.png"
     },
     {
       "name": "Firefly",
       "element": "Feuer",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/char_firefly.png"
+      "icon_path": "assets/images/characters/firefly.png"
     },
     {
       "name": "Fu Xuan",
       "element": "Quantum",
       "path": "Die Bewahrung",
       "rarity": 5,
-      "icon_path": "assets/images/char_fu_xuan.png"
+      "icon_path": "assets/images/characters/fu_xuan.png"
     },
     {
       "name": "Fugue",
       "element": "Feuer",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_fugue.png"
+      "icon_path": "assets/images/characters/fugue.png"
     },
     {
       "name": "Gallagher",
       "element": "Feuer",
       "path": "Der Überfluss",
       "rarity": 4,
-      "icon_path": "assets/images/char_gallagher.png"
+      "icon_path": "assets/images/characters/gallagher.png"
     },
     {
       "name": "Gepard",
       "element": "Eis",
       "path": "Die Bewahrung",
       "rarity": 5,
-      "icon_path": "assets/images/char_gepard.png"
+      "icon_path": "assets/images/characters/gepard.png"
     },
     {
       "name": "Gilgamesh",
       "element": "Blitz",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/char_gilgamesh.png"
+      "icon_path": "assets/images/characters/gilgamesh.png"
     },
     {
       "name": "Guinaifen",
       "element": "Feuer",
       "path": "Die Nichtigkeit",
       "rarity": 4,
-      "icon_path": "assets/images/char_guinaifen.png"
+      "icon_path": "assets/images/characters/guinaifen.png"
     },
     {
       "name": "Hanya",
       "element": "Physisch",
       "path": "Die Harmonie",
       "rarity": 4,
-      "icon_path": "assets/images/char_hanya.png"
+      "icon_path": "assets/images/characters/hanya.png"
     },
     {
       "name": "Herta",
       "element": "Eis",
       "path": "Die Gelehrsamkeit",
       "rarity": 4,
-      "icon_path": "assets/images/char_herta.png"
+      "icon_path": "assets/images/characters/herta.png"
     },
     {
       "name": "Himeko",
       "element": "Feuer",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_himeko.png"
+      "icon_path": "assets/images/characters/himeko.png"
     },
     {
       "name": "Himeko • Nova",
       "element": "Feuer",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_himeko_nova.png"
+      "icon_path": "assets/images/characters/himeko_nova.png"
     },
     {
       "name": "Hook",
       "element": "Feuer",
       "path": "Die Zerstörung",
       "rarity": 4,
-      "icon_path": "assets/images/char_hook.png"
+      "icon_path": "assets/images/characters/hook.png"
     },
     {
       "name": "Huohuo",
       "element": "Wind",
       "path": "Der Überfluss",
       "rarity": 5,
-      "icon_path": "assets/images/char_huohuo.png"
+      "icon_path": "assets/images/characters/huohuo.png"
     },
     {
       "name": "Hyacine",
       "element": "Wind",
       "path": "Das Gedenken",
       "rarity": 5,
-      "icon_path": "assets/images/char_hyacine.png"
+      "icon_path": "assets/images/characters/hyacine.png"
     },
     {
       "name": "Hysilens",
       "element": "Physisch",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_hysilens.png"
+      "icon_path": "assets/images/characters/hysilens.png"
     },
     {
       "name": "Jade",
       "element": "Quantum",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_jade.png"
+      "icon_path": "assets/images/characters/jade.png"
     },
     {
       "name": "Jiaoqiu",
       "element": "Feuer",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_jiaoqiu.png"
+      "icon_path": "assets/images/characters/jiaoqiu.png"
     },
     {
       "name": "Jing Yuan",
       "element": "Blitz",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_jing_yuan.png"
+      "icon_path": "assets/images/characters/jing_yuan.png"
     },
     {
       "name": "Jingliu",
       "element": "Eis",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/char_jingliu.png"
+      "icon_path": "assets/images/characters/jingliu.png"
     },
     {
       "name": "Kafka",
       "element": "Blitz",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_kafka.png"
+      "icon_path": "assets/images/characters/kafka.png"
     },
     {
       "name": "Lingsha",
       "element": "Feuer",
       "path": "Der Überfluss",
       "rarity": 5,
-      "icon_path": "assets/images/char_lingsha.png"
+      "icon_path": "assets/images/characters/lingsha.png"
     },
     {
       "name": "Luka",
       "element": "Physisch",
       "path": "Die Nichtigkeit",
       "rarity": 4,
-      "icon_path": "assets/images/char_luka.png"
+      "icon_path": "assets/images/characters/luka.png"
     },
     {
       "name": "Luocha",
       "element": "Imaginär",
       "path": "Der Überfluss",
       "rarity": 5,
-      "icon_path": "assets/images/char_luocha.png"
+      "icon_path": "assets/images/characters/luocha.png"
     },
     {
       "name": "Lynx",
       "element": "Quantum",
       "path": "Der Überfluss",
       "rarity": 4,
-      "icon_path": "assets/images/char_lynx.png"
+      "icon_path": "assets/images/characters/lynx.png"
     },
     {
       "name": "March 7th",
       "element": "Eis",
       "path": "Die Bewahrung",
       "rarity": 4,
-      "icon_path": "assets/images/char_march_7th.png"
+      "icon_path": "assets/images/characters/march_7th.png"
     },
     {
       "name": "March 7th (Die Jagd)",
       "element": "Imaginär",
       "path": "Die Jagd",
       "rarity": 4,
-      "icon_path": "assets/images/char_march_7th_die_jagd.png"
+      "icon_path": "assets/images/characters/march_7th_die_jagd.png"
     },
     {
       "name": "Misha",
       "element": "Eis",
       "path": "Die Zerstörung",
       "rarity": 4,
-      "icon_path": "assets/images/char_misha.png"
+      "icon_path": "assets/images/characters/misha.png"
     },
     {
       "name": "Mortenax Blade",
       "element": "Feuer",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_mortenax_blade.png"
+      "icon_path": "assets/images/characters/mortenax_blade.png"
     },
     {
       "name": "Moze",
       "element": "Blitz",
       "path": "Die Jagd",
       "rarity": 4,
-      "icon_path": "assets/images/char_moze.png"
+      "icon_path": "assets/images/characters/moze.png"
     },
     {
       "name": "Mydei",
       "element": "Imaginär",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/char_mydei.png"
+      "icon_path": "assets/images/characters/mydei.png"
     },
     {
       "name": "Natasha",
       "element": "Physisch",
       "path": "Der Überfluss",
       "rarity": 4,
-      "icon_path": "assets/images/char_natasha.png"
+      "icon_path": "assets/images/characters/natasha.png"
     },
     {
       "name": "Pearl",
       "element": "Eis",
       "path": "Das Hochgefühl",
       "rarity": 5,
-      "icon_path": "assets/images/char_pearl.png"
+      "icon_path": "assets/images/characters/pearl.png"
     },
     {
       "name": "Pela",
       "element": "Eis",
       "path": "Die Nichtigkeit",
       "rarity": 4,
-      "icon_path": "assets/images/char_pela.png"
+      "icon_path": "assets/images/characters/pela.png"
     },
     {
       "name": "Phainon",
       "element": "Physisch",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/char_phainon.png"
+      "icon_path": "assets/images/characters/phainon.png"
     },
     {
       "name": "Qingque",
       "element": "Quantum",
       "path": "Die Gelehrsamkeit",
       "rarity": 4,
-      "icon_path": "assets/images/char_qingque.png"
+      "icon_path": "assets/images/characters/qingque.png"
     },
     {
       "name": "Rappa",
       "element": "Imaginär",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_rappa.png"
+      "icon_path": "assets/images/characters/rappa.png"
     },
     {
       "name": "Rin Tohsaka",
       "element": "Quantum",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_rin_tohsaka.png"
+      "icon_path": "assets/images/characters/rin_tohsaka.png"
     },
     {
       "name": "Robin",
       "element": "Physisch",
       "path": "Die Harmonie",
       "rarity": 5,
-      "icon_path": "assets/images/char_robin.png"
+      "icon_path": "assets/images/characters/robin.png"
     },
     {
       "name": "Robin • Summeretto",
       "element": "Wind",
       "path": "Das Gedenken",
       "rarity": 5,
-      "icon_path": "assets/images/char_robin_summeretto.png"
+      "icon_path": "assets/images/characters/robin_summeretto.png"
     },
     {
       "name": "Ruan Mei",
       "element": "Eis",
       "path": "Die Harmonie",
       "rarity": 5,
-      "icon_path": "assets/images/char_ruan_mei.png"
+      "icon_path": "assets/images/characters/ruan_mei.png"
     },
     {
       "name": "Saber",
       "element": "Wind",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/char_saber.png"
+      "icon_path": "assets/images/characters/saber.png"
     },
     {
       "name": "Sampo",
       "element": "Wind",
       "path": "Die Nichtigkeit",
       "rarity": 4,
-      "icon_path": "assets/images/char_sampo.png"
+      "icon_path": "assets/images/characters/sampo.png"
     },
     {
       "name": "Seele",
       "element": "Quantum",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/char_seele.png"
+      "icon_path": "assets/images/characters/seele.png"
     },
     {
       "name": "Serval",
       "element": "Blitz",
       "path": "Die Gelehrsamkeit",
       "rarity": 4,
-      "icon_path": "assets/images/char_serval.png"
+      "icon_path": "assets/images/characters/serval.png"
     },
     {
       "name": "Silver Wolf",
       "element": "Quantum",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_silver_wolf.png"
+      "icon_path": "assets/images/characters/silver_wolf.png"
     },
     {
       "name": "Silver Wolf LV.999",
       "element": "Imaginär",
       "path": "Das Hochgefühl",
       "rarity": 5,
-      "icon_path": "assets/images/char_silver_wolf_lv_999.png"
+      "icon_path": "assets/images/characters/silver_wolf_lv_999.png"
     },
     {
       "name": "Sparkle",
       "element": "Quantum",
       "path": "Die Harmonie",
       "rarity": 5,
-      "icon_path": "assets/images/char_sparkle.png"
+      "icon_path": "assets/images/characters/sparkle.png"
     },
     {
       "name": "Sparxie",
       "element": "Feuer",
       "path": "Das Hochgefühl",
       "rarity": 5,
-      "icon_path": "assets/images/char_sparxie.png"
+      "icon_path": "assets/images/characters/sparxie.png"
     },
     {
       "name": "Sunday",
       "element": "Imaginär",
       "path": "Die Harmonie",
       "rarity": 5,
-      "icon_path": "assets/images/char_sunday.png"
+      "icon_path": "assets/images/characters/sunday.png"
     },
     {
       "name": "Sushang",
       "element": "Physisch",
       "path": "Die Jagd",
       "rarity": 4,
-      "icon_path": "assets/images/char_sushang.png"
+      "icon_path": "assets/images/characters/sushang.png"
     },
     {
       "name": "The Dahlia",
       "element": "Feuer",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_the_dahlia.png"
+      "icon_path": "assets/images/characters/the_dahlia.png"
     },
     {
       "name": "The Herta",
       "element": "Eis",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_the_herta.png"
+      "icon_path": "assets/images/characters/the_herta.png"
     },
     {
       "name": "Tingyun",
       "element": "Blitz",
       "path": "Die Harmonie",
       "rarity": 4,
-      "icon_path": "assets/images/char_tingyun.png"
+      "icon_path": "assets/images/characters/tingyun.png"
     },
     {
       "name": "Topaz & Numby",
       "element": "Feuer",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/char_topaz_numby.png"
+      "icon_path": "assets/images/characters/topaz_numby.png"
     },
     {
       "name": "Trailblazer (Bewahrung)",
       "element": "Feuer",
       "path": "Die Bewahrung",
       "rarity": 5,
-      "icon_path": "assets/images/char_trailblazer_bewahrung.png"
+      "icon_path": "assets/images/characters/trailblazer_bewahrung.png"
     },
     {
       "name": "Trailblazer (Gedenken)",
       "element": "Eis",
       "path": "Das Gedenken",
       "rarity": 5,
-      "icon_path": "assets/images/char_trailblazer_erinnerung.png"
+      "icon_path": "assets/images/characters/trailblazer_erinnerung.png"
     },
     {
       "name": "Trailblazer (Harmonie)",
       "element": "Imaginär",
       "path": "Die Harmonie",
       "rarity": 5,
-      "icon_path": "assets/images/char_trailblazer_harmonie.png"
+      "icon_path": "assets/images/characters/trailblazer_harmonie.png"
     },
     {
       "name": "Trailblazer (Hochgefühl)",
       "element": "Blitz",
       "path": "Das Hochgefühl",
       "rarity": 5,
-      "icon_path": "assets/images/char_trailblazer_hochgef_hl.png"
+      "icon_path": "assets/images/characters/trailblazer_hochgef_hl.png"
     },
     {
       "name": "Trailblazer (Zerstörung)",
       "element": "Physisch",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/char_trailblazer_zerst_rung.png"
+      "icon_path": "assets/images/characters/trailblazer_zerst_rung.png"
     },
     {
       "name": "Tribbie",
       "element": "Quantum",
       "path": "Die Harmonie",
       "rarity": 5,
-      "icon_path": "assets/images/char_tribbie.png"
+      "icon_path": "assets/images/characters/tribbie.png"
     },
     {
       "name": "Welt",
       "element": "Imaginär",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/char_welt.png"
+      "icon_path": "assets/images/characters/welt.png"
     },
     {
       "name": "Xueyi",
       "element": "Quantum",
       "path": "Die Zerstörung",
       "rarity": 4,
-      "icon_path": "assets/images/char_xueyi.png"
+      "icon_path": "assets/images/characters/xueyi.png"
     },
     {
       "name": "Yanqing",
       "element": "Eis",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/char_yanqing.png"
+      "icon_path": "assets/images/characters/yanqing.png"
     },
     {
       "name": "Yao Guang",
       "element": "Physisch",
       "path": "Das Hochgefühl",
       "rarity": 5,
-      "icon_path": "assets/images/char_yao_guang.png"
+      "icon_path": "assets/images/characters/yao_guang.png"
     },
     {
       "name": "Yukong",
       "element": "Imaginär",
       "path": "Die Harmonie",
       "rarity": 4,
-      "icon_path": "assets/images/char_yukong.png"
+      "icon_path": "assets/images/characters/yukong.png"
     },
     {
       "name": "Yunli",
       "element": "Physisch",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/char_yunli.png"
+      "icon_path": "assets/images/characters/yunli.png"
     }
   ],
   "light_cones": [
@@ -664,7 +664,7 @@
       "name": "A Dream Scented in Wheat",
       "path": "Die Gelehrsamkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_a_dream_scented_in_wheat.png",
+      "icon_path": "assets/images/light_cones/a_dream_scented_in_wheat.png",
       "passive": {
         "name": "Sehnsucht",
         "text": [
@@ -680,7 +680,7 @@
       "name": "A Grounded Ascent",
       "path": "Die Harmonie",
       "rarity": 5,
-      "icon_path": "assets/images/lc_a_grounded_ascent.png",
+      "icon_path": "assets/images/light_cones/a_grounded_ascent.png",
       "passive": {
         "name": "Erneute Abreise",
         "text": [
@@ -696,7 +696,7 @@
       "name": "A Little Getaway",
       "path": "Das Hochgefühl",
       "rarity": 4,
-      "icon_path": "assets/images/lc_a_little_getaway.png",
+      "icon_path": "assets/images/light_cones/a_little_getaway.png",
       "passive": {
         "name": "Geflüster",
         "text": [
@@ -712,7 +712,7 @@
       "name": "A Secret Vow",
       "path": "Die Zerstörung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_a_secret_vow.png",
+      "icon_path": "assets/images/light_cones/a_secret_vow.png",
       "passive": {
         "name": "Keine Mühen scheuen",
         "text": [
@@ -728,7 +728,7 @@
       "name": "A Star That Lights the Night",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_a_star_that_lights_the_night.png",
+      "icon_path": "assets/images/light_cones/a_star_that_lights_the_night.png",
       "passive": {
         "name": "Erster Wunsch",
         "text": [
@@ -744,7 +744,7 @@
       "name": "A Thankless Coronation",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/lc_a_thankless_coronation.png",
+      "icon_path": "assets/images/light_cones/a_thankless_coronation.png",
       "passive": {
         "name": "König der Ritter",
         "text": [
@@ -760,7 +760,7 @@
       "name": "A Trail of Bygone Blood",
       "path": "Die Zerstörung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_a_trail_of_bygone_blood.png",
+      "icon_path": "assets/images/light_cones/a_trail_of_bygone_blood.png",
       "passive": {
         "name": "Blutbad",
         "text": [
@@ -776,7 +776,7 @@
       "name": "Adversarial",
       "path": "Die Jagd",
       "rarity": 3,
-      "icon_path": "assets/images/lc_adversarial.png",
+      "icon_path": "assets/images/light_cones/adversarial.png",
       "passive": {
         "name": "Allianz",
         "text": [
@@ -792,7 +792,7 @@
       "name": "After the Charmony Fall",
       "path": "Die Gelehrsamkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_after_the_charmony_fall.png",
+      "icon_path": "assets/images/light_cones/after_the_charmony_fall.png",
       "passive": {
         "name": "Stille",
         "text": [
@@ -808,7 +808,7 @@
       "name": "Along the Passing Shore",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_along_the_passing_shore.png",
+      "icon_path": "assets/images/light_cones/along_the_passing_shore.png",
       "passive": {
         "name": "Fährmann",
         "text": [
@@ -824,7 +824,7 @@
       "name": "Amber",
       "path": "Die Bewahrung",
       "rarity": 3,
-      "icon_path": "assets/images/lc_amber.png",
+      "icon_path": "assets/images/light_cones/amber.png",
       "passive": {
         "name": "Stillstand",
         "text": [
@@ -840,7 +840,7 @@
       "name": "An Instant Before A Gaze",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_an_instant_before_a_gaze.png",
+      "icon_path": "assets/images/light_cones/an_instant_before_a_gaze.png",
       "passive": {
         "name": "Ritterreise",
         "text": [
@@ -856,7 +856,7 @@
       "name": "Arrows",
       "path": "Die Jagd",
       "rarity": 3,
-      "icon_path": "assets/images/lc_arrows.png",
+      "icon_path": "assets/images/light_cones/arrows.png",
       "passive": {
         "name": "Krise",
         "text": [
@@ -872,7 +872,7 @@
       "name": "Baptism of Pure Thought",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/lc_baptism_of_pure_thought.png",
+      "icon_path": "assets/images/light_cones/baptism_of_pure_thought.png",
       "passive": {
         "name": "Denktraining",
         "text": [
@@ -888,7 +888,7 @@
       "name": "Before Dawn",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_before_dawn.png",
+      "icon_path": "assets/images/light_cones/before_dawn.png",
       "passive": {
         "name": "Lange Nacht",
         "text": [
@@ -904,7 +904,7 @@
       "name": "Before the Tutorial Mission Starts",
       "path": "Die Nichtigkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_before_the_tutorial_mission_starts.png",
+      "icon_path": "assets/images/light_cones/before_the_tutorial_mission_starts.png",
       "passive": {
         "name": "Flinke Hände",
         "text": [
@@ -920,7 +920,7 @@
       "name": "Boundless Choreo",
       "path": "Die Nichtigkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_boundless_choreo.png",
+      "icon_path": "assets/images/light_cones/boundless_choreo.png",
       "passive": {
         "name": "Prüfen",
         "text": [
@@ -936,7 +936,7 @@
       "name": "Brighter Than the Sun",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/lc_brighter_than_the_sun.png",
+      "icon_path": "assets/images/light_cones/brighter_than_the_sun.png",
       "passive": {
         "name": "Dem Tode trotzend",
         "text": [
@@ -952,7 +952,7 @@
       "name": "But the Battle Isn't Over",
       "path": "Die Harmonie",
       "rarity": 5,
-      "icon_path": "assets/images/lc_but_the_battle_isn_t_over.png",
+      "icon_path": "assets/images/light_cones/but_the_battle_isn_t_over.png",
       "passive": {
         "name": "Erbin",
         "text": [
@@ -968,7 +968,7 @@
       "name": "Carve the Moon, Weave the Clouds",
       "path": "Die Harmonie",
       "rarity": 4,
-      "icon_path": "assets/images/lc_carve_the_moon_weave_the_clouds.png",
+      "icon_path": "assets/images/light_cones/carve_the_moon_weave_the_clouds.png",
       "passive": {
         "name": "Geheimnis",
         "text": [
@@ -984,7 +984,7 @@
       "name": "Chorus",
       "path": "Die Harmonie",
       "rarity": 3,
-      "icon_path": "assets/images/lc_chorus.png",
+      "icon_path": "assets/images/light_cones/chorus.png",
       "passive": {
         "name": "Vereint",
         "text": [
@@ -1000,7 +1000,7 @@
       "name": "Collapsing Sky",
       "path": "Die Zerstörung",
       "rarity": 3,
-      "icon_path": "assets/images/lc_collapsing_sky.png",
+      "icon_path": "assets/images/light_cones/collapsing_sky.png",
       "passive": {
         "name": "Verwüstung",
         "text": [
@@ -1016,7 +1016,7 @@
       "name": "Colors for Tomorrow",
       "path": "Das Hochgefühl",
       "rarity": 5,
-      "icon_path": "assets/images/lc_colors_for_tomorrow.png",
+      "icon_path": "assets/images/light_cones/colors_for_tomorrow.png",
       "passive": {
         "name": "Tuscheschwung",
         "text": [
@@ -1032,7 +1032,7 @@
       "name": "Concert for Two",
       "path": "Die Bewahrung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_concert_for_two.png",
+      "icon_path": "assets/images/light_cones/concert_for_two.png",
       "passive": {
         "name": "Inspirieren",
         "text": [
@@ -1048,7 +1048,7 @@
       "name": "Cornucopia",
       "path": "Der Überfluss",
       "rarity": 3,
-      "icon_path": "assets/images/lc_cornucopia.png",
+      "icon_path": "assets/images/light_cones/cornucopia.png",
       "passive": {
         "name": "Gedeihen",
         "text": [
@@ -1064,7 +1064,7 @@
       "name": "Cruising in the Stellar Sea",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/lc_cruising_in_the_stellar_sea.png",
+      "icon_path": "assets/images/light_cones/cruising_in_the_stellar_sea.png",
       "passive": {
         "name": "Jagen",
         "text": [
@@ -1080,7 +1080,7 @@
       "name": "Dance at Sunset",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/lc_dance_at_sunset.png",
+      "icon_path": "assets/images/light_cones/dance_at_sunset.png",
       "passive": {
         "name": "Tief versunken",
         "text": [
@@ -1096,7 +1096,7 @@
       "name": "Dance! Dance! Dance!",
       "path": "Die Harmonie",
       "rarity": 4,
-      "icon_path": "assets/images/lc_dance_dance_dance.png",
+      "icon_path": "assets/images/light_cones/dance_dance_dance.png",
       "passive": {
         "name": "Unaufhaltsam!",
         "text": [
@@ -1112,7 +1112,7 @@
       "name": "Darting Arrow",
       "path": "Die Jagd",
       "rarity": 3,
-      "icon_path": "assets/images/lc_darting_arrow.png",
+      "icon_path": "assets/images/light_cones/darting_arrow.png",
       "passive": {
         "name": "Kriegsschrei",
         "text": [
@@ -1128,7 +1128,7 @@
       "name": "Data Bank",
       "path": "Die Gelehrsamkeit",
       "rarity": 3,
-      "icon_path": "assets/images/lc_data_bank.png",
+      "icon_path": "assets/images/light_cones/data_bank.png",
       "passive": {
         "name": "Gelehrt",
         "text": [
@@ -1144,7 +1144,7 @@
       "name": "Day One of My New Life",
       "path": "Die Bewahrung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_day_one_of_my_new_life.png",
+      "icon_path": "assets/images/light_cones/day_one_of_my_new_life.png",
       "passive": {
         "name": "Genau in diesem Moment",
         "text": [
@@ -1160,7 +1160,7 @@
       "name": "Dazzled by a Flowery World",
       "path": "Das Hochgefühl",
       "rarity": 5,
-      "icon_path": "assets/images/lc_dazzled_by_a_flowery_world.png",
+      "icon_path": "assets/images/light_cones/dazzled_by_a_flowery_world.png",
       "passive": {
         "name": "Blickfang",
         "text": [
@@ -1176,7 +1176,7 @@
       "name": "Defense",
       "path": "Die Bewahrung",
       "rarity": 3,
-      "icon_path": "assets/images/lc_defense.png",
+      "icon_path": "assets/images/light_cones/defense.png",
       "passive": {
         "name": "Wiederbelebung",
         "text": [
@@ -1192,7 +1192,7 @@
       "name": "Destiny's Threads Forewoven",
       "path": "Die Bewahrung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_destiny_s_threads_forewoven.png",
+      "icon_path": "assets/images/light_cones/destiny_s_threads_forewoven.png",
       "passive": {
         "name": "Einblick",
         "text": [
@@ -1208,7 +1208,7 @@
       "name": "Dream's Montage",
       "path": "Der Überfluss",
       "rarity": 4,
-      "icon_path": "assets/images/lc_dream_s_montage.png",
+      "icon_path": "assets/images/light_cones/dream_s_montage.png",
       "passive": {
         "name": "Akademischer Schnitt",
         "text": [
@@ -1224,7 +1224,7 @@
       "name": "Dreamville Adventure",
       "path": "Die Harmonie",
       "rarity": 4,
-      "icon_path": "assets/images/lc_dreamville_adventure.png",
+      "icon_path": "assets/images/light_cones/dreamville_adventure.png",
       "passive": {
         "name": "Solidarität",
         "text": [
@@ -1240,7 +1240,7 @@
       "name": "Earthly Escapade",
       "path": "Die Harmonie",
       "rarity": 5,
-      "icon_path": "assets/images/lc_earthly_escapade.png",
+      "icon_path": "assets/images/light_cones/earthly_escapade.png",
       "passive": {
         "name": "Wankelmut",
         "text": [
@@ -1256,7 +1256,7 @@
       "name": "Echoes of the Coffin",
       "path": "Der Überfluss",
       "rarity": 5,
-      "icon_path": "assets/images/lc_echoes_of_the_coffin.png",
+      "icon_path": "assets/images/light_cones/echoes_of_the_coffin.png",
       "passive": {
         "name": "Dornen",
         "text": [
@@ -1272,7 +1272,7 @@
       "name": "Elation Brimming With Blessings",
       "path": "Das Hochgefühl",
       "rarity": 5,
-      "icon_path": "assets/images/lc_elation_brimming_with_blessings.png",
+      "icon_path": "assets/images/light_cones/elation_brimming_with_blessings.png",
       "passive": {
         "name": "Eröffnung",
         "text": [
@@ -1288,7 +1288,7 @@
       "name": "Epoch Etched in Golden Blood",
       "path": "Die Harmonie",
       "rarity": 5,
-      "icon_path": "assets/images/lc_epoch_etched_in_golden_blood.png",
+      "icon_path": "assets/images/light_cones/epoch_etched_in_golden_blood.png",
       "passive": {
         "name": "Erobern",
         "text": [
@@ -1304,7 +1304,7 @@
       "name": "Eternal Calculus",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_eternal_calculus.png",
+      "icon_path": "assets/images/light_cones/eternal_calculus.png",
       "passive": {
         "name": "Gedanken ohne Grenzen",
         "text": [
@@ -1320,7 +1320,7 @@
       "name": "Eyes of the Prey",
       "path": "Die Nichtigkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_eyes_of_the_prey.png",
+      "icon_path": "assets/images/light_cones/eyes_of_the_prey.png",
       "passive": {
         "name": "Selbstvertrauen",
         "text": [
@@ -1336,7 +1336,7 @@
       "name": "Fermata",
       "path": "Die Nichtigkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_fermata.png",
+      "icon_path": "assets/images/light_cones/fermata.png",
       "passive": {
         "name": "Semibrevis-Pause",
         "text": [
@@ -1352,7 +1352,7 @@
       "name": "Final Victor",
       "path": "Die Jagd",
       "rarity": 4,
-      "icon_path": "assets/images/lc_final_victor.png",
+      "icon_path": "assets/images/light_cones/final_victor.png",
       "passive": {
         "name": "Die Wette gilt",
         "text": [
@@ -1368,7 +1368,7 @@
       "name": "Fine Fruit",
       "path": "Der Überfluss",
       "rarity": 3,
-      "icon_path": "assets/images/lc_fine_fruit.png",
+      "icon_path": "assets/images/light_cones/fine_fruit.png",
       "passive": {
         "name": "Geschmack",
         "text": [
@@ -1384,7 +1384,7 @@
       "name": "Flame of Blood, Blaze My Path",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/lc_flame_of_blood_blaze_my_path.png",
+      "icon_path": "assets/images/light_cones/flame_of_blood_blaze_my_path.png",
       "passive": {
         "name": "Weitblick",
         "text": [
@@ -1400,7 +1400,7 @@
       "name": "Flames Afar",
       "path": "Die Zerstörung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_flames_afar.png",
+      "icon_path": "assets/images/light_cones/flames_afar.png",
       "passive": {
         "name": "Deflagration",
         "text": [
@@ -1416,7 +1416,7 @@
       "name": "Flickering Stars",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_flickering_stars.png",
+      "icon_path": "assets/images/light_cones/flickering_stars.png",
       "passive": {
         "name": "Keim",
         "text": [
@@ -1432,7 +1432,7 @@
       "name": "Flowing Nightglow",
       "path": "Die Harmonie",
       "rarity": 5,
-      "icon_path": "assets/images/lc_flowing_nightglow.png",
+      "icon_path": "assets/images/light_cones/flowing_nightglow.png",
       "passive": {
         "name": "Trösten",
         "text": [
@@ -1448,7 +1448,7 @@
       "name": "Fly Into a Pink Tomorrow",
       "path": "Das Gedenken",
       "rarity": 4,
-      "icon_path": "assets/images/lc_fly_into_a_pink_tomorrow.png",
+      "icon_path": "assets/images/light_cones/fly_into_a_pink_tomorrow.png",
       "passive": {
         "name": "Blick",
         "text": [
@@ -1464,7 +1464,7 @@
       "name": "For Tomorrow's Journey",
       "path": "Die Harmonie",
       "rarity": 4,
-      "icon_path": "assets/images/lc_for_tomorrow_s_journey.png",
+      "icon_path": "assets/images/light_cones/for_tomorrow_s_journey.png",
       "passive": {
         "name": "Verketten",
         "text": [
@@ -1480,7 +1480,7 @@
       "name": "Geniuses' Greetings",
       "path": "Das Gedenken",
       "rarity": 4,
-      "icon_path": "assets/images/lc_geniuses_greetings.png",
+      "icon_path": "assets/images/light_cones/geniuses_greetings.png",
       "passive": {
         "name": "Glückwunsch",
         "text": [
@@ -1496,7 +1496,7 @@
       "name": "Geniuses' Repose",
       "path": "Die Gelehrsamkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_geniuses_repose.png",
+      "icon_path": "assets/images/light_cones/geniuses_repose.png",
       "passive": {
         "name": "Jeder muss jetzt eine Rolle spielen",
         "text": [
@@ -1512,7 +1512,7 @@
       "name": "Good Night and Sleep Well",
       "path": "Die Nichtigkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_good_night_and_sleep_well.png",
+      "icon_path": "assets/images/light_cones/good_night_and_sleep_well.png",
       "passive": {
         "name": "Malocher",
         "text": [
@@ -1528,7 +1528,7 @@
       "name": "Hey, Over Here",
       "path": "Der Überfluss",
       "rarity": 4,
-      "icon_path": "assets/images/lc_hey_over_here.png",
+      "icon_path": "assets/images/light_cones/hey_over_here.png",
       "passive": {
         "name": "Hab keine Angst",
         "text": [
@@ -1544,7 +1544,7 @@
       "name": "Hidden Shadow",
       "path": "Die Nichtigkeit",
       "rarity": 3,
-      "icon_path": "assets/images/lc_hidden_shadow.png",
+      "icon_path": "assets/images/light_cones/hidden_shadow.png",
       "passive": {
         "name": "Mechanismus",
         "text": [
@@ -1560,7 +1560,7 @@
       "name": "Holiday Thermae Escapade",
       "path": "Die Nichtigkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_holiday_thermae_escapade.png",
+      "icon_path": "assets/images/light_cones/holiday_thermae_escapade.png",
       "passive": {
         "name": "Chillen",
         "text": [
@@ -1576,7 +1576,7 @@
       "name": "I Am As You Behold",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/lc_i_am_as_you_behold.png",
+      "icon_path": "assets/images/light_cones/i_am_as_you_behold.png",
       "passive": {
         "name": "Nach Belieben",
         "text": [
@@ -1592,7 +1592,7 @@
       "name": "I Shall Be My Own Sword",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/lc_i_shall_be_my_own_sword.png",
+      "icon_path": "assets/images/light_cones/i_shall_be_my_own_sword.png",
       "passive": {
         "name": "Mit dieser Abendjade",
         "text": [
@@ -1608,7 +1608,7 @@
       "name": "I Venture Forth to Hunt",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/lc_i_venture_forth_to_hunt.png",
+      "icon_path": "assets/images/light_cones/i_venture_forth_to_hunt.png",
       "passive": {
         "name": "Einschüchtern",
         "text": [
@@ -1624,7 +1624,7 @@
       "name": "If Time Were a Flower",
       "path": "Die Harmonie",
       "rarity": 5,
-      "icon_path": "assets/images/lc_if_time_were_a_flower.png",
+      "icon_path": "assets/images/light_cones/if_time_were_a_flower.png",
       "passive": {
         "name": "Hoffnung",
         "text": [
@@ -1640,7 +1640,7 @@
       "name": "In Pursuit of the Wind",
       "path": "Die Harmonie",
       "rarity": 4,
-      "icon_path": "assets/images/lc_in_pursuit_of_the_wind.png",
+      "icon_path": "assets/images/light_cones/in_pursuit_of_the_wind.png",
       "passive": {
         "name": "Außer sich",
         "text": [
@@ -1656,7 +1656,7 @@
       "name": "In the Name of the World",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_in_the_name_of_the_world.png",
+      "icon_path": "assets/images/light_cones/in_the_name_of_the_world.png",
       "passive": {
         "name": "Nachkomme",
         "text": [
@@ -1672,7 +1672,7 @@
       "name": "In the Night",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/lc_in_the_night.png",
+      "icon_path": "assets/images/light_cones/in_the_night.png",
       "passive": {
         "name": "Blumen und Schmetterlinge",
         "text": [
@@ -1688,7 +1688,7 @@
       "name": "Incessant Rain",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_incessant_rain.png",
+      "icon_path": "assets/images/light_cones/incessant_rain.png",
       "passive": {
         "name": "Trugbild der Realität",
         "text": [
@@ -1704,7 +1704,7 @@
       "name": "Indelible Promise",
       "path": "Die Zerstörung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_indelible_promise.png",
+      "icon_path": "assets/images/light_cones/indelible_promise.png",
       "passive": {
         "name": "Erbe",
         "text": [
@@ -1720,7 +1720,7 @@
       "name": "Inherently Unjust Destiny",
       "path": "Die Bewahrung",
       "rarity": 5,
-      "icon_path": "assets/images/lc_inherently_unjust_destiny.png",
+      "icon_path": "assets/images/light_cones/inherently_unjust_destiny.png",
       "passive": {
         "name": "Alles auf den Tisch",
         "text": [
@@ -1736,7 +1736,7 @@
       "name": "Into the Unreachable Veil",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_into_the_unreachable_veil.png",
+      "icon_path": "assets/images/light_cones/into_the_unreachable_veil.png",
       "passive": {
         "name": "Denkspiel",
         "text": [
@@ -1752,7 +1752,7 @@
       "name": "It's Showtime",
       "path": "Die Nichtigkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_it_s_showtime.png",
+      "icon_path": "assets/images/light_cones/it_s_showtime.png",
       "passive": {
         "name": "Selbstbelustigung",
         "text": [
@@ -1768,7 +1768,7 @@
       "name": "Journey, Forever Peaceful",
       "path": "Die Bewahrung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_journey_forever_peaceful.png",
+      "icon_path": "assets/images/light_cones/journey_forever_peaceful.png",
       "passive": {
         "name": "Glückstraum",
         "text": [
@@ -1784,7 +1784,7 @@
       "name": "Landau's Choice",
       "path": "Die Bewahrung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_landau_s_choice.png",
+      "icon_path": "assets/images/light_cones/landau_s_choice.png",
       "passive": {
         "name": "Die Zeit fliegt davon",
         "text": [
@@ -1800,7 +1800,7 @@
       "name": "Lies Dance on the Breeze",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_lies_dance_on_the_breeze.png",
+      "icon_path": "assets/images/light_cones/lies_dance_on_the_breeze.png",
       "passive": {
         "name": "Betrug",
         "text": [
@@ -1816,7 +1816,7 @@
       "name": "Life Should Be Cast to Flames",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_life_should_be_cast_to_flames.png",
+      "icon_path": "assets/images/light_cones/life_should_be_cast_to_flames.png",
       "passive": {
         "name": "Schmelzen",
         "text": [
@@ -1832,7 +1832,7 @@
       "name": "Lingering Tear",
       "path": "Das Hochgefühl",
       "rarity": 3,
-      "icon_path": "assets/images/lc_lingering_tear.png",
+      "icon_path": "assets/images/light_cones/lingering_tear.png",
       "passive": {
         "name": "Trauer",
         "text": [
@@ -1848,7 +1848,7 @@
       "name": "Long May Rainbows Adorn the Sky",
       "path": "Das Gedenken",
       "rarity": 5,
-      "icon_path": "assets/images/lc_long_may_rainbows_adorn_the_sky.png",
+      "icon_path": "assets/images/light_cones/long_may_rainbows_adorn_the_sky.png",
       "passive": {
         "name": "Tolerant",
         "text": [
@@ -1864,7 +1864,7 @@
       "name": "Long Road Leads Home",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_long_road_leads_home.png",
+      "icon_path": "assets/images/light_cones/long_road_leads_home.png",
       "passive": {
         "name": "Wiedergeburt",
         "text": [
@@ -1880,7 +1880,7 @@
       "name": "Loop",
       "path": "Die Nichtigkeit",
       "rarity": 3,
-      "icon_path": "assets/images/lc_loop.png",
+      "icon_path": "assets/images/light_cones/loop.png",
       "passive": {
         "name": "Verfolgung",
         "text": [
@@ -1896,7 +1896,7 @@
       "name": "Make Farewells More Beautiful",
       "path": "Das Gedenken",
       "rarity": 5,
-      "icon_path": "assets/images/lc_make_farewells_more_beautiful.png",
+      "icon_path": "assets/images/light_cones/make_farewells_more_beautiful.png",
       "passive": {
         "name": "Schnitzen",
         "text": [
@@ -1912,7 +1912,7 @@
       "name": "Make the World Clamor",
       "path": "Die Gelehrsamkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_make_the_world_clamor.png",
+      "icon_path": "assets/images/light_cones/make_the_world_clamor.png",
       "passive": {
         "name": "Die Macht des Klangs",
         "text": [
@@ -1928,7 +1928,7 @@
       "name": "Mediation",
       "path": "Die Harmonie",
       "rarity": 3,
-      "icon_path": "assets/images/lc_mediation.png",
+      "icon_path": "assets/images/light_cones/mediation.png",
       "passive": {
         "name": "Familie",
         "text": [
@@ -1944,7 +1944,7 @@
       "name": "Memories of the Past",
       "path": "Die Harmonie",
       "rarity": 4,
-      "icon_path": "assets/images/lc_memories_of_the_past.png",
+      "icon_path": "assets/images/light_cones/memories_of_the_past.png",
       "passive": {
         "name": "Altes Foto",
         "text": [
@@ -1960,7 +1960,7 @@
       "name": "Memory's Curtain Never Falls",
       "path": "Das Gedenken",
       "rarity": 5,
-      "icon_path": "assets/images/lc_memory_s_curtain_never_falls.png",
+      "icon_path": "assets/images/light_cones/memory_s_curtain_never_falls.png",
       "passive": {
         "name": "Empfang",
         "text": [
@@ -1976,7 +1976,7 @@
       "name": "Meshing Cogs",
       "path": "Die Harmonie",
       "rarity": 3,
-      "icon_path": "assets/images/lc_meshing_cogs.png",
+      "icon_path": "assets/images/light_cones/meshing_cogs.png",
       "passive": {
         "name": "Schneller Sieg",
         "text": [
@@ -1992,7 +1992,7 @@
       "name": "Moment of Victory",
       "path": "Die Bewahrung",
       "rarity": 5,
-      "icon_path": "assets/images/lc_moment_of_victory.png",
+      "icon_path": "assets/images/light_cones/moment_of_victory.png",
       "passive": {
         "name": "Urteilsspruch",
         "text": [
@@ -2008,7 +2008,7 @@
       "name": "Multiplication",
       "path": "Der Überfluss",
       "rarity": 3,
-      "icon_path": "assets/images/lc_multiplication.png",
+      "icon_path": "assets/images/light_cones/multiplication.png",
       "passive": {
         "name": "Wesen des Überflusses",
         "text": [
@@ -2024,7 +2024,7 @@
       "name": "Mushy Shroomy's Adventures",
       "path": "Das Hochgefühl",
       "rarity": 4,
-      "icon_path": "assets/images/lc_mushy_shroomy_s_adventures.png",
+      "icon_path": "assets/images/light_cones/mushy_shroomy_s_adventures.png",
       "passive": {
         "name": "Kampfchaos",
         "text": [
@@ -2040,7 +2040,7 @@
       "name": "Mutual Demise",
       "path": "Die Zerstörung",
       "rarity": 3,
-      "icon_path": "assets/images/lc_mutual_demise.png",
+      "icon_path": "assets/images/light_cones/mutual_demise.png",
       "passive": {
         "name": "Legion",
         "text": [
@@ -2056,7 +2056,7 @@
       "name": "Never Forget Her Flame",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_never_forget_her_flame.png",
+      "icon_path": "assets/images/light_cones/never_forget_her_flame.png",
       "passive": {
         "name": "Selbstverbrennung",
         "text": [
@@ -2072,7 +2072,7 @@
       "name": "Night of Fright",
       "path": "Der Überfluss",
       "rarity": 5,
-      "icon_path": "assets/images/lc_night_of_fright.png",
+      "icon_path": "assets/images/light_cones/night_of_fright.png",
       "passive": {
         "name": "Atme tief durch",
         "text": [
@@ -2088,7 +2088,7 @@
       "name": "Night on the Milky Way",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_night_on_the_milky_way.png",
+      "icon_path": "assets/images/light_cones/night_on_the_milky_way.png",
       "passive": {
         "name": "Meteoritenschwarm",
         "text": [
@@ -2104,7 +2104,7 @@
       "name": "Ninja Record: Sound Hunt",
       "path": "Die Zerstörung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_ninja_record_sound_hunt.png",
+      "icon_path": "assets/images/light_cones/ninja_record_sound_hunt.png",
       "passive": {
         "name": "Vorhang auf!",
         "text": [
@@ -2120,7 +2120,7 @@
       "name": "Ninjutsu Inscription: Dazzling Evilbreaker",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_ninjutsu_inscription_dazzling_evilbreaker.png",
+      "icon_path": "assets/images/light_cones/ninjutsu_inscription_dazzling_evilbreaker.png",
       "passive": {
         "name": "Exorzismus",
         "text": [
@@ -2136,7 +2136,7 @@
       "name": "Nowhere to Run",
       "path": "Die Zerstörung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_nowhere_to_run.png",
+      "icon_path": "assets/images/light_cones/nowhere_to_run.png",
       "passive": {
         "name": "Krise",
         "text": [
@@ -2152,7 +2152,7 @@
       "name": "On the Fall of an Aeon",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/lc_on_the_fall_of_an_aeon.png",
+      "icon_path": "assets/images/light_cones/on_the_fall_of_an_aeon.png",
       "passive": {
         "name": "Wie Motten ins Licht",
         "text": [
@@ -2168,7 +2168,7 @@
       "name": "Only Silence Remains",
       "path": "Die Jagd",
       "rarity": 4,
-      "icon_path": "assets/images/lc_only_silence_remains.png",
+      "icon_path": "assets/images/light_cones/only_silence_remains.png",
       "passive": {
         "name": "Aufzeichnung",
         "text": [
@@ -2184,7 +2184,7 @@
       "name": "Passkey",
       "path": "Die Gelehrsamkeit",
       "rarity": 3,
-      "icon_path": "assets/images/lc_passkey.png",
+      "icon_path": "assets/images/light_cones/passkey.png",
       "passive": {
         "name": "Erleuchtung",
         "text": [
@@ -2200,7 +2200,7 @@
       "name": "Past Self in Mirror",
       "path": "Die Harmonie",
       "rarity": 5,
-      "icon_path": "assets/images/lc_past_self_in_mirror.png",
+      "icon_path": "assets/images/light_cones/past_self_in_mirror.png",
       "passive": {
         "name": "Pflaumenduft",
         "text": [
@@ -2216,7 +2216,7 @@
       "name": "Past and Future",
       "path": "Die Harmonie",
       "rarity": 4,
-      "icon_path": "assets/images/lc_past_and_future.png",
+      "icon_path": "assets/images/light_cones/past_and_future.png",
       "passive": {
         "name": "Drachen aus der Vergangenheit",
         "text": [
@@ -2232,7 +2232,7 @@
       "name": "Patience Is All You Need",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_patience_is_all_you_need.png",
+      "icon_path": "assets/images/light_cones/patience_is_all_you_need.png",
       "passive": {
         "name": "Spinnennetz",
         "text": [
@@ -2248,7 +2248,7 @@
       "name": "Perfect Timing",
       "path": "Der Überfluss",
       "rarity": 4,
-      "icon_path": "assets/images/lc_perfect_timing.png",
+      "icon_path": "assets/images/light_cones/perfect_timing.png",
       "passive": {
         "name": "Brechung der Sichtlinie",
         "text": [
@@ -2264,7 +2264,7 @@
       "name": "Pioneering",
       "path": "Die Bewahrung",
       "rarity": 3,
-      "icon_path": "assets/images/lc_pioneering.png",
+      "icon_path": "assets/images/light_cones/pioneering.png",
       "passive": {
         "name": "IFK",
         "text": [
@@ -2280,7 +2280,7 @@
       "name": "Planetary Rendezvous",
       "path": "Die Harmonie",
       "rarity": 4,
-      "icon_path": "assets/images/lc_planetary_rendezvous.png",
+      "icon_path": "assets/images/light_cones/planetary_rendezvous.png",
       "passive": {
         "name": "Abreise",
         "text": [
@@ -2296,7 +2296,7 @@
       "name": "Poised to Bloom",
       "path": "Die Harmonie",
       "rarity": 4,
-      "icon_path": "assets/images/lc_poised_to_bloom.png",
+      "icon_path": "assets/images/light_cones/poised_to_bloom.png",
       "passive": {
         "name": "Verliere nicht, vergiss nicht",
         "text": [
@@ -2312,7 +2312,7 @@
       "name": "Post-Op Conversation",
       "path": "Der Überfluss",
       "rarity": 4,
-      "icon_path": "assets/images/lc_post_op_conversation.png",
+      "icon_path": "assets/images/light_cones/post_op_conversation.png",
       "passive": {
         "name": "Gegenseitiges Heilen",
         "text": [
@@ -2328,7 +2328,7 @@
       "name": "Quid Pro Quo",
       "path": "Der Überfluss",
       "rarity": 4,
-      "icon_path": "assets/images/lc_quid_pro_quo.png",
+      "icon_path": "assets/images/light_cones/quid_pro_quo.png",
       "passive": {
         "name": "Im Rausch genießen",
         "text": [
@@ -2344,7 +2344,7 @@
       "name": "Race to the Horizon",
       "path": "Die Jagd",
       "rarity": 4,
-      "icon_path": "assets/images/lc_race_to_the_horizon.png",
+      "icon_path": "assets/images/light_cones/race_to_the_horizon.png",
       "passive": {
         "name": "Überholen",
         "text": [
@@ -2360,7 +2360,7 @@
       "name": "Reforged Remembrance",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_reforged_remembrance.png",
+      "icon_path": "assets/images/light_cones/reforged_remembrance.png",
       "passive": {
         "name": "Kristallisiert",
         "text": [
@@ -2376,7 +2376,7 @@
       "name": "Reforged in Hellfire",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_reforged_in_hellfire.png",
+      "icon_path": "assets/images/light_cones/reforged_in_hellfire.png",
       "passive": {
         "name": "Verfeinern",
         "text": [
@@ -2392,7 +2392,7 @@
       "name": "Reminiscence",
       "path": "Das Gedenken",
       "rarity": 3,
-      "icon_path": "assets/images/lc_reminiscence.png",
+      "icon_path": "assets/images/light_cones/reminiscence.png",
       "passive": {
         "name": "Einschlafen",
         "text": [
@@ -2408,7 +2408,7 @@
       "name": "Resolution Shines As Pearls of Sweat",
       "path": "Die Nichtigkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_resolution_shines_as_pearls_of_sweat.png",
+      "icon_path": "assets/images/light_cones/resolution_shines_as_pearls_of_sweat.png",
       "passive": {
         "name": "Zurückblicken",
         "text": [
@@ -2424,7 +2424,7 @@
       "name": "Return to Darkness",
       "path": "Die Jagd",
       "rarity": 4,
-      "icon_path": "assets/images/lc_return_to_darkness.png",
+      "icon_path": "assets/images/light_cones/return_to_darkness.png",
       "passive": {
         "name": "Tosende Wellen",
         "text": [
@@ -2440,7 +2440,7 @@
       "name": "Rise and Sing",
       "path": "Das Gedenken",
       "rarity": 5,
-      "icon_path": "assets/images/lc_rise_and_sing.png",
+      "icon_path": "assets/images/light_cones/rise_and_sing.png",
       "passive": {
         "name": "Improvisation",
         "text": [
@@ -2456,7 +2456,7 @@
       "name": "River Flows in Spring",
       "path": "Die Jagd",
       "rarity": 4,
-      "icon_path": "assets/images/lc_river_flows_in_spring.png",
+      "icon_path": "assets/images/light_cones/river_flows_in_spring.png",
       "passive": {
         "name": "Die nachklingende Kälte abwehren",
         "text": [
@@ -2472,7 +2472,7 @@
       "name": "Sagacity",
       "path": "Die Gelehrsamkeit",
       "rarity": 3,
-      "icon_path": "assets/images/lc_sagacity.png",
+      "icon_path": "assets/images/light_cones/sagacity.png",
       "passive": {
         "name": "Genie",
         "text": [
@@ -2488,7 +2488,7 @@
       "name": "Sailing Towards a Second Life",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/lc_sailing_towards_a_second_life.png",
+      "icon_path": "assets/images/light_cones/sailing_towards_a_second_life.png",
       "passive": {
         "name": "Starker Wellengang",
         "text": [
@@ -2504,7 +2504,7 @@
       "name": "Scent Alone Stays True",
       "path": "Der Überfluss",
       "rarity": 5,
-      "icon_path": "assets/images/lc_scent_alone_stays_true.png",
+      "icon_path": "assets/images/light_cones/scent_alone_stays_true.png",
       "passive": {
         "name": "Erleichterung",
         "text": [
@@ -2520,7 +2520,7 @@
       "name": "See You at the End",
       "path": "Die Jagd",
       "rarity": 4,
-      "icon_path": "assets/images/lc_see_you_at_the_end.png",
+      "icon_path": "assets/images/light_cones/see_you_at_the_end.png",
       "passive": {
         "name": "Beharrlichkeit",
         "text": [
@@ -2536,7 +2536,7 @@
       "name": "See You at the World's End!",
       "path": "Das Hochgefühl",
       "rarity": 4,
-      "icon_path": "assets/images/lc_see_you_at_the_world_s_end.png",
+      "icon_path": "assets/images/light_cones/see_you_at_the_world_s_end.png",
       "passive": {
         "name": "Verschwörer",
         "text": [
@@ -2552,7 +2552,7 @@
       "name": "Shadowburn",
       "path": "Das Gedenken",
       "rarity": 3,
-      "icon_path": "assets/images/lc_shadowburn.png",
+      "icon_path": "assets/images/light_cones/shadowburn.png",
       "passive": {
         "name": "Verschönerung",
         "text": [
@@ -2568,7 +2568,7 @@
       "name": "Shadowed by Night",
       "path": "Die Jagd",
       "rarity": 4,
-      "icon_path": "assets/images/lc_shadowed_by_night.png",
+      "icon_path": "assets/images/light_cones/shadowed_by_night.png",
       "passive": {
         "name": "Verstecken",
         "text": [
@@ -2584,7 +2584,7 @@
       "name": "Shared Feeling",
       "path": "Der Überfluss",
       "rarity": 4,
-      "icon_path": "assets/images/lc_shared_feeling.png",
+      "icon_path": "assets/images/light_cones/shared_feeling.png",
       "passive": {
         "name": "Heilung und Reparatur",
         "text": [
@@ -2600,7 +2600,7 @@
       "name": "Shattered Home",
       "path": "Die Zerstörung",
       "rarity": 3,
-      "icon_path": "assets/images/lc_shattered_home.png",
+      "icon_path": "assets/images/light_cones/shattered_home.png",
       "passive": {
         "name": "Ausrottung",
         "text": [
@@ -2616,7 +2616,7 @@
       "name": "She Already Shut Her Eyes",
       "path": "Die Bewahrung",
       "rarity": 5,
-      "icon_path": "assets/images/lc_she_already_shut_her_eyes.png",
+      "icon_path": "assets/images/light_cones/she_already_shut_her_eyes.png",
       "passive": {
         "name": "Sicht",
         "text": [
@@ -2632,7 +2632,7 @@
       "name": "Sleep Like the Dead",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/lc_sleep_like_the_dead.png",
+      "icon_path": "assets/images/light_cones/sleep_like_the_dead.png",
       "passive": {
         "name": "Süßer Traum",
         "text": [
@@ -2648,7 +2648,7 @@
       "name": "Sneering",
       "path": "Das Hochgefühl",
       "rarity": 3,
-      "icon_path": "assets/images/lc_sneering.png",
+      "icon_path": "assets/images/light_cones/sneering.png",
       "passive": {
         "name": "Ausgelassenheit",
         "text": [
@@ -2664,7 +2664,7 @@
       "name": "Solitary Healing",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_solitary_healing.png",
+      "icon_path": "assets/images/light_cones/solitary_healing.png",
       "passive": {
         "name": "Chaoselixier",
         "text": [
@@ -2680,7 +2680,7 @@
       "name": "Something Irreplaceable",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/lc_something_irreplaceable.png",
+      "icon_path": "assets/images/light_cones/something_irreplaceable.png",
       "passive": {
         "name": "Teil der Familie",
         "text": [
@@ -2696,7 +2696,7 @@
       "name": "Subscribe for More!",
       "path": "Die Jagd",
       "rarity": 4,
-      "icon_path": "assets/images/lc_subscribe_for_more.png",
+      "icon_path": "assets/images/light_cones/subscribe_for_more.png",
       "passive": {
         "name": "Gib uns einen Like, bevor du gehst!",
         "text": [
@@ -2712,7 +2712,7 @@
       "name": "Summer Rides the Surf",
       "path": "Das Hochgefühl",
       "rarity": 5,
-      "icon_path": "assets/images/lc_summer_rides_the_surf.png",
+      "icon_path": "assets/images/light_cones/summer_rides_the_surf.png",
       "passive": {
         "name": "Wellenreiten",
         "text": [
@@ -2728,7 +2728,7 @@
       "name": "Sweat Now, Cry Less",
       "path": "Das Gedenken",
       "rarity": 4,
-      "icon_path": "assets/images/lc_sweat_now_cry_less.png",
+      "icon_path": "assets/images/light_cones/sweat_now_cry_less.png",
       "passive": {
         "name": "Komm trainieren!",
         "text": [
@@ -2744,7 +2744,7 @@
       "name": "Swordplay",
       "path": "Die Jagd",
       "rarity": 4,
-      "icon_path": "assets/images/lc_swordplay.png",
+      "icon_path": "assets/images/light_cones/swordplay.png",
       "passive": {
         "name": "Eigene Antworten",
         "text": [
@@ -2760,7 +2760,7 @@
       "name": "Texture of Memories",
       "path": "Die Bewahrung",
       "rarity": 5,
-      "icon_path": "assets/images/lc_texture_of_memories.png",
+      "icon_path": "assets/images/light_cones/texture_of_memories.png",
       "passive": {
         "name": "Schätzen",
         "text": [
@@ -2776,7 +2776,7 @@
       "name": "The Birth of the Self",
       "path": "Die Gelehrsamkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_the_birth_of_the_self.png",
+      "icon_path": "assets/images/light_cones/the_birth_of_the_self.png",
       "passive": {
         "name": "Die Jungfrau im Gemälde",
         "text": [
@@ -2792,7 +2792,7 @@
       "name": "The Day The Cosmos Fell",
       "path": "Die Gelehrsamkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_the_day_the_cosmos_fell.png",
+      "icon_path": "assets/images/light_cones/the_day_the_cosmos_fell.png",
       "passive": {
         "name": "Strategem",
         "text": [
@@ -2808,7 +2808,7 @@
       "name": "The Finale of a Lie",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/lc_the_finale_of_a_lie.png",
+      "icon_path": "assets/images/light_cones/the_finale_of_a_lie.png",
       "passive": {
         "name": "Verschlingen",
         "text": [
@@ -2824,7 +2824,7 @@
       "name": "The Flower Remembers",
       "path": "Das Gedenken",
       "rarity": 4,
-      "icon_path": "assets/images/lc_the_flower_remembers.png",
+      "icon_path": "assets/images/light_cones/the_flower_remembers.png",
       "passive": {
         "name": "Gegenseitige Abhängigkeit",
         "text": [
@@ -2840,7 +2840,7 @@
       "name": "The Forever Victual",
       "path": "Die Harmonie",
       "rarity": 4,
-      "icon_path": "assets/images/lc_the_forever_victual.png",
+      "icon_path": "assets/images/light_cones/the_forever_victual.png",
       "passive": {
         "name": "Mmm, lecker!",
         "text": [
@@ -2856,7 +2856,7 @@
       "name": "The Great Cosmic Enterprise",
       "path": "Die Gelehrsamkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_the_great_cosmic_enterprise.png",
+      "icon_path": "assets/images/light_cones/the_great_cosmic_enterprise.png",
       "passive": {
         "name": "Gegenseitiger Nutzen",
         "text": [
@@ -2872,7 +2872,7 @@
       "name": "The Hell Where Ideals Burn",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/lc_the_hell_where_ideals_burn.png",
+      "icon_path": "assets/images/light_cones/the_hell_where_ideals_burn.png",
       "passive": {
         "name": "Hrunting",
         "text": [
@@ -2888,7 +2888,7 @@
       "name": "The Moles Welcome You",
       "path": "Die Zerstörung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_the_moles_welcome_you.png",
+      "icon_path": "assets/images/light_cones/the_moles_welcome_you.png",
       "passive": {
         "name": "Fantastisches Abenteuer",
         "text": [
@@ -2904,7 +2904,7 @@
       "name": "The Seriousness of Breakfast",
       "path": "Die Gelehrsamkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_the_seriousness_of_breakfast.png",
+      "icon_path": "assets/images/light_cones/the_seriousness_of_breakfast.png",
       "passive": {
         "name": "Mach dich bereit",
         "text": [
@@ -2920,7 +2920,7 @@
       "name": "The Story's Next Page",
       "path": "Das Gedenken",
       "rarity": 4,
-      "icon_path": "assets/images/lc_the_story_s_next_page.png",
+      "icon_path": "assets/images/light_cones/the_story_s_next_page.png",
       "passive": {
         "name": "Niederschreiben",
         "text": [
@@ -2936,7 +2936,7 @@
       "name": "The Unreachable Side",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/lc_the_unreachable_side.png",
+      "icon_path": "assets/images/light_cones/the_unreachable_side.png",
       "passive": {
         "name": "Unerfüllte Sehnsucht",
         "text": [
@@ -2952,7 +2952,7 @@
       "name": "This Is Me!",
       "path": "Die Bewahrung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_this_is_me.png",
+      "icon_path": "assets/images/light_cones/this_is_me.png",
       "passive": {
         "name": "Neues Kapitel",
         "text": [
@@ -2968,7 +2968,7 @@
       "name": "This Love, Forever",
       "path": "Das Gedenken",
       "rarity": 5,
-      "icon_path": "assets/images/lc_this_love_forever.png",
+      "icon_path": "assets/images/light_cones/this_love_forever.png",
       "passive": {
         "name": "Versprechen",
         "text": [
@@ -2984,7 +2984,7 @@
       "name": "Those Many Springs",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_those_many_springs.png",
+      "icon_path": "assets/images/light_cones/those_many_springs.png",
       "passive": {
         "name": "Weltliches hinterlässt keine Spur",
         "text": [
@@ -3000,7 +3000,7 @@
       "name": "Though Worlds Apart",
       "path": "Die Bewahrung",
       "rarity": 5,
-      "icon_path": "assets/images/lc_though_worlds_apart.png",
+      "icon_path": "assets/images/light_cones/though_worlds_apart.png",
       "passive": {
         "name": "Neuschuppen",
         "text": [
@@ -3016,7 +3016,7 @@
       "name": "Thus Burns the Dawn",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/lc_thus_burns_the_dawn.png",
+      "icon_path": "assets/images/light_cones/thus_burns_the_dawn.png",
       "passive": {
         "name": "Verloren",
         "text": [
@@ -3032,7 +3032,7 @@
       "name": "Time Waits for No One",
       "path": "Der Überfluss",
       "rarity": 5,
-      "icon_path": "assets/images/lc_time_waits_for_no_one.png",
+      "icon_path": "assets/images/light_cones/time_waits_for_no_one.png",
       "passive": {
         "name": "Morgens, mittags, abends und nachts",
         "text": [
@@ -3048,7 +3048,7 @@
       "name": "Time Woven Into Gold",
       "path": "Das Gedenken",
       "rarity": 5,
-      "icon_path": "assets/images/lc_time_woven_into_gold.png",
+      "icon_path": "assets/images/light_cones/time_woven_into_gold.png",
       "passive": {
         "name": "Gestalten",
         "text": [
@@ -3064,7 +3064,7 @@
       "name": "To Evernight's Stars",
       "path": "Das Gedenken",
       "rarity": 5,
-      "icon_path": "assets/images/lc_to_evernight_s_stars.png",
+      "icon_path": "assets/images/light_cones/to_evernight_s_stars.png",
       "passive": {
         "name": "Schlaflos",
         "text": [
@@ -3080,7 +3080,7 @@
       "name": "Today Is Another Peaceful Day",
       "path": "Die Gelehrsamkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_today_is_another_peaceful_day.png",
+      "icon_path": "assets/images/light_cones/today_is_another_peaceful_day.png",
       "passive": {
         "name": "Ein Sturm zieht auf",
         "text": [
@@ -3096,7 +3096,7 @@
       "name": "Today's Good Luck",
       "path": "Das Hochgefühl",
       "rarity": 4,
-      "icon_path": "assets/images/lc_today_s_good_luck.png",
+      "icon_path": "assets/images/light_cones/today_s_good_luck.png",
       "passive": {
         "name": "Entscheidung",
         "text": [
@@ -3112,7 +3112,7 @@
       "name": "Tomorrow, Together",
       "path": "Das Hochgefühl",
       "rarity": 4,
-      "icon_path": "assets/images/lc_tomorrow_together.png",
+      "icon_path": "assets/images/light_cones/tomorrow_together.png",
       "passive": {
         "name": "Gefährte",
         "text": [
@@ -3128,7 +3128,7 @@
       "name": "Trend of the Universal Market",
       "path": "Die Bewahrung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_trend_of_the_universal_market.png",
+      "icon_path": "assets/images/light_cones/trend_of_the_universal_market.png",
       "passive": {
         "name": "Für eine neue Runde mischen",
         "text": [
@@ -3144,7 +3144,7 @@
       "name": "Under the Blue Sky",
       "path": "Die Zerstörung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_under_the_blue_sky.png",
+      "icon_path": "assets/images/light_cones/under_the_blue_sky.png",
       "passive": {
         "name": "Wogender Weizen unter der Sonne",
         "text": [
@@ -3160,7 +3160,7 @@
       "name": "Until the Flowers Bloom Again",
       "path": "Das Hochgefühl",
       "rarity": 5,
-      "icon_path": "assets/images/lc_until_the_flowers_bloom_again.png",
+      "icon_path": "assets/images/light_cones/until_the_flowers_bloom_again.png",
       "passive": {
         "name": "Tagträumerei",
         "text": [
@@ -3176,7 +3176,7 @@
       "name": "Unto Tomorrow's Morrow",
       "path": "Der Überfluss",
       "rarity": 4,
-      "icon_path": "assets/images/lc_unto_tomorrow_s_morrow.png",
+      "icon_path": "assets/images/light_cones/unto_tomorrow_s_morrow.png",
       "passive": {
         "name": "Lebwohl",
         "text": [
@@ -3192,7 +3192,7 @@
       "name": "Upon the First Echo of \"Aha\"",
       "path": "Das Hochgefühl",
       "rarity": 5,
-      "icon_path": "assets/images/lc_upon_the_first_echo_of_aha.png",
+      "icon_path": "assets/images/light_cones/upon_the_first_echo_of_aha.png",
       "passive": {
         "name": "Impro-Tour",
         "text": [
@@ -3208,7 +3208,7 @@
       "name": "Victory In a Blink",
       "path": "Das Gedenken",
       "rarity": 4,
-      "icon_path": "assets/images/lc_victory_in_a_blink.png",
+      "icon_path": "assets/images/light_cones/victory_in_a_blink.png",
       "passive": {
         "name": "Letzter Schlag",
         "text": [
@@ -3224,7 +3224,7 @@
       "name": "Void",
       "path": "Die Nichtigkeit",
       "rarity": 3,
-      "icon_path": "assets/images/lc_void.png",
+      "icon_path": "assets/images/light_cones/void.png",
       "passive": {
         "name": "Niedergang",
         "text": [
@@ -3240,7 +3240,7 @@
       "name": "Warmth Shortens Cold Nights",
       "path": "Der Überfluss",
       "rarity": 4,
-      "icon_path": "assets/images/lc_warmth_shortens_cold_nights.png",
+      "icon_path": "assets/images/light_cones/warmth_shortens_cold_nights.png",
       "passive": {
         "name": "Kleines Licht",
         "text": [
@@ -3256,7 +3256,7 @@
       "name": "We Are Wildfire",
       "path": "Die Bewahrung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_we_are_wildfire.png",
+      "icon_path": "assets/images/light_cones/we_are_wildfire.png",
       "passive": {
         "name": "Mit tränenden Augen",
         "text": [
@@ -3272,7 +3272,7 @@
       "name": "We Will Meet Again",
       "path": "Die Nichtigkeit",
       "rarity": 4,
-      "icon_path": "assets/images/lc_we_will_meet_again.png",
+      "icon_path": "assets/images/light_cones/we_will_meet_again.png",
       "passive": {
         "name": "Ein Diskurs in Waffen",
         "text": [
@@ -3288,7 +3288,7 @@
       "name": "Welcome to the Cosmic City",
       "path": "Das Hochgefühl",
       "rarity": 5,
-      "icon_path": "assets/images/lc_welcome_to_the_cosmic_city.png",
+      "icon_path": "assets/images/light_cones/welcome_to_the_cosmic_city.png",
       "passive": {
         "name": "Garantierter Sieg",
         "text": [
@@ -3304,7 +3304,7 @@
       "name": "What Is Real?",
       "path": "Der Überfluss",
       "rarity": 4,
-      "icon_path": "assets/images/lc_what_is_real.png",
+      "icon_path": "assets/images/light_cones/what_is_real.png",
       "passive": {
         "name": "Hypothese",
         "text": [
@@ -3320,7 +3320,7 @@
       "name": "When She Decided to See",
       "path": "Das Hochgefühl",
       "rarity": 5,
-      "icon_path": "assets/images/lc_when_she_decided_to_see.png",
+      "icon_path": "assets/images/light_cones/when_she_decided_to_see.png",
       "passive": {
         "name": "Wendepunkt",
         "text": [
@@ -3336,7 +3336,7 @@
       "name": "Whereabouts Should Dreams Rest",
       "path": "Die Zerstörung",
       "rarity": 5,
-      "icon_path": "assets/images/lc_whereabouts_should_dreams_rest.png",
+      "icon_path": "assets/images/light_cones/whereabouts_should_dreams_rest.png",
       "passive": {
         "name": "Metamorphose",
         "text": [
@@ -3352,7 +3352,7 @@
       "name": "Why Does the Ocean Sing",
       "path": "Die Nichtigkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_why_does_the_ocean_sing.png",
+      "icon_path": "assets/images/light_cones/why_does_the_ocean_sing.png",
       "passive": {
         "name": "Solo",
         "text": [
@@ -3368,7 +3368,7 @@
       "name": "Woof! Walk Time!",
       "path": "Die Zerstörung",
       "rarity": 4,
-      "icon_path": "assets/images/lc_woof_walk_time.png",
+      "icon_path": "assets/images/light_cones/woof_walk_time.png",
       "passive": {
         "name": "Lauf!",
         "text": [
@@ -3384,7 +3384,7 @@
       "name": "Worrisome, Blissful",
       "path": "Die Jagd",
       "rarity": 5,
-      "icon_path": "assets/images/lc_worrisome_blissful.png",
+      "icon_path": "assets/images/light_cones/worrisome_blissful.png",
       "passive": {
         "name": "Einer nach dem Anderen",
         "text": [
@@ -3400,7 +3400,7 @@
       "name": "Yet Hope Is Priceless",
       "path": "Die Gelehrsamkeit",
       "rarity": 5,
-      "icon_path": "assets/images/lc_yet_hope_is_priceless.png",
+      "icon_path": "assets/images/light_cones/yet_hope_is_priceless.png",
       "passive": {
         "name": "Versprechen",
         "text": [
@@ -3419,448 +3419,448 @@
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die KRIT-Rate des Trägers um 8%. Wenn sich der Memogeist des Trägers auf dem Kampffeld befindet, wird die GES aller Verbündeten um 8% erhöht. Dieser Effekt ist nicht stapelbar.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_amphoreus_the_eternal_land.png"
+      "icon_path": "assets/images/relic_sets/amphoreus_the_eternal_land.png"
     },
     {
       "name": "Arcadia of Woven Dreams",
       "kind": "Ornament",
       "bonus_2pc": "Wenn die aktuelle Anzahl der Verbündeten auf dem Kampffeld nicht 4 beträgt, wird für jeden Verbündeten über/unter 4 der verursachte SCH des Trägers sowie seines Memogeists um 9%/12% erhöht. Dieser Effekt ist bis zu 4/3-fach stapelbar.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_arcadia_of_woven_dreams.png"
+      "icon_path": "assets/images/relic_sets/arcadia_of_woven_dreams.png"
     },
     {
       "name": "Belobog of the Architects",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die VTD des Trägers um 15%. Wenn die Effekt-Trefferrate des Trägers 50% oder höher erreicht, wird seine VTD zusätzlich um 15% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_belobog_of_the_architects.png"
+      "icon_path": "assets/images/relic_sets/belobog_of_the_architects.png"
     },
     {
       "name": "Bone Collection's Serene Demesne",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die max. LP des Trägers um 12%. Wenn die max. LP des Trägers 5000 oder mehr betragen, wird der KRIT-SCH des Trägers und seines Memogeistes um 28% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_bone_collection_s_serene_demesne.png"
+      "icon_path": "assets/images/relic_sets/bone_collection_s_serene_demesne.png"
     },
     {
       "name": "Broken Keel",
       "kind": "Ornament",
       "bonus_2pc": "Der Effekt-WDS des Trägers wird um 10% erhöht. Wenn der Effekt-WDS des Trägers 30% oder mehr beträgt, wird der KRIT-SCH aller Verbündeten um 10% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_broken_keel.png"
+      "icon_path": "assets/images/relic_sets/broken_keel.png"
     },
     {
       "name": "Celestial Differentiator",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht den KRIT-SCH des Trägers um 16%. Wenn der aktuelle KRIT-SCH des Trägers 120% oder höher erreicht, wird die KRIT-Rate nach Kampfeintritt um 60% erhöht, bis zum Ende seines ersten Angriffs.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_celestial_differentiator.png"
+      "icon_path": "assets/images/relic_sets/celestial_differentiator.png"
     },
     {
       "name": "City of Converging Stars",
       "kind": "Ornament",
       "bonus_2pc": "Wenn der Träger einen Folgeangriff einsetzt, wird sein ANG für 2 Rd. um 24% erhöht. Wenn ein Gegner besiegt wird, wird der KRIT-SCH aller Verbündeten im aktuellen Kampf um 12% erhöht. Dieser Effekt ist nicht stapelbar.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_city_of_converging_stars.png"
+      "icon_path": "assets/images/relic_sets/city_of_converging_stars.png"
     },
     {
       "name": "Cosmic Life Sciences Institute",
       "kind": "Ornament",
       "bonus_2pc": "Wenn die max. Energie des Trägers beim Kampfeintritt mindestens 200 Pkt. beträgt, wird der verursachte SCH des Trägers für jeden überschüssigen Pkt. um 0.2% erhöht, bis zu einem Maximum von 32%.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_cosmic_life_sciences_institute.png"
+      "icon_path": "assets/images/relic_sets/cosmic_life_sciences_institute.png"
     },
     {
       "name": "Duran, Dynasty of Running Wolves",
       "kind": "Ornament",
       "bonus_2pc": "Wenn ein Verbündeter einen Folgeangriff ausführt, erhält der Träger 1 Stapelung „Verdienst“, bis zu 5 Stapelungen. Jede Stapelung Verdienst erhöht den durch Folgeangriffe verursachten SCH des Trägers um 5%. Werden 5 Stapelungen erreicht, wird der KRIT-SCH des Trägers zusätzlich um 25% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_duran_dynasty_of_running_wolves.png"
+      "icon_path": "assets/images/relic_sets/duran_dynasty_of_running_wolves.png"
     },
     {
       "name": "Fallen Star Anchorage",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die KRIT-Rate des Trägers um 8%. Wenn beim Kampfeintritt sowohl der Träger als auch ein weiteres Teammitglied Trailblaze-Gefährten sind, wird der KRIT-SCH des Trägers um 32% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_fallen_star_anchorage.png"
+      "icon_path": "assets/images/relic_sets/fallen_star_anchorage.png"
     },
     {
       "name": "Firmament Frontline: Glamoth",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht den ANG des Trägers um 12%. Wenn die GES des Trägers 135/160 oder höher erreicht, wird sein verursachter SCH um 12%/18% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_firmament_frontline_glamoth.png"
+      "icon_path": "assets/images/relic_sets/firmament_frontline_glamoth.png"
     },
     {
       "name": "Fleet of the Ageless",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die max. LP des Trägers um 12%. Wenn die GES des Trägers 120 oder höher erreicht, wird der ANG aller Verbündeten zusätzlich um 8% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_fleet_of_the_ageless.png"
+      "icon_path": "assets/images/relic_sets/fleet_of_the_ageless.png"
     },
     {
       "name": "Forge of the Kalpagni Lantern",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die GES des Trägers um 6%. Trifft der Träger einen Gegner mit Feuer-Schwäche, wird sein Brucheffekt für 1 Rd. um 40% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_forge_of_the_kalpagni_lantern.png"
+      "icon_path": "assets/images/relic_sets/forge_of_the_kalpagni_lantern.png"
     },
     {
       "name": "Giant Tree of Rapt Brooding",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die GES des Trägers um 6%. Wenn die GES des Trägers 135/180 oder höher erreicht, wird die bewirkte Heilung des Trägers und seines Memogeists um 12%/20% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_giant_tree_of_rapt_brooding.png"
+      "icon_path": "assets/images/relic_sets/giant_tree_of_rapt_brooding.png"
     },
     {
       "name": "God's Moment of Joy",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die GES des Trägers um 6%. Wenn das Hochgefühl des Trägers 40% oder höher beträgt, wird seine Aktion beim Kampfeintritt sofort um 40% vorgezogen.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_god_s_moment_of_joy.png"
+      "icon_path": "assets/images/relic_sets/god_s_moment_of_joy.png"
     },
     {
       "name": "Inert Salsotto",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die KRIT-Rate des Trägers um 8%. Wenn die aktuelle KRIT-Rate des Trägers 50% oder höher erreicht, wird der durch Ultimates und Folgeangriffe verursachte SCH um 15% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_inert_salsotto.png"
+      "icon_path": "assets/images/relic_sets/inert_salsotto.png"
     },
     {
       "name": "Izumo Gensei and Takama Divine Realm",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht den ANG des Trägers um 12%. Wenn beim Kampfeintritt mindestens ein Verbündeter dem gleichen Pfad wie der Träger folgt, wird die KRIT-Rate des Trägers um 12% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_izumo_gensei_and_takama_divine_realm.png"
+      "icon_path": "assets/images/relic_sets/izumo_gensei_and_takama_divine_realm.png"
     },
     {
       "name": "Lushaka, the Sunken Seas",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht Die Energie-Wiederherstellungsrate des Trägers um 5%. Wenn der Träger nicht die erste Figur in der Teamformation ist, wird der ANG der ersten Figur in der Teamformation um 12% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_lushaka_the_sunken_seas.png"
+      "icon_path": "assets/images/relic_sets/lushaka_the_sunken_seas.png"
     },
     {
       "name": "Pan-Cosmic Commercial Enterprise",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die Effekt-Trefferrate des Trägers um 10%. Erhöht gleichzeitig den ANG des Trägers in Höhe von 25% der Effekt-Trefferrate, bis zu einem Höchstwert von 25%.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_pan_cosmic_commercial_enterprise.png"
+      "icon_path": "assets/images/relic_sets/pan_cosmic_commercial_enterprise.png"
     },
     {
       "name": "Penacony, Land of the Dreams",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die Energie-Wiederherstellungsrate des Trägers um 5%. Erhöht den SCH aller anderen Verbündeten im Team mit dem gleichen Typ wie der Träger um 10%.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_penacony_land_of_the_dreams.png"
+      "icon_path": "assets/images/relic_sets/penacony_land_of_the_dreams.png"
     },
     {
       "name": "Punklorde Stage Zero",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht das Hochgefühl des Trägers um 8%. Wenn das Hochgefühl im Kampf zum ersten Mal 40%/80% erreicht, wird der KRIT-SCH des Trägers um 20%/32% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_punklorde_stage_zero.png"
+      "icon_path": "assets/images/relic_sets/punklorde_stage_zero.png"
     },
     {
       "name": "Revelry by the Sea",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht den ANG des Trägers um 12%. Wenn der ANG des Trägers 2400/3600 oder höher beträgt, wird sein verursachter DoT zusätzlich um 12%/24% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_revelry_by_the_sea.png"
+      "icon_path": "assets/images/relic_sets/revelry_by_the_sea.png"
     },
     {
       "name": "Rutilant Arena",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die KRIT-Rate des Trägers um 8%. Wenn die aktuelle KRIT-Rate des Trägers einen Wert von 70% oder höher erreicht, wird der durch Standardangriffe und Fertigkeiten verursachte SCH um 20% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_rutilant_arena.png"
+      "icon_path": "assets/images/relic_sets/rutilant_arena.png"
     },
     {
       "name": "Sigonia, the Unclaimed Desolation",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die KRIT-Rate des Trägers um 4%. Wenn Gegner besiegt werden, wird der KRIT-SCH des Trägers bis zu 10-mal um 4% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sigonia_the_unclaimed_desolation.png"
+      "icon_path": "assets/images/relic_sets/sigonia_the_unclaimed_desolation.png"
     },
     {
       "name": "Space Sealing Station",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht ANG des Trägers um 12%. Wenn die GES des Trägers 120 oder höher erreicht, wird sein ANG zusätzlich um 12% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_space_sealing_station.png"
+      "icon_path": "assets/images/relic_sets/space_sealing_station.png"
     },
     {
       "name": "Sprightly Vonwacq",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die Energie-Wiederherstellungsrate des Trägers um 5%. Wenn die GES des Trägers 120 oder höher erreicht, wird seine Aktion beim Kampfeintritt um 40% vorgezogen.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sprightly_vonwacq.png"
+      "icon_path": "assets/images/relic_sets/sprightly_vonwacq.png"
     },
     {
       "name": "Subspace ASC Center",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die GES des Trägers um 6%. Wenn die GES des Trägers 145 oder höher beträgt, wird der Brucheffekt aller Verbündeten nach Kampfeintritt um 18% erhöht. Dieser Effekt ist nicht stapelbar.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_subspace_asc_center.png"
+      "icon_path": "assets/images/relic_sets/subspace_asc_center.png"
     },
     {
       "name": "Talia: Kingdom of Banditry",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht den Brucheffekt des Trägers um 16%. Wenn die GES des Trägers 145 oder höher erreicht, wird der Brucheffekt des Trägers zusätzlich um 20% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_talia_kingdom_of_banditry.png"
+      "icon_path": "assets/images/relic_sets/talia_kingdom_of_banditry.png"
     },
     {
       "name": "Tengoku@Livestream",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht den KRIT-SCH des Trägers um 16%. Wenn in derselben Runde mindestens 3 Fertigkeitspunkte verbraucht werden, wird der KRIT-SCH des Trägers für 3 Rd. zusätzlich um 32% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_tengoku_livestream.png"
+      "icon_path": "assets/images/relic_sets/tengoku_livestream.png"
     },
     {
       "name": "The Wondrous BananAmusement Park",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht den KRIT-SCH des Trägers um 16%. Befindet sich ein vom Träger beschworenes Objekt auf dem Kampffeld, wird der KRIT-SCH zusätzlich um 32% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_the_wondrous_bananamusement_park.png"
+      "icon_path": "assets/images/relic_sets/the_wondrous_bananamusement_park.png"
     },
     {
       "name": "As Navigator Isee Sees It",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht den ANG um 12%.",
       "bonus_4pc": "Wenn der Träger den Kampf betritt oder seine Fertigkeit einsetzt, wird der verursachte SCH durch Fertigkeiten und Ultimates um 18% erhöht. Dieser Effekt ist bis zu 3-fach stapelbar. Entfernt zu Beginn der Runde des Trägers bzw. nach dem Einsatz des Ultimates 1 Stapelung dieses Effekts.",
-      "icon_path": "assets/images/relic_as_navigator_isee_sees_it.png"
+      "icon_path": "assets/images/relic_sets/as_navigator_isee_sees_it.png"
     },
     {
       "name": "Band of Sizzling Thunder",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Blitz-SCH um 10%.",
       "bonus_4pc": "Erhöht beim Einsatz der Fertigkeit den ANG des Trägers für 1 Rd. um 20%.",
-      "icon_path": "assets/images/relic_band_of_sizzling_thunder.png"
+      "icon_path": "assets/images/relic_sets/band_of_sizzling_thunder.png"
     },
     {
       "name": "Champion of Streetwise Boxing",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht physischen SCH um 10%.",
       "bonus_4pc": "Wenn der Träger einen Angriff ausführt oder getroffen wird, wird sein ANG im aktuellen Kampf um 5% erhöht. Dieser Effekt ist bis zu 5-fach stapelbar.",
-      "icon_path": "assets/images/relic_champion_of_streetwise_boxing.png"
+      "icon_path": "assets/images/relic_sets/champion_of_streetwise_boxing.png"
     },
     {
       "name": "Divine-Querying Master Smith",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht die max. LP um 12%.",
       "bonus_4pc": "Erhöht den KRIT-SCH, den der Träger Gegnern im Status „VTD-Reduktion“ zufügt, um 28%. Nachdem der Träger einem Gegner den Status VTD-Reduktion zugefügt hat, erhalten alle Verbündeten für 2 Rd. „Brandbeschleuniger“. Dieser Effekt ist nicht stapelbar. Der von Verbündeten mit Brandbeschleuniger verursachte SCH wird um 15% erhöht. Dieser Effekt kann erneut ausgelöst werden, nachdem der Träger einen Angriff ausgeführt hat.",
-      "icon_path": "assets/images/relic_divine_querying_master_smith.png"
+      "icon_path": "assets/images/relic_sets/divine_querying_master_smith.png"
     },
     {
       "name": "Diviner of Distant Reach",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht GES um 6%.",
       "bonus_4pc": "Wenn die GES des Trägers vor dem Kampfeintritt größer oder gleich 120/160 ist, wird seine KRIT-Rate um 10%/18% erhöht. Jedes Mal, wenn der Träger im Kampf zum ersten Mal seine Hochgefühl-Fähigkeit einsetzt, wird das Hochgefühl aller Verbündeten um 10% erhöht. Dieser Effekt ist nicht stapelbar.",
-      "icon_path": "assets/images/relic_diviner_of_distant_reach.png"
+      "icon_path": "assets/images/relic_sets/diviner_of_distant_reach.png"
     },
     {
       "name": "Dreamlit Actor",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht die GES um 6%.",
       "bonus_4pc": "Wenn der Träger eine Fertigkeit oder einen Ultimate auf einen anderen Verbündeten einsetzt, wird das Hochgefühl des Ziels der Fähigkeit für 3 Rd. um 16% erhöht. Wenn der Träger mindestens 10 Pkt. „Verdiente Leistung“ besitzt, wird der KRIT-SCH aller Verbündeten zusätzlich für 3 Rd. um 12% erhöht.",
-      "icon_path": "assets/images/relic_dreamlit_actor.png"
+      "icon_path": "assets/images/relic_sets/dreamlit_actor.png"
     },
     {
       "name": "Eagle of Twilight Line",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Wind-SCH um 10%.",
       "bonus_4pc": "Nach dem Einsatz des Ultimates wird die Aktion des Trägers um 25% vorgezogen.",
-      "icon_path": "assets/images/relic_eagle_of_twilight_line.png"
+      "icon_path": "assets/images/relic_sets/eagle_of_twilight_line.png"
     },
     {
       "name": "Ever-Glorious Magical Girl",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht KRIT-SCH um 16%.",
       "bonus_4pc": "Der vom Träger und seinem Memogeist verursachte Hochgefühl-SCH ignoriert 10% der VTD des Ziels. Für je 5 von Verbündeten gesammelte Lachpunkte ignoriert der verursachte Hochgefühl-SCH zusätzlich 1% der VTD des Ziels. Dieser Effekt ist bis zu 10-fach stapelbar.",
-      "icon_path": "assets/images/relic_ever_glorious_magical_girl.png"
+      "icon_path": "assets/images/relic_sets/ever_glorious_magical_girl.png"
     },
     {
       "name": "Firesmith of Lava-Forging",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Feuer-SCH um 10%.",
       "bonus_4pc": "Erhöht den durch Fertigkeiten verursachten SCH des Trägers um 12%. Erhöht nach dem Einsatz des Ultimates den verursachten Feuer-SCH durch den nächsten Angriff um 12%.",
-      "icon_path": "assets/images/relic_firesmith_of_lava_forging.png"
+      "icon_path": "assets/images/relic_sets/firesmith_of_lava_forging.png"
     },
     {
       "name": "Genius of Brilliant Stars",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Quanten-SCH um 10%.",
       "bonus_4pc": "Wenn der Träger einem Gegner SCH zufügt, ignoriert er 10% der VTD des Gegners. Wenn das Ziel Quanten-Schwäche hat, ignoriert der Träger zusätzlich 10% der VTD des Gegners.",
-      "icon_path": "assets/images/relic_genius_of_brilliant_stars.png"
+      "icon_path": "assets/images/relic_sets/genius_of_brilliant_stars.png"
     },
     {
       "name": "Guard of Wuthering Snow",
       "kind": "Relikt",
       "bonus_2pc": "Verringert erlittenen SCH um 8%.",
       "bonus_4pc": "Liegt der LP-Prozentsatz des Trägers zu Beginn seiner Runde bei 50% oder niedriger, werden LP in Höhe von 8% seiner max. LP und 5 Pkt. Energie wiederhergestellt.",
-      "icon_path": "assets/images/relic_guard_of_wuthering_snow.png"
+      "icon_path": "assets/images/relic_sets/guard_of_wuthering_snow.png"
     },
     {
       "name": "Hero of Triumphant Song",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht ANG um 12%.",
       "bonus_4pc": "Während der Memogeist des Trägers sich auf dem Kampffeld befindet, wird die GES des Trägers um 6% erhöht. Wenn der Memogeist des Trägers angreift, wird der KRIT-SCH von Träger und Memogeist für 2 Rd. um 30% erhöht.",
-      "icon_path": "assets/images/relic_hero_of_triumphant_song.png"
+      "icon_path": "assets/images/relic_sets/hero_of_triumphant_song.png"
     },
     {
       "name": "Hunter of Glacial Forest",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Eis-SCH um 10%.",
       "bonus_4pc": "Erhöht beim Einsatz des Ultimates den KRIT-SCH des Trägers für 2 Rd. um 25%.",
-      "icon_path": "assets/images/relic_hunter_of_glacial_forest.png"
+      "icon_path": "assets/images/relic_sets/hunter_of_glacial_forest.png"
     },
     {
       "name": "Iron Cavalry Against the Scourge",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Brucheffekt um 16%.",
       "bonus_4pc": "Wenn der Brucheffekt des Trägers 150% oder mehr beträgt, wird beim Verursachen von Bruch-SCH 10% der VTD des gegnerischen Ziels ignoriert. Wenn der Brucheffekt des Trägers 250% oder mehr beträgt, wird beim Verursachen von Super-Bruch-SCH zusätzlich 15% der VTD des gegnerischen Ziels ignoriert.",
-      "icon_path": "assets/images/relic_iron_cavalry_against_the_scourge.png"
+      "icon_path": "assets/images/relic_sets/iron_cavalry_against_the_scourge.png"
     },
     {
       "name": "Knight of Purity Palace",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht VTD um 15%.",
       "bonus_4pc": "Erhöht die vom Träger gewährte Schildmenge um 20%.",
-      "icon_path": "assets/images/relic_knight_of_purity_palace.png"
+      "icon_path": "assets/images/relic_sets/knight_of_purity_palace.png"
     },
     {
       "name": "Longevous Disciple",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht die max. LP um 12%.",
       "bonus_4pc": "Wenn der Träger getroffen wird oder seine LP von einem Verbündeten verbraucht werden, wird seine KRIT-Rate für 2 Rd. um 8% erhöht. Dieser Effekt ist bis zu 2-fach stapelbar.",
-      "icon_path": "assets/images/relic_longevous_disciple.png"
+      "icon_path": "assets/images/relic_sets/longevous_disciple.png"
     },
     {
       "name": "Messenger Traversing Hackerspace",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht GES um 6%.",
       "bonus_4pc": "Wenn der Träger ein Ultimate auf einen Verbündeten anwendet, erhöht sich die GES aller Verbündeten für 1 Rd. um 12%. Dieser Effekt ist nicht stapelbar.",
-      "icon_path": "assets/images/relic_messenger_traversing_hackerspace.png"
+      "icon_path": "assets/images/relic_sets/messenger_traversing_hackerspace.png"
     },
     {
       "name": "Musketeer of Wild Wheat",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht ANG um 12%.",
       "bonus_4pc": "Erhöht die GES des Trägers um 6% und den durch Standardangriffe verursachten SCH um 10%.",
-      "icon_path": "assets/images/relic_musketeer_of_wild_wheat.png"
+      "icon_path": "assets/images/relic_sets/musketeer_of_wild_wheat.png"
     },
     {
       "name": "Passerby of Wandering Cloud",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht bewirkte Heilung um 10%.",
       "bonus_4pc": "Stellt zu Kampfbeginn sofort 1 Fertigkeitspunkt wieder her.",
-      "icon_path": "assets/images/relic_passerby_of_wandering_cloud.png"
+      "icon_path": "assets/images/relic_sets/passerby_of_wandering_cloud.png"
     },
     {
       "name": "Pioneer Diver of Dead Waters",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht den bei Gegnern mit Debuff verursachten SCH um 12%.",
       "bonus_4pc": "Erhöht die KRIT-Rate um 4%. Der bei Gegnern mit nicht weniger als 2/3 Debuffs verursachte KRIT-SCH des Trägers wird um jeweils 8%/12% erhöht. Nachdem er dem Gegner einen Debuff zugefügt hat, werden diese Effekte für 1 Rd. um 100 % erhöht.",
-      "icon_path": "assets/images/relic_pioneer_diver_of_dead_waters.png"
+      "icon_path": "assets/images/relic_sets/pioneer_diver_of_dead_waters.png"
     },
     {
       "name": "Poet of Mourning Collapse",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Quanten-SCH um 10%.",
       "bonus_4pc": "Reduziert die GES des Trägers um 8%. Wenn die GES des Trägers vor dem Kampfeintritt unter 110/95 liegt, wird die KRIT-Rate des Trägers um 20%/32% erhöht. Dieser Effekt wirkt auch auf den Memogeist des Trägers.",
-      "icon_path": "assets/images/relic_poet_of_mourning_collapse.png"
+      "icon_path": "assets/images/relic_sets/poet_of_mourning_collapse.png"
     },
     {
       "name": "Prisoner in Deep Confinement",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht den ANG um 12%.",
       "bonus_4pc": "Für jeden DoT-Effekt, den der Gegner erleidet, ignoriert der Träger 6% der VTD dieses Gegners, wenn er diesem SCH zufügt. Bis zu 3 DoT-Effekte werden gezählt.",
-      "icon_path": "assets/images/relic_prisoner_in_deep_confinement.png"
+      "icon_path": "assets/images/relic_sets/prisoner_in_deep_confinement.png"
     },
     {
       "name": "Sacerdos' Relived Ordeal",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht GES um 6%.",
       "bonus_4pc": "Wenn eine Fertigkeit oder ein Ultimate auf einen Verbündeten eingesetzt wird, wird der KRIT-SCH des Ziels für 2 Rd. um 18% erhöht. Dieser Effekt ist bis zu 2-mal stapelbar.",
-      "icon_path": "assets/images/relic_sacerdos_relived_ordeal.png"
+      "icon_path": "assets/images/relic_sets/sacerdos_relived_ordeal.png"
     },
     {
       "name": "Scholar Lost in Erudition",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht KRIT-Rate um 8%.",
       "bonus_4pc": "Erhöht den durch Fertigkeiten und Ultimates verursachten SCH um 20%. Nach dem Einsatz des Ultimates wird der SCH beim nächsten Einsatz der Fertigkeit zusätzlich um 25% erhöht.",
-      "icon_path": "assets/images/relic_scholar_lost_in_erudition.png"
+      "icon_path": "assets/images/relic_sets/scholar_lost_in_erudition.png"
     },
     {
       "name": "Self-Enshrouded Recluse",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht die gewährte Schildmenge um 10%.",
       "bonus_4pc": "Erhöht die vom Träger gewährte Schildmenge um 12%. Wenn ein Verbündeter einen vom Träger gewährten Schild hat, wird sein KRIT-SCH um 15% erhöht.",
-      "icon_path": "assets/images/relic_self_enshrouded_recluse.png"
+      "icon_path": "assets/images/relic_sets/self_enshrouded_recluse.png"
     },
     {
       "name": "The Ashblazing Grand Duke",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht den durch Folgeangriffe verursachte SCH um 20%.",
       "bonus_4pc": "Wenn der Träger einen Folgeangriff einsetzt, wird sein ANG für jedes Mal, das der Folgeangriff SCH zufügt, um 6% erhöht. Dieser Effekt ist bis zu 8-mal stapelbar und hält 3 Rd. an. Das nächste Mal, dass der Träger einen Folgeangriff einsetzt, wird der Effekt entfernt.",
-      "icon_path": "assets/images/relic_the_ashblazing_grand_duke.png"
+      "icon_path": "assets/images/relic_sets/the_ashblazing_grand_duke.png"
     },
     {
       "name": "The Edacious Heretic",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht den KRIT-SCH um 16%.",
       "bonus_4pc": "Erhöht den durch Standardangriffe verursachten SCH des Trägers um 36%. Wenn der Träger einen Standardangriff ausführt, wird sein ANG für 2 Rd. um 20% erhöht.",
-      "icon_path": "assets/images/relic_the_edacious_heretic.png"
+      "icon_path": "assets/images/relic_sets/the_edacious_heretic.png"
     },
     {
       "name": "The Wind-Soaring Valorous",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht den ANG um 12%.",
       "bonus_4pc": "Erhöht die KRIT-Rate des Trägers um 6%. Wenn der Träger einen Folgeangriff einsetzt, wird der durch Ultimates verursachte SCH für 1 Rd. um 36% erhöht.",
-      "icon_path": "assets/images/relic_the_wind_soaring_valorous.png"
+      "icon_path": "assets/images/relic_sets/the_wind_soaring_valorous.png"
     },
     {
       "name": "Thief of Shooting Meteor",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Brucheffekt um 16%.",
       "bonus_4pc": "Erhöht den Brucheffekt des Trägers um 16%. Wenn der Träger bei einem Gegner Schwächebruch verursacht, wird 3 Pkt. Energie wiederhergestellt.",
-      "icon_path": "assets/images/relic_thief_of_shooting_meteor.png"
+      "icon_path": "assets/images/relic_sets/thief_of_shooting_meteor.png"
     },
     {
       "name": "Warrior Goddess of Sun and Thunder",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht GES um 6%.",
       "bonus_4pc": "Erhält „Sanfter Regen“, nachdem der Träger oder sein Memogeist Verbündete außer sich selbst Heilung geleistet hat. Dieser Effekt kann bis zu 1-mal pro Runde ausgelöst werden und hält 2 Rd. an. Wenn der Träger Sanfter Regen besitzt, wird seine GES um 6% und der KRIT-SCH aller Verbündeten um 15% erhöht. Dieser Effekt ist nicht stapelbar.",
-      "icon_path": "assets/images/relic_warrior_goddess_of_sun_and_thunder.png"
+      "icon_path": "assets/images/relic_sets/warrior_goddess_of_sun_and_thunder.png"
     },
     {
       "name": "Wastelander of Banditry Desert",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht imaginären SCH um 10%.",
       "bonus_4pc": "Wenn der Träger Gegnern mit Debuff SCH zufügt, wird KRIT-Rate um 10% erhöht. Wenn der Träger Gegnern im Status Gefangenschaft SCH zufügt, wird KRIT-SCH um 20% erhöht.",
-      "icon_path": "assets/images/relic_wastelander_of_banditry_desert.png"
+      "icon_path": "assets/images/relic_sets/wastelander_of_banditry_desert.png"
     },
     {
       "name": "Watchmaker, Master of Dream Machinations",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Brucheffekt um 16%.",
       "bonus_4pc": "Wenn der Träger seinen Ultimate auf einen Verbündeten anwendet, wird der Brucheffekt aller Verbündeten für 2 Rd. um 30% erhöht. Dieser Effekt ist nicht stapelbar.",
-      "icon_path": "assets/images/relic_watchmaker_master_of_dream_machinations.png"
+      "icon_path": "assets/images/relic_sets/watchmaker_master_of_dream_machinations.png"
     },
     {
       "name": "Wavestrider Captain",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht KRIT-SCH um 16%.",
       "bonus_4pc": "Wenn der Träger zum Ziel der Fähigkeit eines anderen Verbündeten wird, erhält er 1 Stapelung „Unterstützen“, bis zu 2 Stapelungen. Verbraucht beim Einsatz des Ultimates alle Stapelungen von Unterstützen und erhöht den ANG des Trägers für 1 Rd. um 48%, wenn 2 Stapelungen vorhanden sind.",
-      "icon_path": "assets/images/relic_wavestrider_captain.png"
+      "icon_path": "assets/images/relic_sets/wavestrider_captain.png"
     },
     {
       "name": "World-Remaking Deliverer",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht die KRIT-Rate um 8%.",
       "bonus_4pc": "Wenn sich nach dem Einsatz eines Standardangriffs oder einer Fertigkeit des Trägers dessen Memogeist auf dem Kampffeld befindet, werden die max. LP des Trägers und seines Memogeists um 24% sowie der verursachte SCH aller Verbündeten um 15% erhöht, bis der Träger seinen nächsten Standardangriff oder seine nächste Fertigkeit einsetzt.",
-      "icon_path": "assets/images/relic_world_remaking_deliverer.png"
+      "icon_path": "assets/images/relic_sets/world_remaking_deliverer.png"
     }
   ]
 }

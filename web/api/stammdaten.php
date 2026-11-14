@@ -89,21 +89,21 @@ function find_new(PDO $pdo): array {
         $seen[$key] = true;
         if (!$path || !$element) { $skipped[] = "Charakter $name: unbekannter Pfad oder Element"; continue; }
         $new['characters'][] = ['name' => $name, 'element' => $element, 'path' => $path, 'rarity' => (int)$c['rarity'],
-            'icon_path' => 'assets/images/char_' . slug($name) . '.png', 'src' => "icon/avatar/$id.png"];
+            'icon_path' => 'assets/images/characters/' . slug($name) . '.png', 'src' => "icon/avatar/$id.png"];
     }
     foreach ($lcs as $id => $l) {
         if (isset($have['light_cones'][mb_strtolower($l['name'])])) continue;
         $path = PATHS[$l['path']] ?? null;
         if (!$path) { $skipped[] = "Lichtkegel {$l['name']}: unbekannter Pfad"; continue; }
         $new['light_cones'][] = ['name' => $l['name'], 'path' => $path, 'rarity' => (int)$l['rarity'],
-            'icon_path' => 'assets/images/lc_' . slug($l['name']) . '.png', 'passive_json' => lc_passive_json((string)$id), 'src' => $l['icon']];
+            'icon_path' => 'assets/images/light_cones/' . slug($l['name']) . '.png', 'passive_json' => lc_passive_json((string)$id), 'src' => $l['icon']];
     }
     foreach ($sets as $id => $s) {
         if (isset($have['relic_sets'][mb_strtolower($s['name'])])) continue;
         $desc = de_source('relic_sets.json')[(string)$id]['desc'] ?? ($s['desc'] ?? []);   // Boni auf Deutsch
         $new['relic_sets'][] = ['name' => $s['name'], 'kind' => ((int)$id >= 300) ? 'Ornament' : 'Relikt',
             'bonus_2pc' => $desc[0] ?? null, 'bonus_4pc' => $desc[1] ?? null,
-            'icon_path' => 'assets/images/relic_' . slug($s['name']) . '.png', 'src' => $s['icon']];
+            'icon_path' => 'assets/images/relic_sets/' . slug($s['name']) . '.png', 'src' => $s['icon']];
     }
     return [$new, $skipped];
 }
@@ -160,7 +160,7 @@ try {
             };
             $stmts[$group]->execute($args);
             $added += $stmts[$group]->rowCount();
-            $state = save_image(SRC . $e['src'], basename($e['icon_path']));
+            $state = save_image(SRC . $e['src'], $e['icon_path']);
             $images[str_starts_with($state, 'FEHLER') ? 'fehler' : $state]++;
         }
     }

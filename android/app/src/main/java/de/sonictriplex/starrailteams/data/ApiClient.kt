@@ -157,7 +157,7 @@ class ApiClient(
         )
     }
 
-    /** Lädt ein Bild des Servers (z. B. `assets/images/char_x.png`), oder null. */
+    /** Lädt ein Bild des Servers (z. B. `assets/images/characters/x.png`), oder null. */
     suspend fun downloadImage(path: String): ByteArray? = withContext(Dispatchers.IO) {
         try {
             val url = (baseUrl.trimEnd('/') + "/" + path.trimStart('/')).toHttpUrlOrNull() ?: return@withContext null

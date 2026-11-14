@@ -27,7 +27,7 @@ neu ein (zusammen mit --auto auch commit, deploy und Datenbank).
 
 Unbekannte Pfade oder Elemente (z. B. ein neuer Pfad im Spiel) werden nur gemeldet und NICHT eingetragen:
 Die Datenbank-Spalten sind ENUMs. Erst web/schema.sql und eine Migration (ALTER TABLE ... MODIFY) ergänzen,
-dann PATHS/ELEMENTS unten erweitern, außerdem das Pfad-Icon (path_<name>.png) und die Filter in web/index.html.
+dann PATHS/ELEMENTS unten erweitern, außerdem das Pfad-Icon (assets/images/paths/<name>.png) und die Filter in web/index.html.
 
 Achtung: Die Quelle enthält manchmal Einträge, die im Spiel noch nicht erschienen sind. Die Liste vor dem Ergänzen prüfen.
 """
@@ -139,7 +139,7 @@ def find_new(data):
             skipped.append(f"Charakter {name}: unbekannter Pfad „{c['path']}“ oder Element „{c['element']}“")
             continue
         new["characters"].append({"name": name, "element": element, "path": path, "rarity": c["rarity"],
-                                  "icon_path": f"assets/images/char_{slug(name)}.png", "_src": f"icon/avatar/{cid}.png"})
+                                  "icon_path": f"assets/images/characters/{slug(name)}.png", "_src": f"icon/avatar/{cid}.png"})
 
     for lid, l in lcs_src.items():
         if l["name"].casefold() in have["light_cones"]:
@@ -149,7 +149,7 @@ def find_new(data):
             skipped.append(f"Lichtkegel {l['name']}: unbekannter Pfad „{l['path']}“")
             continue
         new["light_cones"].append({"name": l["name"], "path": path, "rarity": l["rarity"],
-                                   "icon_path": f"assets/images/lc_{slug(l['name'])}.png", "passive": lc_passive(lid),
+                                   "icon_path": f"assets/images/light_cones/{slug(l['name'])}.png", "passive": lc_passive(lid),
                                    "_src": l["icon"]})
 
     for sid, s in sets_src.items():
@@ -158,7 +158,7 @@ def find_new(data):
         bonus_2pc, bonus_4pc = set_bonuses(sid)
         new["relic_sets"].append({"name": s["name"], "kind": "Ornament" if int(sid) >= 300 else "Relikt",
                                   "bonus_2pc": bonus_2pc, "bonus_4pc": bonus_4pc,
-                                  "icon_path": f"assets/images/relic_{slug(s['name'])}.png", "_src": s["icon"]})
+                                  "icon_path": f"assets/images/relic_sets/{slug(s['name'])}.png", "_src": s["icon"]})
     return new, skipped
 
 
@@ -228,7 +228,8 @@ def main():
     images.mkdir(parents=True, exist_ok=True)
     for key, entries in new.items():
         for e in entries:
-            target = images / Path(e["icon_path"]).name
+            target = ROOT / "shared" / e["icon_path"]
+            target.parent.mkdir(parents=True, exist_ok=True)
             try:
                 state = download(e.pop("_src"), target)
             except Exception as ex:

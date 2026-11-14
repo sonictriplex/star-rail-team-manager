@@ -64,7 +64,7 @@ class StammdatenRepository(private val context: Context) {
             val paths = extras.characters.mapNotNull { it.iconPath } + extras.lightCones.mapNotNull { it.iconPath } +
                 extras.relicSets.mapNotNull { it.iconPath }
             paths.forEach { path ->
-                val target = File(extraImages, File(path).name)
+                val target = File(extraImages, path.removePrefix("assets/images/")).also { it.parentFile?.mkdirs() }
                 if (!target.exists()) api.downloadImage(path)?.let { target.writeBytes(it) }
             }
             if (extras != readExtras()) extraFile.writeText(AppJson.encodeToString(Stammdaten.serializer(), extras), Charsets.UTF_8)
@@ -86,9 +86,9 @@ class StammdatenRepository(private val context: Context) {
     }
 
     private fun loadExtraBitmap(path: String): Bitmap? =
-        File(extraImages, File(path).name).takeIf { it.exists() }?.let { BitmapFactory.decodeFile(it.path) }
+        File(extraImages, path.removePrefix("assets/images/")).takeIf { it.exists() }?.let { BitmapFactory.decodeFile(it.path) }
 
-    /** Lädt ein beliebiges Bild aus den Assets (z. B. `assets/images/mm_logo.png`), oder null. */
+    /** Lädt ein beliebiges Bild aus den Assets (z. B. `assets/images/ui/mm_logo.png`), oder null. */
     fun loadBitmap(path: String): Bitmap? = try {
         context.assets.open(path).use { BitmapFactory.decodeStream(it) }
     } catch (_: java.io.IOException) {
@@ -96,10 +96,11 @@ class StammdatenRepository(private val context: Context) {
     }
 }
 
-/** Leitet den Icon-Pfad aus einem Namen ab (wie Desktop und Web), z. B. char_kafka.png. */
+/** Leitet den Icon-Pfad aus einem Namen ab (wie Desktop und Web), z. B. characters/kafka.png. */
 fun iconPathFor(prefix: String, name: String): String {
     val slug = name.lowercase().replace(Regex("[^a-z0-9]+"), "_").trim('_')
-    return "assets/images/${prefix}_$slug.png"
+    val dir = mapOf("char" to "characters", "lc" to "light_cones", "relic" to "relic_sets").getValue(prefix)
+    return "assets/images/$dir/$slug.png"
 }
 
 /** Ergänzt die Stammdaten um nachgeladene Einträge (Namen aus den Assets haben Vorrang). */

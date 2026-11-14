@@ -134,7 +134,7 @@ Clients ohne Cookies (z. B. die Android-App) melden sich über `POST api/auth.ph
 - **`GET ?action=check`** liefert `{new: {characters, light_cones, relic_sets}, skipped: […]}`. Eintragbar sind nur Einträge mit bekanntem Pfad und Element; alles andere steht in `skipped`.
 - **`POST`** nimmt nur die **Namen** der gewählten Einträge an. Der Server rechnet die Einträge neu aus der Quelle, dem Browser wird nichts geglaubt. Die Anfrage muss den Header `X-Requested-With: fetch` tragen (Schutz vor fremden Formularen), höchstens 50 Einträge je Anfrage, Antwort `{added, images: {geladen, vorhanden, fehler}}`.
 - Neue Lichtkegel und Sets bekommen ihre **deutschen** Fähigkeiten bzw. Boni aus der Quelle; die Texte werden serverseitig mit denselben Regeln wie in `tools/update_stammdaten.py` aufbereitet.
-- Bilder lädt der Server nach `assets/images/` (nur gültige PNG-Dateien, vorhandene werden nie überschrieben). Der Ordner muss für PHP beschreibbar sein.
+- Bilder lädt der Server nach `assets/images/<Typ>/` (nur gültige PNG-Dateien, vorhandene werden nie überschrieben). Der Ordner muss für PHP beschreibbar sein.
 - `shared/stammdaten.json` im Repository ändert der Endpunkt **nicht**; ein späterer Lauf von `tools/update_stammdaten.py` holt das lokal nach.
 
 ## Begrenzung von Anmeldungen und Registrierungen
@@ -186,7 +186,7 @@ Der Android-Emulator erreicht den Rechner unter `http://10.0.2.2:8000`. Aufräum
 
 ## Bilder
 
-Bilder liegen in `../shared/assets/images/`: `char_<name>.png`, `lc_<name>.png`, `relic_<name>.png`, dazu `path_<pfad>.png` und `element_<element>.png`. Der Name wird kleingeschrieben, alles außer a–z und 0–9 wird zu `_` (aus „Kafka“ wird `char_kafka.png`, aus „Der Überfluss“ wird `path_ueberfluss.png` ohne Artikel und mit ue). Der Hintergrund ist `star-rail-bg.jpg`. Die Bilder von neuen Einträgen legt `tools/update_stammdaten.py` bzw. der Menüpunkt „Stammdaten aktualisieren“ selbst an.
+Bilder liegen in `../shared/assets/images/`: nach Typ getrennt in Unterordnern: `characters/<name>.png`, `light_cones/<name>.png`, `relic_sets/<name>.png`, dazu `paths/<pfad>.png` und `elements/<element>.png`. Der Name wird kleingeschrieben, alles außer a–z und 0–9 wird zu `_` (aus „Kafka“ wird `characters/kafka.png`, aus „Der Überfluss“ wird `paths/ueberfluss.png` ohne Artikel und mit ue). Hintergrund (`star-rail-bg.jpg`) und Logo liegen in `ui/`. Die Bilder von neuen Einträgen legt `tools/update_stammdaten.py` bzw. der Menüpunkt „Stammdaten aktualisieren“ selbst an.
 
 ## Hinweis
 

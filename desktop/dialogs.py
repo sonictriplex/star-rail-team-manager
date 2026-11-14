@@ -264,7 +264,7 @@ class AboutDialog(QDialog):
         disclaimer.setStyleSheet("color: #9a97ab; font-size: 11px;")
         layout.addWidget(disclaimer)
 
-        logo_path = os.path.join(IMAGES_DIR, "mm_logo.png")
+        logo_path = os.path.join(IMAGES_DIR, "ui", "mm_logo.png")
         if os.path.exists(logo_path):
             logo = ClickableLabel()
             logo.setObjectName("aboutLogo")

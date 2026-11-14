@@ -27,12 +27,14 @@ function fetch_json(string $url): array {
 }
 
 /**
- * Speichert ein Bild (nur PNG) unter assets/images, falls es dort noch nicht liegt.
+ * Speichert ein Bild (nur PNG) unter assets/images/<Typ>/, falls es dort noch nicht liegt.
  * Rückgabe: 'vorhanden', 'geladen' oder eine Fehlermeldung (beginnt mit 'FEHLER').
  */
-function save_image(string $url, string $file): string {
-    $dir = __DIR__ . '/../assets/images';
-    $target = $dir . '/' . basename($file);
+function save_image(string $url, string $iconPath): string {
+    // $iconPath wie in der DB: assets/images/<Typ>/<name>.png; Typ nur aus der festen Liste
+    if (!preg_match('#^assets/images/(characters|light_cones|relic_sets)/([a-z0-9_]+\.png)$#', $iconPath, $m)) return 'FEHLER: ungültiger Bildpfad';
+    $dir = __DIR__ . '/../assets/images/' . $m[1];
+    $target = $dir . '/' . $m[2];
     if (is_file($target)) return 'vorhanden';
     if (!is_dir($dir) || !is_writable($dir)) return 'FEHLER: Bilder-Ordner nicht beschreibbar';
     try {

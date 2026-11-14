@@ -6,7 +6,7 @@ from typing import Optional
 # Projektverzeichnis: alle Pfade werden relativ hierzu aufgelöst,
 # damit die App unabhängig vom aktuellen Arbeitsverzeichnis funktioniert.
 # Version der Desktop-App; zusammen mit dem Web-Stand hochzählen
-APP_VERSION = "1.1.0"
+APP_VERSION = "1.1.1"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Gemeinsame Daten für Desktop, Web und weitere Clients (Bilder, Stammdaten)
@@ -41,10 +41,13 @@ def resolve_path(path: str) -> str:
     return path if os.path.isabs(path) else os.path.join(SHARED_DIR, path)
 
 
+ICON_DIRS = {"char": "characters", "lc": "light_cones", "relic": "relic_sets"}
+
+
 def icon_path_for(prefix: str, name: str) -> str:
-    """Leitet den Icon-Pfad aus dem Namen ab, falls in der DB keiner hinterlegt ist (z. B. char_kafka.png)."""
+    """Leitet den Icon-Pfad aus dem Namen ab, falls in der DB keiner hinterlegt ist (z. B. characters/kafka.png)."""
     slug = re.sub(r"[^a-z0-9]+", "_", name.lower()).strip("_")
-    return os.path.join(IMAGES_DIR, f"{prefix}_{slug}.png")
+    return os.path.join(IMAGES_DIR, ICON_DIRS[prefix], f"{slug}.png")
 
 
 def _explicit_or_derived(icon_path: Optional[str], prefix: str, name: str) -> str:

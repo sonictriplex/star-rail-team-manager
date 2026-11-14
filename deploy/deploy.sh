@@ -40,12 +40,12 @@ local_files() {
         case "$(basename "$f")" in config.local.php | admins.local.php | config.example.php) continue ;; esac
         printf '%s\tapi/%s\n' "$f" "$(basename "$f")"
     done
-    for f in shared/assets/images/*; do printf '%s\tassets/images/%s\n' "$f" "$(basename "$f")"; done
+    for f in shared/assets/images/*/*; do printf '%s\tassets/images/%s/%s\n' "$f" "$(basename "$(dirname "$f")")" "$(basename "$f")"; done
 }
 
 echo "Server: $FTP_HOST/${FTP_DIR:-}  ($([ $DRY = 1 ] && echo Probelauf || echo Upload))"
 declare -A REMOTE_SIZE
-for dir in "" api assets assets/images; do
+for dir in "" api assets assets/images assets/images/{characters,light_cones,relic_sets,elements,paths,ui}; do
     while IFS=$'\t' read -r size path; do REMOTE_SIZE["$path"]=$size; done < <(remote_list "$dir")
 done
 

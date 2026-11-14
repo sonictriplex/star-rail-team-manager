@@ -31,7 +31,7 @@
     </script>
     <style>
         body {
-            background: url('/assets/images/star-rail-bg.jpg') no-repeat center center fixed;
+            background: url('/assets/images/ui/star-rail-bg.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
             font-family: system-ui, -apple-system, sans-serif;
@@ -142,13 +142,13 @@
     </main>
 
     <footer class="w-full max-w-7xl mx-auto mt-8 mb-2 flex justify-center">
-        <img src="/assets/images/mm_logo.png" alt="the media-matrix" width="109" height="41" class="opacity-90">
+        <img src="/assets/images/ui/mm_logo.png" alt="the media-matrix" width="109" height="41" class="opacity-90">
     </footer>
 
     <!-- MODAL: LOGIN / REGISTRIERUNG -->
     <!-- Eigenes Hintergrundbild (wie die Hauptseite, leicht abgedunkelt), damit die Seite dahinter nicht durchscheint -->
     <div id="authModal" class="fixed inset-0 overflow-y-auto z-50"
-         style="background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('/assets/images/star-rail-bg.jpg') no-repeat center center / cover;">
+         style="background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('/assets/images/ui/star-rail-bg.jpg') no-repeat center center / cover;">
         <div class="min-h-full flex flex-col items-center justify-center gap-6 p-4">
         <h1 class="app-title text-3xl sm:text-4xl font-bold text-accent tracking-wide text-center max-w-4xl" style="text-shadow: 0 2px 12px rgba(0,0,0,0.7);">HONKAI: STAR RAIL Team & Build Manager</h1>
         <div class="bg-cardBg/90 border border-[#332d47] rounded-xl max-w-md w-full p-6 shadow-2xl text-white backdrop-blur-md">
@@ -188,11 +188,11 @@
             <div class="text-5xl mb-2 text-accent" aria-hidden="true">✦</div>
             <h2 id="aboutTitle" class="app-title text-lg font-bold text-accent mb-1">Honkai: Star Rail Team & Build Manager</h2>
             <!-- Bei jeder Änderung zusammen mit CHANGELOG.md hochzählen (ein Test vergleicht beide) -->
-            <div id="webVersion" class="text-sm text-gray-200 mb-3">Web-Version 1.1.0</div>
+            <div id="webVersion" class="text-sm text-gray-200 mb-3">Web-Version 1.1.1</div>
             <p class="text-sm text-gray-300 mb-3">Teams aus bis zu vier Charakteren und die Builds deiner Charaktere verwalten.</p>
             <p class="text-[11px] text-gray-400 mb-4">Inoffizielles Fanprojekt, nicht mit HoYoverse verbunden. Honkai: Star Rail sowie zugehörige Namen und Bilder sind Eigentum von HoYoverse.</p>
             <a id="aboutLogoLink" href="https://www.media-matrix.de" target="_blank" rel="noopener noreferrer" title="www.media-matrix.de" class="inline-block mb-4 opacity-90 hover:opacity-100 transition-opacity">
-                <img src="/assets/images/mm_logo.png" alt="the media-matrix (www.media-matrix.de)" width="109" height="41" class="mx-auto">
+                <img src="/assets/images/ui/mm_logo.png" alt="the media-matrix (www.media-matrix.de)" width="109" height="41" class="mx-auto">
             </a>
             <button type="button" onclick="closeAbout()" class="px-6 py-2 bg-inputBg hover:bg-[#2d293e] border border-[#332d47] text-gray-100 font-bold text-sm rounded transition-colors">Schließen</button>
         </div>
@@ -394,12 +394,12 @@
             "Imaginär": "rgba(60, 54, 18, 0.45)"
         };
 
-        // Bild eines Elements bzw. Pfads (Dateinamen ohne Umlaute, z. B. "Imaginär" -> element_imaginaer.png)
+        // Bild eines Elements bzw. Pfads (Dateinamen ohne Umlaute, z. B. "Imaginär" -> elements/imaginaer.png)
         function asciiSlug(s) {
             return String(s || '').toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss');
         }
-        const elementIcon = el => el ? `/assets/images/element_${asciiSlug(el)}.png` : '';
-        const pathIcon = p => p ? `/assets/images/path_${asciiSlug(String(p).replace(/^(Die|Der|Das)\s+/, ''))}.png` : '';   // Dateien ohne Artikel
+        const elementIcon = el => el ? `/assets/images/elements/${asciiSlug(el)}.png` : '';
+        const pathIcon = p => p ? `/assets/images/paths/${asciiSlug(String(p).replace(/^(Die|Der|Das)\s+/, ''))}.png` : '';   // Dateien ohne Artikel
         const iconUrl = obj => (obj && obj.icon_path) ? '/' + obj.icon_path.replace(/^\//, '') : '';
 
         window.addEventListener('DOMContentLoaded', async () => {
