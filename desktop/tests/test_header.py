@@ -187,7 +187,7 @@ class AboutTest(HeaderTest):
         from dialogs import AboutDialog
         from models import APP_VERSION
         changelog = open(os.path.join(os.path.dirname(__file__), "..", "..", "CHANGELOG.md"), encoding="utf-8").read()
-        self.assertEqual(APP_VERSION, re.search(r"^## Desktop (\d+\.\d+\.\d+)", changelog, re.M).group(1))
+        self.assertEqual(APP_VERSION, re.search(r"^## (?:Desktop )?(\d+\.\d+\.\d+)", changelog, re.M).group(1))
 
         help_menu = next(a.menu() for a in self.window.menuBar().actions() if a.text() == "Hilfe")
         about = next(a for a in help_menu.actions() if a.text() == "Über…")

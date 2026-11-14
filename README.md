@@ -166,7 +166,7 @@ python3 tools/remote_sql.py --ddl web/migrations/<datei>.sql     # zusätzlich A
 
 ## Versionen
 
-Web, Desktop und Android haben eigene Versionsnummern (aktuell **Web 1.1.0, Desktop 1.1.0, Android 1.2.0**). Sie stehen jeweils im „Über“-Dialog (Web: Benutzermenü → Über; Android: Menü ⋮ → Über; Desktop: Hilfe → Über…) und an diesen Stellen im Code, die bei jeder Version zusammen mit dem [CHANGELOG.md](CHANGELOG.md) hochgezählt werden:
+Web, Desktop und Android tragen dieselbe Versionsnummer (zwischenzeitlich liefen sie getrennt); aktuell überall **1.2.1**. Sie stehen jeweils im „Über“-Dialog (Web: Benutzermenü → Über; Android: Menü ⋮ → Über; Desktop: Hilfe → Über…) und an diesen Stellen im Code, die bei jeder Version zusammen mit dem [CHANGELOG.md](CHANGELOG.md) hochgezählt werden:
 
 | Client | Stelle |
 |---|---|
