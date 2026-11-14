@@ -188,7 +188,7 @@
             <div class="text-5xl mb-2 text-accent" aria-hidden="true">✦</div>
             <h2 id="aboutTitle" class="app-title text-lg font-bold text-accent mb-1">Honkai: Star Rail Team & Build Manager</h2>
             <!-- Bei jeder Änderung zusammen mit CHANGELOG.md hochzählen (ein Test vergleicht beide) -->
-            <div id="webVersion" class="text-sm text-gray-200 mb-3">Web-Version 1.1.1</div>
+            <div id="webVersion" class="text-sm text-gray-200 mb-3">Web-Version 1.2.0</div>
             <p class="text-sm text-gray-300 mb-3">Teams aus bis zu vier Charakteren und die Builds deiner Charaktere verwalten.</p>
             <p class="text-[11px] text-gray-400 mb-4">Inoffizielles Fanprojekt, nicht mit HoYoverse verbunden. Honkai: Star Rail sowie zugehörige Namen und Bilder sind Eigentum von HoYoverse.</p>
             <a id="aboutLogoLink" href="https://www.media-matrix.de" target="_blank" rel="noopener noreferrer" title="www.media-matrix.de" class="inline-block mb-4 opacity-90 hover:opacity-100 transition-opacity">
@@ -495,8 +495,9 @@
         document.addEventListener('click', event => {
             const menu = document.getElementById('userMenu');
             if (menu && !menu.contains(event.target)) closeUserMenu();
+            if (!event.target.closest('[data-set-combo]')) closeAllRelicSetCombos();
         });
-        document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeUserMenu(); closeDeleteAccount(); closeAbout(); closeUpdateData(); closeChangePassword(); } });
+        document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeAllRelicSetCombos(); closeUserMenu(); closeDeleteAccount(); closeAbout(); closeUpdateData(); closeChangePassword(); } });
 
         async function handleLogout() {
             try {
@@ -664,6 +665,104 @@
             const parts = [['2er', s.bonus_2pc], ['4er', s.bonus_4pc]]
                 .filter(([, text]) => text).map(([label, text]) => `${label}-Bonus: ${text}`);
             return parts.length ? `${s.name}\n\n${parts.join('\n\n')}` : '';
+        }
+
+        // Set-Icon (assets/images/relic_sets/...) aus den Stammdaten; fehlt es, bleibt der Platz leer
+        function setIconHTML(setName, size) {
+            const s = availableRelicSets.find(x => x.name === setName);
+            const url = s ? iconUrl(s) : '';
+            return url ? `<img src="${escapeHtml(url)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'" class="${size} flex-shrink-0 object-contain">` : '';
+        }
+
+        // Auswahl eines Relikt-Sets bzw. Ornaments mit Suchfeld und Icons (eigenes Element statt <select>, damit Bilder möglich sind).
+        // Der gewählte Name steckt im versteckten Feld rel_set_<slot>, das syncActiveDetailStats() ausliest.
+        function relicSetComboHTML(i, kind, current) {
+            const none = kind === 'Relikt' ? '— Kein Relikt-Set —' : '— Kein Ornament —';
+            return `
+                <div class="relative mb-2" data-set-combo="${i}">
+                    <input type="hidden" id="rel_set_${i}" value="${escapeHtml(current)}">
+                    <button type="button" id="rel_set_btn_${i}" onclick="toggleRelicSetCombo(${i})" aria-haspopup="listbox" aria-expanded="false" title="${escapeHtml(relicBonusTip(current))}" class="w-full flex items-center justify-between gap-1 bg-inputBg text-white border border-[#332d47] rounded px-1 py-0.5 text-left outline-none hover:border-accent focus:border-accent">
+                        <span class="flex items-center gap-1.5 min-w-0">${setIconHTML(current, 'w-6 h-6')}<span class="truncate ${current ? '' : 'text-gray-400'}">${escapeHtml(current || none)}</span></span>
+                        <span class="text-gray-400 flex-shrink-0">▾</span>
+                    </button>
+                    <div id="rel_set_panel_${i}" class="hidden absolute left-0 right-0 top-full mt-1 z-50 bg-[#14111f] border border-[#332d47] rounded-lg shadow-2xl p-1.5">
+                        <input type="text" id="rel_set_search_${i}" placeholder="Suchen …" autocomplete="off" oninput="renderRelicSetList(${i})" onkeydown="relicSetComboKey(event, ${i})" class="w-full bg-inputBg text-white border border-[#332d47] rounded px-2 py-1 mb-1 outline-none focus:border-accent">
+                        <ul id="rel_set_list_${i}" role="listbox" class="max-h-56 overflow-y-auto" style="scrollbar-width: thin; scrollbar-color: #332d47 #14111f;"></ul>
+                    </div>
+                </div>`;
+        }
+
+        function closeAllRelicSetCombos() {
+            document.querySelectorAll('[data-set-combo]').forEach(box => {
+                box.querySelector('[id^="rel_set_panel_"]').classList.add('hidden');
+                box.querySelector('button').setAttribute('aria-expanded', 'false');
+                const slotBox = box.closest('[data-slot-box]');
+                if (slotBox) slotBox.style.zIndex = '';
+            });
+        }
+
+        function toggleRelicSetCombo(i) {
+            const panel = document.getElementById(`rel_set_panel_${i}`);
+            const wasOpen = !panel.classList.contains('hidden');
+            closeAllRelicSetCombos();
+            if (wasOpen) return;
+            panel.classList.remove('hidden');
+            const box = panel.closest('[data-set-combo]');
+            box.querySelector('button').setAttribute('aria-expanded', 'true');
+            // Jede Slot-Karte bildet einen eigenen Stapel (backdrop-blur): die offene Karte muss über den folgenden liegen
+            const slotBox = box.closest('[data-slot-box]');
+            if (slotBox) { slotBox.style.position = 'relative'; slotBox.style.zIndex = '40'; }
+            const search = document.getElementById(`rel_set_search_${i}`);
+            search.value = '';
+            renderRelicSetList(i);
+            search.focus();
+        }
+
+        function renderRelicSetList(i) {
+            const kind = RELIC_SLOT_CONFIG[i].kind;
+            const query = document.getElementById(`rel_set_search_${i}`).value.trim().toLowerCase();
+            const current = document.getElementById(`rel_set_${i}`).value;
+            const list = document.getElementById(`rel_set_list_${i}`);
+            const none = kind === 'Relikt' ? '— Kein Relikt-Set —' : '— Kein Ornament —';
+            const sets = availableRelicSets.filter(x => x.kind === kind && (!query || x.name.toLowerCase().includes(query)));
+            const item = s => `<li role="option" data-set="${escapeHtml(s.name)}" title="${escapeHtml(relicBonusTip(s.name))}" onclick="pickRelicSet(${i}, this.dataset.set)" class="px-2 py-1 rounded cursor-pointer hover:bg-[#262338] flex items-center gap-2 ${s.name === current ? 'bg-[#2d293e] text-accent' : 'text-gray-200'}">${setIconHTML(s.name, 'w-8 h-8')}<div class="truncate min-w-0">${escapeHtml(s.name)}</div></li>`;
+            list.innerHTML = `<li role="option" data-set="" onclick="pickRelicSet(${i}, '')" class="px-2 py-1 rounded cursor-pointer hover:bg-[#262338] text-gray-400">${none}</li>`
+                + (sets.length ? sets.map(item).join('') : '<li class="px-2 py-2 text-gray-400">Nichts gefunden</li>');
+            setActiveRelicSet(i, query ? list.querySelector('li[data-set]:not([data-set=""])') : null);
+        }
+
+        function setActiveRelicSet(i, li) {
+            const list = document.getElementById(`rel_set_list_${i}`);
+            list.querySelectorAll('[data-active]').forEach(x => { x.removeAttribute('data-active'); x.classList.remove('ring-1', 'ring-accent'); });
+            if (!li) return;
+            li.setAttribute('data-active', '');
+            li.classList.add('ring-1', 'ring-accent');
+            li.scrollIntoView?.({ block: 'nearest' });
+        }
+
+        // Tastatur im Suchfeld: Pfeile wählen aus, Enter übernimmt, Escape schließt
+        function relicSetComboKey(event, i) {
+            const list = document.getElementById(`rel_set_list_${i}`);
+            const items = [...list.querySelectorAll('li[data-set]')];
+            const active = list.querySelector('[data-active]');
+            if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+                event.preventDefault();
+                const step = event.key === 'ArrowDown' ? 1 : -1;
+                setActiveRelicSet(i, items[Math.max(0, Math.min(items.length - 1, items.indexOf(active) + step))]);
+            } else if (event.key === 'Enter') {
+                event.preventDefault();
+                if (active) pickRelicSet(i, active.dataset.set);
+            } else if (event.key === 'Escape') {
+                event.stopPropagation();
+                closeAllRelicSetCombos();
+                document.getElementById(`rel_set_btn_${i}`).focus();
+            }
+        }
+
+        function pickRelicSet(i, name) {
+            document.getElementById(`rel_set_${i}`).value = name;
+            closeAllRelicSetCombos();
+            updateRelicProp(i, 'set', name);   // zeichnet die Karte samt Set-Zusammenfassung neu
         }
 
         // Aktive Set-Boni eines Builds: je Set die Anzahl der Teile (2 oder 4; Ornamente nur 2)
@@ -1224,13 +1323,12 @@
                     `;
                 }
 
-                const setOptions = availableRelicSets.filter(x => x.kind === cfg.kind)
-                    .map(x => `<option value="${escapeHtml(x.name)}" title="${escapeHtml(relicBonusTip(x.name))}" ${sData.set === x.name ? 'selected' : ''}>${escapeHtml(x.name)}</option>`).join('');
                 const rarity = parseInt(sData.rarity) || 5;
                 const level = sData.level !== undefined ? sData.level : 15;
                 const mainSaved = sData.main || '';
 
                 const slotBox = document.createElement('div');
+                slotBox.setAttribute("data-slot-box", "");
                 slotBox.className = "bg-black/35 border border-white/10 rounded-lg p-3 text-xs backdrop-blur-sm";
                 slotBox.innerHTML = `
                     <div class="flex justify-between items-center mb-2">
@@ -1244,10 +1342,7 @@
                         </div>
                     </div>
 
-                    <select id="rel_set_${i}" onchange="updateRelicProp(${i}, 'set', this.value); this.title = relicBonusTip(this.value)" title="${escapeHtml(relicBonusTip(sData.set))}" class="w-full bg-inputBg text-white border border-[#332d47] rounded px-1 py-0.5 mb-2 outline-none focus:border-accent">
-                        <option value="">${cfg.kind === 'Relikt' ? '— Kein Relikt-Set —' : '— Kein Ornament —'}</option>
-                        ${setOptions}
-                    </select>
+                    ${relicSetComboHTML(i, cfg.kind, sData.set || '')}
 
                     <div class="flex gap-2 mb-2">
                         <select id="rel_main_${i}" onchange="updateRelicProp(${i}, 'main', this.value)" class="flex-1 min-w-0 bg-inputBg text-white border border-[#332d47] rounded px-1 py-0.5">

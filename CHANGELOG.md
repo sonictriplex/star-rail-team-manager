@@ -2,6 +2,12 @@
 
 Dieser Verlauf fasst die wichtigsten Änderungen zusammen. Web, Desktop und Android sind getrennte Clients mit eigenen Versionsnummern; die Web-Version läuft per `deploy/deploy.sh` auf dem Server, der Desktop direkt aus dem Repo.
 
+## Web 1.2.0 (14.11.2026)
+- Die Auswahl der Relikt-Sets und Planar-Ornamente hat jetzt ein Suchfeld und zeigt zu jedem Set sein Icon (auch im geschlossenen Feld). Die Set-Boni stehen weiter als Tooltip an den Einträgen; Pfeiltasten, Enter und Escape funktionieren wie bei der Teil-Auswahl im Genshin-Manager
+
+## Desktop 1.2.0 (14.11.2026)
+- Die Dropdowns für Relikt-Sets und Planar-Ornamente zeigen zu jedem Set sein Icon
+
 ## Web 1.1.1 (14.11.2026)
 - Die Bilder liegen nach Typ getrennt in Unterordnern von `shared/assets/images/` (`characters`, `light_cones`, `relic_sets`, `elements`, `paths`, `ui`), ohne das frühere Namenspräfix (aus `char_kafka.png` wird `characters/kafka.png`). Die Pfade in `stammdaten.json`, im Seed, im Update-Werkzeug und im Admin-Menü sind angepasst. Bereits eingetragene Pfade in der Server-Datenbank funktionieren weiter, solange die alten Dateien auf dem Server liegen.
 

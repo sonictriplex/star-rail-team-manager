@@ -6,8 +6,8 @@ from PySide6.QtWidgets import (
     QApplication, QWidget, QFrame, QVBoxLayout, QHBoxLayout, QGridLayout, QLabel,
     QComboBox, QPushButton, QSpinBox, QLineEdit, QMessageBox, QDialog, QSpacerItem, QSizePolicy, QStyle, QStyleOption
 )
-from PySide6.QtCore import Qt, Signal, QMimeData, QPoint, QRectF
-from PySide6.QtGui import QPixmap, QDrag, QPainter, QColor, QFontMetrics, QFont, QPainterPath
+from PySide6.QtCore import Qt, Signal, QMimeData, QPoint, QRectF, QSize
+from PySide6.QtGui import QPixmap, QDrag, QPainter, QColor, QFontMetrics, QFont, QPainterPath, QIcon
 
 from models import (Character, DEFAULT_TALENTS, TALENT_MAX, MAX_LEVEL, RELIC_SLOTS, SUBSTATS, RELIC_RARITIES,
                     MAX_RELIC_LEVEL, active_set_bonuses, tooltip_html)
@@ -836,9 +836,13 @@ class RelicPanel(QFrame):
         # Set: Relikt-Sets für Kopf bis Füße, Planar-Ornamente für Planarsphäre und Verbindungsseil
         relic_set = QComboBox()
         relic_set.view().setMinimumWidth(320)
+        relic_set.setIconSize(QSize(28, 28))
         relic_set.addItem("— Kein Relikt-Set —" if kind == "Relikt" else "— Kein Ornament —", "")
         for item in self.manager.relic_sets_of_kind(kind):
-            relic_set.addItem(item.name, item.name)
+            if os.path.exists(item.icon_path):
+                relic_set.addItem(QIcon(item.icon_path), item.name, item.name)
+            else:
+                relic_set.addItem(item.name, item.name)
             relic_set.setItemData(relic_set.count() - 1, item.bonus_tooltip(), Qt.ToolTipRole)
         relic_set.currentIndexChanged.connect(lambda _=0, c=relic_set: self._on_set_changed(c))
         box_layout.addWidget(relic_set)

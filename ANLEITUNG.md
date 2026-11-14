@@ -72,7 +72,7 @@ Charaktere wählst du über das Plus-Feld im Team. Die Suche filtert nach Name, 
 
 - **Lichtkegel:** Tippe bzw. klicke auf das Feld oder das 🔍, um einen zu wählen. Die Suche zeigt zuerst die Lichtkegel des **Pfads deines Charakters**; mit den Filtern siehst du auch alle anderen. Dazu kommen Level (1–80) und die **Überlagerung S1 bis S5**.
 - **Relikte:** Jeder der sechs Slots hat ein eigenes Set, eine Seltenheit, ein Level (0–15), einen **Hauptwert** und bis zu **vier Substats** mit Wert.
-  - **Kopf, Hände, Körper, Füße** nehmen **Relikt-Sets**, **Planarsphäre und Verbindungsseil** nehmen **Planar-Ornamente**. Die Auswahl zeigt automatisch nur die passenden Sets.
+  - **Kopf, Hände, Körper, Füße** nehmen **Relikt-Sets**, **Planarsphäre und Verbindungsseil** nehmen **Planar-Ornamente**. Die Auswahl zeigt automatisch nur die passenden Sets, jeweils mit **Icon** (im Browser mit Suchfeld).
   - Der **Hauptwert** hängt vom Slot ab (Kopf immer LP, Hände immer ANG, Körper, Füße, Planarsphäre und Verbindungsseil mit eigenen Möglichkeiten).
 - **Aktive Set-Boni:** Die Karte rechnet selbst aus, wie viele Teile desselben Sets du trägst: ab 2 Teilen der 2er-Bonus, ab 4 Teilen der 4er-Bonus. Planar-Ornamente zählen bis 2.
 - **Talente:** Basisangriff bis Stufe 7, Fertigkeit, Ultimate und Talent bis Stufe 12 (die Eingabefelder begrenzen automatisch).
