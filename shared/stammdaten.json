@@ -2066,7 +2066,7 @@
       "icon_path": "assets/images/relic_sacerdos_relived_ordeal.png"
     },
     {
-      "name": "Scholar Lost in Gelehrsamkeit",
+      "name": "Scholar Lost in Erudition",
       "kind": "Relikt",
       "bonus_2pc": "Increases CRIT Rate by 8%.",
       "bonus_4pc": "Increases DMG dealt by Skill and Ultimate by 20%. After using Ultimate, additionally increases the DMG dealt by the next Skill by 25%.",

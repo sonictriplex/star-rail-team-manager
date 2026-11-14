@@ -21,6 +21,13 @@ Ein Build gehört zum **Charakter, nicht zum Team**: Kommt ein Charakter in mehr
 
 ## Stammdaten aktualisieren
 
-`shared/stammdaten.json` enthält Charaktere, Lichtkegel und Relikt-Sets (Quelle: [Mar-7th/StarRailRes](https://github.com/Mar-7th/StarRailRes), Stand der Erstellung 14.11.2026). Nach Änderungen `python3 web/tools/make_seed.py` ausführen und die SQL-Datei erneut einspielen. Neue Grafiken kommen nach `shared/assets/images`.
+`tools/update_stammdaten.py` vergleicht Charaktere, Lichtkegel und Relikt-Sets mit der Quelle [Mar-7th/StarRailRes](https://github.com/Mar-7th/StarRailRes) und ergänzt Fehlendes:
+
+```sh
+python3 tools/update_stammdaten.py            # nur prüfen (Exit-Code 1 = es fehlt etwas)
+python3 tools/update_stammdaten.py --apply    # Fehlendes ergänzen (fragt vorher nach)
+```
+
+`--apply` trägt die Einträge in `shared/stammdaten.json` ein, lädt die Bilder (vorhandene werden nie überschrieben) und erzeugt `web/seed_stammdaten.sql` neu. Danach die SQL-Datei in phpMyAdmin importieren (wiederholbar) und `deploy/deploy.sh` starten; das Skript deployt nichts selbst. Die Quelle enthält manchmal Einträge, die im Spiel noch nicht erschienen sind, daher vor `--apply` die Liste prüfen. Ein **neuer Pfad oder ein neues Element** wird nur gemeldet, nicht eingetragen: Die Spalten sind ENUMs, erst Schema, Migration, Icon und Filter ergänzen (Hinweise im Kopf des Skripts).
 
 <sub>Inoffizielles Fanprojekt, nicht mit HoYoverse verbunden. Honkai: Star Rail sowie zugehörige Namen und Bilder sind Eigentum von HoYoverse.</sub>
