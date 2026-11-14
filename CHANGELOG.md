@@ -2,6 +2,9 @@
 
 Dieser Verlauf fasst die wichtigsten Änderungen zusammen. Web, Desktop und Android haben ab 1.2.1 wieder dieselbe Versionsnummer (davor liefen sie getrennt); die Web-Version läuft per `deploy/deploy.sh` auf dem Server, der Desktop direkt aus dem Repo.
 
+## 1.4.2 (15.11.2026)
+- Android: Auch in der Set-Auswahl erscheint ein gesuchtes Relikt-Teil als eigene Zeile (wie im Web seit 1.4.1), z. B. „Vielgesichtige Maske des Diebs“ mit „Kopf · Dieb des fallenden Meteors“; Antippen übernimmt das Set
+
 ## 1.4.1 (15.11.2026)
 - Web: In der Set-Auswahl erscheint ein gesuchtes Relikt-Teil als eigene Zeile (z. B. „Vielgesichtige Maske des Diebs“, darunter „Kopf · Dieb des fallenden Meteors“); ein Klick trägt das zugehörige Set ein. Teile erscheinen nur im passenden Slot-Typ (Relikt-Teile bei Kopf bis Füße, Ornament-Teile bei Planarsphäre und Verbindungsseil)
 

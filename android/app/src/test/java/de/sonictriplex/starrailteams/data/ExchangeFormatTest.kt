@@ -168,4 +168,17 @@ class ExchangeFormatTest {
         assertTrue(thief.infoText()!!.contains("Teile:\nKopf: Vielgesichtige Maske des Diebs"))
         assertEquals(null, RelicSet(name = "X").infoText())
     }
+
+    @Test
+    fun gesuchtesTeilErscheintAlsEigeneZeile() {
+        val data = AppJson.decodeFromString<Stammdaten>(File(shared, "stammdaten.json").readText())
+        val items = data.relicSets.filter { it.kind == "Relikt" }
+            .map { de.sonictriplex.starrailteams.ui.PickerItem(it.name, keywords = it.pieceList()) }
+        val rows = de.sonictriplex.starrailteams.ui.pickerRows(items, "vielgesichtige maske")
+        assertEquals(1, rows.size)
+        assertEquals("Vielgesichtige Maske des Diebs", rows[0].title)
+        assertEquals("Kopf · Dieb des fallenden Meteors", rows[0].subtitle)
+        assertEquals("Dieb des fallenden Meteors", rows[0].pick)             // Antippen übernimmt das Set
+        assertEquals(items.size, de.sonictriplex.starrailteams.ui.pickerRows(items, "").size)
+    }
 }
