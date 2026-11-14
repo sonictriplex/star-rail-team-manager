@@ -8,7 +8,7 @@
 # - Hochgeladen wird nur, was fehlt oder sich unterscheidet. Dateien auf dem Server, die es lokal nicht
 #   gibt, bleiben unberührt (es wird nie etwas gelöscht).
 # - Vor dem Überschreiben landet die Serverdatei in deploy/backup/<Zeitstempel>/.
-# - Bewusst NIE hochgeladen: api/config.local.php (Datenbank-Zugangsdaten, wird einmalig auf dem Server angelegt).
+# - Bewusst NIE hochgeladen: api/config.local.php und api/admins.local.php (Datenbank-Zugangsdaten, wird einmalig auf dem Server angelegt).
 #   api/db.php enthält keine Zugangsdaten und wird mit hochgeladen.
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -37,7 +37,7 @@ remote_list() {
 local_files() {
     printf 'web/index.html\tindex.html\n'
     for f in web/api/*.php; do
-        case "$(basename "$f")" in config.local.php | config.example.php) continue ;; esac
+        case "$(basename "$f")" in config.local.php | admins.local.php | config.example.php) continue ;; esac
         printf '%s\tapi/%s\n' "$f" "$(basename "$f")"
     done
     for f in shared/assets/images/*; do printf '%s\tassets/images/%s\n' "$f" "$(basename "$f")"; done

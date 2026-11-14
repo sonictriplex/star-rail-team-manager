@@ -85,4 +85,30 @@ function require_login() {
     }
     return $user['id'];
 }
+
+/**
+ * Admins stehen in api/admins.local.php (return ['benutzername', ...];, nicht im Git, wird nie hochgeladen)
+ * oder in der Umgebungsvariable ADMIN_USERS (kommagetrennt). Ohne Eintrag gibt es keinen Admin.
+ */
+function is_admin(?array $user): bool {
+    if ($user === null || $user['username'] === '') return false;
+    $names = [];
+    $file = __DIR__ . '/admins.local.php';
+    if (is_file($file)) {
+        $list = require $file;
+        if (is_array($list)) $names = array_map('strval', $list);
+    }
+    $env = getenv('ADMIN_USERS');
+    if ($env !== false && $env !== '') $names = array_merge($names, array_map('trim', explode(',', $env)));
+    return in_array($user['username'], $names, true);
+}
+
+/** Bricht mit 403 ab, wenn der angemeldete Nutzer kein Admin ist. */
+function require_admin(): void {
+    if (!is_admin(current_user())) {
+        http_response_code(403);
+        echo json_encode(["error" => "Nur für Administratoren."], JSON_UNESCAPED_UNICODE);
+        exit();
+    }
+}
 ?>

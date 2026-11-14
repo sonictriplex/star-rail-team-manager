@@ -78,6 +78,8 @@
                     class="block w-full text-left px-4 py-2 text-gray-100 hover:bg-[#2d293e] hover:text-accent transition-colors">Exportieren</button>
                 <button type="button" role="menuitem" onclick="closeUserMenu(); document.getElementById('importFile').click()" title="Liest Builds und Teams aus einer JSON-Export-Datei ein"
                     class="block w-full text-left px-4 py-2 text-gray-100 hover:bg-[#2d293e] hover:text-accent transition-colors">Importieren</button>
+                <button type="button" role="menuitem" id="updateDataBtn" onclick="closeUserMenu(); openUpdateData()" title="Gleicht Charaktere, Lichtkegel und Relikt-Sets mit der Datenquelle ab und ergänzt Fehlendes (nur Administratoren)"
+                    class="hidden block w-full text-left px-4 py-2 text-gray-100 hover:bg-[#2d293e] hover:text-accent transition-colors border-t border-white/10">Stammdaten aktualisieren</button>
                 <button type="button" role="menuitem" id="logoutBtn" onclick="closeUserMenu(); handleLogout()"
                     class="block w-full text-left px-4 py-2 text-gray-300 hover:bg-[#2d293e] hover:text-danger border-t border-white/10 transition-colors">Logout</button>
                 <button type="button" role="menuitem" id="deleteAccountBtn" onclick="closeUserMenu(); openDeleteAccount()" title="Löscht dein Konto mit allen Teams und Builds endgültig"
@@ -300,6 +302,20 @@
         </div>
     </div>
 
+    <!-- MODAL: STAMMDATEN AKTUALISIEREN (nur Admins) -->
+    <div id="updateModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 z-50" onclick="if (event.target === this) closeUpdateData()">
+        <div role="dialog" aria-modal="true" aria-labelledby="updateTitle" class="bg-cardBg border border-[#332d47] rounded-xl max-w-xl w-full max-h-[85vh] flex flex-col p-5 shadow-2xl text-white backdrop-blur-md">
+            <h2 id="updateTitle" class="text-lg font-bold text-accent mb-1">Stammdaten aktualisieren</h2>
+            <p class="text-[11px] text-gray-400 mb-3">Vergleicht mit der öffentlichen Datenquelle. Die Quelle kann Einträge enthalten, die im Spiel noch nicht erschienen sind: nur eintragen, was wirklich verfügbar ist.</p>
+            <div id="updateBody" class="flex-1 overflow-y-auto text-sm"></div>
+            <div id="updateResult" class="hidden mt-3 p-3 rounded border border-[#332d47] text-xs"></div>
+            <div class="flex gap-3 mt-4">
+                <button type="button" onclick="closeUpdateData()" class="flex-1 py-2 bg-inputBg hover:bg-[#2d293e] border border-[#332d47] text-gray-100 font-bold text-sm rounded transition-colors">Schließen</button>
+                <button type="button" id="updateApplyBtn" onclick="applyUpdateData()" class="hidden flex-1 py-2 bg-accent hover:bg-accentHover text-darkBg font-bold text-sm rounded shadow-md transition-colors disabled:opacity-50">Ausgewählte eintragen</button>
+            </div>
+        </div>
+    </div>
+
     <!-- JAVASCRIPT-LOGIK -->
     <script>
         const API_BASE = '/api';
@@ -381,6 +397,7 @@
                     document.getElementById('userInfo').textContent = data.username;
                     document.getElementById('userMenuName').textContent = `Eingeloggt als ${data.username}`;
                     document.getElementById('userMenu').classList.remove('hidden');
+                    document.getElementById('updateDataBtn').classList.toggle('hidden', !data.is_admin);
 
                     await loadInitialData();
                 } else {
@@ -448,7 +465,7 @@
             const menu = document.getElementById('userMenu');
             if (menu && !menu.contains(event.target)) closeUserMenu();
         });
-        document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeUserMenu(); closeDeleteAccount(); closeAbout(); } });
+        document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeUserMenu(); closeDeleteAccount(); closeAbout(); closeUpdateData(); } });
 
         async function handleLogout() {
             try {
@@ -1454,6 +1471,97 @@
                 updateSavedProp(activeLcTargetIndex, 'light_cone', lcName);
                 closeLcModal();
                 renderCurrentView();
+            }
+        }
+        // --- Stammdaten aktualisieren (nur Administratoren; der Server prüft das ebenfalls) ---
+        const UPDATE_GROUPS = [
+            { key: 'characters', label: 'Charaktere', info: e => `${e.rarity}★ ${e.element}, ${e.path}`, checked: true },
+            { key: 'light_cones', label: 'Lichtkegel', info: e => `${e.rarity}★ ${e.path}`, checked: true },
+            { key: 'relic_sets', label: 'Relikt-Sets', info: e => e.kind, checked: true }
+        ];
+        const UPDATE_REGIONS = null;
+
+        function closeUpdateData() { document.getElementById('updateModal').classList.add('hidden'); }
+
+        async function openUpdateData() {
+            const body = document.getElementById('updateBody');
+            document.getElementById('updateModal').classList.remove('hidden');
+            document.getElementById('updateApplyBtn').classList.add('hidden');
+            document.getElementById('updateResult').classList.add('hidden');
+            body.innerHTML = '<p class="text-gray-300">Prüfe die Datenquelle …</p>';
+            try {
+                const res = await fetch(`${API_BASE}/stammdaten.php?action=check`);
+                const data = await res.json().catch(() => ({}));
+                if (!res.ok) throw new Error(data.error || `Fehler ${res.status}`);
+                renderUpdateList(data);
+            } catch (e) {
+                body.innerHTML = `<p class="text-red-200">${escapeHtml(e.message)}</p>`;
+            }
+        }
+
+        function renderUpdateList(data) {
+            const body = document.getElementById('updateBody');
+            let html = '';
+            let count = 0;
+            UPDATE_GROUPS.forEach(g => {
+                const items = (data.new && data.new[g.key]) || [];
+                if (!items.length) return;
+                count += items.length;
+                html += `<h4 class="text-gold font-bold text-xs mt-3 mb-1">${escapeHtml(g.label)} · ${items.length}</h4>`;
+                items.forEach(e => {
+                    const region = (g.key === 'characters' && UPDATE_REGIONS)
+                        ? `<select data-region class="ml-auto bg-inputBg text-white border border-[#332d47] rounded px-1 py-0.5 text-xs outline-none focus:border-accent"><option value="">Region …</option>${UPDATE_REGIONS.map(r => `<option>${escapeHtml(r)}</option>`).join('')}</select>` : '';
+                    html += `<label class="flex items-center gap-2 py-0.5 text-xs text-gray-200">
+                        <input type="checkbox" data-group="${g.key}" data-name="${escapeHtml(e.name)}" ${g.checked ? 'checked' : ''}>
+                        <span class="font-bold text-white truncate">${escapeHtml(e.name)}</span>
+                        <span class="text-gray-400 truncate">${escapeHtml(g.info(e))}</span>${region}</label>`;
+                });
+            });
+            const skipped = (data.skipped || []).map(x => `<li>${escapeHtml(x)}</li>`).join('');
+            if (skipped) html += `<h4 class="text-gold font-bold text-xs mt-3 mb-1">Nicht eintragbar</h4><ul class="text-xs text-gray-400 list-disc pl-5">${skipped}</ul>`;
+            body.innerHTML = count ? html : (html || '<p class="text-gray-200">Alles aktuell. Es fehlt nichts.</p>');
+            document.getElementById('updateApplyBtn').classList.toggle('hidden', !count);
+        }
+
+        async function applyUpdateData() {
+            const payload = {};
+            let missingRegion = '';
+            document.querySelectorAll('#updateBody input[type=checkbox]:checked').forEach(box => {
+                const group = box.dataset.group, name = box.dataset.name;
+                (payload[group] = payload[group] || []);
+                if (group === 'characters' && UPDATE_REGIONS) {
+                    const region = box.closest('label').querySelector('[data-region]').value;
+                    if (!region) missingRegion = name;
+                    payload[group].push({ name, region });
+                } else {
+                    payload[group].push(name);
+                }
+            });
+            if (missingRegion) return alert(`Bitte eine Region für „${missingRegion}“ wählen.`);
+            if (!Object.values(payload).some(list => list.length)) return alert('Nichts ausgewählt.');
+
+            const btn = document.getElementById('updateApplyBtn');
+            const result = document.getElementById('updateResult');
+            btn.disabled = true;
+            try {
+                const res = await fetch(`${API_BASE}/stammdaten.php`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'fetch' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json().catch(() => ({}));
+                if (!res.ok) throw new Error(data.error || `Fehler ${res.status}`);
+                const img = data.images || {};
+                result.textContent = `${data.added} Einträge ergänzt. Bilder: ${img.geladen || 0} geladen, ${img.vorhanden || 0} schon vorhanden${img.fehler ? `, ${img.fehler} FEHLGESCHLAGEN` : ''}.`;
+                result.className = 'mt-3 p-3 rounded border text-xs ' + (img.fehler ? 'border-danger/60 text-red-200' : 'border-accent/60 text-gray-100');
+                document.getElementById('updateBody').innerHTML = '';
+                btn.classList.add('hidden');
+                await loadInitialData(loadedTeamName);
+            } catch (e) {
+                result.textContent = e.message;
+                result.className = 'mt-3 p-3 rounded border border-danger/60 text-red-200 text-xs';
+            } finally {
+                btn.disabled = false;
             }
         }
     </script>

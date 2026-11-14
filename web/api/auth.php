@@ -32,7 +32,8 @@ if ($action === 'status') {
         echo json_encode([
             "logged_in" => true,
             "username"  => $current['username'],
-            "user_id"   => $current['id']
+            "user_id"   => $current['id'],
+            "is_admin"  => is_admin($current)
         ], JSON_UNESCAPED_UNICODE);
     } else {
         echo json_encode(["logged_in" => false], JSON_UNESCAPED_UNICODE);
