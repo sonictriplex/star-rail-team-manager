@@ -114,4 +114,35 @@ class ExchangeFormatTest {
         assertEquals(null, validateTeamName("A", listOf("A"), "A"))
         assertEquals(listOf(2, 1, 3), listOf(1, 2, 3).moved(1, 0))
     }
+
+    @Test
+    fun neuesPasswortWirdWieAmServerGeprueft() {
+        assertEquals("Bitte das aktuelle Passwort eingeben.", validateNewPassword("", "neuespw", "neuespw"))
+        assertEquals("Das neue Passwort muss mindestens 6 Zeichen lang sein.", validateNewPassword("alt", "abc", "abc"))
+        assertEquals("Das neue Passwort darf höchstens 72 Zeichen lang sein.", validateNewPassword("alt", "x".repeat(73), "x".repeat(73)))
+        assertEquals("Das neue Passwort muss sich vom aktuellen unterscheiden.", validateNewPassword("gleich1", "gleich1", "gleich1"))
+        assertEquals("Die beiden neuen Passwörter stimmen nicht überein.", validateNewPassword("alt", "neuespw", "anderes"))
+        assertEquals(null, validateNewPassword("alt", "neuespw", "neuespw"))
+    }
+
+    @Test
+    fun antwortDerStammdatenPruefungWirdGelesen() {
+        val json = """{"new":{"characters":[{"name":"Kafka","element":"Blitz","path":"Die Nichtigkeit","rarity":5}],
+            "light_cones":[{"name":"X","path":"Die Jagd","rarity":4}],"relic_sets":[{"name":"Y","kind":"Ornament"}]},
+            "skipped":["Charakter Z: unbekannter Pfad"]}"""
+        val check = AppJson.decodeFromString<StammdatenCheck>(json)
+        assertEquals(3, check.found.total)
+        assertEquals("5★ Blitz, Die Nichtigkeit", check.found.characters.single().summary())
+        assertEquals("4★ Die Jagd", check.found.lightCones.single().summary())
+        assertEquals("Ornament", check.found.relicSets.single().summary())
+        assertEquals(1, check.skipped.size)
+        val leer = AppJson.decodeFromString<StammdatenCheck>("""{"new":{"characters":[],"light_cones":[],"relic_sets":[]},"skipped":[]}""")
+        assertEquals(0, leer.found.total)
+        // Antwort von apply
+        val result = AppJson.decodeFromString<UpdateResult>("""{"added":4,"images":{"geladen":3,"vorhanden":1,"fehler":0}}""")
+        assertEquals(4, result.added); assertEquals(3, result.images.geladen)
+        // Auswahl geht mit den Feldnamen des Servers hinaus
+        val body = AppJson.encodeToString(UpdateRequest.serializer(), UpdateRequest(listOf("Kafka"), emptyList(), listOf("Y")))
+        assertTrue(body.contains("\"light_cones\":[]") && body.contains("\"relic_sets\":[\"Y\"]"))
+    }
 }

@@ -18,6 +18,9 @@ import de.sonictriplex.starrailteams.data.StammdatenRepository
 import de.sonictriplex.starrailteams.data.Team
 import de.sonictriplex.starrailteams.data.UnauthorizedException
 import de.sonictriplex.starrailteams.data.UserDataCache
+import de.sonictriplex.starrailteams.data.StammdatenCheck
+import de.sonictriplex.starrailteams.data.UpdateRequest
+import de.sonictriplex.starrailteams.data.validateNewPassword
 import de.sonictriplex.starrailteams.data.validateRegistration
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -48,6 +51,24 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     /** Fehlermeldung des Dialogs „Konto löschen“ (z. B. falsches Passwort); getrennt von [error]. */
     var accountError by mutableStateOf<String?>(null)
+        private set
+
+    /** true, wenn das Konto auf dem Server Administrator ist (zeigt „Stammdaten aktualisieren“ im Menü). */
+    var isAdmin by mutableStateOf(false)
+        private set
+
+    /** Fehlermeldung des Dialogs „Passwort ändern“; getrennt von [error]. */
+    var passwordError by mutableStateOf<String?>(null)
+        private set
+
+    // Dialog „Stammdaten aktualisieren“ (nur Administratoren)
+    var updateCheck by mutableStateOf<StammdatenCheck?>(null)
+        private set
+    var updateBusy by mutableStateOf(false)
+        private set
+    var updateError by mutableStateOf<String?>(null)
+        private set
+    var updateResult by mutableStateOf<String?>(null)
         private set
 
     /** true, wenn die angezeigten Daten aus dem Cache stammen, weil der Server nicht erreichbar war. */
@@ -126,6 +147,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                 userData = fresh
                 offline = false
                 storeCache(fresh)
+                syncInBackground()
             } catch (e: UnauthorizedException) {
                 clearSession()
                 error = "Sitzung abgelaufen. Bitte erneut anmelden."
@@ -137,6 +159,14 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             } finally {
                 busy = false
             }
+        }
+    }
+
+    /** Fragt im Hintergrund den Admin-Status ab und holt neuere Stammdaten vom Server; Fehler sind hier unkritisch. */
+    private fun syncInBackground() {
+        viewModelScope.launch {
+            runCatching { isAdmin = api().isAdmin() }
+            runCatching { stammdaten.syncFromServer(api()) }
         }
     }
 
@@ -182,6 +212,77 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun dismissAccountError() { accountError = null }
+
+    /** Ändert das Passwort. Prüft vorab wie der Server (6–72 Zeichen); Fehler erscheinen im Dialog ([passwordError]). */
+    fun changePassword(old: String, new: String, repeat: String, onDone: () -> Unit) {
+        validateNewPassword(old, new, repeat)?.let { passwordError = it; return }
+        viewModelScope.launch {
+            saving = true
+            passwordError = null
+            try {
+                api().changePassword(old, new)
+                onDone()
+            } catch (e: UnauthorizedException) {
+                clearSession()
+                error = "Sitzung abgelaufen. Bitte erneut anmelden."
+            } catch (e: ApiException) {
+                passwordError = e.message
+            } finally {
+                saving = false
+            }
+        }
+    }
+
+    fun dismissPasswordError() { passwordError = null }
+
+    /** Administrator: fragt den Server, welche Charaktere, Lichtkegel und Relikt-Sets in der Datenbank fehlen. */
+    fun checkStammdaten() {
+        viewModelScope.launch {
+            updateBusy = true
+            updateError = null
+            updateResult = null
+            updateCheck = null
+            try {
+                updateCheck = api().checkStammdaten()
+            } catch (e: UnauthorizedException) {
+                clearSession()
+                error = "Sitzung abgelaufen. Bitte erneut anmelden."
+            } catch (e: ApiException) {
+                updateError = e.message
+            } finally {
+                updateBusy = false
+            }
+        }
+    }
+
+    /** Administrator: trägt die Auswahl auf dem Server ein und holt die neuen Einträge danach in die App. */
+    fun applyStammdaten(selection: UpdateRequest) {
+        viewModelScope.launch {
+            updateBusy = true
+            updateError = null
+            try {
+                val result = api().applyStammdaten(selection)
+                val images = result.images
+                updateResult = "${result.added} Einträge ergänzt. Bilder: ${images.geladen} geladen, " +
+                    "${images.vorhanden} schon vorhanden" + if (images.fehler > 0) ", ${images.fehler} FEHLGESCHLAGEN." else "."
+                updateCheck = null
+                runCatching { stammdaten.syncFromServer(api()) }
+            } catch (e: UnauthorizedException) {
+                clearSession()
+                error = "Sitzung abgelaufen. Bitte erneut anmelden."
+            } catch (e: ApiException) {
+                updateError = e.message
+            } finally {
+                updateBusy = false
+            }
+        }
+    }
+
+    fun dismissUpdate() {
+        updateCheck = null
+        updateError = null
+        updateResult = null
+    }
 
     /** Führt eine Schreibaktion aus: Ladezustand, Fehlermeldung und abgelaufene Sitzung einheitlich behandelt. */
     private fun write(action: suspend (ApiClient) -> Unit, onSuccess: () -> Unit) {
@@ -255,6 +356,8 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         userData = null
         offline = false
         dataSavedAt = null
+        isAdmin = false
+        dismissUpdate()
         cache.clear()   // Daten eines abgemeldeten Nutzers nicht auf dem Gerät lassen
     }
 }

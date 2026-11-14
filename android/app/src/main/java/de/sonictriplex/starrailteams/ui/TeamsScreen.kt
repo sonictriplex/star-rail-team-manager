@@ -56,6 +56,8 @@ fun TeamsScreen(vm: AppViewModel, onOpenCharacter: (String) -> Unit, onNewTeam: 
     var deleting by remember { mutableStateOf<String?>(null) }
     var menuOpen by remember { mutableStateOf(false) }
     var deletingAccount by remember { mutableStateOf(false) }
+    var changingPassword by remember { mutableStateOf(false) }
+    var updatingData by remember { mutableStateOf(false) }
     var showAbout by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
@@ -74,6 +76,18 @@ fun TeamsScreen(vm: AppViewModel, onOpenCharacter: (String) -> Unit, onNewTeam: 
                                 text = { Text("Abmelden") },
                                 onClick = { menuOpen = false; vm.logout() },
                                 enabled = !vm.busy,
+                            )
+                            if (vm.isAdmin) {
+                                DropdownMenuItem(
+                                    text = { Text("Stammdaten aktualisieren") },
+                                    onClick = { menuOpen = false; updatingData = true },
+                                    enabled = !vm.busy && !vm.offline,
+                                )
+                            }
+                            DropdownMenuItem(
+                                text = { Text("Passwort ändern") },
+                                onClick = { menuOpen = false; vm.dismissPasswordError(); changingPassword = true },
+                                enabled = !vm.busy && !vm.offline,
                             )
                             DropdownMenuItem(
                                 text = { Text("Über") },
@@ -167,6 +181,9 @@ fun TeamsScreen(vm: AppViewModel, onOpenCharacter: (String) -> Unit, onNewTeam: 
     if (deletingAccount) {
         DeleteAccountDialog(vm, onDismiss = { deletingAccount = false })
     }
+
+    if (changingPassword) ChangePasswordDialog(vm, onDismiss = { changingPassword = false })
+    if (updatingData && vm.isAdmin) StammdatenUpdateDialog(vm, onDismiss = { updatingData = false })
 
     deleting?.let { name ->
         AlertDialog(

@@ -29,6 +29,12 @@ private data class TokenRequest(val username: String, val password: String, val 
 private data class PasswordRequest(val password: String)
 
 @Serializable
+private data class ChangePasswordRequest(
+    @kotlinx.serialization.SerialName("old_password") val oldPassword: String,
+    @kotlinx.serialization.SerialName("new_password") val newPassword: String,
+)
+
+@Serializable
 private data class RegisterRequest(val username: String, val password: String)
 
 @Serializable
@@ -109,6 +115,58 @@ class ApiClient(
         val request = authorized(endpoint("auth.php", mapOf("action" to "delete_account")))
             .post(body.toRequestBody(JSON_TYPE)).build()
         execute(request)
+    }
+
+    /** Ändert das Passwort. Ein falsches aktuelles Passwort meldet der Server mit 403 (Meldung erscheint als [ApiException]). */
+    suspend fun changePassword(oldPassword: String, newPassword: String) {
+        val body = AppJson.encodeToString(ChangePasswordRequest.serializer(), ChangePasswordRequest(oldPassword, newPassword))
+        val request = authorized(endpoint("auth.php", mapOf("action" to "change_password")))
+            .post(body.toRequestBody(JSON_TYPE)).build()
+        execute(request)
+    }
+
+    /** true, wenn das Konto auf dem Server als Administrator eingetragen ist (siehe web/api/admins.local.php). */
+    suspend fun isAdmin(): Boolean {
+        val request = authorized(endpoint("auth.php", mapOf("action" to "status"))).get().build()
+        return decode(StatusResponse.serializer(), execute(request)).isAdmin
+    }
+
+    /** Nur Administratoren: prüft die Datenquelle und liefert, was in der Datenbank fehlt (ändert nichts). */
+    suspend fun checkStammdaten(): StammdatenCheck {
+        val request = authorized(endpoint("stammdaten.php", mapOf("action" to "check"))).get().build()
+        return decode(StammdatenCheck.serializer(), execute(request))
+    }
+
+    /** Nur Administratoren: trägt die ausgewählten Einträge samt Bildern auf dem Server ein. */
+    suspend fun applyStammdaten(selection: UpdateRequest): UpdateResult {
+        val body = AppJson.encodeToString(UpdateRequest.serializer(), selection)
+        val request = authorized(endpoint("stammdaten.php"))
+            .header("X-Requested-With", "fetch")   // der Server nimmt Änderungen nur so an
+            .post(body.toRequestBody(JSON_TYPE)).build()
+        return decode(UpdateResult.serializer(), execute(request))
+    }
+
+    /** Die Stammdaten des Servers (öffentlich): Charaktere, Lichtkegel und Relikt-Sets, auch neuere als in der APK. */
+    suspend fun fetchMasterData(): Stammdaten {
+        suspend fun <T> list(file: String, serializer: kotlinx.serialization.KSerializer<T>): List<T> =
+            decode(kotlinx.serialization.builtins.ListSerializer(serializer), execute(Request.Builder().url(endpoint(file)).get().build()))
+        return Stammdaten(
+            characters = list("characters.php", Character.serializer()),
+            lightCones = list("light_cones.php", LightCone.serializer()),
+            relicSets = list("relic_sets.php", RelicSet.serializer()),
+        )
+    }
+
+    /** Lädt ein Bild des Servers (z. B. `assets/images/char_x.png`), oder null. */
+    suspend fun downloadImage(path: String): ByteArray? = withContext(Dispatchers.IO) {
+        try {
+            val url = (baseUrl.trimEnd('/') + "/" + path.trimStart('/')).toHttpUrlOrNull() ?: return@withContext null
+            http.newCall(Request.Builder().url(url).get().build()).execute().use { r ->
+                if (r.isSuccessful) r.body.bytes() else null
+            }
+        } catch (_: IOException) {
+            null
+        }
     }
 
     /** Builds und Teams des angemeldeten Nutzers im gemeinsamen Austauschformat. */

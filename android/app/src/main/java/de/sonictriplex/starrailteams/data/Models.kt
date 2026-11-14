@@ -111,3 +111,62 @@ fun parseExchange(text: String): ExchangeFile {
     require(file.version <= EXCHANGE_VERSION) { "Die Datei stammt aus einer neueren Version und kann nicht gelesen werden." }
     return file
 }
+
+// --- Konto und Stammdaten-Aktualisierung (Antworten der Web-API) ---
+
+@Serializable
+data class StatusResponse(val username: String = "", @SerialName("is_admin") val isAdmin: Boolean = false)
+
+/** Ein Eintrag der Liste „Stammdaten aktualisieren“ (Felder je nach Gruppe). */
+@Serializable
+data class UpdateEntry(
+    val name: String,
+    val element: String = "",
+    val path: String = "",
+    val rarity: Int = 0,
+    val kind: String = "",
+) {
+    /** Kurzbeschreibung für die Liste, z. B. „5★ Blitz, Die Nichtigkeit“. */
+    fun summary(): String = listOf(
+        if (rarity > 0) "$rarity★" else "",
+        listOf(element, path).filter { it.isNotBlank() }.joinToString(", "),
+        kind,
+    ).filter { it.isNotBlank() }.joinToString(" ")
+}
+
+@Serializable
+data class UpdateGroups(
+    val characters: List<UpdateEntry> = emptyList(),
+    @SerialName("light_cones") val lightCones: List<UpdateEntry> = emptyList(),
+    @SerialName("relic_sets") val relicSets: List<UpdateEntry> = emptyList(),
+) {
+    val total: Int get() = characters.size + lightCones.size + relicSets.size
+}
+
+/** Ergebnis von `stammdaten.php?action=check`: was in der Datenbank fehlt, und was sich nicht eintragen lässt. */
+@Serializable
+data class StammdatenCheck(@SerialName("new") val found: UpdateGroups = UpdateGroups(), val skipped: List<String> = emptyList())
+
+/** Auswahl, die an den Server geht (nur Namen; der Server rechnet die Einträge selbst aus der Quelle). */
+@Serializable
+data class UpdateRequest(
+    val characters: List<String>,
+    @SerialName("light_cones") val lightCones: List<String>,
+    @SerialName("relic_sets") val relicSets: List<String>,
+)
+
+@Serializable
+data class UpdateImages(val geladen: Int = 0, val vorhanden: Int = 0, val fehler: Int = 0)
+
+@Serializable
+data class UpdateResult(val added: Int = 0, val images: UpdateImages = UpdateImages())
+
+/** Prüft ein neues Passwort wie der Server: 6 bis 72 Zeichen. Rückgabe: Fehlermeldung oder null. */
+fun validateNewPassword(old: String, new: String, repeat: String): String? = when {
+    old.isEmpty() -> "Bitte das aktuelle Passwort eingeben."
+    new.length < 6 -> "Das neue Passwort muss mindestens 6 Zeichen lang sein."
+    new.toByteArray().size > 72 -> "Das neue Passwort darf höchstens 72 Zeichen lang sein."
+    new == old -> "Das neue Passwort muss sich vom aktuellen unterscheiden."
+    new != repeat -> "Die beiden neuen Passwörter stimmen nicht überein."
+    else -> null
+}
