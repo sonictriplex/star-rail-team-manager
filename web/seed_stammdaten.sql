@@ -55,7 +55,7 @@ INSERT INTO characters (name, element, path, rarity, icon_path) VALUES
   ('Luocha', 'Imaginär', 'Der Überfluss', 5, 'assets/images/char_luocha.png'),
   ('Lynx', 'Quantum', 'Der Überfluss', 4, 'assets/images/char_lynx.png'),
   ('March 7th', 'Eis', 'Die Bewahrung', 4, 'assets/images/char_march_7th.png'),
-  ('March 7th', 'Imaginär', 'Die Jagd', 4, 'assets/images/char_march_7th.png'),
+  ('March 7th (Die Jagd)', 'Imaginär', 'Die Jagd', 4, 'assets/images/char_march_7th_die_jagd.png'),
   ('Misha', 'Eis', 'Die Zerstörung', 4, 'assets/images/char_misha.png'),
   ('Mortenax Blade', 'Feuer', 'Die Nichtigkeit', 5, 'assets/images/char_mortenax_blade.png'),
   ('Moze', 'Blitz', 'Die Jagd', 4, 'assets/images/char_moze.png'),

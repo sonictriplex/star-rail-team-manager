@@ -71,9 +71,16 @@ def find_new(data):
     skipped = []
 
     seen = set()
+    # Gleiche Namen in der Quelle (z. B. zwei "March 7th" mit verschiedenem Pfad): der mit der kleinsten ID behält den Namen,
+    # die übrigen bekommen den Pfad als Zusatz ("March 7th (Die Jagd)"), weil der Name in der Datenbank eindeutig sein muss
+    first_id = {}
+    for cid, c in sorted(chars_src.items(), key=lambda kv: int(kv[0])):
+        first_id.setdefault(c["name"], cid)
     for cid, c in chars_src.items():
         path, element = PATHS.get(c["path"]), ELEMENTS.get(c["element"])
         name = c["name"]
+        if name != "{NICKNAME}" and first_id[name] != cid and path:
+            name = f"{name} ({path})"
         if name == "{NICKNAME}":                       # Trailblazer: je Pfad ein Eintrag (Varianten teilen sich ihn)
             name = f"Trailblazer ({re.sub(r'^(Die|Der|Das)\s+', '', path)})" if path else name   # Name ohne Artikel, bleibt stabil
         if name.casefold() in have["characters"] or name.casefold() in seen:

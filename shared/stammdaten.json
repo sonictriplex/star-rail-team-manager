@@ -372,11 +372,11 @@
       "icon_path": "assets/images/char_march_7th.png"
     },
     {
-      "name": "March 7th",
+      "name": "March 7th (Die Jagd)",
       "element": "Imaginär",
       "path": "Die Jagd",
       "rarity": 4,
-      "icon_path": "assets/images/char_march_7th.png"
+      "icon_path": "assets/images/char_march_7th_die_jagd.png"
     },
     {
       "name": "Misha",

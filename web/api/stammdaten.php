@@ -39,10 +39,17 @@ function find_new(PDO $pdo): array {
     $skipped = [];
 
     $seen = [];
+    // Gleiche Namen in der Quelle (z. B. zwei "March 7th" mit verschiedenem Pfad): die kleinste ID behält den Namen,
+    // die übrigen bekommen den Pfad als Zusatz, weil der Name in der Datenbank eindeutig sein muss
+    $firstId = [];
+    $ids = array_keys($chars);
+    sort($ids, SORT_NUMERIC);
+    foreach ($ids as $cid) $firstId[$chars[$cid]['name']] ??= (string)$cid;
     foreach ($chars as $id => $c) {
         $path = PATHS[$c['path']] ?? null;
         $element = ELEMENTS[$c['element']] ?? null;
         $name = $c['name'];
+        if ($name !== '{NICKNAME}' && $firstId[$name] !== (string)$id && $path) $name = "$name ($path)";
         if ($name === '{NICKNAME}') $name = $path ? 'Trailblazer (' . preg_replace('/^(Die|Der|Das)\s+/u', '', $path) . ')' : $name;   // je Pfad ein Eintrag
         $key = mb_strtolower($name);
         if (isset($have['characters'][$key]) || isset($seen[$key])) continue;
