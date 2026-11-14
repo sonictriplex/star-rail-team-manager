@@ -6,13 +6,21 @@ Quelle: github.com/Mar-7th/StarRailRes (Daten und Bilder, englische Namen wie in
     python3 tools/update_stammdaten.py            Prüfen (ändert nichts, Exit-Code 1 = es fehlt etwas)
     python3 tools/update_stammdaten.py --apply    Fehlendes ergänzen (fragt vorher nach)
     python3 tools/update_stammdaten.py --apply --yes   ohne Rückfrage
+    python3 tools/update_stammdaten.py --auto     ALLES in einem Schritt (siehe unten), geeignet für regelmäßige Läufe
 
 Was --apply macht:
   - trägt Neues in shared/stammdaten.json ein (an der passenden Stelle der Sortierung, ohne Umformatierung)
   - lädt die Bilder nach shared/assets/images (vorhandene Dateien werden nie überschrieben)
   - erzeugt web/seed_stammdaten.sql neu (web/tools/make_seed.py)
-Danach: web/seed_stammdaten.sql in phpMyAdmin importieren (wiederholbar) und deploy/deploy.sh starten.
-Das Skript deployt nichts selbst und greift nicht auf die Datenbank zu.
+Ohne --auto danach: web/seed_stammdaten.sql in phpMyAdmin importieren (wiederholbar) und deploy/deploy.sh starten.
+
+--auto erledigt zusätzlich ohne Rückfrage und ohne Handarbeit:
+  1. committet die Änderungen lokal (ohne Push; abschaltbar mit --no-commit)
+  2. lädt Bilder und Code per deploy/deploy.sh hoch
+  3. spielt den Seed über tools/remote_sql.py in die Server-Datenbank ein
+  4. prüft über die API, ob alles angekommen ist
+Sicherung gegen Fehlläufe: Mehr als --max-new neue Einträge (Standard 15) brechen --auto ab, ohne etwas zu ändern.
+Der Lauf ist wiederholbar: ein zweiter Aufruf findet nichts Neues und meldet „Alles aktuell“.
 
 Unbekannte Pfade oder Elemente (z. B. ein neuer Pfad im Spiel) werden nur gemeldet und NICHT eingetragen:
 Die Datenbank-Spalten sind ENUMs. Erst web/schema.sql und eine Migration (ALTER TABLE ... MODIFY) ergänzen,
@@ -110,7 +118,12 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--apply", action="store_true", help="Fehlendes ergänzen (Standard: nur prüfen)")
     ap.add_argument("--yes", action="store_true", help="bei --apply nicht nachfragen")
+    ap.add_argument("--auto", action="store_true", help="ergänzen, committen, deployen, Datenbank aktualisieren, prüfen")
+    ap.add_argument("--max-new", type=int, default=15, help="bei --auto: Abbruch bei mehr neuen Einträgen (Standard 15)")
+    ap.add_argument("--no-commit", action="store_true", help="bei --auto: nicht committen")
     args = ap.parse_args()
+    if args.auto:
+        args.apply = args.yes = True
 
     path = ROOT / "shared" / "stammdaten.json"
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -141,6 +154,10 @@ def main():
     if not total:
         print("\nNichts zu ergänzen.")
         return 1
+    if args.auto and total > args.max_new:
+        print(f"\nABBRUCH: {total} neue Einträge, erlaubt sind bei --auto höchstens {args.max_new}. "
+              "Liste prüfen und mit --apply (oder --max-new) bewusst fortfahren. Nichts wurde verändert.")
+        return 1
     if not args.yes and input("\nDiese Einträge ergänzen? Einträge, die im Spiel noch nicht erschienen sind, vorher prüfen. [j/N] ").strip().lower() not in ("j", "ja", "y"):
         print("Abgebrochen.")
         return 1
@@ -164,7 +181,61 @@ def main():
     seed = ROOT / "web" / "tools" / "make_seed.py"
     if seed.exists():
         subprocess.run([sys.executable, str(seed)], check=True)
-    print("Nächste Schritte: web/seed_stammdaten.sql in phpMyAdmin importieren (wiederholbar), dann deploy/deploy.sh.")
+    if not args.auto:
+        print("Nächste Schritte: web/seed_stammdaten.sql in phpMyAdmin importieren (wiederholbar), dann deploy/deploy.sh.")
+        return 1 if skipped else 0
+    return publish(new, args, skipped)
+
+
+def run(cmd):
+    return subprocess.run(cmd, cwd=ROOT).returncode == 0
+
+
+def publish(new, args, skipped):
+    """--auto: committen, deployen, Datenbank aktualisieren, per API prüfen."""
+    print("\n== 1/4 Commit ==")
+    if args.no_commit or not (ROOT / ".git").exists():
+        print("  übersprungen")
+    else:
+        names = ", ".join(e["name"] for v in new.values() for e in v)
+        paths = ["shared/stammdaten.json", "shared/assets/images", "web/seed_stammdaten.sql"]
+        run(["git", "add", *paths])
+        msg = f"Stammdaten aktualisiert: {names}"[:200]
+        print("  " + ("committet" if run(["git", "commit", "-q", "-m", msg, "--", *paths]) else "nichts zu committen"))
+
+    print("\n== 2/4 Deploy (Bilder und Code) ==")
+    if not run([str(ROOT / "deploy" / "deploy.sh")]):
+        print("FEHLER beim Deploy. Die Datenbank wurde NICHT aktualisiert.")
+        return 1
+
+    print("\n== 3/4 Datenbank ==")
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import remote_sql
+    try:
+        remote_sql.run_sql((ROOT / "web" / "seed_stammdaten.sql").read_text(encoding="utf-8"))
+    except (RuntimeError, SystemExit) as e:
+        print(f"FEHLER: {e}")
+        return 1
+
+    print("\n== 4/4 Kontrolle über die API ==")
+    base = remote_sql.load_env()["SITE_URL"].rstrip("/")
+    endpoints = {"characters": "characters.php", "light_cones": "light_cones.php", "relic_sets": "relic_sets.php"}
+    missing = []
+    for key, endpoint in endpoints.items():
+        if not new[key]:
+            continue
+        try:
+            req = urllib.request.Request(f"{base}/api/{endpoint}", headers={"User-Agent": "stammdaten-update"})
+            with urllib.request.urlopen(req, timeout=60) as r:
+                online = {x["name"] for x in json.load(r)}
+        except Exception as e:
+            print(f"FEHLER bei der Kontrolle von {endpoint}: {e}")
+            return 1
+        missing += [e["name"] for e in new[key] if e["name"] not in online]
+    if missing:
+        print("FEHLT online: " + ", ".join(missing))
+        return 1
+    print("  alle neuen Einträge sind online.")
     return 1 if skipped else 0
 
 

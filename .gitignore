@@ -3,3 +3,5 @@ web/api/config.local.php
 node_modules/
 deploy/*.local.*
 deploy/backup/
+__pycache__/
+*.pyc

@@ -21,13 +21,24 @@ Ein Build gehört zum **Charakter, nicht zum Team**: Kommt ein Charakter in mehr
 
 ## Stammdaten aktualisieren
 
-`tools/update_stammdaten.py` vergleicht Charaktere, Lichtkegel und Relikt-Sets mit der Quelle [Mar-7th/StarRailRes](https://github.com/Mar-7th/StarRailRes) und ergänzt Fehlendes:
+Ein Befehl erledigt alles:
 
 ```sh
-python3 tools/update_stammdaten.py            # nur prüfen (Exit-Code 1 = es fehlt etwas)
-python3 tools/update_stammdaten.py --apply    # Fehlendes ergänzen (fragt vorher nach)
+python3 tools/update_stammdaten.py --auto
 ```
 
-`--apply` trägt die Einträge in `shared/stammdaten.json` ein, lädt die Bilder (vorhandene werden nie überschrieben) und erzeugt `web/seed_stammdaten.sql` neu. Danach die SQL-Datei in phpMyAdmin importieren (wiederholbar) und `deploy/deploy.sh` starten; das Skript deployt nichts selbst. Die Quelle enthält manchmal Einträge, die im Spiel noch nicht erschienen sind, daher vor `--apply` die Liste prüfen. Ein **neuer Pfad oder ein neues Element** wird nur gemeldet, nicht eingetragen: Die Spalten sind ENUMs, erst Schema, Migration, Icon und Filter ergänzen (Hinweise im Kopf des Skripts).
+Er vergleicht Charaktere, Lichtkegel und Relikt-Sets mit der Quelle [Mar-7th/StarRailRes](https://github.com/Mar-7th/StarRailRes), ergänzt Fehlendes in `shared/stammdaten.json`, lädt die Bilder, committet lokal (ohne Push), deployt per `deploy/deploy.sh`, spielt die Daten über `tools/remote_sql.py` in die Server-Datenbank ein und prüft zum Schluss über die API, ob alles online ist. Ein zweiter Aufruf meldet „Alles aktuell“, der Befehl eignet sich also für regelmäßige Läufe (Cron oder systemd-Timer).
+
+Weitere Aufrufe:
+
+```sh
+python3 tools/update_stammdaten.py            # nur prüfen (Exit-Code 1 = es fehlt etwas), ändert nichts
+python3 tools/update_stammdaten.py --apply    # nur lokal ergänzen (mit Rückfrage), ohne Deploy und Datenbank
+python3 tools/remote_sql.py web/migrations/<datei>.sql   # eine SQL-Datei (INSERT/UPDATE/DELETE) auf dem Server ausführen
+```
+
+**Sicherungen:** `--auto` bricht ohne Änderung ab, wenn mehr als 15 neue Einträge gefunden werden (`--max-new`), denn die Quelle enthält manchmal Einträge, die im Spiel noch nicht erschienen sind. Ein **neuer Pfad oder ein neues Element** wird nur gemeldet, nicht eingetragen: Die Spalten sind ENUMs, erst Schema, Migration, Icon und Filter ergänzen (Hinweise im Kopf des Skripts).
+
+**Wie die Datenbank ohne phpMyAdmin erreicht wird:** Sie ist nur vom Server aus erreichbar. `tools/remote_sql.py` lädt eine einmalige PHP-Datei (`api/_sql_<zufall>.php`) per FTPS hoch und ruft sie per HTTPS auf. Die Datei enthält nur den SHA-256-Hash eines Zufalls-Tokens, nutzt die vorhandene `api/db.php`, führt alles in einer Transaktion aus (nur INSERT/UPDATE/DELETE/REPLACE), löscht sich selbst und wird vom Skript per FTP-Liste kontrolliert.
 
 <sub>Inoffizielles Fanprojekt, nicht mit HoYoverse verbunden. Honkai: Star Rail sowie zugehörige Namen und Bilder sind Eigentum von HoYoverse.</sub>
