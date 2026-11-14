@@ -2,6 +2,9 @@
 
 Dieser Verlauf fasst die wichtigsten Änderungen zusammen. Web, Desktop und Android haben ab 1.2.1 wieder dieselbe Versionsnummer (davor liefen sie getrennt); die Web-Version läuft per `deploy/deploy.sh` auf dem Server, der Desktop direkt aus dem Repo.
 
+## 1.4.1 (15.11.2026)
+- Web: In der Set-Auswahl erscheint ein gesuchtes Relikt-Teil als eigene Zeile (z. B. „Vielgesichtige Maske des Diebs“, darunter „Kopf · Dieb des fallenden Meteors“); ein Klick trägt das zugehörige Set ein. Teile erscheinen nur im passenden Slot-Typ (Relikt-Teile bei Kopf bis Füße, Ornament-Teile bei Planarsphäre und Verbindungsseil)
+
 ## 1.4.0 (14.11.2026)
 - Die Namen der einzelnen Relikt-Teile stehen jetzt in den Stammdaten (auf Deutsch, z. B. „Vielgesichtige Maske des Diebs“ für das Kopfteil von „Dieb des fallenden Meteors“). Die Suche bei der Set-Auswahl findet ein Set auch über den Namen eines seiner Teile und zeigt das gefundene Teil unter dem Set an (Web und Android). Die Tooltips bzw. die Info-Anzeige nennen die Teile (Web, Desktop, Android)
 - Neue Spalte `relic_sets.pieces_json`: Web per `web/migrations/010_relikt_teile.sql` (danach `web/seed_stammdaten.sql`), Desktop automatisch beim Start. Das Update-Werkzeug und das Admin-Menü tragen die Teile neuer Sets selbst ein; `python3 tools/update_stammdaten.py --texts` liest sie für vorhandene Sets neu ein

@@ -188,7 +188,7 @@
             <div class="text-5xl mb-2 text-accent" aria-hidden="true">✦</div>
             <h2 id="aboutTitle" class="app-title text-lg font-bold text-accent mb-1">Honkai: Star Rail Team & Build Manager</h2>
             <!-- Bei jeder Änderung zusammen mit CHANGELOG.md hochzählen (ein Test vergleicht beide) -->
-            <div id="webVersion" class="text-sm text-gray-200 mb-3">Web-Version 1.4.0</div>
+            <div id="webVersion" class="text-sm text-gray-200 mb-3">Web-Version 1.4.1</div>
             <p class="text-sm text-gray-300 mb-3">Teams aus bis zu vier Charakteren und die Builds deiner Charaktere verwalten.</p>
             <p class="text-[11px] text-gray-400 mb-4">Inoffizielles Fanprojekt, nicht mit HoYoverse verbunden. Honkai: Star Rail sowie zugehörige Namen und Bilder sind Eigentum von HoYoverse.</p>
             <a id="aboutLogoLink" href="https://www.media-matrix.de" target="_blank" rel="noopener noreferrer" title="www.media-matrix.de" class="inline-block mb-4 opacity-90 hover:opacity-100 transition-opacity">
@@ -731,12 +731,15 @@
             const current = document.getElementById(`rel_set_${i}`).value;
             const list = document.getElementById(`rel_set_list_${i}`);
             const none = kind === 'Relikt' ? '— Kein Relikt-Set —' : '— Kein Ornament —';
-            // Die Suche findet ein Set über seinen Namen oder den Namen eines seiner Teile (z. B. "Vielgesichtige Maske des Diebs")
-            const hitPiece = s => query && !s.name.toLowerCase().includes(query) ? relicPieceList(s).find(p => p.name.toLowerCase().includes(query)) : null;
-            const sets = availableRelicSets.filter(x => x.kind === kind && (!query || x.name.toLowerCase().includes(query) || relicPieceList(x).some(p => p.name.toLowerCase().includes(query))));
-            const item = s => { const hit = hitPiece(s); return `<li role="option" data-set="${escapeHtml(s.name)}" title="${escapeHtml(relicBonusTip(s.name))}" onclick="pickRelicSet(${i}, this.dataset.set)" class="px-2 py-1 rounded cursor-pointer hover:bg-[#262338] flex items-center gap-2 ${s.name === current ? 'bg-[#2d293e] text-accent' : 'text-gray-200'}">${setIconHTML(s.name, 'w-8 h-8')}<div class="min-w-0"><div class="truncate">${escapeHtml(s.name)}</div>${hit ? `<div class="truncate text-xs text-gray-400">${escapeHtml(hit.slot)}: ${escapeHtml(hit.name)}</div>` : ''}</div></li>`; };
+            // Die Suche findet Sets über ihren Namen und einzelne Teile über ihren Namen (z. B. "Vielgesichtige Maske des Diebs");
+            // ein Teil erscheint als eigene Zeile, ein Klick darauf trägt sein Set ein
+            const setsByName = availableRelicSets.filter(x => x.kind === kind && (!query || x.name.toLowerCase().includes(query)));
+            const pieceHits = !query ? [] : availableRelicSets.filter(x => x.kind === kind)
+                .flatMap(x => relicPieceList(x).filter(p => p.name.toLowerCase().includes(query)).map(p => ({ set: x, piece: p })));
+            const row = (s, title, sub) => `<li role="option" data-set="${escapeHtml(s.name)}" title="${escapeHtml(relicBonusTip(s.name))}" onclick="pickRelicSet(${i}, this.dataset.set)" class="px-2 py-1 rounded cursor-pointer hover:bg-[#262338] flex items-center gap-2 ${s.name === current ? 'bg-[#2d293e] text-accent' : 'text-gray-200'}">${setIconHTML(s.name, 'w-8 h-8')}<div class="min-w-0"><div class="truncate">${escapeHtml(title)}</div>${sub ? `<div class="truncate text-xs text-gray-400">${escapeHtml(sub)}</div>` : ''}</div></li>`;
+            const sets = [...setsByName.map(s => row(s, s.name, '')), ...pieceHits.map(h => row(h.set, h.piece.name, `${h.piece.slot} · ${h.set.name}`))];
             list.innerHTML = `<li role="option" data-set="" onclick="pickRelicSet(${i}, '')" class="px-2 py-1 rounded cursor-pointer hover:bg-[#262338] text-gray-400">${none}</li>`
-                + (sets.length ? sets.map(item).join('') : '<li class="px-2 py-2 text-gray-400">Nichts gefunden</li>');
+                + (sets.length ? sets.join('') : '<li class="px-2 py-2 text-gray-400">Nichts gefunden</li>');
             setActiveRelicSet(i, query ? list.querySelector('li[data-set]:not([data-set=""])') : null);
         }
 

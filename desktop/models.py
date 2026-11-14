@@ -7,7 +7,7 @@ from typing import Optional
 # Projektverzeichnis: alle Pfade werden relativ hierzu aufgelöst,
 # damit die App unabhängig vom aktuellen Arbeitsverzeichnis funktioniert.
 # Version der Desktop-App; zusammen mit dem Web-Stand hochzählen
-APP_VERSION = "1.4.0"
+APP_VERSION = "1.4.1"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Gemeinsame Daten für Desktop, Web und weitere Clients (Bilder, Stammdaten)

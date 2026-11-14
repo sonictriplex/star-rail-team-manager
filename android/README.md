@@ -2,7 +2,7 @@
 
 Online-Client für die Web-Version. Die App greift **nicht** direkt auf MySQL zu, sondern über die PHP-API in `../web/api/` (Anmeldung per Token, siehe `../web/README.md`).
 
-**Stand (Version 1.4.0):** Anmelden, Registrieren, **Passwort ändern** und Konto löschen, Teamliste, Build-Ansicht sowie Bearbeiten und Speichern von Builds und Teams (anlegen, ändern, umbenennen, löschen) funktionieren. Teams und Builds lassen sich auch offline ansehen. **Administratoren** können neue Charaktere, Lichtkegel und Relikt-Sets eintragen, und die App gleicht ihre Stammdaten mit dem Server ab.
+**Stand (Version 1.4.1):** Anmelden, Registrieren, **Passwort ändern** und Konto löschen, Teamliste, Build-Ansicht sowie Bearbeiten und Speichern von Builds und Teams (anlegen, ändern, umbenennen, löschen) funktionieren. Teams und Builds lassen sich auch offline ansehen. **Administratoren** können neue Charaktere, Lichtkegel und Relikt-Sets eintragen, und die App gleicht ihre Stammdaten mit dem Server ab.
 
 ## Technik
 
