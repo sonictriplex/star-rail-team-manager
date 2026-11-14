@@ -199,6 +199,73 @@ if ($action === 'logout') {
 // 6. Konto löschen (POST {password}): entfernt den Nutzer samt Teams, Builds und allen Token.
 //    Das Passwort muss erneut stimmen; falsche Eingaben zählen wie beim Login für die Begrenzung.
 //    Bewusst 403 statt 401 bei falschem Passwort: 401 bedeutet für die Apps "Sitzung abgelaufen".
+if ($action === 'change_password') {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(405);
+        header('Allow: POST');
+        echo json_encode(["error" => "Passwort ändern nur per POST erlaubt."], JSON_UNESCAPED_UNICODE);
+        exit();
+    }
+
+    $current = current_user();
+    if ($current === null) {
+        http_response_code(401);
+        echo json_encode(["error" => "Nicht eingeloggt"], JSON_UNESCAPED_UNICODE);
+        exit();
+    }
+
+    $old = (string)($data['old_password'] ?? '');
+    $new = (string)($data['new_password'] ?? '');
+    if (strlen($new) < 6) {
+        http_response_code(400);
+        echo json_encode(["error" => "Das neue Passwort muss mindestens 6 Zeichen lang sein."], JSON_UNESCAPED_UNICODE);
+        exit();
+    }
+    if (strlen($new) > 72) {   // bcrypt ignoriert alles ab dem 73. Byte: lieber ablehnen als stillschweigend kürzen
+        http_response_code(400);
+        echo json_encode(["error" => "Das neue Passwort darf höchstens 72 Zeichen lang sein."], JSON_UNESCAPED_UNICODE);
+        exit();
+    }
+    if ($new === $old) {
+        http_response_code(400);
+        echo json_encode(["error" => "Das neue Passwort muss sich vom aktuellen unterscheiden."], JSON_UNESCAPED_UNICODE);
+        exit();
+    }
+
+    rl_login_gate($pdo, $current['username']);   // gleiche Begrenzung wie beim Login (siehe rate_limit.php)
+
+    $stmt = $pdo->prepare("SELECT password_hash FROM users WHERE id = ?");
+    $stmt->execute([$current['id']]);
+    $hash = $stmt->fetchColumn();
+
+    if ($hash === false || !password_verify($old, $hash)) {
+        rl_login_failed($pdo, $current['username']);
+        http_response_code(403);
+        echo json_encode(["error" => "Das aktuelle Passwort ist falsch."], JSON_UNESCAPED_UNICODE);
+        exit();
+    }
+    rl_login_succeeded($pdo, $current['username']);
+
+    try {
+        $pdo->beginTransaction();
+        $pdo->prepare("UPDATE users SET password_hash = ? WHERE id = ?")->execute([password_hash($new, PASSWORD_DEFAULT), $current['id']]);
+        // Alle anderen angemeldeten Apps müssen sich neu anmelden; ein Token dieser Anfrage bleibt gültig
+        $keep = ($GLOBALS['auth_token'] ?? '') !== '' ? hash('sha256', $GLOBALS['auth_token']) : '';
+        $pdo->prepare("DELETE FROM api_tokens WHERE user_id = ? AND token_hash <> ?")->execute([$current['id'], $keep]);
+        $pdo->commit();
+    } catch (Exception $e) {
+        if ($pdo->inTransaction()) $pdo->rollBack();
+        http_response_code(500);
+        error_log("auth.php change_password: " . $e->getMessage());
+        echo json_encode(["error" => "Das Passwort konnte nicht geändert werden."], JSON_UNESCAPED_UNICODE);
+        exit();
+    }
+
+    if (session_status() === PHP_SESSION_ACTIVE) session_regenerate_id(true);
+    echo json_encode(["success" => true], JSON_UNESCAPED_UNICODE);
+    exit();
+}
+
 if ($action === 'delete_account') {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         http_response_code(405);

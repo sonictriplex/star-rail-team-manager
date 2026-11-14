@@ -82,6 +82,8 @@
                     class="hidden block w-full text-left px-4 py-2 text-gray-100 hover:bg-[#2d293e] hover:text-accent transition-colors border-t border-white/10">Stammdaten aktualisieren</button>
                 <button type="button" role="menuitem" id="logoutBtn" onclick="closeUserMenu(); handleLogout()"
                     class="block w-full text-left px-4 py-2 text-gray-300 hover:bg-[#2d293e] hover:text-danger border-t border-white/10 transition-colors">Logout</button>
+                <button type="button" role="menuitem" id="changePasswordBtn" onclick="closeUserMenu(); openChangePassword()" title="Ändert dein Passwort"
+                    class="block w-full text-left px-4 py-2 text-gray-100 hover:bg-[#2d293e] hover:text-accent transition-colors border-t border-white/10">Passwort ändern</button>
                 <button type="button" role="menuitem" id="deleteAccountBtn" onclick="closeUserMenu(); openDeleteAccount()" title="Löscht dein Konto mit allen Teams und Builds endgültig"
                     class="block w-full text-left px-4 py-2 text-danger/80 hover:bg-[#2d293e] hover:text-danger transition-colors">Konto löschen</button>
                 <button type="button" role="menuitem" id="aboutBtn" onclick="closeUserMenu(); openAbout()"
@@ -193,6 +195,35 @@
                 <img src="/assets/images/mm_logo.png" alt="the media-matrix (www.media-matrix.de)" width="109" height="41" class="mx-auto">
             </a>
             <button type="button" onclick="closeAbout()" class="px-6 py-2 bg-inputBg hover:bg-[#2d293e] border border-[#332d47] text-gray-100 font-bold text-sm rounded transition-colors">Schließen</button>
+        </div>
+    </div>
+
+    <!-- MODAL: PASSWORT ÄNDERN -->
+    <div id="changePasswordModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 z-50">
+        <div role="dialog" aria-modal="true" aria-labelledby="changePasswordTitle" class="bg-cardBg border border-[#332d47] rounded-xl max-w-md w-full p-6 shadow-2xl text-white backdrop-blur-md">
+            <h2 id="changePasswordTitle" class="text-xl font-bold text-accent mb-4 text-center">Passwort ändern</h2>
+
+            <div id="changePasswordError" class="hidden mb-4 p-3 bg-danger/20 border border-danger/60 rounded text-red-200 text-xs font-semibold"></div>
+            <div id="changePasswordOk" class="hidden mb-4 p-3 bg-accent/10 border border-accent/60 rounded text-gray-100 text-xs font-semibold"></div>
+
+            <form id="changePasswordForm" onsubmit="handleChangePassword(event)" class="space-y-4">
+                <div>
+                    <label for="cpOld" class="block text-xs font-bold text-gray-300 mb-1">Aktuelles Passwort</label>
+                    <input type="password" id="cpOld" required autocomplete="current-password" class="w-full bg-inputBg border border-[#332d47] focus:border-accent text-white px-3 py-2 rounded text-sm outline-none">
+                </div>
+                <div>
+                    <label for="cpNew" class="block text-xs font-bold text-gray-300 mb-1">Neues Passwort (6 bis 72 Zeichen)</label>
+                    <input type="password" id="cpNew" required minlength="6" maxlength="72" autocomplete="new-password" class="w-full bg-inputBg border border-[#332d47] focus:border-accent text-white px-3 py-2 rounded text-sm outline-none">
+                </div>
+                <div>
+                    <label for="cpRepeat" class="block text-xs font-bold text-gray-300 mb-1">Neues Passwort wiederholen</label>
+                    <input type="password" id="cpRepeat" required minlength="6" maxlength="72" autocomplete="new-password" class="w-full bg-inputBg border border-[#332d47] focus:border-accent text-white px-3 py-2 rounded text-sm outline-none">
+                </div>
+                <div class="flex gap-3">
+                    <button type="button" onclick="closeChangePassword()" class="flex-1 py-2 bg-inputBg hover:bg-[#2d293e] border border-[#332d47] text-gray-100 font-bold text-sm rounded transition-colors">Schließen</button>
+                    <button type="submit" id="changePasswordSubmit" class="flex-1 py-2 bg-accent hover:bg-accentHover text-darkBg font-bold text-sm rounded shadow-md transition-colors disabled:opacity-50">Ändern</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -465,7 +496,7 @@
             const menu = document.getElementById('userMenu');
             if (menu && !menu.contains(event.target)) closeUserMenu();
         });
-        document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeUserMenu(); closeDeleteAccount(); closeAbout(); closeUpdateData(); } });
+        document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeUserMenu(); closeDeleteAccount(); closeAbout(); closeUpdateData(); closeChangePassword(); } });
 
         async function handleLogout() {
             try {
@@ -478,6 +509,59 @@
 
         function openAbout() { document.getElementById('aboutModal').classList.remove('hidden'); }
         function closeAbout() { document.getElementById('aboutModal').classList.add('hidden'); }
+
+        // --- Passwort ändern (aktuelles Passwort wird abgefragt; der Server prüft es) ---
+        function openChangePassword() {
+            ['cpOld', 'cpNew', 'cpRepeat'].forEach(id => { document.getElementById(id).value = ''; });
+            document.getElementById('changePasswordError').classList.add('hidden');
+            document.getElementById('changePasswordOk').classList.add('hidden');
+            document.getElementById('changePasswordForm').classList.remove('hidden');
+            document.getElementById('changePasswordModal').classList.remove('hidden');
+            document.getElementById('cpOld').focus();
+        }
+
+        function closeChangePassword() {
+            document.getElementById('changePasswordModal').classList.add('hidden');
+            ['cpOld', 'cpNew', 'cpRepeat'].forEach(id => { document.getElementById(id).value = ''; });
+        }
+
+        async function handleChangePassword(event) {
+            event.preventDefault();
+            const errorBox = document.getElementById('changePasswordError');
+            const okBox = document.getElementById('changePasswordOk');
+            const submit = document.getElementById('changePasswordSubmit');
+            errorBox.classList.add('hidden');
+            const oldPw = document.getElementById('cpOld').value;
+            const newPw = document.getElementById('cpNew').value;
+            if (newPw !== document.getElementById('cpRepeat').value) {
+                errorBox.textContent = 'Die beiden neuen Passwörter stimmen nicht überein.';
+                errorBox.classList.remove('hidden');
+                return;
+            }
+            submit.disabled = true;
+            try {
+                const res = await fetch(`${API_BASE}/auth.php?action=change_password`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ old_password: oldPw, new_password: newPw })
+                });
+                const data = await res.json().catch(() => ({}));
+                if (!res.ok) {
+                    errorBox.textContent = data.error || 'Das Passwort konnte nicht geändert werden.';
+                    errorBox.classList.remove('hidden');
+                    return;
+                }
+                ['cpOld', 'cpNew', 'cpRepeat'].forEach(id => { document.getElementById(id).value = ''; });
+                document.getElementById('changePasswordForm').classList.add('hidden');
+                okBox.textContent = 'Das Passwort wurde geändert. Andere angemeldete Geräte (z. B. die Android-App) müssen sich neu anmelden.';
+                okBox.classList.remove('hidden');
+            } catch (e) {
+                errorBox.textContent = 'Server nicht erreichbar. Bitte später erneut versuchen.';
+                errorBox.classList.remove('hidden');
+            } finally {
+                submit.disabled = false;
+            }
+        }
 
         // --- Konto löschen (Passwort wird erneut abgefragt; der Server prüft es) ---
         function openDeleteAccount() {
