@@ -166,6 +166,31 @@ class TooltipTest(unittest.TestCase):
         self.assertEqual(manager.get_light_cone_by_name("Entlang am vorbeiziehenden Ufer").passive["name"], "Fährmann")
 
 
+class TeilenamenTest(unittest.TestCase):
+    def setUp(self):
+        warnings.simplefilter("ignore", ResourceWarning)
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+
+    def test_sets_haben_teilenamen_im_tooltip(self):
+        manager = StarRailManager(os.path.join(self.tmp.name, "test.db"))
+        thief = manager.get_relic_set_by_name("Dieb des fallenden Meteors")
+        self.assertEqual(thief.pieces["Kopf"], ["Vielgesichtige Maske des Diebs"])
+        self.assertTrue(all(len(r.pieces) == (4 if r.kind == "Relikt" else 2) for r in manager.available_relic_sets))
+        self.assertIn("Vielgesichtige Maske des Diebs", thief.bonus_tooltip())
+
+    def test_alte_datenbank_bekommt_teilenamen(self):
+        import sqlite3
+        path = os.path.join(self.tmp.name, "alt.db")
+        with sqlite3.connect(path) as conn:           # relic_sets ohne die Spalte pieces_json
+            conn.executescript("""CREATE TABLE relic_sets (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE NOT NULL,
+                kind TEXT NOT NULL, bonus_2pc TEXT DEFAULT '', bonus_4pc TEXT DEFAULT '', icon_path TEXT);
+                INSERT INTO relic_sets (name, kind) VALUES ('Thief of Shooting Meteor', 'Relikt');""")
+        manager = StarRailManager(path)
+        self.assertEqual(manager.load_errors, [])
+        self.assertEqual(manager.get_relic_set_by_name("Dieb des fallenden Meteors").pieces["Hände"], ["Bemalte Handschuhe des Diebs"])
+
+
 class DeutscheNamenTest(unittest.TestCase):
     def setUp(self):
         warnings.simplefilter("ignore", ResourceWarning)

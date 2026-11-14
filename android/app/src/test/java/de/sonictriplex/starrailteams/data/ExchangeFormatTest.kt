@@ -158,4 +158,14 @@ class ExchangeFormatTest {
         assertEquals(null, LightCone(name = "X").passiveText(1))
         assertTrue(data.relicSets.all { !it.bonus2pc.isNullOrBlank() })
     }
+
+    @Test
+    fun relikteHabenTeilenamenAufDeutsch() {
+        val data = AppJson.decodeFromString<Stammdaten>(File(shared, "stammdaten.json").readText())
+        assertTrue(data.relicSets.all { it.pieceList().size == if (it.kind == "Relikt") 4 else 2 })
+        val thief = data.relicSets.first { it.name == "Dieb des fallenden Meteors" }
+        assertEquals("Kopf" to "Vielgesichtige Maske des Diebs", thief.pieceList().first())
+        assertTrue(thief.infoText()!!.contains("Teile:\nKopf: Vielgesichtige Maske des Diebs"))
+        assertEquals(null, RelicSet(name = "X").infoText())
+    }
 }

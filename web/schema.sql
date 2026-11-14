@@ -34,7 +34,8 @@ CREATE TABLE IF NOT EXISTS relic_sets (
     kind      ENUM('Relikt','Ornament') NOT NULL,
     bonus_2pc TEXT,
     bonus_4pc TEXT,                             -- bei Ornamenten NULL
-    icon_path VARCHAR(255) NULL
+    icon_path VARCHAR(255) NULL,
+    pieces_json MEDIUMTEXT NULL                 -- Namen der einzelnen Teile: {"Kopf": [..], "Hände": [..], ...}
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Nutzerdaten: ein Build pro Nutzer und Charakter (gilt in allen Teams)

@@ -23,7 +23,7 @@ SEED_PATH = os.path.join(SHARED_DIR, "stammdaten.json")
 TABLES = {
     "characters": ["name", "element", "path", "rarity", "icon_path"],
     "light_cones": ["name", "path", "rarity", "icon_path", "passive_json"],
-    "relic_sets": ["name", "kind", "bonus_2pc", "bonus_4pc", "icon_path"],
+    "relic_sets": ["name", "kind", "bonus_2pc", "bonus_4pc", "icon_path", "pieces_json"],
 }
 
 
@@ -32,6 +32,9 @@ def _row_from_json(table: str, row: dict) -> dict:
     if table == "light_cones":
         row = dict(row)
         row["passive_json"] = json.dumps(row["passive"], ensure_ascii=False) if row.get("passive") else None
+    elif table == "relic_sets":
+        row = dict(row)
+        row["pieces_json"] = json.dumps(row["pieces"], ensure_ascii=False) if row.get("pieces") else None
     return row
 
 
@@ -43,6 +46,12 @@ def _row_to_json(table: str, row: dict) -> dict:
             row["passive"] = json.loads(row.pop("passive_json", None) or "null")
         except json.JSONDecodeError:
             row["passive"] = None
+    elif table == "relic_sets":
+        row = dict(row)
+        try:
+            row["pieces"] = json.loads(row.pop("pieces_json", None) or "null") or {}
+        except json.JSONDecodeError:
+            row["pieces"] = {}
     return row
 
 
@@ -81,7 +90,7 @@ def import_seed(conn: sqlite3.Connection, path: str = SEED_PATH) -> dict[str, in
 
 
 def fill_texts(conn: sqlite3.Connection, path: str = SEED_PATH) -> int:
-    """Trägt die Fähigkeiten der Lichtkegel und die (deutschen) Set-Boni aus der JSON-Datei nach, auch in
+    """Trägt die Fähigkeiten der Lichtkegel, die (deutschen) Set-Boni und die Namen der Relikt-Teile aus der JSON-Datei nach, auch in
     bestehende Datenbanken. Rückgabe: Anzahl aktualisierter Einträge."""
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -91,8 +100,9 @@ def fill_texts(conn: sqlite3.Connection, path: str = SEED_PATH) -> int:
                            (json.dumps(row["passive"], ensure_ascii=False) if row.get("passive") else None, row["name"]))
         changed += cur.rowcount
     for row in data.get("relic_sets", []):
-        cur = conn.execute("UPDATE relic_sets SET bonus_2pc = ?, bonus_4pc = ? WHERE name = ?",
-                           (row.get("bonus_2pc"), row.get("bonus_4pc"), row["name"]))
+        cur = conn.execute("UPDATE relic_sets SET bonus_2pc = ?, bonus_4pc = ?, pieces_json = ? WHERE name = ?",
+                           (row.get("bonus_2pc"), row.get("bonus_4pc"),
+                            json.dumps(row["pieces"], ensure_ascii=False) if row.get("pieces") else None, row["name"]))
         changed += cur.rowcount
     return changed
 

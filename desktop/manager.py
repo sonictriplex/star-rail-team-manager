@@ -37,7 +37,8 @@ CREATE TABLE IF NOT EXISTS relic_sets (
     kind TEXT NOT NULL,
     bonus_2pc TEXT DEFAULT '',
     bonus_4pc TEXT DEFAULT '',
-    icon_path TEXT
+    icon_path TEXT,
+    pieces_json TEXT
 );
 CREATE TABLE IF NOT EXISTS user_characters (
     char_name TEXT PRIMARY KEY,
@@ -107,6 +108,7 @@ class StarRailManager:
                 conn.executescript(SCHEMA)
                 self._migrate_german_names(conn)   # vor den Fähigkeiten: die Texte werden über die deutschen Namen zugeordnet
                 self._migrate_light_cone_passives(conn)
+                self._migrate_relic_pieces(conn)
         except (sqlite3.Error, OSError, json.JSONDecodeError) as e:
             raise DatabaseError(f"Datenbank konnte nicht initialisiert werden ({self.db_path}): {e}") from e
 
@@ -117,6 +119,15 @@ class StarRailManager:
         if "passive_json" in columns:
             return
         conn.execute("ALTER TABLE light_cones ADD COLUMN passive_json TEXT")
+        if self.seed_path and os.path.exists(self.seed_path):
+            fill_texts(conn, self.seed_path)
+
+    def _migrate_relic_pieces(self, conn: sqlite3.Connection):
+        """Ältere Datenbanken: Spalte relic_sets.pieces_json (Namen der einzelnen Relikt-Teile) ergänzen und aus der Seed-Datei füllen."""
+        columns = [r[1] for r in conn.execute("PRAGMA table_info(relic_sets)")]
+        if "pieces_json" in columns:
+            return
+        conn.execute("ALTER TABLE relic_sets ADD COLUMN pieces_json TEXT")
         if self.seed_path and os.path.exists(self.seed_path):
             fill_texts(conn, self.seed_path)
 
@@ -186,13 +197,22 @@ class StarRailManager:
             self.available_light_cones = []
             raise DatabaseError(f"Fehler beim Laden der Lichtkegel: {e}") from e
 
+    @staticmethod
+    def _decode_pieces(raw) -> dict:
+        """Namen der Relikt-Teile aus der Spalte pieces_json: {Slot: [Name, ...]}; leer bei fehlenden oder kaputten Daten."""
+        try:
+            data = json.loads(raw or "{}")
+        except (json.JSONDecodeError, TypeError):
+            return {}
+        return {str(k): [str(n) for n in v] for k, v in data.items() if isinstance(v, list)} if isinstance(data, dict) else {}
+
     def load_relic_sets(self):
         """Lädt Relikt-Sets und Planar-Ornamente aus der SQLite-Datenbank."""
         try:
             with self.get_connection() as conn:
-                rows = conn.execute("SELECT name, kind, bonus_2pc, bonus_4pc, icon_path FROM relic_sets ORDER BY name ASC").fetchall()
+                rows = conn.execute("SELECT name, kind, bonus_2pc, bonus_4pc, icon_path, pieces_json FROM relic_sets ORDER BY name ASC").fetchall()
                 self.available_relic_sets = [RelicSet(name=r[0], kind=r[1], bonus_2pc=r[2] or "", bonus_4pc=r[3] or "",
-                                                      icon_path=r[4]) for r in rows]
+                                                      icon_path=r[4], pieces=self._decode_pieces(r[5])) for r in rows]
         except sqlite3.Error as e:
             self.available_relic_sets = []
             raise DatabaseError(f"Fehler beim Laden der Relikt-Sets: {e}") from e

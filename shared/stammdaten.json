@@ -3419,448 +3419,1164 @@
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die GES des Trägers um 6%. Wenn die GES des Trägers 145 oder höher beträgt, wird der Brucheffekt aller Verbündeten nach Kampfeintritt um 18% erhöht. Dieser Effekt ist nicht stapelbar.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/subspace_asc_center.png"
+      "icon_path": "assets/images/relic_sets/subspace_asc_center.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Negativfilmrolle des AVZ"
+        ],
+        "Verbindungsseil": [
+          "Dunkler Riss des AVZ"
+        ]
+      }
     },
     {
       "name": "Amphoreus, Land der Ewigkeit",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die KRIT-Rate des Trägers um 8%. Wenn sich der Memogeist des Trägers auf dem Kampffeld befindet, wird die GES aller Verbündeten um 8% erhöht. Dieser Effekt ist nicht stapelbar.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/amphoreus_the_eternal_land.png"
+      "icon_path": "assets/images/relic_sets/amphoreus_the_eternal_land.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Die ewigen Verse von Amphoreus"
+        ],
+        "Verbindungsseil": [
+          "Das Ende von Amphoreus’ Westwind"
+        ]
+      }
     },
     {
       "name": "Ankerplatz des gefallenen Sterns",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die KRIT-Rate des Trägers um 8%. Wenn beim Kampfeintritt sowohl der Träger als auch ein weiteres Teammitglied Trailblaze-Gefährten sind, wird der KRIT-SCH des Trägers um 32% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/fallen_star_anchorage.png"
+      "icon_path": "assets/images/relic_sets/fallen_star_anchorage.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Silberne Schienen des Ankerplatzes"
+        ],
+        "Verbindungsseil": [
+          "Gestrandeter Express am Ankerplatz"
+        ]
+      }
     },
     {
       "name": "Belobog der Architekten",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die VTD des Trägers um 15%. Wenn die Effekt-Trefferrate des Trägers 50% oder höher erreicht, wird seine VTD zusätzlich um 15% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/belobog_of_the_architects.png"
+      "icon_path": "assets/images/relic_sets/belobog_of_the_architects.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Belobogs eiserne Verteidigung"
+        ],
+        "Verbindungsseil": [
+          "Belobogs Festung der Bewahrung"
+        ]
+      }
     },
     {
       "name": "Duran, Dynastie der rennenden Wölfe",
       "kind": "Ornament",
       "bonus_2pc": "Wenn ein Verbündeter einen Folgeangriff ausführt, erhält der Träger 1 Stapelung „Verdienst“, bis zu 5 Stapelungen. Jede Stapelung Verdienst erhöht den durch Folgeangriffe verursachten SCH des Trägers um 5%. Werden 5 Stapelungen erreicht, wird der KRIT-SCH des Trägers zusätzlich um 25% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/duran_dynasty_of_running_wolves.png"
+      "icon_path": "assets/images/relic_sets/duran_dynasty_of_running_wolves.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Zügel von Durans Mechabestie"
+        ],
+        "Verbindungsseil": [
+          "Durans Zelt des goldenen Himmels"
+        ]
+      }
     },
     {
       "name": "Etappe Nr. Null von Punklorde",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht das Hochgefühl des Trägers um 8%. Wenn das Hochgefühl im Kampf zum ersten Mal 40%/80% erreicht, wird der KRIT-SCH des Trägers um 20%/32% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/punklorde_stage_zero.png"
+      "icon_path": "assets/images/relic_sets/punklorde_stage_zero.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Datenflut von Punklorde"
+        ],
+        "Verbindungsseil": [
+          "Die Regenbogenstadt von Punklorde"
+        ]
+      }
     },
     {
       "name": "Flotte der Alterslosen",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die max. LP des Trägers um 12%. Wenn die GES des Trägers 120 oder höher erreicht, wird der ANG aller Verbündeten zusätzlich um 8% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/fleet_of_the_ageless.png"
+      "icon_path": "assets/images/relic_sets/fleet_of_the_ageless.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Himmelsbaumranken der Xianzhou Luofu"
+        ],
+        "Verbindungsseil": [
+          "Die Himmlische Arche der Xianzhou Luofu"
+        ]
+      }
     },
     {
       "name": "Gebrochener Kiel",
       "kind": "Ornament",
       "bonus_2pc": "Der Effekt-WDS des Trägers wird um 10% erhöht. Wenn der Effekt-WDS des Trägers 30% oder mehr beträgt, wird der KRIT-SCH aller Verbündeten um 10% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/broken_keel.png"
+      "icon_path": "assets/images/relic_sets/broken_keel.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Gerissenes Tauwerk von Insumousu"
+        ],
+        "Verbindungsseil": [
+          "Walfänger von Insumousu"
+        ]
+      }
     },
     {
       "name": "Gottes Moment der Freude",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die GES des Trägers um 6%. Wenn das Hochgefühl des Trägers 40% oder höher beträgt, wird seine Aktion beim Kampfeintritt sofort um 40% vorgezogen.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/god_s_moment_of_joy.png"
+      "icon_path": "assets/images/relic_sets/god_s_moment_of_joy.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Magische Requisite des Moments der Freude"
+        ],
+        "Verbindungsseil": [
+          "Ewige Bühne des Moments der Freude"
+        ]
+      }
     },
     {
       "name": "Himmelsfront Glamoth",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht den ANG des Trägers um 12%. Wenn die GES des Trägers 135/160 oder höher erreicht, wird sein verursachter SCH um 12%/18% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/firmament_frontline_glamoth.png"
+      "icon_path": "assets/images/relic_sets/firmament_frontline_glamoth.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Glamoths stiller Grabstein"
+        ],
+        "Verbindungsseil": [
+          "Glamoths eisernes Kavallerieregiment"
+        ]
+      }
     },
     {
       "name": "Himmlischer Differenziator",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht den KRIT-SCH des Trägers um 16%. Wenn der aktuelle KRIT-SCH des Trägers 120% oder höher erreicht, wird die KRIT-Rate nach Kampfeintritt um 60% erhöht, bis zum Ende seines ersten Angriffs.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/celestial_differentiator.png"
+      "icon_path": "assets/images/relic_sets/celestial_differentiator.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Ringsystem des Planeten Screwllum"
+        ],
+        "Verbindungsseil": [
+          "Die mechanische Sonne des Planeten Screwllum"
+        ]
+      }
     },
     {
       "name": "Institut für kosmische Biowissenschaften",
       "kind": "Ornament",
       "bonus_2pc": "Wenn die max. Energie des Trägers beim Kampfeintritt mindestens 200 Pkt. beträgt, wird der verursachte SCH des Trägers für jeden überschüssigen Pkt. um 0.2% erhöht, bis zu einem Maximum von 32%.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/cosmic_life_sciences_institute.png"
+      "icon_path": "assets/images/relic_sets/cosmic_life_sciences_institute.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Periphere Leitung des Instituts für Biowissenschaften"
+        ],
+        "Verbindungsseil": [
+          "Zentrale Drehscheibe des Instituts für Biowissenschaften"
+        ]
+      }
     },
     {
       "name": "Izumo-Gensei und Takama-Himmelreich",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht den ANG des Trägers um 12%. Wenn beim Kampfeintritt mindestens ein Verbündeter dem gleichen Pfad wie der Träger folgt, wird die KRIT-Rate des Trägers um 12% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/izumo_gensei_and_takama_divine_realm.png"
+      "icon_path": "assets/images/relic_sets/izumo_gensei_and_takama_divine_realm.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Izumos Klingen von Ende und Anfang"
+        ],
+        "Verbindungsseil": [
+          "Izumos Magatsu-no-Morokami"
+        ]
+      }
     },
     {
       "name": "Küste der Weintrunkenheit",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht den ANG des Trägers um 12%. Wenn der ANG des Trägers 2400/3600 oder höher beträgt, wird sein verursachter DoT zusätzlich um 12%/24% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/revelry_by_the_sea.png"
+      "icon_path": "assets/images/relic_sets/revelry_by_the_sea.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Gesangspfad der singenden Küste"
+        ],
+        "Verbindungsseil": [
+          "Flammendes Leuchtfeuer der singenden Küste"
+        ]
+      }
     },
     {
       "name": "Lebhaftes Vonwacq",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die Energie-Wiederherstellungsrate des Trägers um 5%. Wenn die GES des Trägers 120 oder höher erreicht, wird seine Aktion beim Kampfeintritt um 40% vorgezogen.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/sprightly_vonwacq.png"
+      "icon_path": "assets/images/relic_sets/sprightly_vonwacq.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Vonwacqs Inselküste"
+        ],
+        "Verbindungsseil": [
+          "Vonwacqs Geburtsinsel"
+        ]
+      }
     },
     {
       "name": "Lushaka, die versunkene See",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht Die Energie-Wiederherstellungsrate des Trägers um 5%. Wenn der Träger nicht die erste Figur in der Teamformation ist, wird der ANG der ersten Figur in der Teamformation um 12% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/lushaka_the_sunken_seas.png"
+      "icon_path": "assets/images/relic_sets/lushaka_the_sunken_seas.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Die symbiotischen Seewege von Lushaka"
+        ],
+        "Verbindungsseil": [
+          "Die versunkene, azurblaue Hauptstadt von Lushaka"
+        ]
+      }
     },
     {
       "name": "Pangalaktische Handelsgesellschaft",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die Effekt-Trefferrate des Trägers um 10%. Erhöht gleichzeitig den ANG des Trägers in Höhe von 25% der Effekt-Trefferrate, bis zu einem Höchstwert von 25%.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/pan_cosmic_commercial_enterprise.png"
+      "icon_path": "assets/images/relic_sets/pan_cosmic_commercial_enterprise.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Handelsroute der IFK"
+        ],
+        "Verbindungsseil": [
+          "Das Mega-Hauptquartier der IFK"
+        ]
+      }
     },
     {
       "name": "Penacony, Land der Träume",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die Energie-Wiederherstellungsrate des Trägers um 5%. Erhöht den SCH aller anderen Verbündeten im Team mit dem gleichen Typ wie der Träger um 10%.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/penacony_land_of_the_dreams.png"
+      "icon_path": "assets/images/relic_sets/penacony_land_of_the_dreams.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Penaconys Traumsuchspuren"
+        ],
+        "Verbindungsseil": [
+          "Penaconys Grandhotel"
+        ]
+      }
     },
     {
       "name": "Raumstation für Versiegelung",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht ANG des Trägers um 12%. Wenn die GES des Trägers 120 oder höher erreicht, wird sein ANG zusätzlich um 12% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/space_sealing_station.png"
+      "icon_path": "assets/images/relic_sets/space_sealing_station.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Hertas Wanderschaft"
+        ],
+        "Verbindungsseil": [
+          "Hertas Raumstation"
+        ]
+      }
     },
     {
       "name": "Regloses Salsotto",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die KRIT-Rate des Trägers um 8%. Wenn die aktuelle KRIT-Rate des Trägers 50% oder höher erreicht, wird der durch Ultimates und Folgeangriffe verursachte SCH um 15% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/inert_salsotto.png"
+      "icon_path": "assets/images/relic_sets/inert_salsotto.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Tag-Nacht-Grenze von Salsotto"
+        ],
+        "Verbindungsseil": [
+          "Die fliegende Stadt von Salsotto"
+        ]
+      }
     },
     {
       "name": "Riesenbaum des versunkenen Grübelns",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die GES des Trägers um 6%. Wenn die GES des Trägers 135/180 oder höher erreicht, wird die bewirkte Heilung des Trägers und seines Memogeists um 12%/20% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/giant_tree_of_rapt_brooding.png"
+      "icon_path": "assets/images/relic_sets/giant_tree_of_rapt_brooding.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Verbindungsnetz des Hains der Erleuchtung"
+        ],
+        "Verbindungsseil": [
+          "Nachdenklicher Riesenbaum des Hains der Erleuchtung"
+        ]
+      }
     },
     {
       "name": "Ruhiges Anwesen für die Gebeine der Toten",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die max. LP des Trägers um 12%. Wenn die max. LP des Trägers 5000 oder mehr betragen, wird der KRIT-SCH des Trägers und seines Memogeistes um 28% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/bone_collection_s_serene_demesne.png"
+      "icon_path": "assets/images/relic_sets/bone_collection_s_serene_demesne.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Todes-Knochenketten von Aidonia"
+        ],
+        "Verbindungsseil": [
+          "Grabsteine von Aidonia"
+        ]
+      }
     },
     {
       "name": "Schmiede der Kalpagni-Laterne",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die GES des Trägers um 6%. Trifft der Träger einen Gegner mit Feuer-Schwäche, wird sein Brucheffekt für 1 Rd. um 40% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/forge_of_the_kalpagni_lantern.png"
+      "icon_path": "assets/images/relic_sets/forge_of_the_kalpagni_lantern.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Flammende Himmelsseide des Schmiedepalastes"
+        ],
+        "Verbindungsseil": [
+          "Lotus-Lampendocht des Schmiedepalastes"
+        ]
+      }
     },
     {
       "name": "Stadt der unzähligen Sterne",
       "kind": "Ornament",
       "bonus_2pc": "Wenn der Träger einen Folgeangriff einsetzt, wird sein ANG für 2 Rd. um 24% erhöht. Wenn ein Gegner besiegt wird, wird der KRIT-SCH aller Verbündeten im aktuellen Kampf um 12% erhöht. Dieser Effekt ist nicht stapelbar.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/city_of_converging_stars.png"
+      "icon_path": "assets/images/relic_sets/city_of_converging_stars.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Mitarbeiterausweis von Astropolis"
+        ],
+        "Verbindungsseil": [
+          "Medienhauptquartier von Astropolis"
+        ]
+      }
     },
     {
       "name": "Sternenarena",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die KRIT-Rate des Trägers um 8%. Wenn die aktuelle KRIT-Rate des Trägers einen Wert von 70% oder höher erreicht, wird der durch Standardangriffe und Fertigkeiten verursachte SCH um 20% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/rutilant_arena.png"
+      "icon_path": "assets/images/relic_sets/rutilant_arena.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Lichtbogen-Rennbahn auf Taikiyan"
+        ],
+        "Verbindungsseil": [
+          "Laser-Stadion auf Taikiyan"
+        ]
+      }
     },
     {
       "name": "Talia – Königreich der Banditen",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht den Brucheffekt des Trägers um 16%. Wenn die GES des Trägers 145 oder höher erreicht, wird der Brucheffekt des Trägers zusätzlich um 20% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/talia_kingdom_of_banditry.png"
+      "icon_path": "assets/images/relic_sets/talia_kingdom_of_banditry.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Freiliegendes Kabel aus Talia"
+        ],
+        "Verbindungsseil": [
+          "Alteisenstadt auf Talia"
+        ]
+      }
     },
     {
       "name": "Tengoku@Livestream",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht den KRIT-SCH des Trägers um 16%. Wenn in derselben Runde mindestens 3 Fertigkeitspunkte verbraucht werden, wird der KRIT-SCH des Trägers für 3 Rd. zusätzlich um 32% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/tengoku_livestream.png"
+      "icon_path": "assets/images/relic_sets/tengoku_livestream.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Die tausend Gespräche im Livestream"
+        ],
+        "Verbindungsseil": [
+          "Die tausend Gesichter im Livestream"
+        ]
+      }
     },
     {
       "name": "Traumwebendes Feenreich",
       "kind": "Ornament",
       "bonus_2pc": "Wenn die aktuelle Anzahl der Verbündeten auf dem Kampffeld nicht 4 beträgt, wird für jeden Verbündeten über/unter 4 der verursachte SCH des Trägers sowie seines Memogeists um 9%/12% erhöht. Dieser Effekt ist bis zu 4/3-fach stapelbar.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/arcadia_of_woven_dreams.png"
+      "icon_path": "assets/images/relic_sets/arcadia_of_woven_dreams.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Wunschflöte des Wirrgartens"
+        ],
+        "Verbindungsseil": [
+          "Ruhiges Baumhaus des Wirrgartens"
+        ]
+      }
     },
     {
       "name": "Verlassenes Sigonien",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht die KRIT-Rate des Trägers um 4%. Wenn Gegner besiegt werden, wird der KRIT-SCH des Trägers bis zu 10-mal um 4% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/sigonia_the_unclaimed_desolation.png"
+      "icon_path": "assets/images/relic_sets/sigonia_the_unclaimed_desolation.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Sigonischer Knoten des Kreislaufs"
+        ],
+        "Verbindungsseil": [
+          "Liege der sigonischen Muttergöttin"
+        ]
+      }
     },
     {
       "name": "Wunbanana-Park",
       "kind": "Ornament",
       "bonus_2pc": "Erhöht den KRIT-SCH des Trägers um 16%. Befindet sich ein vom Träger beschworenes Objekt auf dem Kampffeld, wird der KRIT-SCH zusätzlich um 32% erhöht.",
       "bonus_4pc": null,
-      "icon_path": "assets/images/relic_sets/the_wondrous_bananamusement_park.png"
+      "icon_path": "assets/images/relic_sets/the_wondrous_bananamusement_park.png",
+      "pieces": {
+        "Planarsphäre": [
+          "Memetische Kabel im Banana-Park"
+        ],
+        "Verbindungsseil": [
+          "Kernplatz im Banana-Park"
+        ]
+      }
     },
     {
       "name": "Adler des Zwielichts",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Wind-SCH um 10%.",
       "bonus_4pc": "Nach dem Einsatz des Ultimates wird die Aktion des Trägers um 25% vorgezogen.",
-      "icon_path": "assets/images/relic_sets/eagle_of_twilight_line.png"
+      "icon_path": "assets/images/relic_sets/eagle_of_twilight_line.png",
+      "pieces": {
+        "Kopf": [
+          "Schnabelhelm des Adlers"
+        ],
+        "Hände": [
+          "Flugring des Adlers"
+        ],
+        "Körper": [
+          "Fluggeschirr des Adlers"
+        ],
+        "Füße": [
+          "Steppgamaschen des Adlers"
+        ]
+      }
     },
     {
       "name": "Band des knisternden Donners",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Blitz-SCH um 10%.",
       "bonus_4pc": "Erhöht beim Einsatz der Fertigkeit den ANG des Trägers für 1 Rd. um 20%.",
-      "icon_path": "assets/images/relic_sets/band_of_sizzling_thunder.png"
+      "icon_path": "assets/images/relic_sets/band_of_sizzling_thunder.png",
+      "pieces": {
+        "Kopf": [
+          "Verspiegelte Sonnenbrille der Band"
+        ],
+        "Hände": [
+          "Tourarmband der Band"
+        ],
+        "Körper": [
+          "Nietenbesetzte Lederjacke der Band"
+        ],
+        "Füße": [
+          "Nietenbesetzte Boots der Band"
+        ]
+      }
     },
     {
       "name": "Bote im Hackerspace",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht GES um 6%.",
       "bonus_4pc": "Wenn der Träger ein Ultimate auf einen Verbündeten anwendet, erhöht sich die GES aller Verbündeten für 1 Rd. um 12%. Dieser Effekt ist nicht stapelbar.",
-      "icon_path": "assets/images/relic_sets/messenger_traversing_hackerspace.png"
+      "icon_path": "assets/images/relic_sets/messenger_traversing_hackerspace.png",
+      "pieces": {
+        "Kopf": [
+          "Holobrille des Boten"
+        ],
+        "Hände": [
+          "Transformationsarm des Boten"
+        ],
+        "Körper": [
+          "Geheime Umhängetasche des Boten"
+        ],
+        "Füße": [
+          "Coole Turnschuhe des Boten"
+        ]
+      }
     },
     {
       "name": "Champion des Straßenboxens",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht physischen SCH um 10%.",
       "bonus_4pc": "Wenn der Träger einen Angriff ausführt oder getroffen wird, wird sein ANG im aktuellen Kampf um 5% erhöht. Dieser Effekt ist bis zu 5-fach stapelbar.",
-      "icon_path": "assets/images/relic_sets/champion_of_streetwise_boxing.png"
+      "icon_path": "assets/images/relic_sets/champion_of_streetwise_boxing.png",
+      "pieces": {
+        "Kopf": [
+          "Kopfschutz des Champions"
+        ],
+        "Hände": [
+          "Schwere Handschuhe des Champions"
+        ],
+        "Körper": [
+          "Brustschutz des Champions"
+        ],
+        "Füße": [
+          "Leichtfüßige Stiefel des Champions"
+        ]
+      }
     },
     {
       "name": "Der eingeäscherte Erzherzog",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht den durch Folgeangriffe verursachte SCH um 20%.",
       "bonus_4pc": "Wenn der Träger einen Folgeangriff einsetzt, wird sein ANG für jedes Mal, das der Folgeangriff SCH zufügt, um 6% erhöht. Dieser Effekt ist bis zu 8-mal stapelbar und hält 3 Rd. an. Das nächste Mal, dass der Träger einen Folgeangriff einsetzt, wird der Effekt entfernt.",
-      "icon_path": "assets/images/relic_sets/the_ashblazing_grand_duke.png"
+      "icon_path": "assets/images/relic_sets/the_ashblazing_grand_duke.png",
+      "pieces": {
+        "Kopf": [
+          "Infernokrone des Erzherzogs"
+        ],
+        "Hände": [
+          "Lodernde Samthandschuhe des Erzherzogs"
+        ],
+        "Körper": [
+          "Anmutige Robe des Erzherzogs"
+        ],
+        "Füße": [
+          "Elegante Feststiefel des Erzherzogs"
+        ]
+      }
     },
     {
       "name": "Die Traumlicht-Mimen",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht die GES um 6%.",
       "bonus_4pc": "Wenn der Träger eine Fertigkeit oder einen Ultimate auf einen anderen Verbündeten einsetzt, wird das Hochgefühl des Ziels der Fähigkeit für 3 Rd. um 16% erhöht. Wenn der Träger mindestens 10 Pkt. „Verdiente Leistung“ besitzt, wird der KRIT-SCH aller Verbündeten zusätzlich für 3 Rd. um 12% erhöht.",
-      "icon_path": "assets/images/relic_sets/dreamlit_actor.png"
+      "icon_path": "assets/images/relic_sets/dreamlit_actor.png",
+      "pieces": {
+        "Kopf": [
+          "Weinende Maske einer Mimin"
+        ],
+        "Hände": [
+          "Farbenfroher Fächer eines Mimen"
+        ],
+        "Körper": [
+          "Komisches Kostüm eines Mimen"
+        ],
+        "Füße": [
+          "Mondsichel-Tanzstiefel einer Mimin"
+        ]
+      }
     },
     {
       "name": "Die gefräßige Ketzerin",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht den KRIT-SCH um 16%.",
       "bonus_4pc": "Erhöht den durch Standardangriffe verursachten SCH des Trägers um 36%. Wenn der Träger einen Standardangriff ausführt, wird sein ANG für 2 Rd. um 20% erhöht.",
-      "icon_path": "assets/images/relic_sets/the_edacious_heretic.png"
+      "icon_path": "assets/images/relic_sets/the_edacious_heretic.png",
+      "pieces": {
+        "Kopf": [
+          "Kranialapparat der Ketzerin"
+        ],
+        "Hände": [
+          "Injektionshandschuhe der Ketzerin"
+        ],
+        "Körper": [
+          "Vernunftszwangsjacke der Ketzerin"
+        ],
+        "Füße": [
+          "Hungerstiefel der Ketzerin"
+        ]
+      }
     },
     {
       "name": "Dieb des fallenden Meteors",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Brucheffekt um 16%.",
       "bonus_4pc": "Erhöht den Brucheffekt des Trägers um 16%. Wenn der Träger bei einem Gegner Schwächebruch verursacht, wird 3 Pkt. Energie wiederhergestellt.",
-      "icon_path": "assets/images/relic_sets/thief_of_shooting_meteor.png"
+      "icon_path": "assets/images/relic_sets/thief_of_shooting_meteor.png",
+      "pieces": {
+        "Kopf": [
+          "Vielgesichtige Maske des Diebs"
+        ],
+        "Hände": [
+          "Bemalte Handschuhe des Diebs"
+        ],
+        "Körper": [
+          "Stählerner Wurfhaken des Diebs"
+        ],
+        "Füße": [
+          "Meteor-Stiefel des Diebs"
+        ]
+      }
     },
     {
       "name": "Eiserne Kavallerie gegen die Plage",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Brucheffekt um 16%.",
       "bonus_4pc": "Wenn der Brucheffekt des Trägers 150% oder mehr beträgt, wird beim Verursachen von Bruch-SCH 10% der VTD des gegnerischen Ziels ignoriert. Wenn der Brucheffekt des Trägers 250% oder mehr beträgt, wird beim Verursachen von Super-Bruch-SCH zusätzlich 15% der VTD des gegnerischen Ziels ignoriert.",
-      "icon_path": "assets/images/relic_sets/iron_cavalry_against_the_scourge.png"
+      "icon_path": "assets/images/relic_sets/iron_cavalry_against_the_scourge.png",
+      "pieces": {
+        "Kopf": [
+          "Zielsuchender Helm der Eisernen Kavallerie"
+        ],
+        "Hände": [
+          "Vernichtende Faust der Eisernen Kavallerie"
+        ],
+        "Körper": [
+          "Silberne Panzerung der Eisernen Kavallerie"
+        ],
+        "Füße": [
+          "Himmlische Beinschienen der Eisernen Kavallerie"
+        ]
+      }
     },
     {
       "name": "Erlöserin/Erlöser der Weltneuschöpfung",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht die KRIT-Rate um 8%.",
       "bonus_4pc": "Wenn sich nach dem Einsatz eines Standardangriffs oder einer Fertigkeit des Trägers dessen Memogeist auf dem Kampffeld befindet, werden die max. LP des Trägers und seines Memogeists um 24% sowie der verursachte SCH aller Verbündeten um 15% erhöht, bis der Träger seinen nächsten Standardangriff oder seine nächste Fertigkeit einsetzt.",
-      "icon_path": "assets/images/relic_sets/world_remaking_deliverer.png"
+      "icon_path": "assets/images/relic_sets/world_remaking_deliverer.png",
+      "pieces": {
+        "Kopf": [
+          "Reisekapuze der Erlöserin/des Erlösers"
+        ],
+        "Hände": [
+          "Schutzhandschuhe der Erlöserin/des Erlösers"
+        ],
+        "Körper": [
+          "Erbgewand der Erlöserin/des Erlösers"
+        ],
+        "Füße": [
+          "Pionierstiefel der Erlöserin/des Erlösers"
+        ]
+      }
     },
     {
       "name": "Feuerschmied der Lavaglut",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Feuer-SCH um 10%.",
       "bonus_4pc": "Erhöht den durch Fertigkeiten verursachten SCH des Trägers um 12%. Erhöht nach dem Einsatz des Ultimates den verursachten Feuer-SCH durch den nächsten Angriff um 12%.",
-      "icon_path": "assets/images/relic_sets/firesmith_of_lava_forging.png"
+      "icon_path": "assets/images/relic_sets/firesmith_of_lava_forging.png",
+      "pieces": {
+        "Kopf": [
+          "Obsidianbrille des Feuerschmieds"
+        ],
+        "Hände": [
+          "Flammenmeisterring des Feuerschmieds"
+        ],
+        "Körper": [
+          "Flammenfeste Schürze des Feuerschmieds"
+        ],
+        "Füße": [
+          "Metallbein des Feuerschmieds"
+        ]
+      }
     },
     {
       "name": "Gefangene in tiefem Gewahrsam",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht den ANG um 12%.",
       "bonus_4pc": "Für jeden DoT-Effekt, den der Gegner erleidet, ignoriert der Träger 6% der VTD dieses Gegners, wenn er diesem SCH zufügt. Bis zu 3 DoT-Effekte werden gezählt.",
-      "icon_path": "assets/images/relic_sets/prisoner_in_deep_confinement.png"
+      "icon_path": "assets/images/relic_sets/prisoner_in_deep_confinement.png",
+      "pieces": {
+        "Kopf": [
+          "Maulkorb der Gefangenen"
+        ],
+        "Hände": [
+          "Bleisteinschellen der Gefangenen"
+        ],
+        "Körper": [
+          "Versiegelte Fesseln der Gefangenen"
+        ],
+        "Füße": [
+          "Bindungsfesseln der Gefangenen"
+        ]
+      }
     },
     {
       "name": "Genie der strahlenden Sterne",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Quanten-SCH um 10%.",
       "bonus_4pc": "Wenn der Träger einem Gegner SCH zufügt, ignoriert er 10% der VTD des Gegners. Wenn das Ziel Quanten-Schwäche hat, ignoriert der Träger zusätzlich 10% der VTD des Gegners.",
-      "icon_path": "assets/images/relic_sets/genius_of_brilliant_stars.png"
+      "icon_path": "assets/images/relic_sets/genius_of_brilliant_stars.png",
+      "pieces": {
+        "Kopf": [
+          "Ultrasignalbrille des Genies"
+        ],
+        "Hände": [
+          "Frequenzerfasser des Genies"
+        ],
+        "Körper": [
+          "Metafeldanzug des Genies"
+        ],
+        "Füße": [
+          "Gravitationsgleiter des Genies"
+        ]
+      }
     },
     {
       "name": "Götterbefragender Meisterschmied",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht die max. LP um 12%.",
       "bonus_4pc": "Erhöht den KRIT-SCH, den der Träger Gegnern im Status „VTD-Reduktion“ zufügt, um 28%. Nachdem der Träger einem Gegner den Status VTD-Reduktion zugefügt hat, erhalten alle Verbündeten für 2 Rd. „Brandbeschleuniger“. Dieser Effekt ist nicht stapelbar. Der von Verbündeten mit Brandbeschleuniger verursachte SCH wird um 15% erhöht. Dieser Effekt kann erneut ausgelöst werden, nachdem der Träger einen Angriff ausgeführt hat.",
-      "icon_path": "assets/images/relic_sets/divine_querying_master_smith.png"
+      "icon_path": "assets/images/relic_sets/divine_querying_master_smith.png",
+      "pieces": {
+        "Kopf": [
+          "Feuerbestienmaske des Schmieds"
+        ],
+        "Hände": [
+          "Panzerhandschuhe des Schmieds"
+        ],
+        "Körper": [
+          "Feuerfestes Gewand des Schmieds"
+        ],
+        "Füße": [
+          "Unbändige Stiefel des Schmieds"
+        ]
+      }
     },
     {
       "name": "Held des Lobgesangs",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht ANG um 12%.",
       "bonus_4pc": "Während der Memogeist des Trägers sich auf dem Kampffeld befindet, wird die GES des Trägers um 6% erhöht. Wenn der Memogeist des Trägers angreift, wird der KRIT-SCH von Träger und Memogeist für 2 Rd. um 30% erhöht.",
-      "icon_path": "assets/images/relic_sets/hero_of_triumphant_song.png"
+      "icon_path": "assets/images/relic_sets/hero_of_triumphant_song.png",
+      "pieces": {
+        "Kopf": [
+          "Siegerkranz des Helden"
+        ],
+        "Hände": [
+          "Glänzende Armrüstung des Helden"
+        ],
+        "Körper": [
+          "Goldene Kriegsrüstung des Helden"
+        ],
+        "Füße": [
+          "Feuerfeste Schienbeinschoner des Helden"
+        ]
+      }
     },
     {
       "name": "Himmelweitreichender Wahrsager",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht GES um 6%.",
       "bonus_4pc": "Wenn die GES des Trägers vor dem Kampfeintritt größer oder gleich 120/160 ist, wird seine KRIT-Rate um 10%/18% erhöht. Jedes Mal, wenn der Träger im Kampf zum ersten Mal seine Hochgefühl-Fähigkeit einsetzt, wird das Hochgefühl aller Verbündeten um 10% erhöht. Dieser Effekt ist nicht stapelbar.",
-      "icon_path": "assets/images/relic_sets/diviner_of_distant_reach.png"
+      "icon_path": "assets/images/relic_sets/diviner_of_distant_reach.png",
+      "pieces": {
+        "Kopf": [
+          "Berechnungs-Jade-Abakus des Wahrsagers"
+        ],
+        "Hände": [
+          "Ingenium-Armprothese des Wahrsagers"
+        ],
+        "Körper": [
+          "Sternengewand des Wahrsagers"
+        ],
+        "Füße": [
+          "Fliegende Wolkenstiefel des Wahrsagers"
+        ]
+      }
     },
     {
       "name": "Im Wissen verlorene Gelehrte",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht KRIT-Rate um 8%.",
       "bonus_4pc": "Erhöht den durch Fertigkeiten und Ultimates verursachten SCH um 20%. Nach dem Einsatz des Ultimates wird der SCH beim nächsten Einsatz der Fertigkeit zusätzlich um 25% erhöht.",
-      "icon_path": "assets/images/relic_sets/scholar_lost_in_erudition.png"
+      "icon_path": "assets/images/relic_sets/scholar_lost_in_erudition.png",
+      "pieces": {
+        "Kopf": [
+          "Silberrandmonokel des Gelehrten"
+        ],
+        "Hände": [
+          "Hilfsfinger der Gelehrten"
+        ],
+        "Körper": [
+          "Tweedjacke des Gelehrten"
+        ],
+        "Füße": [
+          "Filz-Schneestiefel der Gelehrten"
+        ]
+      }
     },
     {
       "name": "Jäger aus dem Gletscherwald",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Eis-SCH um 10%.",
       "bonus_4pc": "Erhöht beim Einsatz des Ultimates den KRIT-SCH des Trägers für 2 Rd. um 25%.",
-      "icon_path": "assets/images/relic_sets/hunter_of_glacial_forest.png"
+      "icon_path": "assets/images/relic_sets/hunter_of_glacial_forest.png",
+      "pieces": {
+        "Kopf": [
+          "Artaius-Hut des Jägers"
+        ],
+        "Hände": [
+          "Echsenhandschuhe des Jägers"
+        ],
+        "Körper": [
+          "Eisdrachenumhang des Jägers"
+        ],
+        "Füße": [
+          "Weiche Elchlederstiefel des Jägers"
+        ]
+      }
     },
     {
       "name": "Kapitän über den verfluchten Wellen",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht KRIT-SCH um 16%.",
       "bonus_4pc": "Wenn der Träger zum Ziel der Fähigkeit eines anderen Verbündeten wird, erhält er 1 Stapelung „Unterstützen“, bis zu 2 Stapelungen. Verbraucht beim Einsatz des Ultimates alle Stapelungen von Unterstützen und erhöht den ANG des Trägers für 1 Rd. um 48%, wenn 2 Stapelungen vorhanden sind.",
-      "icon_path": "assets/images/relic_sets/wavestrider_captain.png"
+      "icon_path": "assets/images/relic_sets/wavestrider_captain.png",
+      "pieces": {
+        "Kopf": [
+          "Navigatorhut des Kapitäns"
+        ],
+        "Hände": [
+          "Sternhöhenmesser des Kapitäns"
+        ],
+        "Körper": [
+          "Windmantel des Kapitäns"
+        ],
+        "Füße": [
+          "Wellenreiterstiefel des Kapitäns"
+        ]
+      }
     },
     {
       "name": "Klagende Dichterin",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Quanten-SCH um 10%.",
       "bonus_4pc": "Reduziert die GES des Trägers um 8%. Wenn die GES des Trägers vor dem Kampfeintritt unter 110/95 liegt, wird die KRIT-Rate des Trägers um 20%/32% erhöht. Dieser Effekt wirkt auch auf den Memogeist des Trägers.",
-      "icon_path": "assets/images/relic_sets/poet_of_mourning_collapse.png"
+      "icon_path": "assets/images/relic_sets/poet_of_mourning_collapse.png",
+      "pieces": {
+        "Kopf": [
+          "Dillkranz der Dichterin"
+        ],
+        "Hände": [
+          "Armreif der Dichterin"
+        ],
+        "Körper": [
+          "Sternengewand der Dichterin"
+        ],
+        "Füße": [
+          "Silberschuhe der Dichterin"
+        ]
+      }
     },
     {
       "name": "Kriegsgöttin der lodernden Sonne und des Donners",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht GES um 6%.",
       "bonus_4pc": "Erhält „Sanfter Regen“, nachdem der Träger oder sein Memogeist Verbündete außer sich selbst Heilung geleistet hat. Dieser Effekt kann bis zu 1-mal pro Runde ausgelöst werden und hält 2 Rd. an. Wenn der Träger Sanfter Regen besitzt, wird seine GES um 6% und der KRIT-SCH aller Verbündeten um 15% erhöht. Dieser Effekt ist nicht stapelbar.",
-      "icon_path": "assets/images/relic_sets/warrior_goddess_of_sun_and_thunder.png"
+      "icon_path": "assets/images/relic_sets/warrior_goddess_of_sun_and_thunder.png",
+      "pieces": {
+        "Kopf": [
+          "Geflügelter Helm der Kriegsgöttin"
+        ],
+        "Hände": [
+          "Reiterstulpen der Kriegsgöttin"
+        ],
+        "Körper": [
+          "Dämmerumhang der Kriegsgöttin"
+        ],
+        "Füße": [
+          "Tapferkeitssporen der Kriegsgöttin"
+        ]
+      }
     },
     {
       "name": "Langlebige Jüngerin",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht die max. LP um 12%.",
       "bonus_4pc": "Wenn der Träger getroffen wird oder seine LP von einem Verbündeten verbraucht werden, wird seine KRIT-Rate für 2 Rd. um 8% erhöht. Dieser Effekt ist bis zu 2-fach stapelbar.",
-      "icon_path": "assets/images/relic_sets/longevous_disciple.png"
+      "icon_path": "assets/images/relic_sets/longevous_disciple.png",
+      "pieces": {
+        "Kopf": [
+          "Augenprothese der Jüngerin"
+        ],
+        "Hände": [
+          "Mechanische Hand der Jüngerin"
+        ],
+        "Körper": [
+          "Taubedecktes Federkleid der Jüngerin"
+        ],
+        "Füße": [
+          "Himmlische Seidensandalen der Jüngerin"
+        ]
+      }
     },
     {
       "name": "Magisches Mädchen mit glänzendem Verdienst",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht KRIT-SCH um 16%.",
       "bonus_4pc": "Der vom Träger und seinem Memogeist verursachte Hochgefühl-SCH ignoriert 10% der VTD des Ziels. Für je 5 von Verbündeten gesammelte Lachpunkte ignoriert der verursachte Hochgefühl-SCH zusätzlich 1% der VTD des Ziels. Dieser Effekt ist bis zu 10-fach stapelbar.",
-      "icon_path": "assets/images/relic_sets/ever_glorious_magical_girl.png"
+      "icon_path": "assets/images/relic_sets/ever_glorious_magical_girl.png",
+      "pieces": {
+        "Kopf": [
+          "Glänzende Medaille des Magischen Mädchens"
+        ],
+        "Hände": [
+          "Schutzhandschuhe des Magischen Mädchens"
+        ],
+        "Körper": [
+          "Ewigtanz-Kampfkleid des Magischen Mädchens"
+        ],
+        "Füße": [
+          "Vertragsstiefel des Magischen Mädchens"
+        ]
+      }
     },
     {
       "name": "Musketierin des wilden Weizens",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht ANG um 12%.",
       "bonus_4pc": "Erhöht die GES des Trägers um 6% und den durch Standardangriffe verursachten SCH um 10%.",
-      "icon_path": "assets/images/relic_sets/musketeer_of_wild_wheat.png"
+      "icon_path": "assets/images/relic_sets/musketeer_of_wild_wheat.png",
+      "pieces": {
+        "Kopf": [
+          "Wildweizen-Filzhut der Musketierin"
+        ],
+        "Hände": [
+          "Grobe Lederhandschuhe der Musketierin"
+        ],
+        "Körper": [
+          "Windjäger-Umhang der Musketierin"
+        ],
+        "Füße": [
+          "Nietenbesetzte Reitstiefel der Musketierin"
+        ]
+      }
     },
     {
       "name": "Pioniertaucherin toter Gewässer",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht den bei Gegnern mit Debuff verursachten SCH um 12%.",
       "bonus_4pc": "Erhöht die KRIT-Rate um 4%. Der bei Gegnern mit nicht weniger als 2/3 Debuffs verursachte KRIT-SCH des Trägers wird um jeweils 8%/12% erhöht. Nachdem er dem Gegner einen Debuff zugefügt hat, werden diese Effekte für 1 Rd. um 100 % erhöht.",
-      "icon_path": "assets/images/relic_sets/pioneer_diver_of_dead_waters.png"
+      "icon_path": "assets/images/relic_sets/pioneer_diver_of_dead_waters.png",
+      "pieces": {
+        "Kopf": [
+          "Hitzefester Panzer der Pionierin"
+        ],
+        "Hände": [
+          "Hohler Kompass der Pionierin"
+        ],
+        "Körper": [
+          "Versiegelter Bleimantel der Pionierin"
+        ],
+        "Füße": [
+          "Astraler Anker der Pionierin"
+        ]
+      }
     },
     {
       "name": "Ritterin vom Palast der Reinheit",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht VTD um 15%.",
       "bonus_4pc": "Erhöht die vom Träger gewährte Schildmenge um 20%.",
-      "icon_path": "assets/images/relic_sets/knight_of_purity_palace.png"
+      "icon_path": "assets/images/relic_sets/knight_of_purity_palace.png",
+      "pieces": {
+        "Kopf": [
+          "Vergebungsvoller Helm der Ritterin"
+        ],
+        "Hände": [
+          "Ring des stillen Eides der Ritterin"
+        ],
+        "Körper": [
+          "Feierliche Brustplatte der Ritterin"
+        ],
+        "Füße": [
+          "Eiserne Stiefel der Ordnung der Ritterin"
+        ]
+      }
     },
     {
       "name": "Sternenverhüllter Einsiedler",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht die gewährte Schildmenge um 10%.",
       "bonus_4pc": "Erhöht die vom Träger gewährte Schildmenge um 12%. Wenn ein Verbündeter einen vom Träger gewährten Schild hat, wird sein KRIT-SCH um 15% erhöht.",
-      "icon_path": "assets/images/relic_sets/self_enshrouded_recluse.png"
+      "icon_path": "assets/images/relic_sets/self_enshrouded_recluse.png",
+      "pieces": {
+        "Kopf": [
+          "Breitrandiger Filzhut des Einsiedlers"
+        ],
+        "Hände": [
+          "Schlichte Uhr des Einsiedlers"
+        ],
+        "Körper": [
+          "Kamelfarbene Jacke des Einsiedlers"
+        ],
+        "Füße": [
+          "Weiche Wildlederstiefel des Einsiedlers"
+        ]
+      }
     },
     {
       "name": "Tapferer Krieger des Winds",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht den ANG um 12%.",
       "bonus_4pc": "Erhöht die KRIT-Rate des Trägers um 6%. Wenn der Träger einen Folgeangriff einsetzt, wird der durch Ultimates verursachte SCH für 1 Rd. um 36% erhöht.",
-      "icon_path": "assets/images/relic_sets/the_wind_soaring_valorous.png"
+      "icon_path": "assets/images/relic_sets/the_wind_soaring_valorous.png",
+      "pieces": {
+        "Kopf": [
+          "Tapfere Maske des Nordhimmels"
+        ],
+        "Hände": [
+          "Tapfere Armschiene der Klaue"
+        ],
+        "Körper": [
+          "Tapfere Rüstung des Segelflugs"
+        ],
+        "Füße": [
+          "Tapfere Beinschienen der Beutejagd"
+        ]
+      }
     },
     {
       "name": "Uhrmacher der maschinellen Traumspiele",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht Brucheffekt um 16%.",
       "bonus_4pc": "Wenn der Träger seinen Ultimate auf einen Verbündeten anwendet, wird der Brucheffekt aller Verbündeten für 2 Rd. um 30% erhöht. Dieser Effekt ist nicht stapelbar.",
-      "icon_path": "assets/images/relic_sets/watchmaker_master_of_dream_machinations.png"
+      "icon_path": "assets/images/relic_sets/watchmaker_master_of_dream_machinations.png",
+      "pieces": {
+        "Kopf": [
+          "Polare Linse des Uhrmachers"
+        ],
+        "Hände": [
+          "Glückbringende Armbanduhr des Uhrmachers"
+        ],
+        "Körper": [
+          "Illusorischer Anzug des Uhrmachers"
+        ],
+        "Füße": [
+          "Traumverbergende Lederschuhe des Uhrmachers"
+        ]
+      }
     },
     {
       "name": "Wachen des stürmischen Schnees",
       "kind": "Relikt",
       "bonus_2pc": "Verringert erlittenen SCH um 8%.",
       "bonus_4pc": "Liegt der LP-Prozentsatz des Trägers zu Beginn seiner Runde bei 50% oder niedriger, werden LP in Höhe von 8% seiner max. LP und 5 Pkt. Energie wiederhergestellt.",
-      "icon_path": "assets/images/relic_sets/guard_of_wuthering_snow.png"
+      "icon_path": "assets/images/relic_sets/guard_of_wuthering_snow.png",
+      "pieces": {
+        "Kopf": [
+          "Gusseiserner Helm der Wache"
+        ],
+        "Hände": [
+          "Strahlende Kampfhandschuhe der Wache"
+        ],
+        "Körper": [
+          "Traditionelle Uniform der Wache"
+        ],
+        "Füße": [
+          "Silberne Beinschienen der Wache"
+        ]
+      }
     },
     {
       "name": "Wanderer der vorbeiziehenden Wolke",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht bewirkte Heilung um 10%.",
       "bonus_4pc": "Stellt zu Kampfbeginn sofort 1 Fertigkeitspunkt wieder her.",
-      "icon_path": "assets/images/relic_sets/passerby_of_wandering_cloud.png"
+      "icon_path": "assets/images/relic_sets/passerby_of_wandering_cloud.png",
+      "pieces": {
+        "Kopf": [
+          "Verjüngter hölzerner Haarstab des Wanderers"
+        ],
+        "Hände": [
+          "Wanderdrachen-Armschutz des Wanderers"
+        ],
+        "Körper": [
+          "Zerlumpter bestickter Mantel des Wanderers"
+        ],
+        "Füße": [
+          "Düstere Wanderstiefel des Wanderers"
+        ]
+      }
     },
     {
       "name": "Wie Navigator Isee es sieht",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht den ANG um 12%.",
       "bonus_4pc": "Wenn der Träger den Kampf betritt oder seine Fertigkeit einsetzt, wird der verursachte SCH durch Fertigkeiten und Ultimates um 18% erhöht. Dieser Effekt ist bis zu 3-fach stapelbar. Entfernt zu Beginn der Runde des Trägers bzw. nach dem Einsatz des Ultimates 1 Stapelung dieses Effekts.",
-      "icon_path": "assets/images/relic_sets/as_navigator_isee_sees_it.png"
+      "icon_path": "assets/images/relic_sets/as_navigator_isee_sees_it.png",
+      "pieces": {
+        "Kopf": [
+          "Tiefenraumteleskop des Navigators"
+        ],
+        "Hände": [
+          "Spielwürfel des Navigators"
+        ],
+        "Körper": [
+          "Sternenkarten-Uniform des Navigators"
+        ],
+        "Füße": [
+          "Zauberstiefel des Navigators"
+        ]
+      }
     },
     {
       "name": "Wiedererlebte Tortur des Priesters",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht GES um 6%.",
       "bonus_4pc": "Wenn eine Fertigkeit oder ein Ultimate auf einen Verbündeten eingesetzt wird, wird der KRIT-SCH des Ziels für 2 Rd. um 18% erhöht. Dieser Effekt ist bis zu 2-mal stapelbar.",
-      "icon_path": "assets/images/relic_sets/sacerdos_relived_ordeal.png"
+      "icon_path": "assets/images/relic_sets/sacerdos_relived_ordeal.png",
+      "pieces": {
+        "Kopf": [
+          "Melodische Ohrringe des Priesters"
+        ],
+        "Hände": [
+          "Begrüßungshandschuhe des Priesters"
+        ],
+        "Körper": [
+          "Zeremonielles Gewand des Priesters"
+        ],
+        "Füße": [
+          "Beschwerliche Stiefel des Priesters"
+        ]
+      }
     },
     {
       "name": "Ödländer aus der Räuberwüste",
       "kind": "Relikt",
       "bonus_2pc": "Erhöht imaginären SCH um 10%.",
       "bonus_4pc": "Wenn der Träger Gegnern mit Debuff SCH zufügt, wird KRIT-Rate um 10% erhöht. Wenn der Träger Gegnern im Status Gefangenschaft SCH zufügt, wird KRIT-SCH um 20% erhöht.",
-      "icon_path": "assets/images/relic_sets/wastelander_of_banditry_desert.png"
+      "icon_path": "assets/images/relic_sets/wastelander_of_banditry_desert.png",
+      "pieces": {
+        "Kopf": [
+          "Atemmaske des Ödländers"
+        ],
+        "Hände": [
+          "Wüstenterminal des Ödländers"
+        ],
+        "Körper": [
+          "Mönchsgewand des Ödländers"
+        ],
+        "Füße": [
+          "Motorbeinschienen des Ödländers"
+        ]
+      }
     }
   ]
 }

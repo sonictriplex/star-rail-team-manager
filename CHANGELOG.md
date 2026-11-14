@@ -2,6 +2,10 @@
 
 Dieser Verlauf fasst die wichtigsten Änderungen zusammen. Web, Desktop und Android haben ab 1.2.1 wieder dieselbe Versionsnummer (davor liefen sie getrennt); die Web-Version läuft per `deploy/deploy.sh` auf dem Server, der Desktop direkt aus dem Repo.
 
+## 1.4.0 (14.11.2026)
+- Die Namen der einzelnen Relikt-Teile stehen jetzt in den Stammdaten (auf Deutsch, z. B. „Vielgesichtige Maske des Diebs“ für das Kopfteil von „Dieb des fallenden Meteors“). Die Suche bei der Set-Auswahl findet ein Set auch über den Namen eines seiner Teile und zeigt das gefundene Teil unter dem Set an (Web und Android). Die Tooltips bzw. die Info-Anzeige nennen die Teile (Web, Desktop, Android)
+- Neue Spalte `relic_sets.pieces_json`: Web per `web/migrations/010_relikt_teile.sql` (danach `web/seed_stammdaten.sql`), Desktop automatisch beim Start. Das Update-Werkzeug und das Admin-Menü tragen die Teile neuer Sets selbst ein; `python3 tools/update_stammdaten.py --texts` liest sie für vorhandene Sets neu ein
+
 ## 1.3.0 (14.11.2026)
 - Lichtkegel und Relikt-Sets haben jetzt deutsche Namen (offizielle Namen aus StarRailRes, z. B. „Pfeile“, „Füllhorn“, „Im Wissen verlorene Gelehrte“). Charaktere bleiben englisch. Die Bilddateien behalten ihren englischen Namen und dienen dem Update-Werkzeug und dem Admin-Menü als stabile Kennung
 - Bereits gespeicherte Builds werden umgestellt: Desktop beim ersten Start automatisch, Web per `web/migrations/009_deutsche_namen.sql` (danach `web/seed_stammdaten.sql`). Alte Export-Dateien mit englischen Namen lassen sich weiter importieren; auch ältere App-Versionen, die noch englische Namen senden, werden vom Server umgeschrieben (`shared/name_aliases.json`, `web/api/name_aliases.php`)

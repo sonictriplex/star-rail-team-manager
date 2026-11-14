@@ -83,7 +83,13 @@ fun DiscardDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
 }
 
 /** Eintrag einer Suchliste; [withIcon] zeigt das Bild aus den Assets an. */
-data class PickerItem(val name: String, val subtitle: String = "", val detail: String = "")
+data class PickerItem(
+    val name: String,
+    val subtitle: String = "",
+    val detail: String = "",
+    /** Weitere durchsuchbare Namen (Slot, Name), z. B. die Teile eines Relikt-Sets; ein Treffer wird als Untertitel gezeigt. */
+    val keywords: List<Pair<String, String>> = emptyList(),
+)
 
 /** Aufklappbare Beschreibung (Set-Boni der Relikte): auf dem Handy gibt es keinen Hover-Tooltip. Ohne Text wird nichts angezeigt. */
 @Composable
@@ -108,7 +114,8 @@ fun SearchPickerDialog(
 ) {
     var query by remember { mutableStateOf("") }
     val shown = remember(query, items) {
-        items.filter { it.name.contains(query.trim(), ignoreCase = true) }
+        val q = query.trim()
+        items.filter { item -> item.name.contains(q, ignoreCase = true) || item.keywords.any { it.second.contains(q, ignoreCase = true) } }
     }
     Dialog(onDismissRequest = onDismiss) {
         Surface(shape = MaterialTheme.shapes.large, color = MaterialTheme.colorScheme.surface) {
@@ -135,7 +142,12 @@ fun SearchPickerDialog(
                             if (repo != null) NameIcon(item.name, repo, 40.dp)
                             Column {
                                 Text(item.name)
-                                if (item.subtitle.isNotEmpty()) {
+                                val q = query.trim()
+                                val hit = if (q.isNotEmpty() && !item.name.contains(q, ignoreCase = true))
+                                    item.keywords.firstOrNull { it.second.contains(q, ignoreCase = true) } else null
+                                if (hit != null) {
+                                    Text("${hit.first}: ${hit.second}", style = MaterialTheme.typography.bodySmall)
+                                } else if (item.subtitle.isNotEmpty()) {
                                     Text(item.subtitle, style = MaterialTheme.typography.bodySmall)
                                 }
                                 if (item.detail.isNotEmpty()) {

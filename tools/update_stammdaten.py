@@ -106,6 +106,23 @@ def de_name(filename, src_id, fallback):
     return re.sub(r"\{F#([^}]*)\}\{M#([^}]*)\}", r"\1/\2", name).strip()
 
 
+PIECE_SLOTS = {"HEAD": "Kopf", "HAND": "Hände", "BODY": "Körper", "FOOT": "Füße", "OBJECT": "Planarsphäre", "NECK": "Verbindungsseil"}
+
+
+def set_pieces(set_id):
+    """Deutsche Namen der einzelnen Teile eines Sets: {Slot: [Name, ...]} in der Reihenfolge der Slots (nur vorhandene).
+    Die Quelle führt jedes Teil je Seltenheit auf (gleicher Name), deshalb werden die Namen zusammengefasst."""
+    found = {}
+    for piece in fetch_de("relics.json").values():
+        slot = PIECE_SLOTS.get(piece["type"])
+        if slot and str(piece["set_id"]) == str(set_id):
+            name = re.sub(r"\{F#([^}]*)\}\{M#([^}]*)\}", r"\1/\2", piece["name"]).strip()
+            names = found.setdefault(slot, [])
+            if name not in names:
+                names.append(name)
+    return {slot: found[slot] for slot in PIECE_SLOTS.values() if slot in found}
+
+
 def slug(name):
     return re.sub(r"[^a-z0-9]+", "_", name.lower()).strip("_")
 
@@ -167,6 +184,7 @@ def find_new(data):
         bonus_2pc, bonus_4pc = set_bonuses(sid)
         new["relic_sets"].append({"name": de_name("relic_sets.json", sid, s["name"]), "kind": "Ornament" if int(sid) >= 300 else "Relikt",
                                   "bonus_2pc": bonus_2pc, "bonus_4pc": bonus_4pc,
+                                  "pieces": set_pieces(sid),
                                   "icon_path": f"assets/images/relic_sets/{slug(s['name'])}.png", "_src": s["icon"]})
     return new, skipped
 
@@ -279,6 +297,9 @@ def refresh_texts(path, data, args):
         bonus_2pc, bonus_4pc = set_bonuses(set_ids[key])
         changed += (rs.get("bonus_2pc"), rs.get("bonus_4pc")) != (bonus_2pc, bonus_4pc)
         rs["bonus_2pc"], rs["bonus_4pc"] = bonus_2pc, bonus_4pc
+        pieces = set_pieces(set_ids[key])
+        changed += rs.get("pieces") != pieces
+        rs["pieces"] = pieces
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"{changed} Einträge geändert, {missing} ohne Text in der Quelle. shared/stammdaten.json aktualisiert.")
     seed = ROOT / "web" / "tools" / "make_seed.py"

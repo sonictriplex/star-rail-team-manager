@@ -67,6 +67,16 @@ fun RelicSet.bonusText(): String? {
     return parts.takeIf { it.isNotEmpty() }?.joinToString("\n\n")
 }
 
+/** Die einzelnen Teile eines Sets als (Slot, Name), in der Reihenfolge der Stammdaten. */
+fun RelicSet.pieceList(): List<Pair<String, String>> = pieces.flatMap { (slot, names) -> names.map { slot to it } }
+
+/** Set-Boni plus die Namen der einzelnen Teile, für die Info-Anzeige. */
+fun RelicSet.infoText(): String? {
+    val pieceLines = pieceList().joinToString("\n") { "${it.first}: ${it.second}" }
+    return listOfNotNull(bonusText(), pieceLines.takeIf { it.isNotEmpty() }?.let { "Teile:\n$it" })
+        .joinToString("\n\n").ifEmpty { null }
+}
+
 /** Aktive Set-Boni: (Setname, 2 oder 4). Ornamente zählen nur bis 2; sortiert nach Teilezahl, dann Name. */
 fun Build.activeSetBonuses(): List<Pair<String, Int>> =
     relics.values.map { it.relicSet }.filter { it.isNotBlank() }.groupingBy { it }.eachCount()

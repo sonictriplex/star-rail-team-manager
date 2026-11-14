@@ -27,7 +27,9 @@ out.append(block("characters", ["name", "element", "path", "rarity", "icon_path"
 for lc in data["light_cones"]:   # Fähigkeit als JSON-Text in der Spalte passive_json
     lc["passive_json"] = json.dumps(lc["passive"], ensure_ascii=False) if lc.get("passive") else None
 out.append(block("light_cones", ["name", "path", "rarity", "icon_path", "passive_json"], data["light_cones"]))
-out.append(block("relic_sets", ["name", "kind", "bonus_2pc", "bonus_4pc", "icon_path"], data["relic_sets"]))
+for rs in data["relic_sets"]:   # Teile-Namen als JSON-Text in der Spalte pieces_json
+    rs["pieces_json"] = json.dumps(rs["pieces"], ensure_ascii=False) if rs.get("pieces") else None
+out.append(block("relic_sets", ["name", "kind", "bonus_2pc", "bonus_4pc", "icon_path", "pieces_json"], data["relic_sets"]))
 (root / "web" / "seed_stammdaten.sql").write_text("\n".join(out), encoding="utf-8")
 print("web/seed_stammdaten.sql geschrieben:", {k: len(v) for k, v in data.items()})
 

@@ -28,6 +28,8 @@ import de.sonictriplex.starrailteams.data.BuildOptions
 import de.sonictriplex.starrailteams.data.RELIC_SLOTS
 import de.sonictriplex.starrailteams.data.activeSetBonuses
 import de.sonictriplex.starrailteams.data.bonusText
+import de.sonictriplex.starrailteams.data.infoText
+import de.sonictriplex.starrailteams.data.pieceList
 import de.sonictriplex.starrailteams.data.passiveText
 import de.sonictriplex.starrailteams.data.normalized
 import de.sonictriplex.starrailteams.data.slotKind
@@ -119,7 +121,7 @@ fun EditBuildScreen(vm: AppViewModel, name: String, onDone: () -> Unit) {
                 if (active.isEmpty()) Text("Keine aktiven Set-Boni", style = MaterialTheme.typography.bodySmall)
                 active.forEach { (setName, n) ->
                     Text("${n}× $setName")
-                    InfoToggle(vm.stammdaten.relicSet(setName)?.bonusText()?.let { "$setName\n\n$it" })
+                    InfoToggle(vm.stammdaten.relicSet(setName)?.infoText()?.let { "$setName\n\n$it" })
                 }
             }
 
@@ -178,11 +180,11 @@ private fun SetPicker(slotName: String, value: String, vm: AppViewModel, onPick:
     val kind = slotKind(slotName)
     val none = if (kind == "Relikt") "Kein Relikt-Set" else "Kein Ornament"
     OutlinedButton(onClick = { picking = true }, Modifier.fillMaxWidth()) { Text(value.ifBlank { none }, maxLines = 1) }
-    InfoToggle(vm.stammdaten.relicSet(value)?.bonusText())
+    InfoToggle(vm.stammdaten.relicSet(value)?.infoText())
     if (picking) {
         val sets = vm.stammdaten.stammdaten.relicSets.filter { it.kind == kind }
             .sortedBy { it.name.lowercase() }
-            .map { PickerItem(it.name, detail = it.bonusText().orEmpty()) }
+            .map { PickerItem(it.name, detail = it.bonusText().orEmpty(), keywords = it.pieceList()) }
         SearchPickerDialog(
             if (kind == "Relikt") "Relikt-Set wählen" else "Planar-Ornament wählen", sets, vm.stammdaten, none,
             onPick = { onPick(it); picking = false },

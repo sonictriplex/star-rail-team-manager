@@ -47,6 +47,22 @@ function render_rank(string $desc, array $params): string {
     return str_replace('\\n', "\n", preg_replace('/\{F#([^}]*)\}\{M#([^}]*)\}/u', '$1/$2', $text));
 }
 
+const PIECE_SLOTS = ['HEAD' => 'Kopf', 'HAND' => 'Hände', 'BODY' => 'Körper', 'FOOT' => 'Füße', 'OBJECT' => 'Planarsphäre', 'NECK' => 'Verbindungsseil'];
+
+/** Namen der einzelnen Teile eines Sets als JSON-Text {"Kopf": [..], ...} (wie tools/update_stammdaten.py), oder null. */
+function set_pieces_json(string $setId): ?string {
+    $found = [];
+    foreach (de_source('relics.json') as $piece) {
+        $slot = PIECE_SLOTS[$piece['type'] ?? ''] ?? null;
+        if (!$slot || (string)$piece['set_id'] !== $setId) continue;
+        $name = trim(preg_replace('/\{F#([^}]*)\}\{M#([^}]*)\}/u', '$1/$2', (string)$piece['name']));
+        if (!in_array($name, $found[$slot] ?? [], true)) $found[$slot][] = $name;
+    }
+    $ordered = [];
+    foreach (PIECE_SLOTS as $slot) if (isset($found[$slot])) $ordered[$slot] = $found[$slot];
+    return $ordered ? json_encode($ordered, JSON_UNESCAPED_UNICODE) : null;
+}
+
 /** Fähigkeit eines Lichtkegels als JSON-Text {"name", "text": [S1..S5]}, oder null. */
 function lc_passive_json(string $lcId): ?string {
     $rank = de_source('light_cone_ranks.json')[$lcId] ?? null;
@@ -111,7 +127,7 @@ function find_new(PDO $pdo): array {
         $desc = de_source('relic_sets.json')[(string)$id]['desc'] ?? ($s['desc'] ?? []);   // Boni auf Deutsch
         $new['relic_sets'][] = ['name' => de_name('relic_sets.json', (string)$id, $s['name']), 'kind' => ((int)$id >= 300) ? 'Ornament' : 'Relikt',
             'bonus_2pc' => $desc[0] ?? null, 'bonus_4pc' => $desc[1] ?? null,
-            'icon_path' => 'assets/images/relic_sets/' . slug($s['name']) . '.png', 'src' => $s['icon']];
+            'pieces_json' => set_pieces_json((string)$id), 'icon_path' => 'assets/images/relic_sets/' . slug($s['name']) . '.png', 'src' => $s['icon']];
     }
     return [$new, $skipped];
 }
@@ -119,7 +135,7 @@ function find_new(PDO $pdo): array {
 function public_view(array $new): array {
     $out = [];
     foreach ($new as $group => $items) {
-        $out[$group] = array_map(fn($e) => array_diff_key($e, ['src' => 1, 'icon_path' => 1, 'bonus_2pc' => 1, 'bonus_4pc' => 1, 'passive_json' => 1]), $items);
+        $out[$group] = array_map(fn($e) => array_diff_key($e, ['src' => 1, 'icon_path' => 1, 'bonus_2pc' => 1, 'bonus_4pc' => 1, 'passive_json' => 1, 'pieces_json' => 1]), $items);
     }
     return $out;
 }
@@ -147,13 +163,17 @@ try {
 
     [$new] = find_new($pdo);   // neu aus der Quelle berechnen: dem Browser wird nur die Auswahl der Namen geglaubt
     $hasPassive = (bool)$pdo->query("SHOW COLUMNS FROM light_cones LIKE 'passive_json'")->fetch();
+    $hasPieces = (bool)$pdo->query("SHOW COLUMNS FROM relic_sets LIKE 'pieces_json'")->fetch();
     $stmts = [
         'characters' => $pdo->prepare("INSERT IGNORE INTO characters (name, element, path, rarity, icon_path) VALUES (?, ?, ?, ?, ?)"),
         // Ohne die Spalte passive_json (Migration 007 fehlt noch) werden Lichtkegel ohne Fähigkeit eingetragen
         'light_cones' => $pdo->prepare($hasPassive
             ? "INSERT IGNORE INTO light_cones (name, path, rarity, icon_path, passive_json) VALUES (?, ?, ?, ?, ?)"
             : "INSERT IGNORE INTO light_cones (name, path, rarity, icon_path) VALUES (?, ?, ?, ?)"),
-        'relic_sets' => $pdo->prepare("INSERT IGNORE INTO relic_sets (name, kind, bonus_2pc, bonus_4pc, icon_path) VALUES (?, ?, ?, ?, ?)"),
+        // Ohne die Spalte pieces_json (Migration 010 fehlt noch) werden Sets ohne Teile-Namen eingetragen
+        'relic_sets' => $pdo->prepare($hasPieces
+            ? "INSERT IGNORE INTO relic_sets (name, kind, bonus_2pc, bonus_4pc, icon_path, pieces_json) VALUES (?, ?, ?, ?, ?, ?)"
+            : "INSERT IGNORE INTO relic_sets (name, kind, bonus_2pc, bonus_4pc, icon_path) VALUES (?, ?, ?, ?, ?)"),
     ];
     $added = 0;
     $images = ['geladen' => 0, 'vorhanden' => 0, 'fehler' => 0];
@@ -164,7 +184,7 @@ try {
             $args = match ($group) {
                 'characters' => [$e['name'], $e['element'], $e['path'], $e['rarity'], $e['icon_path']],
                 'light_cones' => $hasPassive ? [$e['name'], $e['path'], $e['rarity'], $e['icon_path'], $e['passive_json']] : [$e['name'], $e['path'], $e['rarity'], $e['icon_path']],
-                'relic_sets' => [$e['name'], $e['kind'], $e['bonus_2pc'], $e['bonus_4pc'], $e['icon_path']],
+                'relic_sets' => $hasPieces ? [$e['name'], $e['kind'], $e['bonus_2pc'], $e['bonus_4pc'], $e['icon_path'], $e['pieces_json']] : [$e['name'], $e['kind'], $e['bonus_2pc'], $e['bonus_4pc'], $e['icon_path']],
             };
             $stmts[$group]->execute($args);
             $added += $stmts[$group]->rowCount();

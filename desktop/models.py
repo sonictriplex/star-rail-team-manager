@@ -7,7 +7,7 @@ from typing import Optional
 # Projektverzeichnis: alle Pfade werden relativ hierzu aufgelöst,
 # damit die App unabhängig vom aktuellen Arbeitsverzeichnis funktioniert.
 # Version der Desktop-App; zusammen mit dem Web-Stand hochzählen
-APP_VERSION = "1.3.0"
+APP_VERSION = "1.4.0"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Gemeinsame Daten für Desktop, Web und weitere Clients (Bilder, Stammdaten)
@@ -107,8 +107,10 @@ class LightCone:
 
 class RelicSet:
     """Modelliert ein Relikt-Set (kind = "Relikt", 2er und 4er Bonus) oder Planar-Ornament (nur 2er Bonus)."""
-    def __init__(self, name: str, kind: str, bonus_2pc: str = "", bonus_4pc: str = "", icon_path: Optional[str] = None):
+    def __init__(self, name: str, kind: str, bonus_2pc: str = "", bonus_4pc: str = "", icon_path: Optional[str] = None,
+                 pieces: Optional[dict] = None):
         self.name = name
+        self.pieces = pieces or {}   # Namen der einzelnen Teile: {Slot: [Name, ...]}
         self.kind = kind
         self.bonus_2pc = bonus_2pc or ""
         self.bonus_4pc = bonus_4pc or ""
@@ -121,6 +123,9 @@ class RelicSet:
     def bonus_tooltip(self) -> str:
         """Set-Boni (2er, 4er) als Tooltip, leer wenn das Set keine Beschreibung hat."""
         parts = [f"{label}-Bonus: {bonus}" for label, bonus in (("2er", self.bonus_2pc), ("4er", self.bonus_4pc)) if bonus]
+        pieces = [f"{slot}: {name}" for slot, names in self.pieces.items() for name in names]
+        if pieces:
+            parts.append("Teile:\n" + "\n".join(pieces))
         return tooltip_html(self.name, parts) if parts else ""
 
 

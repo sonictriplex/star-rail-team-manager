@@ -51,6 +51,8 @@ data class RelicSet(
     @SerialName("bonus_2pc") val bonus2pc: String? = null,
     @SerialName("bonus_4pc") val bonus4pc: String? = null,
     @SerialName("icon_path") val iconPath: String? = null,
+    /** Namen der einzelnen Teile je Slot, z. B. "Kopf" -> ["Vielgesichtige Maske des Diebs"]. */
+    val pieces: Map<String, List<String>> = emptyMap(),
 )
 
 // --- Austauschformat (identisch zu Web und Desktop) ---
