@@ -2,7 +2,7 @@
 
 Online-Client für die Web-Version. Die App greift **nicht** direkt auf MySQL zu, sondern über die PHP-API in `../web/api/` (Anmeldung per Token, siehe `../web/README.md`).
 
-**Stand (Version 1.2.0):** Anmelden, Registrieren und Konto löschen, Teamliste, Build-Ansicht sowie Bearbeiten und Speichern von Builds und Teams (anlegen, ändern, umbenennen, löschen) funktionieren. Teams und Builds lassen sich auch offline ansehen.
+**Stand (Version 1.2.0):** Anmelden, Registrieren, **Passwort ändern** und Konto löschen, Teamliste, Build-Ansicht sowie Bearbeiten und Speichern von Builds und Teams (anlegen, ändern, umbenennen, löschen) funktionieren. Teams und Builds lassen sich auch offline ansehen. **Administratoren** können neue Charaktere, Lichtkegel und Relikt-Sets eintragen, und die App gleicht ihre Stammdaten mit dem Server ab.
 
 ## Technik
 
@@ -29,6 +29,18 @@ Die zuletzt geladenen Teams und Builds liegen im app-privaten Speicher (`files/u
 - Beim **Abmelden** und bei abgelaufener Sitzung wird der Cache gelöscht. Er ist nicht verschlüsselt (anders als der Token), enthält aber nur Teams und Builds, keine Zugangsdaten.
 - Nur ohne Cache und ohne Verbindung (erster Start) erscheint die Fehlermeldung statt der Liste.
 
+## Passwort ändern
+
+Im Menü (⋮) auf der Teamliste: „Passwort ändern“ (nur mit Verbindung). Der Dialog verlangt das aktuelle Passwort und zweimal das neue (6 bis 72 Zeichen, nicht gleich dem alten); die App prüft das vorab wie der Server und sendet `POST auth.php?action=change_password` mit `{old_password, new_password}`. Ein falsches aktuelles Passwort antwortet der Server mit 403, die Meldung erscheint im Dialog (kein „Sitzung abgelaufen“). Nach Erfolg bleibt **diese** App angemeldet (ihr Token bleibt gültig), alle anderen Geräte müssen sich neu anmelden.
+
+## Stammdaten aktualisieren (Administratoren)
+
+Ist das Konto auf dem Server als Administrator eingetragen (`web/api/admins.local.php`), erscheint im Menü „Stammdaten aktualisieren“. Die App fragt den Admin-Status nach jedem erfolgreichen Laden über `auth.php?action=status` ab (`is_admin`); deshalb steht der Punkt erst nach dem ersten Laden der Teams da. Der Dialog ruft `stammdaten.php?action=check` auf und listet, was in der Datenbank fehlt (alles vorausgewählt); „Ausgewählte eintragen“ sendet die Namen per `POST stammdaten.php` mit dem Header `X-Requested-With: fetch`. Der Server rechnet die Einträge selbst aus der Quelle aus und lädt die Bilder auf den Server. Das Menü ist nur mit Verbindung bedienbar.
+
+## Stammdaten der App und Abgleich mit dem Server
+
+Charaktere, Lichtkegel und Relikt-Sets stammen aus `shared/stammdaten.json` (in der APK). Damit neue Einträge, die ein Administrator eingetragen hat, ohne neuen Build erscheinen, gleicht die App nach dem Laden der Teams die öffentlichen Listen des Servers (`characters.php`, `light_cones.php`, `relic_sets.php`) ab: Was weder in den Assets noch schon gespeichert ist, landet in `files/stammdaten-extra.json`, die Bilder in `files/extra-images/` (`StammdatenRepository.syncFromServer`). Fehler (kein Netz) sind unkritisch, der alte Stand bleibt. Die Oberfläche folgt automatisch (die Stammdaten sind ein Compose-State).
+
 ## Konto löschen
 
 Im Menü (⋮) auf der Teamliste: „Konto löschen“ (nur mit Verbindung). Der Dialog verlangt das Passwort; die App sendet `POST auth.php?action=delete_account`. Ein falsches Passwort erscheint im Dialog (der Server antwortet mit 403, nicht 401, sonst würde die App „Sitzung abgelaufen“ annehmen). Nach Erfolg wird lokal abgemeldet, der Cache gelöscht und der Benutzername im Anmeldefeld geleert. Das Konto ist auch in der Web-Version weg.
@@ -36,6 +48,10 @@ Im Menü (⋮) auf der Teamliste: „Konto löschen“ (nur mit Verbindung). Der
 ## Token-Header
 
 Die App sendet den Token in zwei Headern: `Authorization: Bearer …` und `X-Auth-Token`. Hintergrund: Viele Hoster reichen den Authorization-Header nicht an PHP durch, der eigene Header kommt dagegen immer an. Der Server nimmt, was er bekommt (`web/api/auth_check.php`).
+
+## Tooltips
+
+Auf dem Handy gibt es keinen Hover: Die Beschreibung der **Lichtkegel-Fähigkeit** (passend zur gewählten Überlagerung S1–S5) und die **Set-Boni** der Relikte lassen sich über „ⓘ Beschreibung anzeigen“ aufklappen (Build-Ansicht und Bearbeiten); in den Auswahllisten stehen die ersten Zeilen unter dem Namen. Die Texte sind deutsch und stammen aus den Stammdaten.
 
 ## Aussehen
 
