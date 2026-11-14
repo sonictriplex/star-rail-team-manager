@@ -5,3 +5,5 @@ deploy/*.local.*
 deploy/backup/
 __pycache__/
 *.pyc
+desktop/star_rail_manager.db
+desktop/star-rail-team-manager.json
