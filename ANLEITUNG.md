@@ -3,7 +3,7 @@
 Mit dem **Team & Build Manager** hältst du deine Honkai-Star-Rail-Teams und die Builds deiner Charaktere an einem Ort fest: Level, Eidolon, Talente, Lichtkegel und die Werte aller sechs Relikte. Du kannst ihn im **Browser**, als **Android-App** (Handy und Tablet) oder als **Desktop-App** nutzen; Browser und App greifen auf dasselbe Konto zu.
 
 <p align="center">
-  <img src="docs/screenshots/web-overview.jpg" alt="Übersicht aller Teams im Browser" width="720">
+  <img src="docs/screenshots/web/overview.jpg" alt="Übersicht aller Teams im Browser" width="720">
 </p>
 
 <sub>Die Bilder in dieser Anleitung zeigen Beispieldaten eines Demo-Kontos.</sub>
@@ -21,8 +21,8 @@ Eine Technik-Beschreibung für Entwickler steht in der [README](README.md).
 
 <table>
   <tr>
-    <td align="center"><img src="docs/screenshots/web-login.jpg" alt="Anmeldung im Browser" width="420"><br><sub>Anmeldung im Browser</sub></td>
-    <td align="center"><img src="docs/screenshots/android-login.jpg" alt="Anmeldung in der Android-App" width="180"><br><sub>Anmeldung in der App</sub></td>
+    <td align="center"><img src="docs/screenshots/web/login.jpg" alt="Anmeldung im Browser" width="420"><br><sub>Anmeldung im Browser</sub></td>
+    <td align="center"><img src="docs/screenshots/android/login.jpg" alt="Anmeldung in der Android-App" width="180"><br><sub>Anmeldung in der App</sub></td>
   </tr>
 </table>
 
@@ -37,34 +37,34 @@ In der App ist das Feld **„Server“** schon mit `https://star-rail.media-matr
 **Im Browser** findest du Alle Teams, Neues Team, Exportieren, Importieren, Logout, Passwort ändern, Konto löschen und Über im Benutzermenü oben rechts (für Administratoren zusätzlich „Stammdaten aktualisieren“ nach „Importieren“):
 
 <p align="center">
-  <img src="docs/screenshots/web-menu.jpg" alt="Benutzermenü im Browser" width="560">
+  <img src="docs/screenshots/web/menu.jpg" alt="Benutzermenü im Browser" width="560">
 </p>
 
 Ein Team öffnest du per Klick auf die Teamkarte. Jede Charakterkarte zeigt Level, Eidolon, Lichtkegel, die aktiven Set-Boni und die Talente; die Werte lassen sich direkt auf der Karte ändern:
 
 <p align="center">
-  <img src="docs/screenshots/web-team.jpg" alt="Ein Team im Browser" width="720">
+  <img src="docs/screenshots/web/team.jpg" alt="Ein Team im Browser" width="720">
 </p>
 
 Mit dem **+** neben „Relikt-Sets“ öffnest du die Detailansicht und trägst die Werte der sechs Relikte ein:
 
 <p align="center">
-  <img src="docs/screenshots/web-build.jpg" alt="Build eines Charakters im Browser" width="720">
+  <img src="docs/screenshots/web/build.jpg" alt="Build eines Charakters im Browser" width="720">
 </p>
 
 Charaktere wählst du über das Plus-Feld im Team. Die Suche filtert nach Name, Pfad, Element und Seltenheit:
 
 <p align="center">
-  <img src="docs/screenshots/web-character-search.jpg" alt="Charakter auswählen im Browser" width="620">
+  <img src="docs/screenshots/web/character-search.jpg" alt="Charakter auswählen im Browser" width="620">
 </p>
 
 **In der App** tippst du auf einen Charakter, um seinen Build zu sehen, und oben rechts auf „Bearbeiten“, um ihn zu ändern. Beim Verlassen mit ungespeicherten Änderungen fragt die App nach, bevor sie etwas verwirft.
 
 <table>
   <tr>
-    <td align="center"><img src="docs/screenshots/android-teams.jpg" alt="Teamliste in der App" width="200"><br><sub>Teams</sub></td>
-    <td align="center"><img src="docs/screenshots/android-build.jpg" alt="Build in der App" width="200"><br><sub>Build ansehen</sub></td>
-    <td align="center"><img src="docs/screenshots/android-edit.jpg" alt="Build bearbeiten in der App" width="200"><br><sub>Build bearbeiten</sub></td>
+    <td align="center"><img src="docs/screenshots/android/teams.jpg" alt="Teamliste in der App" width="200"><br><sub>Teams</sub></td>
+    <td align="center"><img src="docs/screenshots/android/build.jpg" alt="Build in der App" width="200"><br><sub>Build ansehen</sub></td>
+    <td align="center"><img src="docs/screenshots/android/edit.jpg" alt="Build bearbeiten in der App" width="200"><br><sub>Build bearbeiten</sub></td>
   </tr>
 </table>
 
@@ -105,8 +105,8 @@ Fahre im Browser oder am Desktop mit der Maus auf einen Lichtkegel oder ein Reli
 
 <table>
   <tr>
-    <td align="center"><img src="docs/screenshots/android-menu.jpg" alt="Menü der App" width="220"><br><sub>Menü der App</sub></td>
-    <td align="center"><img src="docs/screenshots/android-about.jpg" alt="Über-Dialog in der App" width="220"><br><sub>Über-Dialog</sub></td>
+    <td align="center"><img src="docs/screenshots/android/menu.jpg" alt="Menü der App" width="220"><br><sub>Menü der App</sub></td>
+    <td align="center"><img src="docs/screenshots/android/about.jpg" alt="Über-Dialog in der App" width="220"><br><sub>Über-Dialog</sub></td>
   </tr>
 </table>
 
@@ -125,9 +125,9 @@ Du gibst dein **aktuelles Passwort** und zweimal das **neue** ein (6 bis 72 Zeic
 
 <table>
   <tr>
-    <td align="center"><img src="docs/screenshots/web-password.jpg" alt="Passwort ändern im Browser" width="420"><br><sub>Im Browser</sub></td>
-    <td align="center"><img src="docs/screenshots/android-password.jpg" alt="Passwort ändern in der App" width="190"><br><sub>In der App</sub></td>
-    <td align="center"><img src="docs/screenshots/android-password-error.jpg" alt="Falsches Passwort in der App" width="190"><br><sub>Falsches aktuelles Passwort</sub></td>
+    <td align="center"><img src="docs/screenshots/web/password.jpg" alt="Passwort ändern im Browser" width="420"><br><sub>Im Browser</sub></td>
+    <td align="center"><img src="docs/screenshots/android/password.jpg" alt="Passwort ändern in der App" width="190"><br><sub>In der App</sub></td>
+    <td align="center"><img src="docs/screenshots/android/password-error.jpg" alt="Falsches Passwort in der App" width="190"><br><sub>Falsches aktuelles Passwort</sub></td>
   </tr>
 </table>
 
@@ -143,7 +143,7 @@ Wenn du die App nicht mehr nutzen möchtest, kannst du dein Konto selbst lösche
 Du bestätigst mit deinem Passwort. Stimmt es nicht, bleibt alles unverändert und du bekommst die Meldung „Passwort falsch.“. Exportiere vorher, wenn du deine Daten behalten willst (siehe unten).
 
 <p align="center">
-  <img src="docs/screenshots/web-delete-account.jpg" alt="Konto löschen im Browser" width="560">
+  <img src="docs/screenshots/web/delete-account.jpg" alt="Konto löschen im Browser" width="560">
 </p>
 
 ## Daten mitnehmen oder übertragen
@@ -159,7 +159,7 @@ Kommt im Spiel etwas Neues dazu, tragen Administratoren es selbst ein. Du erkenn
 3. „Ausgewählte eintragen“ legt die Einträge samt Bildern an. Danach stehen sie sofort in der Auswahl (in der App nach dem Neu-Laden).
 
 <p align="center">
-  <img src="docs/screenshots/web-update.jpg" alt="Stammdaten aktualisieren im Browser" width="620">
+  <img src="docs/screenshots/web/update.jpg" alt="Stammdaten aktualisieren im Browser" width="620">
 </p>
 
 Wer kein Administrator ist, sieht den Punkt nicht; fehlt dir ein Charakter oder Lichtkegel, melde das dem Betreiber.
@@ -170,12 +170,12 @@ Es gibt auch eine Desktop-App, die ihre Daten lokal in einer Datei speichert und
 
 <table>
   <tr>
-    <td align="center"><img src="docs/screenshots/desktop-overview.jpg" alt="Desktop: Team" width="420"><br><sub>Ein Team</sub></td>
-    <td align="center"><img src="docs/screenshots/desktop-build.jpg" alt="Desktop: Relikt-Details" width="420"><br><sub>Relikt-Details</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop/overview.jpg" alt="Desktop: Team" width="420"><br><sub>Ein Team</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop/build.jpg" alt="Desktop: Relikt-Details" width="420"><br><sub>Relikt-Details</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/desktop-all-teams.jpg" alt="Desktop: Alle Teams" width="420"><br><sub>Alle Teams (Datei → Alle Teams)</sub></td>
-    <td align="center"><img src="docs/screenshots/desktop-lightcone-search.jpg" alt="Desktop: Lichtkegel auswählen" width="420"><br><sub>Lichtkegel wählen, mit Tooltip der Fähigkeit</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop/all-teams.jpg" alt="Desktop: Alle Teams" width="420"><br><sub>Alle Teams (Datei → Alle Teams)</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop/lightcone-search.jpg" alt="Desktop: Lichtkegel auswählen" width="420"><br><sub>Lichtkegel wählen, mit Tooltip der Fähigkeit</sub></td>
   </tr>
 </table>
 
@@ -185,8 +185,8 @@ Im Browser (Benutzermenü → „Über“), in der App (Menü ⋮ → „Über�
 
 <table>
   <tr>
-    <td align="center"><img src="docs/screenshots/web-about.jpg" alt="Über-Dialog im Browser" width="420"><br><sub>Browser</sub></td>
-    <td align="center"><img src="docs/screenshots/desktop-about.jpg" alt="Über-Dialog am Desktop" width="240"><br><sub>Desktop</sub></td>
+    <td align="center"><img src="docs/screenshots/web/about.jpg" alt="Über-Dialog im Browser" width="420"><br><sub>Browser</sub></td>
+    <td align="center"><img src="docs/screenshots/desktop/about.jpg" alt="Über-Dialog am Desktop" width="240"><br><sub>Desktop</sub></td>
   </tr>
 </table>
 

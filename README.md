@@ -3,12 +3,12 @@
 Teams aus bis zu vier Charakteren zusammenstellen und für jeden Charakter einen Build verwalten: Level, Eidolon, Talente, Lichtkegel (Level und Überlagerung) und alle sechs Relikte mit Set, Hauptwert und Substats. Es gibt drei Clients für dieselben Daten: eine **Web-App**, eine **Android-App** und eine **Desktop-App**.
 
 <p align="center">
-  <img src="docs/screenshots/web-overview.jpg" alt="Web-Version: Übersicht aller Teams" width="760">
+  <img src="docs/screenshots/web/overview.jpg" alt="Web-Version: Übersicht aller Teams" width="760">
 </p>
 
 | Desktop | Android: Teams | Android: Build |
 |:---:|:---:|:---:|
-| <img src="docs/screenshots/desktop-overview.jpg" alt="Desktop-Version" width="440"> | <img src="docs/screenshots/android-teams.jpg" alt="Android: Teamliste" width="170"> | <img src="docs/screenshots/android-build.jpg" alt="Android: Build eines Charakters" width="170"> |
+| <img src="docs/screenshots/desktop/overview.jpg" alt="Desktop-Version" width="440"> | <img src="docs/screenshots/android/teams.jpg" alt="Android: Teamliste" width="170"> | <img src="docs/screenshots/android/build.jpg" alt="Android: Build eines Charakters" width="170"> |
 
 <sub>Alle Screenshots zeigen Beispieldaten eines Demo-Kontos.</sub>
 
