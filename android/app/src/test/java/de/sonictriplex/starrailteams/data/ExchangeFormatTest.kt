@@ -14,7 +14,7 @@ class ExchangeFormatTest {
 
     private val webExport = """
         {"format":"star-rail-team-manager","version":1,"exported_at":"2026-11-14T12:00:00","builds":[
-          {"name":"Kafka","level":80,"eidolon":2,"light_cone":"Along the Passing Shore","lc_level":70,"lc_superimpose":3,
+          {"name":"Kafka","level":80,"eidolon":2,"light_cone":"Entlang am vorbeiziehenden Ufer","lc_level":70,"lc_superimpose":3,
            "relics":{"Kopf":{"set":"Band of Sizzling Thunder","rarity":5,"level":15,"main":"LP (Fix)","main_value":"705.6",
               "substats":[{"stat":"KT%","val":"5,2"},{"stat":"","val":""},{"stat":"","val":""},{"stat":"","val":""}]}},
            "talents":{"basic":6,"skill":10,"ult":10,"talent":10}}],
@@ -42,7 +42,7 @@ class ExchangeFormatTest {
         val file = parseExchange(webExport)
         val build = file.builds.single()
         assertEquals(2, build.eidolon)
-        assertEquals("Along the Passing Shore", build.lightCone)
+        assertEquals("Entlang am vorbeiziehenden Ufer", build.lightCone)
         assertEquals(3, build.lcSuperimpose)
         assertEquals(6, build.talents.basic)
         val kopf = build.relics.getValue("Kopf")
@@ -150,7 +150,7 @@ class ExchangeFormatTest {
     fun lichtkegelHabenFaehigkeitenAufDeutsch() {
         val data = AppJson.decodeFromString<Stammdaten>(File(shared, "stammdaten.json").readText())
         assertTrue(data.lightCones.all { it.passive?.text?.size == 5 })
-        val shore = data.lightCones.first { it.name == "Along the Passing Shore" }
+        val shore = data.lightCones.first { it.name == "Entlang am vorbeiziehenden Ufer" }
         assertEquals("Fährmann", shore.passive?.name)
         assertTrue(shore.passiveText(1)!!.contains("36%"))
         assertTrue(shore.passiveText(5)!!.contains("60%"))

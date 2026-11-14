@@ -2,6 +2,10 @@
 
 Dieser Verlauf fasst die wichtigsten Änderungen zusammen. Web, Desktop und Android haben ab 1.2.1 wieder dieselbe Versionsnummer (davor liefen sie getrennt); die Web-Version läuft per `deploy/deploy.sh` auf dem Server, der Desktop direkt aus dem Repo.
 
+## 1.3.0 (14.11.2026)
+- Lichtkegel und Relikt-Sets haben jetzt deutsche Namen (offizielle Namen aus StarRailRes, z. B. „Pfeile“, „Füllhorn“, „Im Wissen verlorene Gelehrte“). Charaktere bleiben englisch. Die Bilddateien behalten ihren englischen Namen und dienen dem Update-Werkzeug und dem Admin-Menü als stabile Kennung
+- Bereits gespeicherte Builds werden umgestellt: Desktop beim ersten Start automatisch, Web per `web/migrations/009_deutsche_namen.sql` (danach `web/seed_stammdaten.sql`). Alte Export-Dateien mit englischen Namen lassen sich weiter importieren; auch ältere App-Versionen, die noch englische Namen senden, werden vom Server umgeschrieben (`shared/name_aliases.json`, `web/api/name_aliases.php`)
+
 ## 1.2.1 (14.11.2026)
 Ab dieser Version tragen Web, Desktop und Android wieder dieselbe Versionsnummer.
 - Die Auswahl der Relikt-Sets und Planar-Ornamente zeigt zu jedem Set sein Icon. Web: zusätzlich mit Suchfeld, das Icon steht auch im geschlossenen Feld, die Set-Boni bleiben als Tooltip an den Einträgen, Pfeiltasten, Enter und Escape funktionieren wie bei der Teil-Auswahl im Genshin-Manager. Desktop: die Dropdowns zeigen die Icons. Android zeigt die Set-Icons in der Auswahl bereits

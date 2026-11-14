@@ -30,3 +30,17 @@ out.append(block("light_cones", ["name", "path", "rarity", "icon_path", "passive
 out.append(block("relic_sets", ["name", "kind", "bonus_2pc", "bonus_4pc", "icon_path"], data["relic_sets"]))
 (root / "web" / "seed_stammdaten.sql").write_text("\n".join(out), encoding="utf-8")
 print("web/seed_stammdaten.sql geschrieben:", {k: len(v) for k, v in data.items()})
+
+# Alte englische Namen -> deutsche Namen (Import alter Export-Dateien, ältere App-Versionen), als PHP-Tabelle für api/helpers.php
+aliases = json.loads((root / "shared" / "name_aliases.json").read_text(encoding="utf-8"))
+aliases.pop("_hinweis", None)
+def php(v):
+    return "'" + v.replace("\\", "\\\\").replace("'", "\\'") + "'"
+lines = ["<?php", "// Erzeugt von web/tools/make_seed.py aus shared/name_aliases.json. Nicht von Hand ändern.", "return ["]
+for group, pairs in aliases.items():
+    lines.append(f"    {php(group)} => [")
+    lines += [f"        {php(k)} => {php(v)}," for k, v in pairs.items()]
+    lines.append("    ],")
+lines.append("];")
+(root / "web" / "api" / "name_aliases.php").write_text("\n".join(lines) + "\n", encoding="utf-8")
+print("web/api/name_aliases.php geschrieben")

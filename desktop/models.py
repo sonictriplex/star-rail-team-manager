@@ -1,4 +1,5 @@
 import html
+import json
 import os
 import re
 from typing import Optional
@@ -6,7 +7,7 @@ from typing import Optional
 # Projektverzeichnis: alle Pfade werden relativ hierzu aufgelöst,
 # damit die App unabhängig vom aktuellen Arbeitsverzeichnis funktioniert.
 # Version der Desktop-App; zusammen mit dem Web-Stand hochzählen
-APP_VERSION = "1.2.1"
+APP_VERSION = "1.3.0"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Gemeinsame Daten für Desktop, Web und weitere Clients (Bilder, Stammdaten)
@@ -131,6 +132,26 @@ def clamp_int(value, low: int, high: int, default: int) -> int:
         return default
 
 
+_ALIASES = None
+
+
+def name_aliases() -> dict:
+    """Alte englische Namen -> deutsche Namen von Lichtkegeln und Relikt-Sets (shared/name_aliases.json); leer, wenn die Datei fehlt."""
+    global _ALIASES
+    if _ALIASES is None:
+        try:
+            with open(os.path.join(SHARED_DIR, "name_aliases.json"), encoding="utf-8") as f:
+                _ALIASES = {k: v for k, v in json.load(f).items() if isinstance(v, dict)}
+        except (OSError, ValueError):
+            _ALIASES = {}
+    return _ALIASES
+
+
+def canonical_name(group: str, name: str) -> str:
+    """Deutscher Name zu einem alten englischen (Import alter Export-Dateien); unbekannte Namen bleiben unverändert."""
+    return name_aliases().get(group, {}).get(name, name)
+
+
 def normalize_relics(relics) -> dict:
     """Bringt die Relikte in das Format von Web und Server: nur bekannte Slots, je Slot
     {set, rarity, level, main, main_value, substats: [{stat, val} x4]}."""
@@ -148,7 +169,7 @@ def normalize_relics(relics) -> dict:
             subs.append({"stat": str(sub.get("stat") or "")[:40], "val": str(sub.get("val") or "")[:20]})
         set_name = str(data.get("set") or "").strip()
         clean[slot] = {
-            "set": "" if set_name.startswith("—") else set_name[:255],
+            "set": "" if set_name.startswith("—") else canonical_name("relic_sets", set_name)[:255],
             "rarity": clamp_int(data.get("rarity", 5), 2, 5, 5),
             "level": clamp_int(data.get("level", 15), 0, MAX_RELIC_LEVEL, 15),
             "main": str(data.get("main") or "")[:40],

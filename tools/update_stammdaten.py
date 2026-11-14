@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Prüft, ob die Star-Rail-Stammdaten (Charaktere, Lichtkegel, Relikt-Sets) aktuell sind, und ergänzt Fehlendes.
 
-Quelle: github.com/Mar-7th/StarRailRes (Daten und Bilder, englische Namen wie in den Stammdaten).
+Quelle: github.com/Mar-7th/StarRailRes (Daten und Bilder; Charaktere englisch, Lichtkegel und Relikt-Sets mit deutschen Namen, ihre Bilddateien tragen den englischen Slug).
 
     python3 tools/update_stammdaten.py            Prüfen (ändert nichts, Exit-Code 1 = es fehlt etwas)
     python3 tools/update_stammdaten.py --apply    Fehlendes ergänzen (fragt vorher nach)
@@ -100,6 +100,12 @@ def set_bonuses(set_id):
     return (desc[0] if desc else None), (desc[1] if len(desc) > 1 else None)
 
 
+def de_name(filename, src_id, fallback):
+    """Deutscher Name eines Lichtkegels bzw. Relikt-Sets aus der Quelle (Geschlechtsvarianten {F#…}{M#…} -> „weiblich/männlich“)."""
+    name = (fetch_de(filename).get(str(src_id)) or {}).get("name") or fallback
+    return re.sub(r"\{F#([^}]*)\}\{M#([^}]*)\}", r"\1/\2", name).strip()
+
+
 def slug(name):
     return re.sub(r"[^a-z0-9]+", "_", name.lower()).strip("_")
 
@@ -115,7 +121,10 @@ def download(source, target):
 
 def find_new(data):
     chars_src, lcs_src, sets_src = fetch_json("characters.json"), fetch_json("light_cones.json"), fetch_json("relic_sets.json")
-    have = {k: {n["name"].casefold() for n in data[k]} for k in ("characters", "light_cones", "relic_sets")}
+    have = {k: {n["name"].casefold() for n in data[k]} for k in ("characters",)}
+    # Lichtkegel und Relikt-Sets heißen auf Deutsch, ihr Bild-Slug stammt vom englischen Namen und dient als stabile Kennung
+    for k in ("light_cones", "relic_sets"):
+        have[k] = {Path(n["icon_path"]).stem for n in data[k]}
     new = {"characters": [], "light_cones": [], "relic_sets": []}
     skipped = []
 
@@ -142,21 +151,21 @@ def find_new(data):
                                   "icon_path": f"assets/images/characters/{slug(name)}.png", "_src": f"icon/avatar/{cid}.png"})
 
     for lid, l in lcs_src.items():
-        if l["name"].casefold() in have["light_cones"]:
+        if slug(l["name"]) in have["light_cones"]:
             continue
         path = PATHS.get(l["path"])
         if not path:
             skipped.append(f"Lichtkegel {l['name']}: unbekannter Pfad „{l['path']}“")
             continue
-        new["light_cones"].append({"name": l["name"], "path": path, "rarity": l["rarity"],
+        new["light_cones"].append({"name": de_name("light_cones.json", lid, l["name"]), "path": path, "rarity": l["rarity"],
                                    "icon_path": f"assets/images/light_cones/{slug(l['name'])}.png", "passive": lc_passive(lid),
                                    "_src": l["icon"]})
 
     for sid, s in sets_src.items():
-        if s["name"].casefold() in have["relic_sets"]:
+        if slug(s["name"]) in have["relic_sets"]:
             continue
         bonus_2pc, bonus_4pc = set_bonuses(sid)
-        new["relic_sets"].append({"name": s["name"], "kind": "Ornament" if int(sid) >= 300 else "Relikt",
+        new["relic_sets"].append({"name": de_name("relic_sets.json", sid, s["name"]), "kind": "Ornament" if int(sid) >= 300 else "Relikt",
                                   "bonus_2pc": bonus_2pc, "bonus_4pc": bonus_4pc,
                                   "icon_path": f"assets/images/relic_sets/{slug(s['name'])}.png", "_src": s["icon"]})
     return new, skipped
@@ -253,19 +262,21 @@ def main():
 def refresh_texts(path, data, args):
     """Liest die Fähigkeiten der Lichtkegel und die Set-Boni aller vorhandenen Einträge neu aus der deutschen Quelle."""
     print("Lade deutsche Texte von StarRailRes …")
-    lc_ids = {v["name"]: k for k, v in fetch_json("light_cones.json").items()}
-    set_ids = {v["name"]: k for k, v in fetch_json("relic_sets.json").items()}
+    lc_ids = {slug(v["name"]): k for k, v in fetch_json("light_cones.json").items()}   # Zuordnung über den Bild-Slug (Namen sind deutsch)
+    set_ids = {slug(v["name"]): k for k, v in fetch_json("relic_sets.json").items()}
     changed = missing = 0
     for lc in data["light_cones"]:
-        passive = lc_passive(lc_ids[lc["name"]]) if lc["name"] in lc_ids else None
+        key = Path(lc["icon_path"]).stem
+        passive = lc_passive(lc_ids[key]) if key in lc_ids else None
         missing += passive is None
         changed += lc.get("passive") != passive
         lc["passive"] = passive
     for rs in data["relic_sets"]:
-        if rs["name"] not in set_ids:
+        key = Path(rs["icon_path"]).stem
+        if key not in set_ids:
             missing += 1
             continue
-        bonus_2pc, bonus_4pc = set_bonuses(set_ids[rs["name"]])
+        bonus_2pc, bonus_4pc = set_bonuses(set_ids[key])
         changed += (rs.get("bonus_2pc"), rs.get("bonus_4pc")) != (bonus_2pc, bonus_4pc)
         rs["bonus_2pc"], rs["bonus_4pc"] = bonus_2pc, bonus_4pc
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

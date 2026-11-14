@@ -18,6 +18,16 @@ function clean_set($value): string {
 }
 
 /**
+ * Alte englische Namen von Lichtkegeln und Relikt-Sets (Export-Dateien, ältere App-Versionen) auf den deutschen Namen
+ * abbilden. Die Tabelle steht in name_aliases.php (erzeugt von web/tools/make_seed.py).
+ */
+function canonical_name(string $group, string $name): string {
+    static $aliases = null;
+    $aliases ??= require __DIR__ . '/name_aliases.php';
+    return $aliases[$group][$name] ?? $name;
+}
+
+/**
  * Bringt relics in ein sauberes, immer gleiches Format:
  * - Rückgabe ist ein assoziatives Array (Slot => Daten) oder leer; nur bekannte Slots
  * - je Slot {set, rarity, level, main, main_value, substats: [{stat, val} x4]}
@@ -42,7 +52,7 @@ function normalize_relics($relics): array {
         }
 
         $clean[$slotName] = [
-            'set'        => mb_substr(clean_set($slot['set'] ?? ''), 0, 255),
+            'set'        => mb_substr(canonical_name('relic_sets', clean_set($slot['set'] ?? '')), 0, 255),
             'rarity'     => clamp_int($slot['rarity'] ?? 5, 2, 5, 5),
             'level'      => clamp_int($slot['level'] ?? 15, 0, 15, 15),
             'main'       => mb_substr((string)($slot['main'] ?? ''), 0, 40),
@@ -70,7 +80,7 @@ function build_values(array $m): array {
         clamp_int($talents['skill'] ?? 1, 1, 12, 1),
         clamp_int($talents['ult'] ?? 1, 1, 12, 1),
         clamp_int($talents['talent'] ?? 1, 1, 12, 1),
-        clean_set($m['light_cone'] ?? ''),
+        canonical_name('light_cones', clean_set($m['light_cone'] ?? '')),
         clamp_int($m['lc_level'] ?? 80, 1, 80, 80),
         clamp_int($m['lc_superimpose'] ?? 1, 1, 5, 1),
         json_encode(count($relics) > 0 ? $relics : new stdClass(), JSON_UNESCAPED_UNICODE),

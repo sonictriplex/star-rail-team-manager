@@ -54,6 +54,12 @@ function lc_passive_json(string $lcId): ?string {
     return json_encode(['name' => $rank['skill'], 'text' => array_map(fn($p) => render_rank($rank['desc'], $p), $rank['params'])], JSON_UNESCAPED_UNICODE);
 }
 
+/** Deutscher Name eines Lichtkegels bzw. Relikt-Sets aus der Quelle; Geschlechtsvarianten {F#…}{M#…} werden zu "weiblich/männlich". */
+function de_name(string $file, string $id, string $fallback): string {
+    $name = de_source($file)[$id]['name'] ?? $fallback;
+    return trim(preg_replace('/\{F#([^}]*)\}\{M#([^}]*)\}/u', '$1/$2', $name));
+}
+
 function slug(string $name): string {
     return trim(preg_replace('/[^a-z0-9]+/', '_', strtolower($name)), '_');
 }
@@ -65,8 +71,10 @@ function find_new(PDO $pdo): array {
     $sets = fetch_json(SRC . 'index_new/en/relic_sets.json');
 
     $have = [];
-    foreach (['characters', 'light_cones', 'relic_sets'] as $t) {
-        $have[$t] = array_flip(array_map('mb_strtolower', $pdo->query("SELECT name FROM $t")->fetchAll(PDO::FETCH_COLUMN)));
+    $have['characters'] = array_flip(array_map('mb_strtolower', $pdo->query("SELECT name FROM characters")->fetchAll(PDO::FETCH_COLUMN)));
+    // Lichtkegel und Relikt-Sets heißen auf Deutsch; der Bild-Slug (vom englischen Namen) ist die stabile Kennung
+    foreach (['light_cones', 'relic_sets'] as $t) {
+        $have[$t] = array_flip(array_map(fn($p) => pathinfo((string)$p, PATHINFO_FILENAME), $pdo->query("SELECT icon_path FROM $t")->fetchAll(PDO::FETCH_COLUMN)));
     }
     $new = ['characters' => [], 'light_cones' => [], 'relic_sets' => []];
     $skipped = [];
@@ -92,16 +100,16 @@ function find_new(PDO $pdo): array {
             'icon_path' => 'assets/images/characters/' . slug($name) . '.png', 'src' => "icon/avatar/$id.png"];
     }
     foreach ($lcs as $id => $l) {
-        if (isset($have['light_cones'][mb_strtolower($l['name'])])) continue;
+        if (isset($have['light_cones'][slug($l['name'])])) continue;
         $path = PATHS[$l['path']] ?? null;
         if (!$path) { $skipped[] = "Lichtkegel {$l['name']}: unbekannter Pfad"; continue; }
-        $new['light_cones'][] = ['name' => $l['name'], 'path' => $path, 'rarity' => (int)$l['rarity'],
+        $new['light_cones'][] = ['name' => de_name('light_cones.json', (string)$id, $l['name']), 'path' => $path, 'rarity' => (int)$l['rarity'],
             'icon_path' => 'assets/images/light_cones/' . slug($l['name']) . '.png', 'passive_json' => lc_passive_json((string)$id), 'src' => $l['icon']];
     }
     foreach ($sets as $id => $s) {
-        if (isset($have['relic_sets'][mb_strtolower($s['name'])])) continue;
+        if (isset($have['relic_sets'][slug($s['name'])])) continue;
         $desc = de_source('relic_sets.json')[(string)$id]['desc'] ?? ($s['desc'] ?? []);   // Boni auf Deutsch
-        $new['relic_sets'][] = ['name' => $s['name'], 'kind' => ((int)$id >= 300) ? 'Ornament' : 'Relikt',
+        $new['relic_sets'][] = ['name' => de_name('relic_sets.json', (string)$id, $s['name']), 'kind' => ((int)$id >= 300) ? 'Ornament' : 'Relikt',
             'bonus_2pc' => $desc[0] ?? null, 'bonus_4pc' => $desc[1] ?? null,
             'icon_path' => 'assets/images/relic_sets/' . slug($s['name']) . '.png', 'src' => $s['icon']];
     }

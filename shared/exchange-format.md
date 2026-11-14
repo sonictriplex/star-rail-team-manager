@@ -88,4 +88,4 @@ Beispiel eines Builds:
 
 ## Namen
 
-Charakternamen, Lichtkegel und Sets heißen **englisch** wie in `shared/stammdaten.json`. Die Trailblazer stehen je Pfad einmal als `Trailblazer (Zerstörung)`, `Trailblazer (Bewahrung)`, `Trailblazer (Harmonie)`, `Trailblazer (Gedenken)` und `Trailblazer (Hochgefühl)` (ohne Artikel). Gleichnamige Charaktere der Quelle tragen den Pfad als Zusatz, z. B. `March 7th (Die Jagd)`.
+Charakternamen heißen **englisch**, Lichtkegel und Relikt-Sets **deutsch** wie in `shared/stammdaten.json` (bis Version 1.2.1 waren auch sie englisch). Export-Dateien mit den alten englischen Namen lassen sich weiter importieren: Web, Server und Desktop ordnen sie über `shared/name_aliases.json` den deutschen Namen zu. Die Trailblazer stehen je Pfad einmal als `Trailblazer (Zerstörung)`, `Trailblazer (Bewahrung)`, `Trailblazer (Harmonie)`, `Trailblazer (Gedenken)` und `Trailblazer (Hochgefühl)` (ohne Artikel). Gleichnamige Charaktere der Quelle tragen den Pfad als Zusatz, z. B. `March 7th (Die Jagd)`.

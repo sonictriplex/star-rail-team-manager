@@ -4,7 +4,7 @@ import sqlite3
 from datetime import datetime
 from typing import Optional
 from models import (Character, LightCone, RelicSet, BASE_DIR, DEFAULT_TALENTS, MAX_LEVEL, TALENT_MAX,
-                    clamp_int, icon_path_for, normalize_relics)
+                    canonical_name, clamp_int, icon_path_for, name_aliases, normalize_relics)
 from seed import SEED_PATH, fill_texts, import_seed, is_seeded
 
 DB_PATH = os.path.join(BASE_DIR, "star_rail_manager.db")
@@ -105,6 +105,7 @@ class StarRailManager:
         try:
             with self.get_connection() as conn:
                 conn.executescript(SCHEMA)
+                self._migrate_german_names(conn)   # vor den Fähigkeiten: die Texte werden über die deutschen Namen zugeordnet
                 self._migrate_light_cone_passives(conn)
         except (sqlite3.Error, OSError, json.JSONDecodeError) as e:
             raise DatabaseError(f"Datenbank konnte nicht initialisiert werden ({self.db_path}): {e}") from e
@@ -118,6 +119,32 @@ class StarRailManager:
         conn.execute("ALTER TABLE light_cones ADD COLUMN passive_json TEXT")
         if self.seed_path and os.path.exists(self.seed_path):
             fill_texts(conn, self.seed_path)
+
+    @staticmethod
+    def _migrate_german_names(conn: sqlite3.Connection):
+        """Ältere Datenbanken: Lichtkegel und Relikt-Sets tragen noch englische Namen. Umbenennen auf die deutschen, samt der
+        gespeicherten Builds (Lichtkegel und Set-Namen in relics_json). Läuft bei jedem Start, ist bei bereits deutschen Namen wirkungslos."""
+        aliases = name_aliases()
+        lcs, sets = aliases.get("light_cones", {}), aliases.get("relic_sets", {})
+        for old, new in lcs.items():
+            conn.execute("UPDATE light_cones SET name = ? WHERE name = ? AND NOT EXISTS (SELECT 1 FROM light_cones WHERE name = ?)", (new, old, new))
+            conn.execute("UPDATE user_characters SET light_cone = ? WHERE light_cone = ?", (new, old))
+        for old, new in sets.items():
+            conn.execute("UPDATE relic_sets SET name = ? WHERE name = ? AND NOT EXISTS (SELECT 1 FROM relic_sets WHERE name = ?)", (new, old, new))
+        if not sets:
+            return
+        for char_name, raw in conn.execute("SELECT char_name, relics_json FROM user_characters WHERE relics_json LIKE '%\"set\"%'").fetchall():
+            try:
+                relics = json.loads(raw or "{}")
+            except (json.JSONDecodeError, TypeError):
+                continue
+            changed = False
+            for slot in relics.values() if isinstance(relics, dict) else []:
+                if isinstance(slot, dict) and slot.get("set") in sets:
+                    slot["set"] = sets[slot["set"]]
+                    changed = True
+            if changed:
+                conn.execute("UPDATE user_characters SET relics_json = ? WHERE char_name = ?", (json.dumps(relics, ensure_ascii=False), char_name))
 
     def seed_if_empty(self):
         """Spielt die Stammdaten aus der JSON-Datei ein, wenn die Datenbank noch keine hat."""
@@ -296,7 +323,7 @@ class StarRailManager:
             clamp_int(card_data.get("eidolon", 0), 0, 6, 0),
             *(clamp_int(talents.get(key, DEFAULT_TALENTS[key]), 1, TALENT_MAX[key], 1)
               for key in ("basic", "skill", "ult", "talent")),
-            str(card_data.get("light_cone") or ""),
+            canonical_name("light_cones", str(card_data.get("light_cone") or "")),
             clamp_int(card_data.get("lc_level", MAX_LEVEL), 1, MAX_LEVEL, MAX_LEVEL),
             clamp_int(card_data.get("lc_superimpose", 1), 1, 5, 1),
             json.dumps(relics, ensure_ascii=False),
