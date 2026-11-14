@@ -2,7 +2,7 @@
 """Führt eine SQL-Datei (INSERT/UPDATE/DELETE) auf der Datenbank des Servers aus, ohne phpMyAdmin.
 
     python3 tools/remote_sql.py web/migrations/003_scholar_set_name.sql
-    python3 tools/remote_sql.py --ddl web/migrations/<datei>.sql      zusätzlich ALTER TABLE … MODIFY (ohne Transaktion)
+    python3 tools/remote_sql.py --ddl web/migrations/<datei>.sql      zusätzlich ALTER TABLE … MODIFY / ADD COLUMN (ohne Transaktion)
 
 Die Datenbank ist nur vom Server aus erreichbar. Das Skript lädt deshalb per FTPS eine einmalige PHP-Datei
 (api/_sql_<zufall>.php) hoch, ruft sie per HTTPS auf und löscht sie wieder:
@@ -28,7 +28,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWED = ("INSERT", "UPDATE", "DELETE", "REPLACE")
-DDL_PATTERN = re.compile(r"ALTER\s+TABLE\s+\w+\s+MODIFY\s", re.I)   # nur mit --ddl: Spalten-Umstellungen (z. B. ENUM erweitern)
+DDL_PATTERN = re.compile(r"ALTER\s+TABLE\s+\w+\s+(MODIFY|ADD\s+COLUMN)\s", re.I)   # nur mit --ddl: Spalten ändern oder ergänzen
 
 
 def load_env():
@@ -86,7 +86,7 @@ def split_statements(sql, ddl=False):
             result.append(s)
             continue
         if word not in ALLOWED:
-            hint = " (ALTER TABLE … MODIFY nur mit --ddl)" if word == "ALTER" else ""
+            hint = " (ALTER TABLE … MODIFY / ADD COLUMN nur mit --ddl)" if word == "ALTER" else ""
             raise SystemExit(f"Nicht erlaubte Anweisung ({word}){hint}: {s[:60]} …")
         result.append(s)
     return result

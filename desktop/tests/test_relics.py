@@ -122,5 +122,49 @@ class RelicPanelTest(unittest.TestCase):
             self.assertEqual(spin.maximum(), TALENT_MAX[key])
 
 
+
+class TooltipTest(unittest.TestCase):
+    def setUp(self):
+        warnings.simplefilter("ignore", ResourceWarning)
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.manager = StarRailManager(os.path.join(self.tmp.name, "test.db"))
+
+    def test_lichtkegel_haben_faehigkeiten(self):
+        cones = self.manager.available_light_cones
+        self.assertTrue(all(lc.passive and len(lc.passive["text"]) == 5 for lc in cones))
+        lc = self.manager.get_light_cone_by_name("Along the Passing Shore")
+        self.assertEqual(lc.passive["name"], "Fährmann")                      # deutsche Texte
+        self.assertIn("36%", lc.passive_tooltip(1))
+        self.assertIn("60%", lc.passive_tooltip(5))                           # Überlagerung wirkt auf die Werte
+        self.assertIn("Überlagerung 5", lc.passive_tooltip(9))                # außerhalb 1..5 wird begrenzt
+
+    def test_karte_zeigt_faehigkeit_passend_zur_ueberlagerung(self):
+        lc = self.manager.get_light_cone_by_name("Along the Passing Shore")
+        card = widgets.CharacterCardWidget(self.manager.get_character_by_name("Kafka"), self.manager,
+                                           {"light_cone": lc.name, "lc_superimpose": 1})
+        self.assertIn("36%", card.lc_input.toolTip())
+        card.superimpose_row.buttons[5].click()
+        self.assertIn("60%", card.lc_input.toolTip())
+        card.set_light_cone("")
+        self.assertEqual(card.lc_input.toolTip(), "")
+
+    def test_setboni_sind_deutsch(self):
+        sets = self.manager.available_relic_sets
+        self.assertTrue(all(r.bonus_2pc for r in sets))
+        self.assertIn("Erhöht", self.manager.get_relic_set_by_name("Amphoreus, The Eternal Land").bonus_2pc)
+
+    def test_bestehende_datenbank_wird_nachgeruestet(self):
+        import sqlite3
+        path = os.path.join(self.tmp.name, "alt.db")
+        with sqlite3.connect(path) as conn:           # Datenbank ohne die Spalte passive_json
+            conn.executescript("""CREATE TABLE light_cones (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE NOT NULL,
+                path TEXT NOT NULL, rarity INTEGER NOT NULL, icon_path TEXT);
+                INSERT INTO light_cones (name, path, rarity) VALUES ('Along the Passing Shore', 'Die Nichtigkeit', 5);""")
+        manager = StarRailManager(path)
+        self.assertEqual(manager.load_errors, [])
+        self.assertEqual(manager.get_light_cone_by_name("Along the Passing Shore").passive["name"], "Fährmann")
+
+
 if __name__ == "__main__":
     unittest.main()

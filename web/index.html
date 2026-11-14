@@ -188,7 +188,7 @@
             <div class="text-5xl mb-2 text-accent" aria-hidden="true">✦</div>
             <h2 id="aboutTitle" class="app-title text-lg font-bold text-accent mb-1">Honkai: Star Rail Team & Build Manager</h2>
             <!-- Bei jeder Änderung zusammen mit CHANGELOG.md hochzählen (ein Test vergleicht beide) -->
-            <div id="webVersion" class="text-sm text-gray-200 mb-3">Web-Version 1.0.0</div>
+            <div id="webVersion" class="text-sm text-gray-200 mb-3">Web-Version 1.1.0</div>
             <p class="text-sm text-gray-300 mb-3">Teams aus bis zu vier Charakteren und die Builds deiner Charaktere verwalten.</p>
             <p class="text-[11px] text-gray-400 mb-4">Inoffizielles Fanprojekt, nicht mit HoYoverse verbunden. Honkai: Star Rail sowie zugehörige Namen und Bilder sind Eigentum von HoYoverse.</p>
             <a id="aboutLogoLink" href="https://www.media-matrix.de" target="_blank" rel="noopener noreferrer" title="www.media-matrix.de" class="inline-block mb-4 opacity-90 hover:opacity-100 transition-opacity">
@@ -648,6 +648,15 @@
             renderOverview();
         }
 
+        // Tooltip (title-Attribut) mit der Fähigkeit eines Lichtkegels bei der gegebenen Überlagerung (S1–S5); leer ohne Text
+        function lcPassiveTip(lcName, superimpose) {
+            const lc = availableLightCones.find(x => x.name === lcName);
+            const texts = lc?.passive?.text;
+            if (!Array.isArray(texts) || !texts.length) return '';
+            const step = Math.max(1, Math.min(parseInt(superimpose) || 1, texts.length));
+            return `${lc.name}\n${lc.passive.name || ''} (Überlagerung ${step})\n\n${texts[step - 1]}`;
+        }
+
         // Tooltip mit den Set-Boni (2er, 4er) eines Relikt-Sets bzw. Planar-Ornaments; leer ohne Beschreibung
         function relicBonusTip(setName) {
             const s = availableRelicSets.find(x => x.name === setName);
@@ -1018,7 +1027,7 @@
                             <button onclick="openLcModal(${index})" class="w-5 h-5 rounded bg-inputBg text-accent font-bold flex items-center justify-center border border-[#332d47] hover:border-accent text-xs" title="Lichtkegel suchen">🔍</button>
                         </div>
                         <div class="flex gap-1.5 mb-1.5">
-                            <input type="text" readonly value="${escapeHtml(saved.light_cone || '')}" placeholder="Kein Lichtkegel" title="${escapeHtml(saved.light_cone || '')}" onclick="openLcModal(${index})" class="flex-1 min-w-0 bg-inputBg text-gray-100 border border-[#332d47] rounded px-2 py-1 text-xs truncate cursor-pointer hover:border-accent outline-none">
+                            <input type="text" readonly value="${escapeHtml(saved.light_cone || '')}" placeholder="Kein Lichtkegel" title="${escapeHtml(lcPassiveTip(saved.light_cone, saved.lc_superimpose) || saved.light_cone || '')}" onclick="openLcModal(${index})" class="flex-1 min-w-0 bg-inputBg text-gray-100 border border-[#332d47] rounded px-2 py-1 text-xs truncate cursor-pointer hover:border-accent outline-none">
                             <input type="number" min="1" max="80" value="${saved.lc_level || 80}" onchange="updateSavedProp(${index}, 'lc_level', this.value)" class="w-13 h-7 ${NUM_INPUT} px-1 text-xs flex-shrink-0">
                         </div>
                         <div class="flex items-center justify-between">
@@ -1539,7 +1548,7 @@
             });
 
             document.getElementById('lcTableBody').innerHTML = filtered.map(l => `
-                <tr data-name="${escapeHtml(l.name)}" class="hover:bg-[#262338]/60 cursor-pointer transition-colors">
+                <tr data-name="${escapeHtml(l.name)}" title="${escapeHtml(lcPassiveTip(l.name, 1))}" class="hover:bg-[#262338]/60 cursor-pointer transition-colors">
                     <td class="p-2"><img src="${escapeHtml(iconUrl(l))}" loading="lazy" onerror="this.removeAttribute('src')" class="w-8 h-8 object-contain"></td>
                     <td class="p-2 font-bold text-white">${escapeHtml(l.name)}</td>
                     <td class="p-2">${escapeHtml(l.path)}</td>

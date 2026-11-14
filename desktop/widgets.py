@@ -609,6 +609,9 @@ class CharacterCardWidget(QFrame):
 
         self.superimpose_row = ChoiceButtonRow("S", range(1, 6), selected=self.saved_data.get("lc_superimpose", 1))
         layout.addLayout(self.superimpose_row)
+        for btn in self.superimpose_row.buttons.values():
+            btn.clicked.connect(self.update_light_cone_tooltip)   # nach ChoiceButtonRow.select, der Wert ist schon gesetzt
+        self.update_light_cone_tooltip()
 
     def _build_relics(self, layout: QVBoxLayout):
         header = QHBoxLayout()
@@ -690,7 +693,15 @@ class CharacterCardWidget(QFrame):
     def set_light_cone(self, name: str):
         self.lc_input.setText(name)
         self.lc_input.setCursorPosition(0)
-        self.lc_input.setToolTip(name)
+        self.update_light_cone_tooltip()
+
+    def update_light_cone_tooltip(self):
+        """Tooltip des Lichtkegels: Fähigkeit bei der aktuellen Überlagerung (sonst nur der Name)."""
+        name = self.lc_input.text()
+        light_cone = self.manager.get_light_cone_by_name(name)
+        row = getattr(self, "superimpose_row", None)
+        superimpose = row.value if row else self.saved_data.get("lc_superimpose", 1)
+        self.lc_input.setToolTip((light_cone.passive_tooltip(superimpose) if light_cone else "") or name)
 
     def open_light_cone_dialog(self):
         dialog = LightConeSearchDialog(self.manager.available_light_cones, self.character.path, parent=self)

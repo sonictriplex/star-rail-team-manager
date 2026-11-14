@@ -6,7 +6,7 @@ from typing import Optional
 # Projektverzeichnis: alle Pfade werden relativ hierzu aufgelöst,
 # damit die App unabhängig vom aktuellen Arbeitsverzeichnis funktioniert.
 # Version der Desktop-App; zusammen mit dem Web-Stand hochzählen
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.1.0"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Gemeinsame Daten für Desktop, Web und weitere Clients (Bilder, Stammdaten)
@@ -79,11 +79,22 @@ class Character:
 
 class LightCone:
     """Modelliert einen Lichtkegel."""
-    def __init__(self, name: str, path: str, rarity: int, icon_path: Optional[str] = None):
+    def __init__(self, name: str, path: str, rarity: int, icon_path: Optional[str] = None,
+                 passive: Optional[dict] = None):
         self.name = name
         self.path = path
         self.rarity = rarity
         self._icon_path = icon_path
+        # {"name": Name der Fähigkeit, "text": [Beschreibung je Überlagerung S1..S5]} oder None
+        self.passive = passive if isinstance(passive, dict) else None
+
+    def passive_tooltip(self, superimpose: int = 1) -> str:
+        """Beschreibung der Fähigkeit bei der gegebenen Überlagerung (1–5), sonst leer."""
+        texts = (self.passive or {}).get("text") or []
+        if not texts:
+            return ""
+        step = max(1, min(superimpose, len(texts)))
+        return tooltip_html(self.name, [f"{self.passive.get('name', '')} (Überlagerung {step})", texts[step - 1]])
 
     @property
     def icon_path(self) -> str:

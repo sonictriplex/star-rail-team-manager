@@ -5,7 +5,7 @@ from datetime import datetime
 from typing import Optional
 from models import (Character, LightCone, RelicSet, BASE_DIR, DEFAULT_TALENTS, MAX_LEVEL, TALENT_MAX,
                     clamp_int, icon_path_for, normalize_relics)
-from seed import SEED_PATH, import_seed, is_seeded
+from seed import SEED_PATH, fill_texts, import_seed, is_seeded
 
 DB_PATH = os.path.join(BASE_DIR, "star_rail_manager.db")
 
@@ -28,7 +28,8 @@ CREATE TABLE IF NOT EXISTS light_cones (
     name TEXT UNIQUE NOT NULL,
     path TEXT NOT NULL,
     rarity INTEGER NOT NULL,
-    icon_path TEXT
+    icon_path TEXT,
+    passive_json TEXT
 );
 CREATE TABLE IF NOT EXISTS relic_sets (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -104,8 +105,19 @@ class StarRailManager:
         try:
             with self.get_connection() as conn:
                 conn.executescript(SCHEMA)
+                self._migrate_light_cone_passives(conn)
         except (sqlite3.Error, OSError, json.JSONDecodeError) as e:
             raise DatabaseError(f"Datenbank konnte nicht initialisiert werden ({self.db_path}): {e}") from e
+
+    def _migrate_light_cone_passives(self, conn: sqlite3.Connection):
+        """Ältere Datenbanken: Spalte light_cones.passive_json (Fähigkeiten) ergänzen und mit den deutschen Texten
+        (auch der Set-Boni) aus der Seed-Datei füllen."""
+        columns = [r[1] for r in conn.execute("PRAGMA table_info(light_cones)")]
+        if "passive_json" in columns:
+            return
+        conn.execute("ALTER TABLE light_cones ADD COLUMN passive_json TEXT")
+        if self.seed_path and os.path.exists(self.seed_path):
+            fill_texts(conn, self.seed_path)
 
     def seed_if_empty(self):
         """Spielt die Stammdaten aus der JSON-Datei ein, wenn die Datenbank noch keine hat."""
@@ -140,8 +152,9 @@ class StarRailManager:
         """Lädt alle Lichtkegel aus der SQLite-Datenbank."""
         try:
             with self.get_connection() as conn:
-                rows = conn.execute("SELECT name, path, rarity, icon_path FROM light_cones ORDER BY name ASC").fetchall()
-                self.available_light_cones = [LightCone(name=r[0], path=r[1], rarity=r[2], icon_path=r[3]) for r in rows]
+                rows = conn.execute("SELECT name, path, rarity, icon_path, passive_json FROM light_cones ORDER BY name ASC").fetchall()
+                self.available_light_cones = [LightCone(name=r[0], path=r[1], rarity=r[2], icon_path=r[3],
+                                                        passive=self._parse_json(r[4])) for r in rows]
         except sqlite3.Error as e:
             self.available_light_cones = []
             raise DatabaseError(f"Fehler beim Laden der Lichtkegel: {e}") from e
@@ -156,6 +169,13 @@ class StarRailManager:
         except sqlite3.Error as e:
             self.available_relic_sets = []
             raise DatabaseError(f"Fehler beim Laden der Relikt-Sets: {e}") from e
+
+    @staticmethod
+    def _parse_json(text: Optional[str]):
+        try:
+            return json.loads(text) if text else None
+        except json.JSONDecodeError:
+            return None
 
     def relic_sets_of_kind(self, kind: str) -> list[RelicSet]:
         """Relikt-Sets (kind "Relikt") oder Planar-Ornamente (kind "Ornament")."""
@@ -416,6 +436,13 @@ class StarRailManager:
             if c.name.lower() == name.lower():
                 return c
         return Character(name=name, element="Physisch", path="", rarity=4, icon_path=icon_path_for("char", name))
+
+    def get_light_cone_by_name(self, name: str) -> Optional[LightCone]:
+        """Sucht einen Lichtkegel nach Namen."""
+        for lc in self.available_light_cones:
+            if lc.name.lower() == (name or "").lower():
+                return lc
+        return None
 
     def get_light_cones_by_path(self, path: str) -> list[LightCone]:
         """Gibt alle Lichtkegel eines Pfads zurück."""

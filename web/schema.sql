@@ -23,7 +23,8 @@ CREATE TABLE IF NOT EXISTS light_cones (
     name      VARCHAR(255) NOT NULL UNIQUE,
     path      ENUM('Die Zerstörung','Die Jagd','Die Gelehrsamkeit','Die Harmonie','Die Nichtigkeit','Die Bewahrung','Der Überfluss','Das Gedenken','Das Hochgefühl') NOT NULL,
     rarity    TINYINT NOT NULL,                 -- 3 bis 5
-    icon_path VARCHAR(255) NULL
+    icon_path VARCHAR(255) NULL,
+    passive_json MEDIUMTEXT NULL                -- Fähigkeit: {"name": ..., "text": [S1 ... S5]}
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Relikt-Sets (2er und 4er Bonus) und Planar-Ornamente (nur 2er Bonus)

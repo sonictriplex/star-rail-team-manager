@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import de.sonictriplex.starrailteams.data.RELIC_SLOTS
 import de.sonictriplex.starrailteams.data.activeSetBonuses
 import de.sonictriplex.starrailteams.data.bonusText
+import de.sonictriplex.starrailteams.data.passiveText
 import de.sonictriplex.starrailteams.data.Build
 
 /** Ansicht des Builds eines Charakters; Bearbeiten über die Leiste oben. */
@@ -64,6 +65,7 @@ fun BuildScreen(vm: AppViewModel, name: String, onBack: () -> Unit, onEdit: () -
                                             Text("Level ${build.lcLevel} · Überlagerung S${build.lcSuperimpose}")
                                         }
                                     }
+                                    InfoToggle(vm.stammdaten.lightCone(build.lightCone)?.passiveText(build.lcSuperimpose))
                                 }
                             }
                             Section("Relikt-Sets") {

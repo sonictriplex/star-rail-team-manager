@@ -53,6 +53,13 @@ fun Build.normalized(): Build = copy(
     },
 )
 
+/** Beschreibung der Fähigkeit bei der gegebenen Überlagerung (1–5), oder null, wenn der Lichtkegel keine hat. */
+fun LightCone.passiveText(superimpose: Int): String? {
+    val texts = passive?.text?.takeIf { it.isNotEmpty() } ?: return null
+    val step = superimpose.coerceIn(1, texts.size)
+    return "${passive.name} (Überlagerung $step)\n\n${texts[step - 1]}"
+}
+
 /** Set-Boni (2er, 4er) als Text, oder null, wenn das Set keine Beschreibung hat. */
 fun RelicSet.bonusText(): String? {
     val parts = listOf("2er" to bonus2pc, "4er" to bonus4pc)

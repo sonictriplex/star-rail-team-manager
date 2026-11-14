@@ -28,6 +28,7 @@ import de.sonictriplex.starrailteams.data.BuildOptions
 import de.sonictriplex.starrailteams.data.RELIC_SLOTS
 import de.sonictriplex.starrailteams.data.activeSetBonuses
 import de.sonictriplex.starrailteams.data.bonusText
+import de.sonictriplex.starrailteams.data.passiveText
 import de.sonictriplex.starrailteams.data.normalized
 import de.sonictriplex.starrailteams.data.slotKind
 import de.sonictriplex.starrailteams.data.withSlot
@@ -96,6 +97,7 @@ fun EditBuildScreen(vm: AppViewModel, name: String, onDone: () -> Unit) {
                         Dropdown("S${build.lcSuperimpose}", (1..5).map { "S$it" }, { build = build.copy(lcSuperimpose = it.drop(1).toInt()) })
                     }
                 }
+                InfoToggle(vm.stammdaten.lightCone(build.lightCone)?.passiveText(build.lcSuperimpose))
                 if (picking) {
                     // Zuerst die Lichtkegel des Pfads des Charakters, seltene zuerst, danach alle übrigen
                     val cones = vm.stammdaten.stammdaten.lightCones
@@ -103,7 +105,7 @@ fun EditBuildScreen(vm: AppViewModel, name: String, onDone: () -> Unit) {
                             compareByDescending<de.sonictriplex.starrailteams.data.LightCone> { character != null && it.path == character.path }
                                 .thenByDescending { it.rarity }.thenBy { it.name },
                         )
-                        .map { PickerItem(it.name, "${it.rarity} ★ · ${it.path}") }
+                        .map { PickerItem(it.name, "${it.rarity} ★ · ${it.path}", it.passiveText(1).orEmpty()) }
                     SearchPickerDialog(
                         "Lichtkegel wählen", cones, vm.stammdaten, "Kein Lichtkegel",
                         onPick = { build = build.copy(lightCone = it); picking = false },

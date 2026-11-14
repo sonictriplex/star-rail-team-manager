@@ -35,7 +35,13 @@ data class LightCone(
     val path: String = "",
     val rarity: Int = 4,
     @SerialName("icon_path") val iconPath: String? = null,
+    /** Fähigkeit des Lichtkegels; null, wenn der Server oder die Stammdaten keine liefern. */
+    val passive: LightConePassive? = null,
 )
+
+/** Beschreibung der Lichtkegel-Fähigkeit: [text] hat je einen Eintrag für Überlagerung 1 bis 5. */
+@Serializable
+data class LightConePassive(val name: String = "", val text: List<String> = emptyList())
 
 /** Relikt-Set (kind "Relikt", 2er und 4er Bonus) oder Planar-Ornament (kind "Ornament", nur 2er Bonus). */
 @Serializable

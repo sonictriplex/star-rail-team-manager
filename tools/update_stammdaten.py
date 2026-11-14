@@ -22,6 +22,9 @@ Ohne --auto danach: web/seed_stammdaten.sql in phpMyAdmin importieren (wiederhol
 Sicherung gegen Fehlläufe: Mehr als --max-new neue Einträge (Standard 15) brechen --auto ab, ohne etwas zu ändern.
 Der Lauf ist wiederholbar: ein zweiter Aufruf findet nichts Neues und meldet „Alles aktuell“.
 
+--texts liest die Fähigkeiten der Lichtkegel (je Überlagerung S1–S5) und die Set-Boni aller vorhandenen Einträge auf Deutsch
+neu ein (zusammen mit --auto auch commit, deploy und Datenbank).
+
 Unbekannte Pfade oder Elemente (z. B. ein neuer Pfad im Spiel) werden nur gemeldet und NICHT eingetragen:
 Die Datenbank-Spalten sind ENUMs. Erst web/schema.sql und eine Migration (ALTER TABLE ... MODIFY) ergänzen,
 dann PATHS/ELEMENTS unten erweitern, außerdem das Pfad-Icon (path_<name>.png) und die Filter in web/index.html.
@@ -49,6 +52,52 @@ ELEMENTS = {"Physical": "Physisch", "Fire": "Feuer", "Ice": "Eis", "Thunder": "B
 def fetch_json(name):
     with urllib.request.urlopen(RAW + "index_new/en/" + name, timeout=90) as r:
         return json.load(r)
+
+
+_DE_CACHE = {}
+
+
+def fetch_de(name):
+    """Deutsche Texte der Quelle (Fähigkeiten der Lichtkegel, Boni der Sets), einmal je Lauf geladen."""
+    if name not in _DE_CACHE:
+        with urllib.request.urlopen(RAW + "index_new/de/" + name, timeout=90) as r:
+            _DE_CACHE[name] = json.load(r)
+    return _DE_CACHE[name]
+
+
+def render_rank(desc, params):
+    """Setzt die Werte einer Überlagerung in den Text der Lichtkegel-Fähigkeit ein.
+
+    Platzhalter: #1[i] ganze Zahl, #1[f1] eine Nachkommastelle, ein folgendes % bedeutet Prozent (Wert x 100).
+    Geschlechtsvarianten {F#…}{M#…} werden zu „weiblich/männlich“ zusammengefasst."""
+    def sub(m):
+        value = params[int(m.group(1)) - 1] * (100 if m.group(3) == "%" else 1)
+        fmt = m.group(2)
+        if fmt == "i":
+            text = str(int(value + 0.5 + 1e-9))
+        else:
+            digits = int(fmt[1:])
+            text = f"{value:.{digits}f}"
+            if "." in text and text.rstrip("0").endswith("."):
+                text = text.split(".")[0]
+            text = text.replace(".", ",")
+        return text + ("%" if m.group(3) == "%" else "")
+    text = re.sub(r"#(\d+)\[([^\]]+)\](%?)", sub, desc)
+    return re.sub(r"\{F#([^}]*)\}\{M#([^}]*)\}", r"\1/\2", text).replace("\\n", "\n")
+
+
+def lc_passive(lc_id):
+    """Fähigkeit eines Lichtkegels: {name, text: [Überlagerung 1..5]}, oder None."""
+    rank = fetch_de("light_cone_ranks.json").get(str(lc_id))
+    if not rank or not rank.get("params"):
+        return None
+    return {"name": rank["skill"], "text": [render_rank(rank["desc"], params) for params in rank["params"]]}
+
+
+def set_bonuses(set_id):
+    """Deutsche Set-Boni (2er, 4er) aus der Quelle, oder (None, None)."""
+    desc = (fetch_de("relic_sets.json").get(str(set_id)) or {}).get("desc") or []
+    return (desc[0] if desc else None), (desc[1] if len(desc) > 1 else None)
 
 
 def slug(name):
@@ -100,14 +149,15 @@ def find_new(data):
             skipped.append(f"Lichtkegel {l['name']}: unbekannter Pfad „{l['path']}“")
             continue
         new["light_cones"].append({"name": l["name"], "path": path, "rarity": l["rarity"],
-                                   "icon_path": f"assets/images/lc_{slug(l['name'])}.png", "_src": l["icon"]})
+                                   "icon_path": f"assets/images/lc_{slug(l['name'])}.png", "passive": lc_passive(lid),
+                                   "_src": l["icon"]})
 
     for sid, s in sets_src.items():
         if s["name"].casefold() in have["relic_sets"]:
             continue
-        desc = s.get("desc") or []
+        bonus_2pc, bonus_4pc = set_bonuses(sid)
         new["relic_sets"].append({"name": s["name"], "kind": "Ornament" if int(sid) >= 300 else "Relikt",
-                                  "bonus_2pc": desc[0] if desc else None, "bonus_4pc": desc[1] if len(desc) > 1 else None,
+                                  "bonus_2pc": bonus_2pc, "bonus_4pc": bonus_4pc,
                                   "icon_path": f"assets/images/relic_{slug(s['name'])}.png", "_src": s["icon"]})
     return new, skipped
 
@@ -125,6 +175,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--apply", action="store_true", help="Fehlendes ergänzen (Standard: nur prüfen)")
     ap.add_argument("--yes", action="store_true", help="bei --apply nicht nachfragen")
+    ap.add_argument("--texts", action="store_true",
+                    help="Fähigkeiten der Lichtkegel und Set-Boni aller vorhandenen Einträge auf Deutsch neu einlesen")
     ap.add_argument("--auto", action="store_true", help="ergänzen, committen, deployen, Datenbank aktualisieren, prüfen")
     ap.add_argument("--max-new", type=int, default=15, help="bei --auto: Abbruch bei mehr neuen Einträgen (Standard 15)")
     ap.add_argument("--no-commit", action="store_true", help="bei --auto: nicht committen")
@@ -134,6 +186,9 @@ def main():
 
     path = ROOT / "shared" / "stammdaten.json"
     data = json.loads(path.read_text(encoding="utf-8"))
+    if args.texts:
+        return refresh_texts(path, data, args)
+
     print("Lade Daten von StarRailRes …")
     new, skipped = find_new(data)
     print(f"Stand: {len(data['characters'])} Charaktere, {len(data['light_cones'])} Lichtkegel, {len(data['relic_sets'])} Relikt-Sets.\n")
@@ -192,6 +247,35 @@ def main():
         print("Nächste Schritte: web/seed_stammdaten.sql in phpMyAdmin importieren (wiederholbar), dann deploy/deploy.sh.")
         return 1 if skipped else 0
     return publish(new, args, skipped)
+
+
+def refresh_texts(path, data, args):
+    """Liest die Fähigkeiten der Lichtkegel und die Set-Boni aller vorhandenen Einträge neu aus der deutschen Quelle."""
+    print("Lade deutsche Texte von StarRailRes …")
+    lc_ids = {v["name"]: k for k, v in fetch_json("light_cones.json").items()}
+    set_ids = {v["name"]: k for k, v in fetch_json("relic_sets.json").items()}
+    changed = missing = 0
+    for lc in data["light_cones"]:
+        passive = lc_passive(lc_ids[lc["name"]]) if lc["name"] in lc_ids else None
+        missing += passive is None
+        changed += lc.get("passive") != passive
+        lc["passive"] = passive
+    for rs in data["relic_sets"]:
+        if rs["name"] not in set_ids:
+            missing += 1
+            continue
+        bonus_2pc, bonus_4pc = set_bonuses(set_ids[rs["name"]])
+        changed += (rs.get("bonus_2pc"), rs.get("bonus_4pc")) != (bonus_2pc, bonus_4pc)
+        rs["bonus_2pc"], rs["bonus_4pc"] = bonus_2pc, bonus_4pc
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"{changed} Einträge geändert, {missing} ohne Text in der Quelle. shared/stammdaten.json aktualisiert.")
+    seed = ROOT / "web" / "tools" / "make_seed.py"
+    if seed.exists():
+        subprocess.run([sys.executable, str(seed)], check=True)
+    if args.auto:
+        return publish({"characters": [], "light_cones": [], "relic_sets": []}, args, [])
+    print("Nächste Schritte: python3 tools/update_stammdaten.py --texts --auto (Commit, Deploy, Datenbank) oder den Seed von Hand einspielen.")
+    return 0
 
 
 def run(cmd):

@@ -176,6 +176,9 @@ class LightConeSearchDialog(SearchDialog):
     def row_values(self, lc: LightCone):
         return lc.icon_path, [lc.name, lc.path, f"{lc.rarity} ★"]
 
+    def row_tooltip(self, lc: LightCone) -> str:
+        return lc.passive_tooltip(1)
+
 
 class CharacterSearchDialog(SearchDialog):
     """Dialog zur Suche und Filterung von Charakteren nach Pfad, Element und Seltenheit."""

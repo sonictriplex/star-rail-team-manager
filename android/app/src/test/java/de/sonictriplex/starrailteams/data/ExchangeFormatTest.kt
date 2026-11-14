@@ -145,4 +145,17 @@ class ExchangeFormatTest {
         val body = AppJson.encodeToString(UpdateRequest.serializer(), UpdateRequest(listOf("Kafka"), emptyList(), listOf("Y")))
         assertTrue(body.contains("\"light_cones\":[]") && body.contains("\"relic_sets\":[\"Y\"]"))
     }
+
+    @Test
+    fun lichtkegelHabenFaehigkeitenAufDeutsch() {
+        val data = AppJson.decodeFromString<Stammdaten>(File(shared, "stammdaten.json").readText())
+        assertTrue(data.lightCones.all { it.passive?.text?.size == 5 })
+        val shore = data.lightCones.first { it.name == "Along the Passing Shore" }
+        assertEquals("Fährmann", shore.passive?.name)
+        assertTrue(shore.passiveText(1)!!.contains("36%"))
+        assertTrue(shore.passiveText(5)!!.contains("60%"))
+        assertTrue(shore.passiveText(9)!!.contains("Überlagerung 5"))   // außerhalb 1..5 wird begrenzt
+        assertEquals(null, LightCone(name = "X").passiveText(1))
+        assertTrue(data.relicSets.all { !it.bonus2pc.isNullOrBlank() })
+    }
 }
