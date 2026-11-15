@@ -23,6 +23,7 @@ import de.sonictriplex.starrailteams.data.RELIC_SLOTS
 import de.sonictriplex.starrailteams.data.activeSetBonuses
 import de.sonictriplex.starrailteams.data.bonusText
 import de.sonictriplex.starrailteams.data.passiveText
+import de.sonictriplex.starrailteams.data.displayPiece
 import de.sonictriplex.starrailteams.data.Build
 
 /** Ansicht des Builds eines Charakters; Bearbeiten über die Leiste oben. */
@@ -81,7 +82,12 @@ fun BuildScreen(vm: AppViewModel, name: String, onBack: () -> Unit, onEdit: () -
                             RELIC_SLOTS.forEach { slotName ->
                                 val slot = build.relics[slotName] ?: return@forEach
                                 Section("$slotName · ${slot.rarity}★ · +${slot.level}") {
-                                    if (slot.relicSet.isNotBlank()) Text(slot.relicSet)
+                                    if (slot.relicSet.isNotBlank()) {
+                                        // Teil dieses Slots als Titel, darunter das Set
+                                        val piece = slot.displayPiece(slotName, vm.stammdaten.relicSet(slot.relicSet))
+                                        Text(piece)
+                                        if (piece != slot.relicSet) Text(slot.relicSet, style = MaterialTheme.typography.bodySmall)
+                                    }
                                     Text("${slot.main}: ${slot.mainValue}", style = MaterialTheme.typography.titleSmall)
                                     slot.substats.filter { it.stat.isNotBlank() }.forEach { Text("${it.stat}  ${it.value}") }
                                 }

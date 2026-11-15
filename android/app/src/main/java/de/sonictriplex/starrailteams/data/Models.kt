@@ -78,6 +78,10 @@ data class Build(
     @SerialName("lc_level") val lcLevel: Int = 80,
     @SerialName("lc_superimpose") val lcSuperimpose: Int = 1,
     val talents: Talents = Talents(),
+    /** Sets des Builds (auf der Karte gewählt): Relikt-Set (4er bzw. erstes 2er), zweites 2er-Relikt-Set, Ornament-Set; leer = keins. */
+    @SerialName("relic_set") val relicSet: String = "",
+    @SerialName("relic_set_2") val relicSet2: String = "",
+    @SerialName("ornament_set") val ornamentSet: String = "",
     /** Die sechs Relikte nach Slotname (siehe [RELIC_SLOTS]). */
     val relics: Map<String, RelicSlot> = emptyMap(),
 )
@@ -89,6 +93,8 @@ data class Talents(val basic: Int = 1, val skill: Int = 1, val ult: Int = 1, val
 data class RelicSlot(
     /** Name des Relikt-Sets bzw. Planar-Ornaments; leer = nicht gewählt. */
     @SerialName("set") val relicSet: String = "",
+    /** Name des Teils dieses Slots (z. B. "Weinende Maske einer Mimin"); leer bei älteren Daten, dann gilt das Teil des Sets. */
+    val piece: String = "",
     val rarity: Int = 5,
     val level: Int = 15,
     val main: String = "",

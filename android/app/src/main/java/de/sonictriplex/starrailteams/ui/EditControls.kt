@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenu
@@ -85,6 +86,10 @@ fun DiscardDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
 /** Eintrag einer Suchliste; [withIcon] zeigt das Bild aus den Assets an. */
 data class PickerItem(
     val name: String,
+    /** Angezeigter Titel, wenn er vom [name] abweicht (Relikt-Sets: das Teil des Slots); der Name steht dann als Untertitel. */
+    val title: String = name,
+    /** Überschrift der Gruppe, zu der der Eintrag gehört (z. B. "Teile der gewählten Sets"); leer = keine Gruppen. */
+    val group: String = "",
     val subtitle: String = "",
     val detail: String = "",
     /** Weitere durchsuchbare Namen (Slot, Name), z. B. die Teile eines Relikt-Sets; ein Treffer erscheint als eigene Zeile. */
@@ -99,6 +104,7 @@ data class PickerRow(
     val detail: String,
     val pick: String,
     val iconName: String,
+    val group: String = "",
 )
 
 /**
@@ -107,12 +113,15 @@ data class PickerRow(
  */
 fun pickerRows(items: List<PickerItem>, query: String): List<PickerRow> {
     val q = query.trim()
-    val byName = items.filter { it.name.contains(q, ignoreCase = true) }
-        .map { PickerRow(it.name, it.name, it.subtitle, it.detail, it.name, it.name) }
+    fun PickerItem.hit() = name.contains(q, ignoreCase = true) || title.contains(q, ignoreCase = true)
+    fun PickerItem.row() = PickerRow(name, title, if (title == name) subtitle else name, detail, name, name, group)
+    val byName = items.filter { it.hit() }.map { it.row() }
     if (q.isEmpty()) return byName
-    val byPiece = items.flatMap { item ->
+    val byPiece = items.filterNot { it.hit() }.flatMap { item ->
         item.keywords.filter { it.second.contains(q, ignoreCase = true) }.map { (slot, piece) ->
-            PickerRow("${item.name}\u0000$slot\u0000$piece", piece, "$slot · ${item.name}", item.detail, item.name, item.name)
+            // Mit eigenem Titel (Teil des Slots) bleibt das Teil des Slots die Überschrift, der Treffer steht darunter
+            if (item.title != item.name) PickerRow("${item.name}\u0000$slot\u0000$piece", item.title, "$slot: $piece · ${item.name}", item.detail, item.name, item.name, item.group)
+            else PickerRow("${item.name}\u0000$slot\u0000$piece", piece, "$slot · ${item.name}", item.detail, item.name, item.name, item.group)
         }
     }
     return byName + byPiece
@@ -157,7 +166,13 @@ fun SearchPickerDialog(
                             color = MaterialTheme.colorScheme.primary,
                         )
                     }
-                    items(shown, key = { it.key }) { item ->
+                    itemsIndexed(shown, key = { _, row -> row.key }) { index, item ->
+                        if (item.group.isNotEmpty() && (index == 0 || shown[index - 1].group != item.group)) {
+                            Text(
+                                item.group, style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.tertiary, modifier = Modifier.padding(top = 8.dp),
+                            )
+                        }
                         Row(
                             Modifier.fillMaxWidth().clickable { onPick(item.pick) }.padding(vertical = 6.dp),
                             horizontalArrangement = Arrangement.spacedBy(12.dp),

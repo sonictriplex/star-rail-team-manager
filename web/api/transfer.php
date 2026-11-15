@@ -24,7 +24,7 @@ if ($method === 'GET') {
     try {
         $stmt = $pdo->prepare("
             SELECT char_name, level, eidolon, talent_basic, talent_skill, talent_ult, talent_talent,
-                   light_cone, lc_level, lc_superimpose, relics_json
+                   light_cone, lc_level, lc_superimpose, relics_json, relic_set, relic_set_2, ornament_set
             FROM user_characters WHERE user_id = ? ORDER BY char_name ASC
         ");
         $stmt->execute([$user_id]);

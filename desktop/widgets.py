@@ -10,7 +10,7 @@ from PySide6.QtCore import Qt, Signal, QMimeData, QPoint, QRectF, QSize
 from PySide6.QtGui import QPixmap, QDrag, QPainter, QColor, QFontMetrics, QFont, QPainterPath, QIcon
 
 from models import (Character, DEFAULT_TALENTS, TALENT_MAX, MAX_LEVEL, RELIC_SLOTS, SUBSTATS, RELIC_RARITIES,
-                    MAX_RELIC_LEVEL, active_set_bonuses, tooltip_html)
+                    MAX_RELIC_LEVEL, CARD_SET_KEYS, card_sets, tooltip_html)
 from manager import StarRailManager, DatabaseError
 from dialogs import LightConeSearchDialog
 from styles import element_badge_style, set_selected, tint_style, ELEMENT_COLORS, ACCENT
@@ -45,6 +45,9 @@ def section_title(text: str) -> QLabel:
 
 def muted(text: str) -> QLabel:
     return QLabel(f"<span style='color:#7a788e; font-size:10px;'>{text}</span>")
+
+
+PIECE_ROLE = Qt.UserRole + 1   # Name des Teils in den Einträgen der Teile-Auswahl (die Item-Daten tragen das Set)
 
 
 def normalize_build(build: dict, element: Optional[str] = None) -> dict:
@@ -625,36 +628,43 @@ class CharacterCardWidget(QFrame):
         header.addStretch()
         layout.addLayout(header)
 
-        # Die aktiven 2er-/4er-Boni werden aus den sechs Relikt-Slots berechnet
-        self.set_summary = QLabel()
-        self.set_summary.setObjectName("cardSubInfo")
-        self.set_summary.setWordWrap(True)
-        self.set_summary.setTextFormat(Qt.RichText)
-        self.set_summary.setMinimumHeight(40)
-        self.set_summary.setAlignment(Qt.AlignTop | Qt.AlignLeft)
-        layout.addWidget(self.set_summary)
-        self.update_set_summary(self.saved_data.get("relics") or {})
+        # Die Sets des Builds wie im Genshin-Manager auf der Karte wählen; die Teile der Slots wählt man im Detailpanel
+        sets = card_sets(self.saved_data, self.saved_data.get("relics") or {})
+        self.card_set_combos: dict[str, QComboBox] = {}
+        for key, kind, none in (("relic_set", "Relikt", "— Kein Relikt-Set —"),
+                                ("relic_set_2", "Relikt", "— Zweites 2er-Relikt-Set —"),
+                                ("ornament_set", "Ornament", "— Kein Ornament —")):
+            combo = QComboBox()
+            combo.setIconSize(QSize(24, 24))
+            combo.setSizeAdjustPolicy(QComboBox.AdjustToMinimumContentsLengthWithIcon)
+            combo.setMinimumContentsLength(10)
+            combo.view().setMinimumWidth(320)
+            combo.addItem(none, "")
+            for item in self.manager.relic_sets_of_kind(kind):
+                if os.path.exists(item.icon_path):
+                    combo.addItem(QIcon(item.icon_path), item.name, item.name)
+                else:
+                    combo.addItem(item.name, item.name)
+                combo.setItemData(combo.count() - 1, item.bonus_tooltip(), Qt.ToolTipRole)
+            select_value(combo, sets[CARD_SET_KEYS.index(key)])
+            combo.currentIndexChanged.connect(lambda _=0, c=combo: self._on_card_set_changed(c))
+            self._on_card_set_changed(combo, notify=False)
+            self.card_set_combos[key] = combo
+            layout.addWidget(combo)
 
-    def update_set_summary(self, relics: dict):
-        """Zeigt die aktiven Set-Boni (z. B. "4× Genius of Brilliant Stars"), mit den Boni als Tooltip."""
-        active = active_set_bonuses(relics)
-        if not active:
-            self.set_summary.setText("<span style='color:#7a788e;'>Keine aktiven Set-Boni</span>")
-            self.set_summary.setToolTip("")
-            return
-        self.set_summary.setText("<br>".join(
-            f"<b style='color:#a99bff;'>{n}×</b> {self._escape(name)}" for name, n in active))
-        parts = []
-        for name, n in active:
-            relic_set = self.manager.get_relic_set_by_name(name)
-            if relic_set:
-                parts.append(relic_set.bonus_tooltip())
-        self.set_summary.setToolTip("".join(parts[:1]) if len(parts) == 1 else
-                                    tooltip_html("Aktive Set-Boni", [f"{n}× {name}" for name, n in active]))
+    def card_set_values(self) -> dict:
+        """Die gewählten Sets der Karte: {relic_set, relic_set_2, ornament_set}."""
+        return {key: combo_value(combo) for key, combo in self.card_set_combos.items()}
 
-    @staticmethod
-    def _escape(text: str) -> str:
-        return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    def _on_card_set_changed(self, combo: QComboBox, notify: bool = True):
+        """Tooltip der Auswahl nachziehen; bei offenem Detailpanel ordnet dieses seine Teile-Listen neu."""
+        relic_set = self.manager.get_relic_set_by_name(combo_value(combo))
+        combo.setToolTip(relic_set.bonus_tooltip() if relic_set else "")
+        if notify and self.relic_panel is not None:
+            try:
+                self.relic_panel.refresh_piece_choices()
+            except RuntimeError:
+                self.relic_panel = None
 
     def _build_talents(self, layout: QVBoxLayout):
         layout.addWidget(section_title("Talente"))
@@ -729,6 +739,7 @@ class CharacterCardWidget(QFrame):
             "light_cone": self.lc_input.text(),
             "lc_level": self.lc_level_spin.value(),
             "lc_superimpose": self.superimpose_row.value,
+            **self.card_set_values(),
             "relics": self.saved_data.get("relics", {}),
             "talents": {key: spin.value() for key, spin in self.talent_spins.items()},
         }
@@ -754,7 +765,7 @@ class RelicPanel(QFrame):
         """Die Werte, die ein unbearbeitetes Panel liefert (siehe set_relics({}) / get_relics())."""
         return {
             slot_name: {
-                "set": "", "rarity": RELIC_RARITIES[0], "level": MAX_RELIC_LEVEL,
+                "set": "", "piece": "", "rarity": RELIC_RARITIES[0], "level": MAX_RELIC_LEVEL,
                 "main": mains[0], "main_value": "",
                 "substats": [{"stat": "", "val": ""} for _ in range(4)],
             }
@@ -833,17 +844,13 @@ class RelicPanel(QFrame):
         head.addWidget(rarity)
         box_layout.addLayout(head)
 
-        # Set: Relikt-Sets für Kopf bis Füße, Planar-Ornamente für Planarsphäre und Verbindungsseil
+        # Teil des Slots: Teile der Sets des Builds zuerst, danach alle übrigen (Off-Pieces sind erlaubt); gespeichert werden Teil und Set
         relic_set = QComboBox()
-        relic_set.view().setMinimumWidth(320)
+        relic_set.view().setMinimumWidth(420)
         relic_set.setIconSize(QSize(28, 28))
-        relic_set.addItem("— Kein Relikt-Set —" if kind == "Relikt" else "— Kein Ornament —", "")
-        for item in self.manager.relic_sets_of_kind(kind):
-            if os.path.exists(item.icon_path):
-                relic_set.addItem(QIcon(item.icon_path), item.name, item.name)
-            else:
-                relic_set.addItem(item.name, item.name)
-            relic_set.setItemData(relic_set.count() - 1, item.bonus_tooltip(), Qt.ToolTipRole)
+        relic_set.setSizeAdjustPolicy(QComboBox.AdjustToMinimumContentsLengthWithIcon)
+        relic_set.setMinimumContentsLength(12)
+        self._fill_piece_combo(slot_name, kind, relic_set)
         relic_set.currentIndexChanged.connect(lambda _=0, c=relic_set: self._on_set_changed(c))
         box_layout.addWidget(relic_set)
 
@@ -887,12 +894,67 @@ class RelicPanel(QFrame):
         edit.setFixedWidth(50)
         return edit
 
+    def _fill_piece_combo(self, slot_name: str, kind: str, combo: QComboBox, keep: tuple = ("", "")):
+        """Füllt die Teile-Auswahl eines Slots: "— Kein Teil —", die Teile der Sets des Builds, danach die übrigen Teile.
+        keep = (Teil, Set) bleibt gewählt, auch wenn es nicht (mehr) in den Stammdaten steht."""
+        sets = self.card.card_set_values()
+        wanted = [name for name in ((sets["relic_set"], sets["relic_set_2"]) if kind == "Relikt" else (sets["ornament_set"],)) if name]
+        entries = []   # (Teil, Set)
+        for item in self.manager.relic_sets_of_kind(kind):
+            entries.append((item.piece_for(slot_name) or item.name, item))   # Sets ohne Teile-Namen erscheinen mit ihrem Namen
+        mine = sorted((e for e in entries if e[1].name in wanted), key=lambda e: wanted.index(e[1].name))
+        others = sorted((e for e in entries if e[1].name not in wanted), key=lambda e: e[0].casefold())
+
+        combo.blockSignals(True)
+        combo.clear()
+        combo.addItem("— Kein Teil —", "")
+        combo.setItemData(0, "", PIECE_ROLE)
+
+        def add(piece: str, set_name: str, relic_set=None):
+            label = f"{piece}  ·  {set_name}" if piece != set_name else piece
+            icon_path = relic_set.icon_path if relic_set else ""
+            if icon_path and os.path.exists(icon_path):
+                combo.addItem(QIcon(icon_path), label, set_name)
+            else:
+                combo.addItem(label, set_name)
+            combo.setItemData(combo.count() - 1, piece, PIECE_ROLE)
+            combo.setItemData(combo.count() - 1, relic_set.bonus_tooltip() if relic_set else "", Qt.ToolTipRole)
+
+        for piece, item in mine:
+            add(piece, item.name, item)
+        if mine and others:
+            combo.insertSeparator(combo.count())
+        for piece, item in others:
+            add(piece, item.name, item)
+        keep_piece, keep_set = keep
+        if keep_piece and not any(e[0] == keep_piece and e[1].name == keep_set for e in entries):
+            add(keep_piece, keep_set)               # gespeichertes Teil, das nicht in den Stammdaten steht
+        self._select_piece(combo, keep_piece, keep_set)
+        combo.blockSignals(False)
+
+    @staticmethod
+    def _select_piece(combo: QComboBox, piece: str, set_name: str):
+        """Wählt das Teil (und sein Set); ohne Teil das erste Teil des Sets (ältere Builds kennen nur das Set)."""
+        for i in range(combo.count()):
+            if combo.itemData(i, Qt.UserRole) is None:      # Trenner
+                continue
+            item_piece, item_set = combo.itemData(i, PIECE_ROLE) or "", combo.itemData(i, Qt.UserRole) or ""
+            if (piece and item_piece == piece and item_set == set_name) or (not piece and set_name and item_set == set_name):
+                combo.setCurrentIndex(i)
+                return
+        combo.setCurrentIndex(0)
+
+    def refresh_piece_choices(self):
+        """Ordnet die Teile-Listen neu, wenn die Sets des Builds auf der Karte wechseln; die Auswahl der Slots bleibt."""
+        for slot_name, kind, _ in RELIC_SLOTS:
+            combo = self.slots[slot_name].relic_set
+            self._fill_piece_combo(slot_name, kind, combo,
+                                   (combo.itemData(combo.currentIndex(), PIECE_ROLE) or "", combo_value(combo)))
+
     def _on_set_changed(self, combo: QComboBox):
-        """Tooltip der Auswahl aktualisieren und die Set-Zusammenfassung auf der Karte nachziehen."""
+        """Tooltip der Auswahl aktualisieren."""
         relic_set = self.manager.get_relic_set_by_name(combo_value(combo))
         combo.setToolTip(relic_set.bonus_tooltip() if relic_set else "")
-        if hasattr(self, "card") and len(self.slots) == len(RELIC_SLOTS):
-            self.card.update_set_summary(self.get_relics())
 
     # --- Werte lesen / setzen ---
 
@@ -903,7 +965,8 @@ class RelicPanel(QFrame):
             saved = relics.get(slot_name)
             if not isinstance(saved, dict):
                 saved = {}
-            select_value(w.relic_set, saved.get("set", ""))
+            self._fill_piece_combo(slot_name, next(k for n, k, _ in RELIC_SLOTS if n == slot_name), w.relic_set,
+                                   (str(saved.get("piece") or ""), str(saved.get("set") or "")))
             select_value(w.rarity, saved.get("rarity", RELIC_RARITIES[0]))
             w.level.setValue(saved.get("level", MAX_RELIC_LEVEL))
             mains = next(m for n, _, m in RELIC_SLOTS if n == slot_name)
@@ -915,12 +978,12 @@ class RelicPanel(QFrame):
                 sub = subs[i] if i < len(subs) and isinstance(subs[i], dict) else {}
                 select_value(cb, sub.get("stat", ""))
                 val.setText(str(sub.get("val", "")))
-        self.card.update_set_summary(self.get_relics())
 
     def get_relics(self) -> dict:
         return {
             slot_name: {
                 "set": combo_value(w.relic_set),
+                "piece": w.relic_set.itemData(w.relic_set.currentIndex(), PIECE_ROLE) or "",
                 "rarity": w.rarity.currentData(),
                 "level": w.level.value(),
                 "main": w.main.currentText(),

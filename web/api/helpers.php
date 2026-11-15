@@ -30,7 +30,8 @@ function canonical_name(string $group, string $name): string {
 /**
  * Bringt relics in ein sauberes, immer gleiches Format:
  * - Rückgabe ist ein assoziatives Array (Slot => Daten) oder leer; nur bekannte Slots
- * - je Slot {set, rarity, level, main, main_value, substats: [{stat, val} x4]}
+ * - je Slot {set, piece, rarity, level, main, main_value, substats: [{stat, val} x4]}; piece ist der Name des Teils,
+ *   set das Set, zu dem das Teil gehört
  */
 function normalize_relics($relics): array {
     if (!is_array($relics)) return [];
@@ -53,6 +54,7 @@ function normalize_relics($relics): array {
 
         $clean[$slotName] = [
             'set'        => mb_substr(canonical_name('relic_sets', clean_set($slot['set'] ?? '')), 0, 255),
+            'piece'      => mb_substr(clean_set($slot['piece'] ?? ''), 0, 255),
             'rarity'     => clamp_int($slot['rarity'] ?? 5, 2, 5, 5),
             'level'      => clamp_int($slot['level'] ?? 15, 0, 15, 15),
             'main'       => mb_substr((string)($slot['main'] ?? ''), 0, 40),
@@ -61,6 +63,28 @@ function normalize_relics($relics): array {
         ];
     }
     return $clean;
+}
+
+/**
+ * Leitet die Sets des Builds aus den Sets der Slots ab (für Builds ohne Set-Felder, z. B. ältere Daten und Export-Dateien):
+ * [Relikt-Set (häufigstes Set in Kopf bis Füße), zweites 2er-Relikt-Set (nur bei 2+2), Ornament-Set (Planarsphäre, Verbindungsseil)].
+ */
+function derive_card_sets(array $relics): array {
+    $count = function (array $slotNames) use ($relics): array {
+        $c = [];
+        foreach ($slotNames as $n) {
+            $set = $relics[$n]['set'] ?? '';
+            if ($set !== '') $c[$set] = ($c[$set] ?? 0) + 1;
+        }
+        arsort($c);   // stabil: bei gleicher Anzahl bleibt die Reihenfolge der Slots
+        return $c;
+    };
+    $relic = $count(array_slice(RELIC_SLOTS, 0, 4));
+    $names = array_keys($relic);
+    $first = $names[0] ?? '';
+    $second = (count($names) > 1 && $relic[$first] === 2 && $relic[$names[1]] >= 2) ? $names[1] : '';
+    $orn = array_keys($count(array_slice(RELIC_SLOTS, 4, 2)));
+    return [$first, $second, $orn[0] ?? ''];
 }
 
 /** Liest relics_json aus der Datenbank und liefert es immer als Array (leer = []). */
@@ -73,6 +97,11 @@ function decode_relics($json): array {
 function build_values(array $m): array {
     $talents = is_array($m['talents'] ?? null) ? $m['talents'] : [];
     $relics = normalize_relics($m['relics'] ?? []);
+    // Fehlen die Set-Felder ganz (ältere Clients, alte Export-Dateien), werden sie aus den Slots abgeleitet
+    $sets = isset($m['relic_set']) || isset($m['relic_set_2']) || isset($m['ornament_set'])
+        ? [clean_set($m['relic_set'] ?? ''), clean_set($m['relic_set_2'] ?? ''), clean_set($m['ornament_set'] ?? '')]
+        : derive_card_sets($relics);
+    $sets = array_map(fn($x) => mb_substr(canonical_name('relic_sets', $x), 0, 255), $sets);
     return [
         clamp_int($m['level'] ?? 80, 1, 80, 80),
         clamp_int($m['eidolon'] ?? 0, 0, 6, 0),
@@ -84,24 +113,28 @@ function build_values(array $m): array {
         clamp_int($m['lc_level'] ?? 80, 1, 80, 80),
         clamp_int($m['lc_superimpose'] ?? 1, 1, 5, 1),
         json_encode(count($relics) > 0 ? $relics : new stdClass(), JSON_UNESCAPED_UNICODE),
+        $sets[0], $sets[1], $sets[2],
     ];
 }
 
 const BUILD_UPSERT_SQL = "
     INSERT INTO user_characters (
         user_id, char_name, level, eidolon, talent_basic, talent_skill, talent_ult, talent_talent,
-        light_cone, lc_level, lc_superimpose, relics_json
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        light_cone, lc_level, lc_superimpose, relics_json, relic_set, relic_set_2, ornament_set
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ON DUPLICATE KEY UPDATE
         level=VALUES(level), eidolon=VALUES(eidolon), talent_basic=VALUES(talent_basic),
         talent_skill=VALUES(talent_skill), talent_ult=VALUES(talent_ult), talent_talent=VALUES(talent_talent),
         light_cone=VALUES(light_cone), lc_level=VALUES(lc_level), lc_superimpose=VALUES(lc_superimpose),
-        relics_json=VALUES(relics_json)
+        relics_json=VALUES(relics_json), relic_set=VALUES(relic_set), relic_set_2=VALUES(relic_set_2),
+        ornament_set=VALUES(ornament_set)
 ";
 
 /** Wandelt eine Zeile aus user_characters (ggf. mit NULLs) in das Build-Format der API um. */
 function build_from_row(array $r, string $name): array {
     $relics = decode_relics($r['relics_json'] ?? null);
+    $sets = [(string)($r['relic_set'] ?? ''), (string)($r['relic_set_2'] ?? ''), (string)($r['ornament_set'] ?? '')];
+    if ($sets === ['', '', ''] && count($relics) > 0) $sets = derive_card_sets($relics);   // Builds aus der Zeit vor den Set-Feldern
     return [
         "name"           => $name,
         "level"          => (int)($r['level'] ?? 80),
@@ -109,6 +142,9 @@ function build_from_row(array $r, string $name): array {
         "light_cone"     => $r['light_cone'] ?? '',
         "lc_level"       => (int)($r['lc_level'] ?? 80),
         "lc_superimpose" => (int)($r['lc_superimpose'] ?? 1),
+        "relic_set"      => $sets[0],
+        "relic_set_2"    => $sets[1],
+        "ornament_set"   => $sets[2],
         "relics"         => count($relics) > 0 ? $relics : new stdClass(),
         "talents"        => [
             "basic"  => (int)($r['talent_basic'] ?? 1),

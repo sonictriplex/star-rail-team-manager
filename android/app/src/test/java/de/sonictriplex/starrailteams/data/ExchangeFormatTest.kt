@@ -3,6 +3,7 @@ package de.sonictriplex.starrailteams.data
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Assert.assertThrows
 import org.junit.Test
@@ -76,18 +77,41 @@ class ExchangeFormatTest {
     }
 
     @Test
-    fun setBonusenWerdenBerechnet() {
-        fun slot(set: String) = RelicSlot(relicSet = set)
-        val build = Build(
-            name = "X",
-            relics = mapOf(
-                "Kopf" to slot("A"), "Hände" to slot("A"), "Körper" to slot("A"), "Füße" to slot("A"),
-                "Planarsphäre" to slot("O"), "Verbindungsseil" to slot("O"),
-            ),
-        )
+    fun setBonusenKommenVonDenSetsDesBuilds() {
+        val build = Build(name = "X", relicSet = "A", ornamentSet = "O")
         assertEquals(listOf("A" to 4, "O" to 2), build.activeSetBonuses())
-        assertEquals(listOf("A" to 2, "O" to 2), build.copy(relics = build.relics + ("Füße" to slot("B"))).activeSetBonuses())
+        assertEquals(listOf("A" to 2, "B" to 2, "O" to 2), build.copy(relicSet2 = "B").activeSetBonuses())   // 2+2
         assertEquals(emptyList<Pair<String, Int>>(), Build(name = "X").activeSetBonuses())
+    }
+
+    @Test
+    fun setsWerdenAusDenSlotsAbgeleitet() {
+        fun slot(set: String) = RelicSlot(relicSet = set)
+        val slots = mapOf(
+            "Kopf" to slot("A"), "Hände" to slot("A"), "Körper" to slot("B"), "Füße" to slot("B"),
+            "Planarsphäre" to slot("O"), "Verbindungsseil" to slot("O"),
+        )
+        val old = Build(name = "X", relics = slots).normalized()      // Altbestand ohne Set-Felder
+        assertEquals(Triple("A", "B", "O"), Triple(old.relicSet, old.relicSet2, old.ornamentSet))
+        val four = Build(name = "X", relics = slots + ("Körper" to slot("A")) + ("Füße" to slot("A"))).normalized()
+        assertEquals(Triple("A", "", "O"), Triple(four.relicSet, four.relicSet2, four.ornamentSet))
+        // gewählte Sets gehen vor
+        val chosen = Build(name = "X", relicSet = "C", relics = slots).normalized()
+        assertEquals(Triple("C", "", ""), Triple(chosen.relicSet, chosen.relicSet2, chosen.ornamentSet))
+        // Teil: gespeichert, sonst das Teil des Sets
+        val set = RelicSet(name = "A", pieces = mapOf("Kopf" to listOf("Maske")))
+        assertEquals("Maske", RelicSlot(relicSet = "A").displayPiece("Kopf", set))
+        assertEquals("Eigenes", RelicSlot(relicSet = "A", piece = "Eigenes").displayPiece("Kopf", set))
+        assertEquals("", RelicSlot().displayPiece("Kopf", null))
+    }
+
+    @Test
+    fun setsUndTeileGehenDurchDenAustausch() {
+        val build = Build(name = "X", relicSet = "A", relicSet2 = "B", ornamentSet = "O",
+            relics = mapOf("Kopf" to RelicSlot(relicSet = "A", piece = "Maske"))).normalized()
+        val back = parseExchange(importPayload(listOf(build)).let { AppJson.parseToJsonElement(it).jsonObject["data"]!!.toString() }).builds.single()
+        assertEquals(Triple("A", "B", "O"), Triple(back.relicSet, back.relicSet2, back.ornamentSet))
+        assertEquals("Maske", back.relics.getValue("Kopf").piece)
     }
 
     @Test
@@ -180,5 +204,23 @@ class ExchangeFormatTest {
         assertEquals("Kopf · Dieb des fallenden Meteors", rows[0].subtitle)
         assertEquals("Dieb des fallenden Meteors", rows[0].pick)             // Antippen übernimmt das Set
         assertEquals(items.size, de.sonictriplex.starrailteams.ui.pickerRows(items, "").size)
+    }
+
+    @Test
+    fun setPickerShowsPieceOfTheSlot() {
+        val data = AppJson.decodeFromString<Stammdaten>(File(shared, "stammdaten.json").readText())
+        for (slot in RELIC_SLOTS) {
+            val items = data.relicSets.filter { it.kind == slotKind(slot) }
+                .map { de.sonictriplex.starrailteams.ui.PickerItem(it.name, title = it.pieceFor(slot) ?: it.name, keywords = it.pieceList()) }
+            val rows = de.sonictriplex.starrailteams.ui.pickerRows(items, "")
+            assertEquals(items.size, rows.size)
+            data.relicSets.filter { it.kind == slotKind(slot) }.forEach { set ->
+                val piece = set.pieceFor(slot)
+                assertNotNull("$slot fehlt bei ${set.name}", piece)
+                val row = rows.single { it.pick == set.name }
+                assertEquals(piece, row.title)          // Titel ist das Teil des Slots
+                assertEquals(set.name, row.subtitle)    // Untertitel das Set
+            }
+        }
     }
 }

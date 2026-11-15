@@ -6,7 +6,7 @@ Desktop-App zum Zusammenstellen von Star-Rail-Teams und zum Verwalten der Charak
 
 - **Teams** mit bis zu 4 Charakteren anlegen, speichern, laden, umbenennen und löschen; die Reihenfolge der Karten ändert man per Drag & Drop am Kopfbereich oder mit den Pfeilen ‹ ›, die der Teams in der Übersicht ebenso
 - **Builds pro Charakter:** Level 1–80, Eidolon E0–E6, Talente (Basis bis 7, Fertigkeit / Ultimate / Talent bis 12), Lichtkegel mit Level und S1–S5
-- **Relikt-Details:** sechs Slots (Kopf, Hände, Körper, Füße, Planarsphäre, Verbindungsseil) mit Set (Relikt-Sets bzw. Planar-Ornamente getrennt), Seltenheit, Level, Hauptwert und vier Substats; die aktiven 2er-/4er-Boni berechnet die Karte selbst
+- **Relikt-Details:** sechs Slots (Kopf, Hände, Körper, Füße, Planarsphäre, Verbindungsseil) mit Teil (Teile der gewählten Sets zuerst, danach alle übrigen als Off-Pieces; Relikt- und Ornament-Teile getrennt), Seltenheit, Level, Hauptwert und vier Substats. Die Sets des Builds (Relikt-Set, zweites 2er-Relikt-Set, Ornament-Set) wählt man auf der Karte, daraus ergeben sich die Set-Boni
 - **Suche und Filter** für Charaktere (Pfad, Element, Seltenheit) und Lichtkegel (Pfad, Seltenheit); der Pfad des Charakters ist in der Lichtkegel-Suche vorausgewählt
 - **Tooltips** auf Deutsch: die Fähigkeit des Lichtkegels passend zur gewählten Überlagerung (auch in der Lichtkegel-Suche bei S1) und die Boni der Relikt-Sets
 - **Export und Import** im Menü „Datei“, im selben Format wie die Web-Version (`star-rail-team-manager`, Version 1): Builds und Teams lassen sich zwischen Desktop und Web austauschen

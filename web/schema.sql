@@ -53,8 +53,12 @@ CREATE TABLE IF NOT EXISTS user_characters (
     lc_level       TINYINT NOT NULL DEFAULT 80,   -- 1 bis 80
     lc_superimpose TINYINT NOT NULL DEFAULT 1,    -- S1 bis S5
     -- Slots: Kopf, Hände, Körper, Füße, Planarsphäre, Verbindungsseil
-    -- je Slot: {set, rarity, level, main, substats: [{stat, val} x4]}
+    -- je Slot: {set, piece, rarity, level, main, substats: [{stat, val} x4]}
     relics_json    TEXT,
+    -- Sets des Builds (wie im Genshin-Manager auf der Karte gewählt): Relikt-Set (4er bzw. erstes 2er), zweites 2er-Relikt-Set, Ornament-Set
+    relic_set      VARCHAR(255) NOT NULL DEFAULT '',
+    relic_set_2    VARCHAR(255) NOT NULL DEFAULT '',
+    ornament_set   VARCHAR(255) NOT NULL DEFAULT '',
     UNIQUE KEY uq_user_char (user_id, char_name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

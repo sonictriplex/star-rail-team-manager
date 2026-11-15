@@ -188,7 +188,7 @@
             <div class="text-5xl mb-2 text-accent" aria-hidden="true">✦</div>
             <h2 id="aboutTitle" class="app-title text-lg font-bold text-accent mb-1">Honkai: Star Rail Team & Build Manager</h2>
             <!-- Bei jeder Änderung zusammen mit CHANGELOG.md hochzählen (ein Test vergleicht beide) -->
-            <div id="webVersion" class="text-sm text-gray-200 mb-3">Web-Version 1.4.2</div>
+            <div id="webVersion" class="text-sm text-gray-200 mb-3">Web-Version 1.5.0</div>
             <p class="text-sm text-gray-300 mb-3">Teams aus bis zu vier Charakteren und die Builds deiner Charaktere verwalten.</p>
             <p class="text-[11px] text-gray-400 mb-4">Inoffizielles Fanprojekt, nicht mit HoYoverse verbunden. Honkai: Star Rail sowie zugehörige Namen und Bilder sind Eigentum von HoYoverse.</p>
             <a id="aboutLogoLink" href="https://www.media-matrix.de" target="_blank" rel="noopener noreferrer" title="www.media-matrix.de" class="inline-block mb-4 opacity-90 hover:opacity-100 transition-opacity">
@@ -674,6 +674,12 @@
             return Object.entries(set?.pieces || {}).flatMap(([slot, names]) => (names || []).map(name => ({ slot, name })));
         }
 
+        // Name des Teils, das ein Set im Slot i liefert (z. B. Kopf -> "Weinende Maske einer Mimin"); leer ohne Angaben
+        function relicSlotPiece(setName, i) {
+            const s = availableRelicSets.find(x => x.name === setName);
+            return s?.pieces?.[RELIC_SLOT_CONFIG[i].name]?.[0] || '';
+        }
+
         // Set-Icon (assets/images/relic_sets/...) aus den Stammdaten; fehlt es, bleibt der Platz leer
         function setIconHTML(setName, size) {
             const s = availableRelicSets.find(x => x.name === setName);
@@ -681,19 +687,49 @@
             return url ? `<img src="${escapeHtml(url)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'" class="${size} flex-shrink-0 object-contain">` : '';
         }
 
-        // Auswahl eines Relikt-Sets bzw. Ornaments mit Suchfeld und Icons (eigenes Element statt <select>, damit Bilder möglich sind).
-        // Der gewählte Name steckt im versteckten Feld rel_set_<slot>, das syncActiveDetailStats() ausliest.
-        function relicSetComboHTML(i, kind, current) {
-            const none = kind === 'Relikt' ? '— Kein Relikt-Set —' : '— Kein Ornament —';
+        // Sets des Builds, deren Teile ein Slot bevorzugt: Relikt-Slots die beiden Relikt-Sets der Karte, Ornament-Slots das Ornament-Set
+        function relicWantedSets(item, kind) {
+            const saved = item?.saved || {};
+            return (kind === 'Relikt' ? [saved.relic_set, saved.relic_set_2] : [saved.ornament_set]).filter(Boolean);
+        }
+
+        // Auswahl für das Teil-Dropdown eines Slots: Teile der Sets des Builds zuerst, danach alle übrigen (Off-Pieces sind erlaubt)
+        function relicPieceOptions(i, item, current) {
+            const kind = RELIC_SLOT_CONFIG[i].kind;
+            const wanted = relicWantedSets(item, kind);
+            const mine = [], others = [];
+            availableRelicSets.filter(x => x.kind === kind).forEach(x => {
+                // Sets ohne Teile-Namen (ältere Stammdaten) erscheinen mit ihrem Set-Namen
+                const entry = { name: relicSlotPiece(x.name, i) || x.name, setName: x.name };
+                (wanted.includes(x.name) ? mine : others).push(entry);
+            });
+            mine.sort((p, q) => wanted.indexOf(p.setName) - wanted.indexOf(q.setName));
+            others.sort((p, q) => p.name.localeCompare(q.name, 'de'));
+            // Ein gespeichertes Teil, das nicht (mehr) in den Stammdaten steht, bleibt auswählbar
+            const known = mine.concat(others).some(o => o.name === current.piece);
+            const extra = (current.piece && !known) ? [{ name: current.piece, setName: current.set }] : [];
+            return { mine, others, extra };
+        }
+
+        // Inhalt des Auswahlfelds: Icon, Teil des Slots (Titel) und darunter das Set
+        function relicPieceButtonInnerHTML(i, piece, setName) {
+            if (!piece) return `<span class="truncate text-gray-400">— Teil wählen —</span>`;
+            return `${setIconHTML(setName, 'w-6 h-6')}<span class="min-w-0 leading-tight"><span class="block truncate">${escapeHtml(piece)}</span>${setName && setName !== piece ? `<span class="block truncate text-[10px] text-gray-400">${escapeHtml(setName)}</span>` : ''}</span>`;
+        }
+
+        // Auswahl des Teils eines Slots mit Suchfeld und Icons (eigenes Element statt <select>, damit Bilder möglich sind).
+        // Teil und Set stecken in den versteckten Feldern rel_piece_<slot> und rel_set_<slot>, die syncActiveDetailStats() ausliest.
+        function relicSetComboHTML(i, piece, setName) {
             return `
                 <div class="relative mb-2" data-set-combo="${i}">
-                    <input type="hidden" id="rel_set_${i}" value="${escapeHtml(current)}">
-                    <button type="button" id="rel_set_btn_${i}" onclick="toggleRelicSetCombo(${i})" aria-haspopup="listbox" aria-expanded="false" title="${escapeHtml(relicBonusTip(current))}" class="w-full flex items-center justify-between gap-1 bg-inputBg text-white border border-[#332d47] rounded px-1 py-0.5 text-left outline-none hover:border-accent focus:border-accent">
-                        <span class="flex items-center gap-1.5 min-w-0">${setIconHTML(current, 'w-6 h-6')}<span class="truncate ${current ? '' : 'text-gray-400'}">${escapeHtml(current || none)}</span></span>
+                    <input type="hidden" id="rel_piece_${i}" value="${escapeHtml(piece)}">
+                    <input type="hidden" id="rel_set_${i}" value="${escapeHtml(setName)}">
+                    <button type="button" id="rel_set_btn_${i}" onclick="toggleRelicSetCombo(${i})" aria-haspopup="listbox" aria-expanded="false" title="${escapeHtml(relicBonusTip(setName) || 'Teil dieses Slots. Teile der gewählten Sets stehen oben, darunter alle anderen (Off-Piece).')}" class="w-full flex items-center justify-between gap-1 bg-inputBg text-white border border-[#332d47] rounded px-1 py-0.5 text-left outline-none hover:border-accent focus:border-accent">
+                        <span class="flex items-center gap-1.5 min-w-0">${relicPieceButtonInnerHTML(i, piece, setName)}</span>
                         <span class="text-gray-400 flex-shrink-0">▾</span>
                     </button>
                     <div id="rel_set_panel_${i}" class="hidden absolute left-0 right-0 top-full mt-1 z-50 bg-[#14111f] border border-[#332d47] rounded-lg shadow-2xl p-1.5">
-                        <input type="text" id="rel_set_search_${i}" placeholder="Set oder Teil suchen …" autocomplete="off" oninput="renderRelicSetList(${i})" onkeydown="relicSetComboKey(event, ${i})" class="w-full bg-inputBg text-white border border-[#332d47] rounded px-2 py-1 mb-1 outline-none focus:border-accent">
+                        <input type="text" id="rel_set_search_${i}" placeholder="Teil oder Set suchen …" autocomplete="off" oninput="renderRelicSetList(${i})" onkeydown="relicSetComboKey(event, ${i})" class="w-full bg-inputBg text-white border border-[#332d47] rounded px-2 py-1 mb-1 outline-none focus:border-accent">
                         <ul id="rel_set_list_${i}" role="listbox" class="max-h-56 overflow-y-auto" style="scrollbar-width: thin; scrollbar-color: #332d47 #14111f;"></ul>
                     </div>
                 </div>`;
@@ -725,22 +761,23 @@
             search.focus();
         }
 
+        // Baut die Liste neu auf: Gruppen "Teile der gewählten Sets" und "Weitere Teile", gefiltert nach Teil- oder Setname
         function renderRelicSetList(i) {
-            const kind = RELIC_SLOT_CONFIG[i].kind;
-            const query = document.getElementById(`rel_set_search_${i}`).value.trim().toLowerCase();
-            const current = document.getElementById(`rel_set_${i}`).value;
             const list = document.getElementById(`rel_set_list_${i}`);
-            const none = kind === 'Relikt' ? '— Kein Relikt-Set —' : '— Kein Ornament —';
-            // Die Suche findet Sets über ihren Namen und einzelne Teile über ihren Namen (z. B. "Vielgesichtige Maske des Diebs");
-            // ein Teil erscheint als eigene Zeile, ein Klick darauf trägt sein Set ein
-            const setsByName = availableRelicSets.filter(x => x.kind === kind && (!query || x.name.toLowerCase().includes(query)));
-            const pieceHits = !query ? [] : availableRelicSets.filter(x => x.kind === kind)
-                .flatMap(x => relicPieceList(x).filter(p => p.name.toLowerCase().includes(query)).map(p => ({ set: x, piece: p })));
-            const row = (s, title, sub) => `<li role="option" data-set="${escapeHtml(s.name)}" title="${escapeHtml(relicBonusTip(s.name))}" onclick="pickRelicSet(${i}, this.dataset.set)" class="px-2 py-1 rounded cursor-pointer hover:bg-[#262338] flex items-center gap-2 ${s.name === current ? 'bg-[#2d293e] text-accent' : 'text-gray-200'}">${setIconHTML(s.name, 'w-8 h-8')}<div class="min-w-0"><div class="truncate">${escapeHtml(title)}</div>${sub ? `<div class="truncate text-xs text-gray-400">${escapeHtml(sub)}</div>` : ''}</div></li>`;
-            const sets = [...setsByName.map(s => row(s, s.name, '')), ...pieceHits.map(h => row(h.set, h.piece.name, `${h.piece.slot} · ${h.set.name}`))];
-            list.innerHTML = `<li role="option" data-set="" onclick="pickRelicSet(${i}, '')" class="px-2 py-1 rounded cursor-pointer hover:bg-[#262338] text-gray-400">${none}</li>`
-                + (sets.length ? sets.join('') : '<li class="px-2 py-2 text-gray-400">Nichts gefunden</li>');
-            setActiveRelicSet(i, query ? list.querySelector('li[data-set]:not([data-set=""])') : null);
+            const query = document.getElementById(`rel_set_search_${i}`).value.trim().toLowerCase();
+            const current = { piece: document.getElementById(`rel_piece_${i}`).value, set: document.getElementById(`rel_set_${i}`).value };
+            const { mine, others, extra } = relicPieceOptions(i, currentTeamMembers[activeDetailIndex], current);
+            const match = o => !query || o.name.toLowerCase().includes(query) || o.setName.toLowerCase().includes(query);
+            const item = o => `<li role="option" data-piece="${escapeHtml(o.name)}" data-set="${escapeHtml(o.setName)}" title="${escapeHtml(relicBonusTip(o.setName))}" onclick="pickRelicPiece(${i}, this.dataset.piece, this.dataset.set)" class="px-2 py-1 rounded cursor-pointer hover:bg-[#262338] flex items-center gap-2 ${o.name === current.piece ? 'bg-[#2d293e] text-accent' : 'text-gray-200'}">${setIconHTML(o.setName, 'w-8 h-8')}<div class="min-w-0"><div class="truncate">${escapeHtml(o.name)}</div>${o.setName !== o.name ? `<div class="text-[10px] text-gray-400 truncate">${escapeHtml(o.setName)}</div>` : ''}</div></li>`;
+            const group = (label, entries) => {
+                const shown = entries.filter(match);
+                return shown.length ? `<li class="px-2 pt-1.5 pb-0.5 text-[10px] uppercase tracking-wide text-gold font-bold">${label}</li>${shown.map(item).join('')}` : '';
+            };
+            const clear = `<li role="option" data-piece="" data-set="" onclick="pickRelicPiece(${i}, '', '')" class="px-2 py-1 rounded cursor-pointer hover:bg-[#262338] text-gray-400">— Kein Teil —</li>`;
+            const html = group('Gespeichert', extra) + group(mine.length ? 'Teile der gewählten Sets' : 'Alle Teile', mine)
+                + group(mine.length ? 'Weitere Teile (Off-Piece)' : 'Alle Teile', others);
+            list.innerHTML = clear + (html || '<li class="px-2 py-2 text-gray-400">Kein Teil gefunden</li>');
+            setActiveRelicSet(i, query ? list.querySelector('li[data-piece]:not([data-piece=""])') : null);
         }
 
         function setActiveRelicSet(i, li) {
@@ -755,7 +792,7 @@
         // Tastatur im Suchfeld: Pfeile wählen aus, Enter übernimmt, Escape schließt
         function relicSetComboKey(event, i) {
             const list = document.getElementById(`rel_set_list_${i}`);
-            const items = [...list.querySelectorAll('li[data-set]')];
+            const items = [...list.querySelectorAll('li[data-piece]')];
             const active = list.querySelector('[data-active]');
             if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
                 event.preventDefault();
@@ -763,7 +800,7 @@
                 setActiveRelicSet(i, items[Math.max(0, Math.min(items.length - 1, items.indexOf(active) + step))]);
             } else if (event.key === 'Enter') {
                 event.preventDefault();
-                if (active) pickRelicSet(i, active.dataset.set);
+                if (active) pickRelicPiece(i, active.dataset.piece, active.dataset.set);
             } else if (event.key === 'Escape') {
                 event.stopPropagation();
                 closeAllRelicSetCombos();
@@ -771,24 +808,17 @@
             }
         }
 
-        function pickRelicSet(i, name) {
-            document.getElementById(`rel_set_${i}`).value = name;
+        // Übernimmt das gewählte Teil; das Set des Teils wird mit gespeichert
+        function pickRelicPiece(i, piece, setName) {
+            document.getElementById(`rel_piece_${i}`).value = piece;
+            document.getElementById(`rel_set_${i}`).value = setName;
+            const btn = document.getElementById(`rel_set_btn_${i}`);
+            btn.title = relicBonusTip(setName) || btn.title;
+            btn.firstElementChild.innerHTML = relicPieceButtonInnerHTML(i, piece, setName);
             closeAllRelicSetCombos();
-            updateRelicProp(i, 'set', name);   // zeichnet die Karte samt Set-Zusammenfassung neu
-        }
-
-        // Aktive Set-Boni eines Builds: je Set die Anzahl der Teile (2 oder 4; Ornamente nur 2)
-        function relicSetSummary(saved) {
-            const relics = (saved && saved.relics && typeof saved.relics === 'object' && !Array.isArray(saved.relics)) ? saved.relics : {};
-            const counts = {};
-            RELIC_SLOT_CONFIG.forEach(cfg => {
-                const set = relics[cfg.name]?.set;
-                if (set) counts[set] = (counts[set] || 0) + 1;
-            });
-            return Object.entries(counts)
-                .map(([set, n]) => ({ set, n: n >= 4 ? 4 : (n >= 2 ? 2 : 0) }))
-                .filter(x => x.n > 0)
-                .sort((a, b) => b.n - a.n || a.set.localeCompare(b.set, 'de'));
+            updateRelicProp(i, 'piece', piece);
+            updateRelicProp(i, 'set', setName);
+            btn.focus();
         }
 
         // Schützt vor XSS: wandelt HTML-Sonderzeichen in Entities um.
@@ -883,6 +913,8 @@
                 slot.level = Math.max(0, Math.min(15, parseInt(lvlInput.value) || 0));
                 slot.rarity = raritySelect ? (parseInt(raritySelect.value) || 5) : 5;
                 slot.set = setSelect ? setSelect.value : "";
+                const pieceInput = document.getElementById(`rel_piece_${i}`);
+                slot.piece = pieceInput ? pieceInput.value : "";
                 slot.main = mainSelect ? mainSelect.value : "";
                 slot.main_value = mainValInput ? mainValInput.value : "";
             });
@@ -1082,10 +1114,11 @@
                 ? 'background: linear-gradient(180deg, rgba(138,96,42,0.85) 0%, rgba(45,36,29,0.85) 100%);'
                 : 'background: linear-gradient(180deg, rgba(89,61,122,0.85) 0%, rgba(41,36,59,0.85) 100%);';
 
-            const sets = relicSetSummary(saved);
-            const setLines = sets.length
-                ? sets.map(s => `<div class="truncate" title="${escapeHtml(relicBonusTip(s.set))}"><span class="text-accent font-bold">${s.n}×</span> ${escapeHtml(s.set)}</div>`).join('')
-                : '<div class="text-gray-400">Keine aktiven Set-Boni</div>';
+            // Sets des Builds wie im Genshin-Manager auf der Karte wählen; die Teile der Slots wählt man im Detail
+            const setSelect = (prop, kind, none) => `<select onchange="updateSavedProp(${index}, '${prop}', this.value); this.title = relicBonusTip(this.value)" title="${escapeHtml(relicBonusTip(saved[prop]))}" class="w-full bg-inputBg text-gray-200 border border-[#332d47] rounded px-2 py-1 text-xs outline-none focus:border-accent">
+                <option value="">${none}</option>
+                ${availableRelicSets.filter(x => x.kind === kind).map(x => `<option value="${escapeHtml(x.name)}" title="${escapeHtml(relicBonusTip(x.name))}" ${saved[prop] === x.name ? 'selected' : ''}>${escapeHtml(x.name)}</option>`).join('')}
+            </select>`;
 
             card.innerHTML = `
                 <!-- KOPFBEREICH (BILD & RARITÄT) -->
@@ -1157,7 +1190,11 @@
                             <span class="text-gold font-bold text-xs">Relikt-Sets</span>
                             <button onclick="toggleDetailView(${index})" class="w-5 h-5 rounded-full bg-[#2d293e] text-accent font-bold flex items-center justify-center border border-[#332d47] hover:bg-accent hover:text-darkBg transition-colors" title="Relikte & Substats bearbeiten">${isDetailMode ? '-' : '+'}</button>
                         </div>
-                        <div class="text-xs text-gray-200 space-y-0.5 min-h-[2.5rem]">${setLines}</div>
+                        <div class="space-y-1">
+                            ${setSelect('relic_set', 'Relikt', 'Kein Relikt-Set')}
+                            ${setSelect('relic_set_2', 'Relikt', '— Zweites 2er-Relikt-Set —')}
+                            ${setSelect('ornament_set', 'Ornament', 'Kein Ornament')}
+                        </div>
                     </div>
 
                     <!-- TALENTE -->
@@ -1182,6 +1219,12 @@
         function updateSavedProp(index, prop, val) {
             if (!currentTeamMembers[index].saved) currentTeamMembers[index].saved = {};
             currentTeamMembers[index].saved[prop] = val;
+            // Wechseln die Sets des Builds, ordnet das offene Relikt-Panel seine Teile-Listen neu
+            if (['relic_set', 'relic_set_2', 'ornament_set'].includes(prop) && index === activeDetailIndex
+                && document.getElementById('relicSlotsGrid')?.children.length) {
+                syncActiveDetailStats();
+                renderRelicPanel(currentTeamMembers[index]);
+            }
         }
 
         function updateTalent(index, talentProp, val) {
@@ -1354,7 +1397,7 @@
                         </div>
                     </div>
 
-                    ${relicSetComboHTML(i, cfg.kind, sData.set || '')}
+                    ${relicSetComboHTML(i, sData.piece || (sData.set ? relicSlotPiece(sData.set, i) || sData.set : ''), sData.set || '')}
 
                     <div class="flex gap-2 mb-2">
                         <select id="rel_main_${i}" onchange="updateRelicProp(${i}, 'main', this.value)" class="flex-1 min-w-0 bg-inputBg text-white border border-[#332d47] rounded px-1 py-0.5">
@@ -1414,14 +1457,6 @@
             if (activeDetailIndex < 0) return;
             const slot = ensureSlot(activeDetailIndex, RELIC_SLOT_NAMES[slotIndex]);
             slot[prop] = val;
-            // Die Set-Zusammenfassung auf der Karte sofort aktualisieren
-            if (prop === 'set') {
-                syncActiveDetailStats();
-                const container = document.getElementById('detailCardContainer');
-                container.innerHTML = '';
-                container.appendChild(createCharacterCard(currentTeamMembers[activeDetailIndex], activeDetailIndex, true));
-                requestAnimationFrame(fitCardNames);
-            }
         }
 
         function updateRelicSub(itemIndex, slotIndex, subIndex, fieldKey, val) {

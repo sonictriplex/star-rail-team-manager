@@ -2,7 +2,7 @@
 
 Online-Client für die Web-Version. Die App greift **nicht** direkt auf MySQL zu, sondern über die PHP-API in `../web/api/` (Anmeldung per Token, siehe `../web/README.md`).
 
-**Stand (Version 1.4.2):** Anmelden, Registrieren, **Passwort ändern** und Konto löschen, Teamliste, Build-Ansicht sowie Bearbeiten und Speichern von Builds und Teams (anlegen, ändern, umbenennen, löschen) funktionieren. Teams und Builds lassen sich auch offline ansehen. **Administratoren** können neue Charaktere, Lichtkegel und Relikt-Sets eintragen, und die App gleicht ihre Stammdaten mit dem Server ab.
+**Stand (Version 1.5.0):** Anmelden, Registrieren, **Passwort ändern** und Konto löschen, Teamliste, Build-Ansicht sowie Bearbeiten und Speichern von Builds und Teams (anlegen, ändern, umbenennen, löschen) funktionieren. Teams und Builds lassen sich auch offline ansehen. **Administratoren** können neue Charaktere, Lichtkegel und Relikt-Sets eintragen, und die App gleicht ihre Stammdaten mit dem Server ab.
 
 ## Technik
 
@@ -119,4 +119,4 @@ Gebaut wird mit dem mitgelieferten Wrapper: `./gradlew :app:assembleDebug` (Debu
 
 ## Inhalt der Builds
 
-Pro Charakter: Level, Eidolon (E0–E6), Talente (Basis bis 7, Fertigkeit, Ultimate und Talent bis 12), Lichtkegel mit Level und Überlagerung (S1–S5) und sechs Relikte (Kopf, Hände, Körper, Füße, Planarsphäre, Verbindungsseil) mit Set, Seltenheit, Level, Hauptwert und vier Substats. Relikt-Sets und Planar-Ornamente werden je nach Slot getrennt angeboten, die aktiven 2er-/4er-Boni berechnet die App aus den Slots. Das Format der Builds ist identisch zu Web und Desktop (`star-rail-team-manager`, Version 1).
+Pro Charakter: Level, Eidolon (E0–E6), Talente (Basis bis 7, Fertigkeit, Ultimate und Talent bis 12), Lichtkegel mit Level und Überlagerung (S1–S5) und sechs Relikte (Kopf, Hände, Körper, Füße, Planarsphäre, Verbindungsseil) mit Set, Seltenheit, Level, Hauptwert und vier Substats. Die Sets des Builds (Relikt-Set, zweites 2er-Relikt-Set, Ornament-Set) wählt man in der Karte „Relikt-Sets“, daraus berechnet die App die aktiven 2er-/4er-Boni; in jedem Slot wählt man das Teil (Teile der gewählten Sets zuerst, danach Off-Pieces). Das Format der Builds ist identisch zu Web und Desktop (`star-rail-team-manager`, Version 1).

@@ -35,13 +35,19 @@ Gemeinsames JSON-Format aller Clients: Desktop (Menü „Datei“), Web (`web/ap
 | `lc_level` | 1–80 | Level des Lichtkegels, Standard 80 |
 | `lc_superimpose` | 1–5 | Überlagerung (S1–S5), Standard 1 |
 | `talents` | `{basic, skill, ult, talent}` | `basic` 1–7, die übrigen 1–12, Standard 1 |
+| `relic_set` | String | Relikt-Set des Builds (4er bzw. erstes 2er-Set); leer oder Platzhalter (beginnt mit `—`) = keins |
+| `relic_set_2` | String | zweites 2er-Relikt-Set (2+2); leer = keins |
+| `ornament_set` | String | Planar-Ornament-Set (2er); leer = keins |
 | `relics` | Objekt | Slotname → Slot; `{}` wenn leer |
+
+Die drei Set-Felder (seit 1.5.0, wie `artifact` und `artifact_2` im Genshin-Manager) wählt man auf der Karte; sie bestimmen die Set-Boni. Fehlen sie in einer Datei ganz (ältere Versionen, alte Export-Dateien), leiten Server und Clients sie aus den Sets der Slots ab: häufigstes Set in Kopf bis Füße, ein zweites nur bei 2+2, das Ornament-Set aus Planarsphäre und Verbindungsseil. Das Austauschformat bleibt bei `version: 1`, die neuen Felder sind rein additiv.
 
 **Relikt-Slot** (Schlüssel: `Kopf`, `Hände`, `Körper`, `Füße`, `Planarsphäre`, `Verbindungsseil`; andere Schlüssel werden verworfen):
 
 | Feld | Typ / Bereich | Hinweis |
 |---|---|---|
-| `set` | String | Name des Relikt-Sets (Kopf bis Füße) bzw. Planar-Ornaments (Planarsphäre, Verbindungsseil); leer = keins |
+| `set` | String | Set, zu dem das Teil des Slots gehört: Relikt-Set (Kopf bis Füße) bzw. Planar-Ornament (Planarsphäre, Verbindungsseil); leer = keins. Bei einem Off-Piece weicht es von den Sets des Builds ab |
+| `piece` | String | Name des Teils dieses Slots, z. B. `Weinende Maske einer Mimin`; leer bei älteren Daten, dann gilt das Teil des Sets (`pieces` in `stammdaten.json`) |
 | `rarity` | 2–5 | Zahl, Standard 5 |
 | `level` | 0–15 | Standard 15 |
 | `main` | String | Hauptwert, z. B. `KT%`; muss zum Slot passen (Kopf `LP (Fix)`, Hände `ANG (Fix)`, …) |
@@ -60,10 +66,11 @@ Beispiel eines Builds:
   "light_cone": "Along the Passing Shore",
   "lc_level": 80,
   "lc_superimpose": 1,
+  "relic_set": "Band of Sizzling Thunder", "relic_set_2": "", "ornament_set": "",
   "talents": { "basic": 6, "skill": 10, "ult": 10, "talent": 10 },
   "relics": {
     "Kopf": {
-      "set": "Band of Sizzling Thunder", "rarity": 5, "level": 15,
+      "set": "Band of Sizzling Thunder", "piece": "", "rarity": 5, "level": 15,
       "main": "LP (Fix)", "main_value": "705.6",
       "substats": [
         { "stat": "KT%", "val": "5.2" }, { "stat": "KSCH%", "val": "10.4" },

@@ -26,7 +26,7 @@ if ($method === 'GET') {
             SELECT
             tm.char_name,
             uc.level, uc.eidolon, uc.talent_basic, uc.talent_skill, uc.talent_ult, uc.talent_talent,
-            uc.light_cone, uc.lc_level, uc.lc_superimpose, uc.relics_json,
+            uc.light_cone, uc.lc_level, uc.lc_superimpose, uc.relics_json, uc.relic_set, uc.relic_set_2, uc.ornament_set,
             c.element, c.path, c.rarity, c.icon_path
             FROM team_members tm
             LEFT JOIN characters c ON tm.char_name = c.name

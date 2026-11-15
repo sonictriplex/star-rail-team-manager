@@ -7,7 +7,7 @@ from typing import Optional
 # Projektverzeichnis: alle Pfade werden relativ hierzu aufgelöst,
 # damit die App unabhängig vom aktuellen Arbeitsverzeichnis funktioniert.
 # Version der Desktop-App; zusammen mit dem Web-Stand hochzählen
-APP_VERSION = "1.4.2"
+APP_VERSION = "1.5.0"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Gemeinsame Daten für Desktop, Web und weitere Clients (Bilder, Stammdaten)
@@ -120,6 +120,16 @@ class RelicSet:
     def icon_path(self) -> str:
         return _explicit_or_derived(self._icon_path, "relic", self.name)
 
+    def piece_for(self, slot: str) -> str:
+        """Name des Teils, das dieses Set im Slot liefert (z. B. Kopf -> "Weinende Maske einer Mimin"); leer ohne Angaben."""
+        names = self.pieces.get(slot) or []
+        return names[0] if names else ""
+
+    def slot_label(self, slot: str) -> str:
+        """Text in der Auswahl eines Slots: das Teil des Slots, dahinter das Set; ohne Teile-Namen nur das Set."""
+        piece = self.piece_for(slot)
+        return f"{piece}  ·  {self.name}" if piece else self.name
+
     def bonus_tooltip(self) -> str:
         """Set-Boni (2er, 4er) als Tooltip, leer wenn das Set keine Beschreibung hat."""
         parts = [f"{label}-Bonus: {bonus}" for label, bonus in (("2er", self.bonus_2pc), ("4er", self.bonus_4pc)) if bonus]
@@ -159,7 +169,7 @@ def canonical_name(group: str, name: str) -> str:
 
 def normalize_relics(relics) -> dict:
     """Bringt die Relikte in das Format von Web und Server: nur bekannte Slots, je Slot
-    {set, rarity, level, main, main_value, substats: [{stat, val} x4]}."""
+    {set, piece, rarity, level, main, main_value, substats: [{stat, val} x4]}; piece ist der Name des Teils, set sein Set."""
     if not isinstance(relics, dict):
         return {}
     clean = {}
@@ -175,6 +185,7 @@ def normalize_relics(relics) -> dict:
         set_name = str(data.get("set") or "").strip()
         clean[slot] = {
             "set": "" if set_name.startswith("—") else canonical_name("relic_sets", set_name)[:255],
+            "piece": "" if str(data.get("piece") or "").startswith("—") else str(data.get("piece") or "").strip()[:255],
             "rarity": clamp_int(data.get("rarity", 5), 2, 5, 5),
             "level": clamp_int(data.get("level", 15), 0, MAX_RELIC_LEVEL, 15),
             "main": str(data.get("main") or "")[:40],
@@ -184,12 +195,32 @@ def normalize_relics(relics) -> dict:
     return clean
 
 
-def active_set_bonuses(relics: dict) -> list[tuple[str, int]]:
-    """Aktive Set-Boni eines Builds: (Setname, 2 oder 4). Ornamente zählen nur bis 2. Sortiert nach Teilezahl, dann Name."""
-    counts: dict[str, int] = {}
-    for slot in RELIC_SLOT_NAMES:
-        name = (relics.get(slot) or {}).get("set") if isinstance(relics, dict) else ""
-        if name:
-            counts[name] = counts.get(name, 0) + 1
-    active = [(name, 4 if n >= 4 else 2) for name, n in counts.items() if n >= 2]
-    return sorted(active, key=lambda x: (-x[1], x[0].casefold()))
+def derive_card_sets(relics: dict) -> tuple[str, str, str]:
+    """Leitet die Sets eines Builds aus den Sets der Slots ab (ältere Builds und Export-Dateien ohne Set-Felder), wie im Server:
+    (Relikt-Set = häufigstes Set in Kopf bis Füße, zweites 2er-Relikt-Set nur bei 2+2, Ornament-Set)."""
+    def counts(slots):
+        found: dict[str, int] = {}
+        for slot in slots:
+            name = (relics.get(slot) or {}).get("set") if isinstance(relics, dict) else ""
+            if name:
+                found[name] = found.get(name, 0) + 1
+        return sorted(found.items(), key=lambda x: -x[1])    # stabil: bei gleicher Anzahl gilt die Reihenfolge der Slots
+    relic = counts(RELIC_SLOT_NAMES[:4])
+    first = relic[0][0] if relic else ""
+    second = relic[1][0] if len(relic) > 1 and relic[0][1] == 2 and relic[1][1] >= 2 else ""
+    ornament = counts(RELIC_SLOT_NAMES[4:6])
+    return first, second, ornament[0][0] if ornament else ""
+
+
+CARD_SET_KEYS = ("relic_set", "relic_set_2", "ornament_set")
+
+
+def card_sets(build: dict, relics: dict) -> tuple[str, str, str]:
+    """Die drei Sets eines Builds: die Felder der Karte, fehlen sie ganz (ältere Daten), aus den Slots abgeleitet."""
+    if any(key in build for key in CARD_SET_KEYS):
+        values = []
+        for key in CARD_SET_KEYS:
+            value = str(build.get(key) or "").strip()
+            values.append("" if value.startswith("—") else canonical_name("relic_sets", value)[:255])
+        return tuple(values)
+    return derive_card_sets(relics)

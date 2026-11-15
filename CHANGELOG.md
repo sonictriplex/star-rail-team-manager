@@ -2,6 +2,12 @@
 
 Dieser Verlauf fasst die wichtigsten Änderungen zusammen. Web, Desktop und Android haben ab 1.2.1 wieder dieselbe Versionsnummer (davor liefen sie getrennt); die Web-Version läuft per `deploy/deploy.sh` auf dem Server, der Desktop direkt aus dem Repo.
 
+## 1.5.0 (16.11.2026)
+- Relikt-Auswahl wie im Genshin-Manager (Web, Desktop, Android): Auf der Karte wählt man die **Sets des Builds**, nämlich Relikt-Set (4er), optional ein zweites 2er-Relikt-Set (2+2) und das Ornament-Set. Im Detail wählt man je Slot das **Teil** (z. B. bei Kopf „Weinende Maske einer Mimin“, darunter sein Set); zuerst stehen die Teile der gewählten Sets, danach alle übrigen als Off-Pieces. Die Set-Boni ergeben sich aus den Sets der Karte
+- Neue Felder `relic_set`, `relic_set_2`, `ornament_set` am Build und `piece` je Relikt-Slot (Austauschformat bleibt Version 1, die Felder sind additiv; siehe `shared/exchange-format.md`). Fehlen sie (ältere Daten, alte Export-Dateien, ältere App-Versionen), leiten Server, Desktop und Android sie aus den Sets der Slots ab, bestehende Builds bleiben also nutzbar
+- Server: neue Spalten per `web/migrations/011_relikt_sets_am_build.sql` (zuerst `python3 tools/remote_sql.py --ddl web/migrations/011_relikt_sets_am_build.sql`, dann `deploy/deploy.sh`); Desktop ergänzt die Spalten beim Start selbst
+- Web: Nach der Auswahl eines Sets zeigte das Auswahlfeld weiter den alten Eintrag, obwohl das Set übernommen wurde
+
 ## 1.4.2 (15.11.2026)
 - Android: Auch in der Set-Auswahl erscheint ein gesuchtes Relikt-Teil als eigene Zeile (wie im Web seit 1.4.1), z. B. „Vielgesichtige Maske des Diebs“ mit „Kopf · Dieb des fallenden Meteors“; Antippen übernimmt das Set
 

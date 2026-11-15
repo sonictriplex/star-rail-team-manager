@@ -18,7 +18,7 @@ from PySide6.QtWidgets import QApplication
 
 import widgets
 from manager import EXCHANGE_FORMAT, DatabaseError, StarRailManager
-from models import RELIC_SLOT_NAMES, TALENT_MAX, active_set_bonuses, normalize_relics
+from models import RELIC_SLOT_NAMES, TALENT_MAX, card_sets, derive_card_sets, normalize_relics
 from styles import APP_QSS
 
 app = None
@@ -58,15 +58,36 @@ class BuildDataTest(unittest.TestCase):
         self.assertEqual((b["relics"]["Kopf"]["level"], b["relics"]["Kopf"]["rarity"]), (15, 5))
         self.assertEqual(len(b["relics"]["Kopf"]["substats"]), 4)
 
-    def test_set_bonus(self):
+    def test_sets_aus_slots_ableiten(self):
         relics = {s: {"set": "A"} for s in RELIC_SLOT_NAMES[:4]}
         relics["Planarsphäre"] = {"set": "O"}
         relics["Verbindungsseil"] = {"set": "O"}
-        self.assertEqual(active_set_bonuses(relics), [("A", 4), ("O", 2)])
-        relics["Füße"] = {"set": "B"}
-        self.assertEqual(active_set_bonuses(relics), [("A", 2), ("O", 2)])   # 3 Teile gelten als 2er-Bonus
-        self.assertEqual(active_set_bonuses({}), [])
+        self.assertEqual(derive_card_sets(relics), ("A", "", "O"))
+        relics["Körper"] = relics["Füße"] = {"set": "B"}
+        self.assertEqual(derive_card_sets(relics), ("A", "B", "O"))       # 2+2
+        relics["Füße"] = {"set": "A"}
+        self.assertEqual(derive_card_sets(relics), ("A", "", "O"))        # 3+1: nur das häufigste Set
+        self.assertEqual(derive_card_sets({}), ("", "", ""))
         self.assertEqual(normalize_relics({"Kopf": {"set": "— Kein Relikt-Set —"}})["Kopf"]["set"], "")
+        # Felder der Karte gehen vor; fehlen sie ganz, wird aus den Slots abgeleitet
+        self.assertEqual(card_sets({"relic_set": "X"}, relics), ("X", "", ""))
+        self.assertEqual(card_sets({}, relics), ("A", "", "O"))
+
+    def test_sets_und_teile_rundreise(self):
+        sets = self.manager.relic_sets_of_kind("Relikt")
+        orn = self.manager.relic_sets_of_kind("Ornament")[0]
+        self.manager.save_user_character("Kafka", {
+            "relic_set": sets[0].name, "relic_set_2": sets[1].name, "ornament_set": orn.name,
+            "relics": {"Kopf": {"set": sets[0].name, "piece": sets[0].piece_for("Kopf")}},
+        })
+        b = self.manager.load_user_characters()["Kafka"]
+        self.assertEqual((b["relic_set"], b["relic_set_2"], b["ornament_set"]), (sets[0].name, sets[1].name, orn.name))
+        self.assertEqual(b["relics"]["Kopf"]["piece"], sets[0].piece_for("Kopf"))
+        # Altbestand: nur Slot-Sets, keine Set-Felder -> beim Laden abgeleitet
+        self.manager.save_user_character("Acheron", {"relics": {s: {"set": sets[2].name} for s in RELIC_SLOT_NAMES[:4]}})
+        with self.manager.get_connection() as conn:
+            conn.execute("UPDATE user_characters SET relic_set='', relic_set_2='', ornament_set='' WHERE char_name='Acheron'")
+        self.assertEqual(self.manager.load_user_characters()["Acheron"]["relic_set"], sets[2].name)
 
     def test_export_import_und_webformat(self):
         self.manager.save_user_character("Kafka", {"level": 70, "talents": {"skill": 8}})
@@ -77,7 +98,7 @@ class BuildDataTest(unittest.TestCase):
         data = json.load(open(path, encoding="utf-8"))
         self.assertEqual((data["format"], data["version"]), (EXCHANGE_FORMAT, 1))
         self.assertEqual(set(data["builds"][0]), {"name", "level", "eidolon", "light_cone", "lc_level",
-                                                  "lc_superimpose", "relics", "talents"})   # gleiche Felder wie die Web-API
+                                                  "lc_superimpose", "relic_set", "relic_set_2", "ornament_set", "relics", "talents"})   # gleiche Felder wie die Web-API
         other = StarRailManager(os.path.join(self.tmp.name, "other.db"))
         result = other.import_user_data(path)
         self.assertEqual((result["builds"], result["teams"], result["skipped"]), (1, 1, []))
@@ -101,21 +122,39 @@ class RelicPanelTest(unittest.TestCase):
         self.assertEqual(widgets.normalize_build({"relics": self.panel.get_relics()})["relics"], {})
         self.assertEqual(list(self.panel.get_relics()), RELIC_SLOT_NAMES)
 
-    def test_set_auswahl_getrennt_nach_art(self):
+    def test_teile_auswahl_getrennt_nach_art(self):
         kopf, sphere = self.panel.slots["Kopf"], self.panel.slots["Planarsphäre"]
-        names = lambda combo: {combo.itemData(i) for i in range(combo.count())} - {""}
+        names = lambda combo: {combo.itemData(i) for i in range(combo.count())} - {"", None}
         self.assertEqual(names(kopf.relic_set), {r.name for r in self.manager.relic_sets_of_kind("Relikt")})
         self.assertEqual(names(sphere.relic_set), {r.name for r in self.manager.relic_sets_of_kind("Ornament")})
 
-    def test_zusammenfassung_folgt_den_slots(self):
-        relic = self.manager.relic_sets_of_kind("Relikt")[0].name
-        for slot in RELIC_SLOT_NAMES[:4]:
-            w = self.panel.slots[slot]
-            w.relic_set.setCurrentIndex(w.relic_set.findData(relic))
-        self.assertIn("4×", self.card.set_summary.text())
-        self.assertIn(relic.replace("&", "&amp;"), self.card.set_summary.text())
-        self.panel.reset()
-        self.assertIn("Keine aktiven", self.card.set_summary.text())
+    def test_karte_waehlt_sets_und_panel_ordnet_teile(self):
+        a, b = self.manager.relic_sets_of_kind("Relikt")[2:4]
+        orn = self.manager.relic_sets_of_kind("Ornament")[1]
+        self.card.relic_panel = self.panel      # wie im Hauptfenster, solange das Detailpanel offen ist
+        c = self.card.card_set_combos
+        c["relic_set"].setCurrentIndex(c["relic_set"].findData(a.name))
+        c["relic_set_2"].setCurrentIndex(c["relic_set_2"].findData(b.name))
+        c["ornament_set"].setCurrentIndex(c["ornament_set"].findData(orn.name))
+        self.assertEqual(self.card.card_set_values(), {"relic_set": a.name, "relic_set_2": b.name, "ornament_set": orn.name})
+        self.assertEqual(self.card.get_card_data()["relic_set"], a.name)
+        kopf = self.panel.slots["Kopf"].relic_set
+        # nach "— Kein Teil —" stehen zuerst die Teile der gewählten Sets
+        self.assertEqual([kopf.itemData(i, widgets.PIECE_ROLE) for i in (1, 2)], [a.piece_for("Kopf"), b.piece_for("Kopf")])
+        sphere = self.panel.slots["Planarsphäre"].relic_set
+        self.assertEqual(sphere.itemData(1, widgets.PIECE_ROLE), orn.piece_for("Planarsphäre"))
+
+    def test_off_piece_und_alter_stand(self):
+        a, other = self.manager.relic_sets_of_kind("Relikt")[2], self.manager.relic_sets_of_kind("Relikt")[9]
+        self.card.relic_panel = self.panel
+        self.card.card_set_combos["relic_set"].setCurrentIndex(self.card.card_set_combos["relic_set"].findData(a.name))
+        self.panel.set_relics({"Kopf": {"set": other.name, "piece": other.piece_for("Kopf")}, "Hände": {"set": a.name}})
+        r = self.panel.get_relics()
+        self.assertEqual((r["Kopf"]["set"], r["Kopf"]["piece"]), (other.name, other.piece_for("Kopf")))   # Off-Piece
+        self.assertEqual((r["Hände"]["set"], r["Hände"]["piece"]), (a.name, a.piece_for("Hände")))        # nur Set gespeichert -> Teil ergänzt
+        # ein Wechsel der Sets auf der Karte behält die Auswahl der Slots
+        self.card.card_set_combos["relic_set"].setCurrentIndex(0)
+        self.assertEqual(self.panel.get_relics()["Kopf"]["piece"], other.piece_for("Kopf"))
 
     def test_talentfelder_haben_grenzen(self):
         for key, spin in self.card.talent_spins.items():
@@ -233,3 +272,40 @@ class DeutscheNamenTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RelicSetPieceLabelTest(unittest.TestCase):
+    """Jeder Slot zeigt in der Set-Auswahl das Teil des Slots; gespeichert wird weiter das Set."""
+
+    def setUp(self):
+        warnings.simplefilter("ignore", ResourceWarning)
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.manager = StarRailManager(os.path.join(self.tmp.name, "test.db"))
+        self.card = widgets.CharacterCardWidget(self.manager.get_character_by_name("Kafka"), self.manager, {})
+        self.panel = widgets.RelicPanel(self.card, self.manager)
+
+    def test_alle_slots_und_sets(self):
+        from models import RELIC_SLOTS
+        checked = 0
+        for slot, kind, _ in RELIC_SLOTS:
+            for rs in self.manager.relic_sets_of_kind(kind):
+                self.assertTrue(rs.piece_for(slot), f"{slot} fehlt bei {rs.name}")
+                self.assertEqual(rs.slot_label(slot), f"{rs.piece_for(slot)}  ·  {rs.name}")
+                checked += 1
+        self.assertGreater(checked, 190)
+
+    def test_echtes_panel_zeigt_teil_und_speichert_set(self):
+        from models import RELIC_SLOTS
+        panel = self.panel
+        for slot, kind, _ in RELIC_SLOTS:
+            combo = panel.slots[slot].relic_set
+            for rs in self.manager.relic_sets_of_kind(kind):
+                idx = next(i for i in range(combo.count()) if combo.itemData(i) == rs.name)
+                combo.setCurrentIndex(idx)
+                self.assertEqual(combo.currentText(), rs.slot_label(slot))
+                r = panel.get_relics()[slot]
+                self.assertEqual((r["set"], r["piece"]), (rs.name, rs.piece_for(slot)))   # Teil und Set werden gespeichert
+            rs = self.manager.relic_sets_of_kind(kind)[3]
+            panel.set_relics({slot: {"set": rs.name, "piece": rs.piece_for(slot)}})
+            self.assertEqual(panel.slots[slot].relic_set.currentText(), rs.slot_label(slot))

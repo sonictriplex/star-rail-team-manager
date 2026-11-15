@@ -25,10 +25,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import de.sonictriplex.starrailteams.data.Build
 import de.sonictriplex.starrailteams.data.BuildOptions
+import de.sonictriplex.starrailteams.data.RelicSlot
+import de.sonictriplex.starrailteams.data.displayPiece
 import de.sonictriplex.starrailteams.data.RELIC_SLOTS
 import de.sonictriplex.starrailteams.data.activeSetBonuses
 import de.sonictriplex.starrailteams.data.bonusText
 import de.sonictriplex.starrailteams.data.infoText
+import de.sonictriplex.starrailteams.data.pieceFor
 import de.sonictriplex.starrailteams.data.pieceList
 import de.sonictriplex.starrailteams.data.passiveText
 import de.sonictriplex.starrailteams.data.normalized
@@ -116,7 +119,11 @@ fun EditBuildScreen(vm: AppViewModel, name: String, onDone: () -> Unit) {
                 }
             }
 
-            Card("Aktive Set-Boni") {
+            // Die Sets des Builds wählt man wie im Genshin-Manager hier; die Teile der Slots rechts
+            Card("Relikt-Sets") {
+                CardSetPicker("Relikt-Set", "Relikt", build.relicSet, vm) { build = build.copy(relicSet = it) }
+                CardSetPicker("Zweites 2er-Relikt-Set", "Relikt", build.relicSet2, vm) { build = build.copy(relicSet2 = it) }
+                CardSetPicker("Ornament-Set", "Ornament", build.ornamentSet, vm) { build = build.copy(ornamentSet = it) }
                 val active = build.activeSetBonuses()
                 if (active.isEmpty()) Text("Keine aktiven Set-Boni", style = MaterialTheme.typography.bodySmall)
                 active.forEach { (setName, n) ->
@@ -130,7 +137,7 @@ fun EditBuildScreen(vm: AppViewModel, name: String, onDone: () -> Unit) {
             RELIC_SLOTS.forEach { slotName ->
                 val slot = build.relics.getValue(slotName)
                 Card(slotName) {
-                    SetPicker(slotName, slot.relicSet, vm) { v -> build = build.withSlot(slotName) { it.copy(relicSet = v) } }
+                    SetPicker(slotName, slot, build, vm) { set, piece -> build = build.withSlot(slotName) { it.copy(relicSet = set, piece = piece) } }
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
                         IntField("Level", slot.level, 0..BuildOptions.RELIC_LEVEL_MAX, { v -> build = build.withSlot(slotName) { it.copy(level = v) } }, Modifier.weight(1f))
                         Dropdown(
@@ -173,21 +180,60 @@ fun EditBuildScreen(vm: AppViewModel, name: String, onDone: () -> Unit) {
     }
 }
 
-/** Auswahl des Relikt-Sets eines Slots: Kopf bis Füße nehmen Relikt-Sets, Planarsphäre und Verbindungsseil Ornamente. */
+/** Auswahl eines Sets des Builds auf der Karte (Relikt-Set, zweites 2er-Relikt-Set oder Ornament-Set). */
 @Composable
-private fun SetPicker(slotName: String, value: String, vm: AppViewModel, onPick: (String) -> Unit) {
+private fun CardSetPicker(label: String, kind: String, value: String, vm: AppViewModel, onPick: (String) -> Unit) {
     var picking by remember { mutableStateOf(false) }
-    val kind = slotKind(slotName)
-    val none = if (kind == "Relikt") "Kein Relikt-Set" else "Kein Ornament"
-    OutlinedButton(onClick = { picking = true }, Modifier.fillMaxWidth()) { Text(value.ifBlank { none }, maxLines = 1) }
+    Label(label)
+    OutlinedButton(onClick = { picking = true }, Modifier.fillMaxWidth()) { Text(value.ifBlank { "Kein Set" }, maxLines = 1) }
     InfoToggle(vm.stammdaten.relicSet(value)?.infoText())
     if (picking) {
         val sets = vm.stammdaten.stammdaten.relicSets.filter { it.kind == kind }
             .sortedBy { it.name.lowercase() }
             .map { PickerItem(it.name, detail = it.bonusText().orEmpty(), keywords = it.pieceList()) }
         SearchPickerDialog(
-            if (kind == "Relikt") "Relikt-Set wählen" else "Planar-Ornament wählen", sets, vm.stammdaten, none,
+            if (kind == "Relikt") "Relikt-Set wählen" else "Planar-Ornament wählen", sets, vm.stammdaten, "Kein Set",
             onPick = { onPick(it); picking = false },
+            onDismiss = { picking = false },
+        )
+    }
+}
+
+/**
+ * Auswahl des Teils eines Slots (Kopf bis Füße nehmen Relikt-Teile, Planarsphäre und Verbindungsseil Ornament-Teile):
+ * Teile der Sets des Builds zuerst, danach alle übrigen (Off-Pieces sind erlaubt). Gespeichert werden das Teil und sein Set.
+ */
+@Composable
+private fun SetPicker(slotName: String, slot: RelicSlot, build: Build, vm: AppViewModel, onPick: (set: String, piece: String) -> Unit) {
+    var picking by remember { mutableStateOf(false) }
+    val kind = slotKind(slotName)
+    val set = vm.stammdaten.relicSet(slot.relicSet)
+    val piece = slot.displayPiece(slotName, set)
+    OutlinedButton(onClick = { picking = true }, Modifier.fillMaxWidth()) {
+        if (piece.isBlank()) Text("Teil wählen", maxLines = 1)
+        else Column(Modifier.fillMaxWidth()) {
+            Text(piece, maxLines = 1)
+            if (slot.relicSet.isNotBlank() && slot.relicSet != piece) Text(slot.relicSet, style = MaterialTheme.typography.bodySmall, maxLines = 1)
+        }
+    }
+    InfoToggle(set?.infoText())
+    if (picking) {
+        val wanted = (if (kind == "Relikt") listOf(build.relicSet, build.relicSet2) else listOf(build.ornamentSet)).filter { it.isNotBlank() }
+        val all = vm.stammdaten.stammdaten.relicSets.filter { it.kind == kind }
+        val (mine, others) = all.partition { it.name in wanted }
+        fun item(it: de.sonictriplex.starrailteams.data.RelicSet, group: String) = PickerItem(
+            it.name, title = it.pieceFor(slotName) ?: it.name, detail = it.bonusText().orEmpty(), keywords = it.pieceList(), group = group,
+        )
+        val items = mine.sortedBy { wanted.indexOf(it.name) }.map { item(it, "Teile der gewählten Sets") } +
+            others.sortedBy { (it.pieceFor(slotName) ?: it.name).lowercase() }
+                .map { item(it, if (mine.isEmpty()) "Alle Teile" else "Weitere Teile (Off-Piece)") }
+        SearchPickerDialog(
+            "Teil wählen", items, vm.stammdaten, "Kein Teil",
+            onPick = { setName ->
+                // Jedes Set liefert im Slot genau ein Teil: das Set bestimmt das Teil
+                onPick(setName, if (setName.isBlank()) "" else vm.stammdaten.relicSet(setName)?.pieceFor(slotName) ?: setName)
+                picking = false
+            },
             onDismiss = { picking = false },
         )
     }

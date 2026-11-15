@@ -4,7 +4,7 @@ import sqlite3
 from datetime import datetime
 from typing import Optional
 from models import (Character, LightCone, RelicSet, BASE_DIR, DEFAULT_TALENTS, MAX_LEVEL, TALENT_MAX,
-                    canonical_name, clamp_int, icon_path_for, name_aliases, normalize_relics)
+                    canonical_name, card_sets, clamp_int, derive_card_sets, icon_path_for, name_aliases, normalize_relics)
 from seed import SEED_PATH, fill_texts, import_seed, is_seeded
 
 DB_PATH = os.path.join(BASE_DIR, "star_rail_manager.db")
@@ -52,6 +52,9 @@ CREATE TABLE IF NOT EXISTS user_characters (
     lc_level INTEGER DEFAULT 80,
     lc_superimpose INTEGER DEFAULT 1,
     relics_json TEXT DEFAULT '{}',
+    relic_set TEXT DEFAULT '',
+    relic_set_2 TEXT DEFAULT '',
+    ornament_set TEXT DEFAULT '',
     FOREIGN KEY (char_name) REFERENCES characters(name) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE IF NOT EXISTS teams (
@@ -109,6 +112,7 @@ class StarRailManager:
                 self._migrate_german_names(conn)   # vor den Fähigkeiten: die Texte werden über die deutschen Namen zugeordnet
                 self._migrate_light_cone_passives(conn)
                 self._migrate_relic_pieces(conn)
+                self._migrate_card_sets(conn)
         except (sqlite3.Error, OSError, json.JSONDecodeError) as e:
             raise DatabaseError(f"Datenbank konnte nicht initialisiert werden ({self.db_path}): {e}") from e
 
@@ -121,6 +125,15 @@ class StarRailManager:
         conn.execute("ALTER TABLE light_cones ADD COLUMN passive_json TEXT")
         if self.seed_path and os.path.exists(self.seed_path):
             fill_texts(conn, self.seed_path)
+
+    @staticmethod
+    def _migrate_card_sets(conn: sqlite3.Connection):
+        """Ältere Datenbanken: die Spalten relic_set, relic_set_2 und ornament_set (Sets des Builds) ergänzen. Bestehende Builds
+        bleiben leer und bekommen ihre Sets beim Laden aus den Slots abgeleitet."""
+        columns = [r[1] for r in conn.execute("PRAGMA table_info(user_characters)")]
+        for column in ("relic_set", "relic_set_2", "ornament_set"):
+            if column not in columns:
+                conn.execute(f"ALTER TABLE user_characters ADD COLUMN {column} TEXT DEFAULT ''")
 
     def _migrate_relic_pieces(self, conn: sqlite3.Connection):
         """Ältere Datenbanken: Spalte relic_sets.pieces_json (Namen der einzelnen Relikt-Teile) ergänzen und aus der Seed-Datei füllen."""
@@ -337,6 +350,7 @@ class StarRailManager:
         """Geprüfte Spaltenwerte eines Builds (Grenzen wie im Server, siehe helpers.php build_values)."""
         talents = card_data.get("talents") or {}
         relics = normalize_relics(card_data.get("relics") or {})
+        sets = card_sets(card_data, relics)
         return (
             char_name,
             clamp_int(card_data.get("level", MAX_LEVEL), 1, MAX_LEVEL, MAX_LEVEL),
@@ -347,13 +361,14 @@ class StarRailManager:
             clamp_int(card_data.get("lc_level", MAX_LEVEL), 1, MAX_LEVEL, MAX_LEVEL),
             clamp_int(card_data.get("lc_superimpose", 1), 1, 5, 1),
             json.dumps(relics, ensure_ascii=False),
+            *sets,
         )
 
     BUILD_SQL = """
         INSERT OR REPLACE INTO user_characters (
             char_name, level, eidolon, talent_basic, talent_skill, talent_ult, talent_talent,
-            light_cone, lc_level, lc_superimpose, relics_json
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            light_cone, lc_level, lc_superimpose, relics_json, relic_set, relic_set_2, ornament_set
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """
 
     def load_user_characters(self) -> dict:
@@ -362,7 +377,7 @@ class StarRailManager:
             with self.get_connection() as conn:
                 rows = conn.execute("""
                     SELECT char_name, level, eidolon, talent_basic, talent_skill, talent_ult, talent_talent,
-                           light_cone, lc_level, lc_superimpose, relics_json
+                           light_cone, lc_level, lc_superimpose, relics_json, relic_set, relic_set_2, ornament_set
                     FROM user_characters
                 """).fetchall()
         except sqlite3.Error as e:
@@ -374,9 +389,13 @@ class StarRailManager:
                 relics = normalize_relics(json.loads(r[10] or "{}"))
             except (json.JSONDecodeError, TypeError):
                 relics = {}
+            sets = tuple(x or "" for x in r[11:14])
+            if not any(sets):
+                sets = derive_card_sets(relics)       # Builds aus der Zeit vor den Set-Feldern
             user_builds[r[0]] = {
                 "name": r[0], "level": r[1], "eidolon": r[2],
                 "light_cone": r[7] or "", "lc_level": r[8], "lc_superimpose": r[9],
+                "relic_set": sets[0], "relic_set_2": sets[1], "ornament_set": sets[2],
                 "relics": relics,
                 "talents": {"basic": r[3], "skill": r[4], "ult": r[5], "talent": r[6]},
             }

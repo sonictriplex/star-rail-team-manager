@@ -79,12 +79,12 @@ Die Tabellen stehen in `schema.sql`:
 | `characters` | Stammdaten: Name, Element, Pfad (ENUM), Seltenheit, Icon |
 | `light_cones` | Stammdaten: Name, Pfad (ENUM), Seltenheit, Icon, Fähigkeit als JSON in `passive_json` |
 | `relic_sets` | Stammdaten: Name, Art (`Relikt` oder `Ornament`), 2er- und 4er-Bonus, Icon |
-| `user_characters` | Builds, eindeutig je `(user_id, char_name)`; die Relikte stehen als JSON in `relics_json` |
+| `user_characters` | Builds, eindeutig je `(user_id, char_name)`; die Sets in `relic_set`, `relic_set_2`, `ornament_set`, die Relikte als JSON in `relics_json` |
 | `teams`, `team_members` | Teams (eindeutig je `(user_id, name)`, Reihenfolge in `position`) und ihre Mitglieder (`slot_order` 0–3) |
 | `api_tokens` | Token-Login der Apps (nur SHA-256-Hash) |
 | `auth_attempts` | Zähler für die Begrenzung der Anmeldeversuche (nur Hashes) |
 
-Team-Mitglieder werden über den **Charakternamen** mit den Stammdaten verbunden, nicht über eine ID. `relics_json` enthält je Slot (`Kopf`, `Hände`, `Körper`, `Füße`, `Planarsphäre`, `Verbindungsseil`) `{set, rarity, level, main, main_value, substats: [{stat, val} ×4]}`. Slots 1–4 nehmen Sets der Art `Relikt`, Slots 5–6 der Art `Ornament`.
+Team-Mitglieder werden über den **Charakternamen** mit den Stammdaten verbunden, nicht über eine ID. `relic_set` (Relikt-Set), `relic_set_2` (zweites 2er-Relikt-Set) und `ornament_set` wählt man wie `artifact` im Genshin-Manager auf der Karte; fehlen sie, leitet der Server sie aus den Slots ab. `relics_json` enthält je Slot (`Kopf`, `Hände`, `Körper`, `Füße`, `Planarsphäre`, `Verbindungsseil`) `{set, piece, rarity, level, main, main_value, substats: [{stat, val} ×4]}`; `piece` ist das gewählte Teil, `set` sein Set. Slots 1–4 nehmen Teile von Sets der Art `Relikt`, Slots 5–6 der Art `Ornament`.
 
 ## API
 

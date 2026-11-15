@@ -46,7 +46,7 @@ Ein Team öffnest du per Klick auf die Teamkarte. Jede Charakterkarte zeigt Leve
   <img src="docs/screenshots/web/team.jpg" alt="Ein Team im Browser" width="720">
 </p>
 
-Mit dem **+** neben „Relikt-Sets“ öffnest du die Detailansicht und trägst die Werte der sechs Relikte ein:
+Die **Sets** wählst du direkt auf der Karte unter „Relikt-Sets“. Mit dem **+** daneben öffnest du die Detailansicht und trägst die Teile und Werte der sechs Relikte ein:
 
 <p align="center">
   <img src="docs/screenshots/web/build.jpg" alt="Build eines Charakters im Browser" width="720">
@@ -71,10 +71,11 @@ Charaktere wählst du über das Plus-Feld im Team. Die Suche filtert nach Name, 
 ## Lichtkegel und Relikte
 
 - **Lichtkegel:** Tippe bzw. klicke auf das Feld oder das 🔍, um einen zu wählen. Die Suche zeigt zuerst die Lichtkegel des **Pfads deines Charakters**; mit den Filtern siehst du auch alle anderen. Dazu kommen Level (1–80) und die **Überlagerung S1 bis S5**.
-- **Relikte:** Jeder der sechs Slots hat ein eigenes Set, eine Seltenheit, ein Level (0–15), einen **Hauptwert** und bis zu **vier Substats** mit Wert.
-  - **Kopf, Hände, Körper, Füße** nehmen **Relikt-Sets**, **Planarsphäre und Verbindungsseil** nehmen **Planar-Ornamente**. Die Auswahl zeigt automatisch nur die passenden Sets, jeweils mit **Icon** (im Browser mit Suchfeld).
+- **Relikt-Sets:** Auf der Karte wählst du das **Relikt-Set** (4er-Bonus), bei 2+2 zusätzlich ein **zweites 2er-Relikt-Set**, und das **Ornament-Set** (Planarsphäre und Verbindungsseil). Daraus ergeben sich die Set-Boni.
+- **Relikte:** Jeder der sechs Slots hat ein **Teil** (z. B. bei Kopf „Weinende Maske einer Mimin“), eine Seltenheit, ein Level (0–15), einen **Hauptwert** und bis zu **vier Substats** mit Wert.
+  - **Kopf, Hände, Körper, Füße** nehmen Teile von **Relikt-Sets**, **Planarsphäre und Verbindungsseil** Teile von **Planar-Ornamenten**. In der Auswahl stehen zuerst die Teile der Sets, die du auf der Karte gewählt hast, darunter alle übrigen (**Off-Pieces**), jeweils mit **Icon** und dem Set darunter (im Browser mit Suchfeld).
   - Der **Hauptwert** hängt vom Slot ab (Kopf immer LP, Hände immer ANG, Körper, Füße, Planarsphäre und Verbindungsseil mit eigenen Möglichkeiten).
-- **Aktive Set-Boni:** Die Karte rechnet selbst aus, wie viele Teile desselben Sets du trägst: ab 2 Teilen der 2er-Bonus, ab 4 Teilen der 4er-Bonus. Planar-Ornamente zählen bis 2.
+- **Aktive Set-Boni:** Sie ergeben sich aus den Sets auf der Karte: ein Relikt-Set gilt als 4er-Bonus, mit einem zweiten Relikt-Set als 2+2, das Ornament-Set als 2er-Bonus. Ältere Builds ohne gewählte Sets leiten sie beim Öffnen aus den Teilen der Slots ab.
 - **Talente:** Basisangriff bis Stufe 7, Fertigkeit, Ultimate und Talent bis Stufe 12 (die Eingabefelder begrenzen automatisch).
 
 ## Tooltips

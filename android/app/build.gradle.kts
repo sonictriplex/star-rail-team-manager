@@ -19,8 +19,8 @@ android {
         applicationId = "de.sonictriplex.starrailteams"
         minSdk = 26
         targetSdk = 36
-        versionCode = 8
-        versionName = "1.4.2"
+        versionCode = 9
+        versionName = "1.5.0"
 
         // Der Server, mit dem die App spricht (die Web-Version, siehe ../web); auf der Anmeldeseite damit vorbelegt, aber änderbar.
         buildConfigField("String", "DEFAULT_SERVER_URL", "\"https://star-rail.media-matrix.de\"")
