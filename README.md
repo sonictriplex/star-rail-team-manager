@@ -118,7 +118,7 @@ docs/         Screenshots
 - **Stammdaten** (`shared/stammdaten.json`): eine Quelle für alle Clients. Der Desktop spielt sie beim Start in SQLite ein, die Android-App liest sie direkt aus den Assets (und gleicht sie mit dem Server ab), die Web-Version hat sie in der Datenbank. Die Namen von Charakteren, Lichtkegeln und Sets sind englisch wie in der Datenquelle; **Pfade, Elemente, Fähigkeiten und Set-Boni sind deutsch**.
 - **Pfade** heißen wie im Spiel: Die Zerstörung, Die Jagd, Die Gelehrsamkeit, Die Harmonie, Die Nichtigkeit, Die Bewahrung, Der Überfluss, Das Gedenken, Das Hochgefühl. **Elemente:** Physisch, Feuer, Eis, Blitz, Wind, Quantum, Imaginär.
 - **Trailblazer** gibt es je Pfad einmal, ohne Artikel im Namen: `Trailblazer (Gedenken)`. Teams und Builds hängen am Charakternamen, deshalb ändern sich Namen nicht.
-- **Bilder** liegen unter `shared/assets/images/` und liegen nach Typ getrennt in Unterordnern: `characters/<name>.png`, `light_cones/<name>.png`, `relic_sets/<name>.png`, `paths/<pfad>.png` und `elements/<element>.png` (Kleinbuchstaben, alles außer a–z und 0–9 wird zu `_`). In `ui/` liegen Hintergrund (`star-rail-bg.jpg`) und Logo.
+- **Bilder** liegen unter `shared/assets/images/` und liegen nach Typ getrennt in Unterordnern: `characters/<name>.png`, `light_cones/<name>.png`, `relic_sets/<name>.png`, `paths/<pfad>.png` und `elements/<element>.png` (Kleinbuchstaben, alles außer a–z und 0–9 wird zu `_`). In `ui/` liegen Hintergrund (`honkai-bg-2.jpg`) und Logo.
 - **Austauschformat** (`shared/exchange-format.md`): `{"format": "star-rail-team-manager", "version": 1, "builds": [...], "teams": [...]}`. Änderungen am Format müssen in allen Clients nachgezogen werden.
 
 ## Stammdaten aktualisieren

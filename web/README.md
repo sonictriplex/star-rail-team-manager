@@ -186,7 +186,7 @@ Der Android-Emulator erreicht den Rechner unter `http://10.0.2.2:8000`. Aufräum
 
 ## Bilder
 
-Bilder liegen in `../shared/assets/images/`: nach Typ getrennt in Unterordnern: `characters/<name>.png`, `light_cones/<name>.png`, `relic_sets/<name>.png`, dazu `paths/<pfad>.png` und `elements/<element>.png`. Der Name wird kleingeschrieben, alles außer a–z und 0–9 wird zu `_` (aus „Kafka“ wird `characters/kafka.png`, aus „Der Überfluss“ wird `paths/ueberfluss.png` ohne Artikel und mit ue). Hintergrund (`star-rail-bg.jpg`) und Logo liegen in `ui/`. Die Bilder von neuen Einträgen legt `tools/update_stammdaten.py` bzw. der Menüpunkt „Stammdaten aktualisieren“ selbst an.
+Bilder liegen in `../shared/assets/images/`: nach Typ getrennt in Unterordnern: `characters/<name>.png`, `light_cones/<name>.png`, `relic_sets/<name>.png`, dazu `paths/<pfad>.png` und `elements/<element>.png`. Der Name wird kleingeschrieben, alles außer a–z und 0–9 wird zu `_` (aus „Kafka“ wird `characters/kafka.png`, aus „Der Überfluss“ wird `paths/ueberfluss.png` ohne Artikel und mit ue). Hintergrund (`honkai-bg-2.jpg`) und Logo liegen in `ui/`. Die Bilder von neuen Einträgen legt `tools/update_stammdaten.py` bzw. der Menüpunkt „Stammdaten aktualisieren“ selbst an.
 
 ## Hinweis
 

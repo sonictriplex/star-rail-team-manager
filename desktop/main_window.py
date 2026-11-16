@@ -28,7 +28,7 @@ class BackgroundWidget(QWidget):
 
     def __init__(self):
         super().__init__()
-        self._image = QPixmap(os.path.join(IMAGES_DIR, "ui", "star-rail-bg.jpg"))
+        self._image = QPixmap(os.path.join(IMAGES_DIR, "ui", "honkai-bg-2.jpg"))
         self._cache_size = None
         self._sharp = QPixmap()
         self._frost = QPixmap()

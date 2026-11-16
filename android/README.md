@@ -55,7 +55,7 @@ Auf dem Handy gibt es keinen Hover: Die Beschreibung der **Lichtkegel-Fähigkeit
 
 ## Aussehen
 
-Immer dunkel wie Desktop und Web (Palette aus `desktop/styles.py`), mit dem Hintergrundbild `shared/assets/images/ui/star-rail-bg.jpg`. Charakterkarten haben einen Verlauf in der Elementfarbe und einen Rahmen nach Seltenheit (5★ golden, 4★ violett).
+Immer dunkel wie Desktop und Web (Palette aus `desktop/styles.py`), mit dem Hintergrundbild `shared/assets/images/ui/honkai-bg-2.jpg`. Charakterkarten haben einen Verlauf in der Elementfarbe und einen Rahmen nach Seltenheit (5★ golden, 4★ violett).
 
 ## Bearbeiten
 

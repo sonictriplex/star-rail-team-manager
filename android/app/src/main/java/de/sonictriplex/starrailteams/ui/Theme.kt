@@ -80,7 +80,7 @@ fun rarityColor(rarity: Int): Color = when (rarity) {
 }
 
 /**
- * Vollbild-Hintergrund wie in der Web-Version (shared/assets/images/ui/star-rail-bg.jpg, zugeschnitten wie
+ * Vollbild-Hintergrund wie in der Web-Version (shared/assets/images/ui/honkai-bg-2.jpg, zugeschnitten wie
  * `background-size: cover`), mit dunkler Abdeckung für die Lesbarkeit. Vor dem Laden bleibt es einfarbig.
  */
 @Composable
@@ -91,7 +91,7 @@ fun AppBackground(content: @Composable () -> Unit) {
             try {
                 // Das Bild ist groß; auf Handygröße verkleinert laden spart Speicher
                 val opts = BitmapFactory.Options().apply { inSampleSize = 2 }
-                context.assets.open("assets/images/ui/star-rail-bg.jpg").use { BitmapFactory.decodeStream(it, null, opts) }?.asImageBitmap()
+                context.assets.open("assets/images/ui/honkai-bg-2.jpg").use { BitmapFactory.decodeStream(it, null, opts) }?.asImageBitmap()
             } catch (_: java.io.IOException) {
                 null
             }
